@@ -116,3 +116,14 @@ FOREIGN KEY (category_id) REFERENCES category (category_id) ON DELETE CASCADE);
 INSERT INTO ad VALUES (1, 1, 'Требуется продавец', 'Требуется продавец в очень большую компанию. Срочно!', 1, '2020-11-21 20:46:38',1);
 
 
+DROP TABLE IF EXISTS comment;
+CREATE TABLE comment (
+ad_id int(10) unsigned NOT NULL,
+customer_id int(10) unsigned NOT NULL,
+description tinytext NOT NULL,
+posted_date datetime NOT NULL,
+PRIMARY KEY (ad_id, customer_id, posted_date),
+FOREIGN KEY (ad_id) REFERENCES ad (ad_id) ON DELETE CASCADE,
+FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE CASCADE);
+INSERT INTO comment VALUES (1, 1, 'Я здесь написал коммент.', '2020-11-21 20:46:38');
+INSERT INTO comment VALUES (1, 1, 'Мой второй коммент!', '2020-11-21 20:47:38');
