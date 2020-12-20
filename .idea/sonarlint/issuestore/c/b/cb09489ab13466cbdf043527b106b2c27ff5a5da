@@ -1,0 +1,14 @@
+
+V	java:S899'":Do something with the "boolean" value returned by "offer".(¡—äì8Š¦Ñâç.
+]	java:S125"<This block of commented-out lines of code should be removed.(€ñ©Ñüÿÿÿÿ8Š¦Ñâç.
+[
+java:S1155M">Use isEmpty() to check whether the collection is empty or not.(Î‚Öò8Š¦Ñâç.
+Z	java:S106,"9Replace this use of System.out or System.err by a logger.(êÓæøùÿÿÿÿ8Š¦Ñâç.
+a
+java:S1128	"DRemove this unused import 'kz.epam.tcfp.dao.exception.DAOException'.(£©ˆ8Š¦Ñâç.
+[	java:S899E":Do something with the "boolean" value returned by "offer".(ñ÷ù—úÿÿÿÿ8Š¦Ñâç.
+Q
+java:S1066D"/Merge this if statement with the enclosing one.(è×Äªûÿÿÿÿ8Š¦Ñâç.
+a
+java:S2147<"DCombine this catch with the one at line 57, which has the same body.(û¹§Ï8Š¦Ñâç.
+X	java:S125+"<This block of commented-out lines of code should be removed.(ùÎıÛ8Š¦Ñâç.
