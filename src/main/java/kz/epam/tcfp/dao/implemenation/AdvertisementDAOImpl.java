@@ -1,10 +1,10 @@
 package kz.epam.tcfp.dao.implemenation;
 
 import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.connection.ClosingUtil;
-import kz.epam.tcfp.dao.connection.ConnectionPool;
-import kz.epam.tcfp.dao.connection.DBConstants;
-import kz.epam.tcfp.dao.exception.ConnectionPoolException;
+import kz.epam.tcfp.connection.ClosingUtil;
+import kz.epam.tcfp.connection.ConnectionPool;
+import kz.epam.tcfp.connection.DBConstants;
+import kz.epam.tcfp.connection.ConnectionPoolException;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class AdvertisementDAOImpl implements AdvertisementDAO {
 
-    public final static Integer AD_ID_COLUMN_INDEX = 1;
+    public static final Integer AD_ID_COLUMN_INDEX = 1;
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     public AdvertisementDAOImpl() {

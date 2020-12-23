@@ -2,14 +2,4 @@
 C
 java:S1948"-Make "avatarPhoto" transient or serializable.(ìØ
 C
-java:S1948".Make "phoneNumbers" transient or serializable.(¾¾úX
-E
-java:S1068"/Remove this unused "avatarPhoto" private field.(ìØ
-C
-java:S1068"-Remove this unused "activeAds" private field.(›×Ä
-S
-java:S1068"8Remove this unused "policyViolationCount" private field.(Ë¥‚£úÿÿÿÿ
-G
-java:S1068",Remove this unused "isBanned" private field.(›°·•ÿÿÿÿÿ
-E
-java:S1068"0Remove this unused "phoneNumbers" private field.(¾¾úX
+java:S1948".Make "phoneNumbers" transient or serializable.(¾¾úX

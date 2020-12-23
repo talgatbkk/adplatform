@@ -26,7 +26,7 @@ first_name varchar(30) NOT NULL,
 last_name varchar(30) NOT NULL,
 email varchar(50) NOT NULL,
 created_date datetime NOT NULL,
-ban boolean not null default 0,
+ban boolean NOT NULL default 0,
 PRIMARY KEY (user_id),
 UNIQUE KEY (login),
 UNIQUE KEY (email),
@@ -98,6 +98,43 @@ BEGIN
 SELECT * FROM advertisement where user_id = user_id;
 END //
 DELIMITER ;
+
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE add_new_user (
+														in role_id smallint(3),
+														in login varchar(20),
+														in password varchar(40),
+														in first_name varchar(30),
+														in last_name varchar(30),
+														in email varchar(50),
+														in created_date datetime,
+														in ban boolean,
+														in phone_number varchar(12),
+														out result int(10))
+BEGIN
+
+DECLARE new_user_id int(10) DEFAULT 0;
+DECLARE result int default 0; 
+START TRANSACTION;
+
+INSERT INTO user (role_id, login, password, first_name, last_name, email, created_date, ban)
+			VALUES (role_id, login, password, first_name, last_name, email, created_date, ban);
+
+SET new_user_id = LAST_INSERT_ID();
+IF new_user_id > 0 THEN
+	INSERT INTO user_phone (user_id, phone_number)
+			VALUES (new_user_id, phone_number);
+	COMMIT;
+	SELECT ROW_COUNT() INTO result; 
+ELSE
+	ROLLBACK;
+END IF;
+
+END //
+DELIMITER ;
+
+
 
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE get_ad_by_id (in advertisement_id INT(10))

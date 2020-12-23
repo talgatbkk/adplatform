@@ -10,8 +10,23 @@ public class PhoneNumber {
     private Integer phoneNumberId;
     private String phoneNumber;
 
+    public PhoneNumber() {
+    }
+
+    public PhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public PhoneNumber(Integer phoneNumberId, String phoneNumber) {
         this.phoneNumberId = phoneNumberId;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

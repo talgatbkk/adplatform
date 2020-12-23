@@ -19,9 +19,9 @@ public class AdvertisementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CommandFactory.getCommand("get_ads").execute(req, resp);
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("advertisement.jsp");
-//        dispatcher.forward(req,resp);
+        String command = req.getParameter("forward_page");
+        CommandFactory.getCommand(command).execute(req, resp);
+
     }
 
     @Override

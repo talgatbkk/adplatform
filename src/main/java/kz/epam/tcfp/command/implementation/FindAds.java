@@ -12,6 +12,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,11 +21,13 @@ import java.util.List;
  * @project AdPlatform
  */
 public class FindAds implements Command {
-
+    private static final String SESSION_USER_ID = "userId";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         AdvertisementService service = ServiceFactory.getAdvertisementService();
-        List<Advertisement> advertisements = service.getAdvertisement(1);
+        List<Advertisement> advertisements = service.getAdvertisement(userId);
         request.setAttribute("ads", advertisements);
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);
