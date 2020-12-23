@@ -24,6 +24,7 @@ public class SignIn implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        session.setAttribute("local", "ru");
         SignInInput signInInput = new SignInInput();
         signInInput.setLogin(request.getParameter("login"));
         signInInput.setPassword(request.getParameter("password"));
@@ -31,11 +32,13 @@ public class SignIn implements Command {
         Customer customer = null;
         try {
             if (!customerDAO.authenticateCustomer(signInInput)){
-                request.setAttribute("incorrect_auth", true);
+                if (signInInput.getLogin() != null) {
+                    request.setAttribute("incorrect_auth", true);
+                }
                 request.getRequestDispatcher("/signin").forward(request,response);
                 return;
             } else {
-                customer = customerDAO.getCustomerIdByLogin(signInInput);
+                customer = customerDAO.getCustomerIdByLogin(signInInput.getLogin());
             }
         } catch (DAOException e) {
             e.printStackTrace();

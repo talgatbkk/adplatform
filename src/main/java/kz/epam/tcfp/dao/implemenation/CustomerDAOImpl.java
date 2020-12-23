@@ -228,7 +228,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer getCustomerIdByLogin(SignInInput signInInput) throws DAOException {
+    public Customer getCustomerIdByLogin(String login) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -236,7 +236,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_CUSTOMER_ID_BY_LOGIN);
-            preparedStatement.setString(1, signInInput.getLogin());
+            preparedStatement.setString(1, login);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 customer = buildCustomer(resultSet);

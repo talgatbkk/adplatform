@@ -29,8 +29,6 @@ n
 >src/main/java/kz/epam/tcfp/service/factory/ServiceFactory.java,c/2/c23721f0c19f87d2523a414bfa377811f058d47f
 v
 Fsrc/main/java/kz/epam/tcfp/dao/implemenation/AdvertisementDAOImpl.java,1/f/1f1e1a3430430207ae2dfb9bd14c55b2fa6774ba
-Q
-!src/main/webapp/advertisement.jsp,b/e/bef31f13c5466ba7f54792456e885b6ca71f49be
 O
 src/main/webapp/WEB-INF/web.xml,2/e/2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 c
@@ -53,3 +51,15 @@ a
 1src/main/java/kz/epam/tcfp/model/PhoneNumber.java,9/0/90588c105b1c9e44409c08e090222b4c239d290c
 c
 3src/test/java/kz/epam/tcfp/dao/CustomerDAOTest.java,6/e/6e6d9b6cb623b5b370c431937acc79d93ca7d78b
+f
+6src/main/java/kz/epam/tcfp/connection/DBConstants.java,1/1/11d8b30eb28732f004ef689234e3219423960e79
+g
+7src/main/java/kz/epam/tcfp/command/CommandSupplier.java,e/a/ea637169a1c84a79500bc6a968d472315ca2a4d2
+N
+src/main/webapp/jsp/SignUp.jsp,3/2/32e183e775f5164c4a3a9369644b7c464c38bb5d
+f
+6src/main/java/kz/epam/tcfp/command/CommandFactory.java,4/9/497ae3094ea960f6bfbcea0e8814aea5a48cbbac
+m
+=src/main/java/kz/epam/tcfp/command/implementation/SignIn.java,9/a/9a42be244e5b7d89d9cbd9406aa65c64939624ee
+N
+src/main/webapp/jsp/SignIn.jsp,1/2/12aab6cd3c61b53774abd03ce2b04f3b248c2044

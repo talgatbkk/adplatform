@@ -6,5 +6,5 @@ package kz.epam.tcfp.command;
  */
 public class PagePath {
 
-    public static final String ADVERTISEMENT = "advertisement.jsp";
+    public static final String ADVERTISEMENT = "/jsp/advertisement.jsp";
 }

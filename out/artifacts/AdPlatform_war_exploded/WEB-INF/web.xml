@@ -29,6 +29,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>FreeSignUp</servlet-name>
+        <jsp-file>/jsp/SignUp.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FreeSignUp</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>FreeSignIn</servlet-name>
         <jsp-file>/jsp/SignIn.jsp</jsp-file>
     </servlet>

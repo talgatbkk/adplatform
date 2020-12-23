@@ -1,10 +1,11 @@
 
-T
-java:S1128"9Remove this unused import 'kz.epam.tcfp.command.Command'.(¬Ş‰8¨ÔÂ×ç.
 
-java:S1989"aHandle the following exceptions that could be thrown by "execute": ServletException, IOException.(¼š²Âùÿÿÿÿ8»İ©üç.
-[	java:S125"<This block of commented-out lines of code should be removed.(¸é˜Èşÿÿÿÿ8‚½Øç.
-
-java:S1989"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(—ôÖ¢øÿÿÿÿ8Ûßà’æ.
-c
-java:S1128"HRemove this unused import 'kz.epam.tcfp.command.implementation.FindAds'.(åÙ¼ 8¨ÔÂ×ç.
+java:S1989"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(—ôÖ¢øÿÿÿÿ8Ûßà’æ.
+e
+java:S1128"HRemove this unused import 'kz.epam.tcfp.command.implementation.FindAds'.(åÙ¼ 8¨ÔÂ×ç.
+V
+java:S1128"9Remove this unused import 'kz.epam.tcfp.command.Command'.(¬Ş‰8¨ÔÂ×ç.
+Y
+java:S1128"<Remove this unused import 'javax.servlet.RequestDispatcher'.(Ëöò¼8Èîöè.
+~
+java:S1989"aHandle the following exceptions that could be thrown by "execute": ServletException, IOException.(’°…ó8Èîöè.

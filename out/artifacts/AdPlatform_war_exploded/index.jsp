@@ -12,6 +12,18 @@
   </head>
   <body>
   <h1>HELLO WORLD!</h1>
-  $END$
+
+  <form action="/test" method="post">
+    <input type="hidden" name="forward_page" value="sign_in">
+
+    </div>
+    <input type="submit" value="Sign In"  /></form>
+
+  <form action="/test" method="post">
+    <input type="hidden" name="forward_page" value="sign_up">
+
+    </div>
+    <input type="submit" value="Registration"  /></form>
+
   </body>
 </html>

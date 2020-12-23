@@ -80,6 +80,12 @@ FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE REST
 FOREIGN KEY (location_id) REFERENCES location (location_id) ON DELETE CASCADE,
 FOREIGN KEY (category_id) REFERENCES category (category_id) ON DELETE CASCADE ON UPDATE RESTRICT);
 
+CREATE TABLE advertisement_image (
+image_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+advertisement_id int(10) unsigned NOT NULL,
+image_data blob NOT NULL,
+PRIMARY KEY (image_id));
+
 
 CREATE TABLE comment (
 comment_id int(10) unsigned NOT NULL AUTO_INCREMENT,
