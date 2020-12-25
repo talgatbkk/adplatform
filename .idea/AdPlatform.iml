@@ -46,5 +46,6 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-annotations-api:9.0.41" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:9.0.41" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jdt:ecj:3.18.0" level="project" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

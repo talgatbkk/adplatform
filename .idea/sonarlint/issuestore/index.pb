@@ -63,3 +63,17 @@ m
 =src/main/java/kz/epam/tcfp/command/implementation/SignIn.java,9/a/9a42be244e5b7d89d9cbd9406aa65c64939624ee
 N
 src/main/webapp/jsp/SignIn.jsp,1/2/12aab6cd3c61b53774abd03ce2b04f3b248c2044
+S
+#src/main/webapp/jsp/EditProfile.jsp,2/8/283df4e4272fcd381867f17c544a497eeafa8c92
+m
+=src/main/java/kz/epam/tcfp/command/implementation/SignUp.java,9/d/9d0b68391d8bb5b70969cbf2493eeb27f58daa56
+d
+4src/main/java/kz/epam/tcfp/dao/AdvertisementDAO.java,4/a/4ab699722d66b82bab5f076bd7f7cd0a28e2383c
+r
+Bsrc/main/java/kz/epam/tcfp/command/implementation/OpenProfile.java,5/e/5ef7b2660fe15a3c93bc911a76411669304a3b85
+r
+Bsrc/main/java/kz/epam/tcfp/command/implementation/EditProfile.java,4/6/467e9d07199fb1bad0c143e025871f207d9e9e24
+Q
+!src/main/webapp/css/bootstrap.css,1/3/13ff1c87977647caa2991b40a1e919c79e2b4c31
+O
+src/main/webapp/jsp/Profile.jsp,0/c/0ca89d8278ba7023a2e1eb5ddd398d351fd98825

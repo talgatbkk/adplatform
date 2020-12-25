@@ -76,6 +76,31 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         return advertisement;
     }
 
+    @Override
+    public Integer getAdvertisementCountById(Integer customerId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Integer advertisementCount = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_AD_COUNT_BY_ID);
+            preparedStatement.setInt(1, customerId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                advertisementCount = resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return advertisementCount;
+    }
+
     private Advertisement buildAdvertisement(ResultSet resultSet) throws SQLException {
         Advertisement advertisement = new Advertisement();
         advertisement.setAdId(resultSet.getInt(DBConstants.AD_ID));

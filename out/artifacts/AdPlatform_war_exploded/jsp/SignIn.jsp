@@ -14,8 +14,8 @@
 
 <fmt:message bundle="${thisLocal}" key="local.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="local.label.password" var="passwordLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.signin" var="signInLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.incorrectAuth" var="incorrectAuthLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.sign_in" var="signInLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.incorrect_auth" var="incorrectAuthLocal"/>
 <html>
 <head>
     <title>${signInLocal}</title>

@@ -28,7 +28,7 @@ public class FindAds implements Command {
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         AdvertisementService service = ServiceFactory.getAdvertisementService();
         List<Advertisement> advertisements = service.getAdvertisement(userId);
-        request.setAttribute("ads", advertisements);
+        request.setAttribute("advertisements", advertisements);
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);
 

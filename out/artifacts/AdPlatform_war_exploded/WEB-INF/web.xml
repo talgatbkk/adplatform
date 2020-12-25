@@ -47,6 +47,17 @@
         <servlet-name>FreeSignIn</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OpenProfile</servlet-name>
+        <jsp-file>/jsp/Profile.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OpenProfile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>

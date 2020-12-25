@@ -12,12 +12,12 @@
 <fmt:setBundle basename="applicationResources" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="local.label.title" var="titleLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.firstName" var="firstNameLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.lastName" var="lastNameLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.first_name" var="firstNameLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.last_name" var="lastNameLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="local.label.password" var="passwordLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.email" var="emailLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.phoneNumber" var="phoneNumberLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.phone_number" var="phoneNumberLocal"/>
 
 <html>
 <head>

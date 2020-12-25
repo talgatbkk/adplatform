@@ -12,12 +12,12 @@
 <fmt:setBundle basename="applicationResources" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="local.label.title" var="titleLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.firstName" var="firstNameLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.lastName" var="lastNameLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.first_name" var="firstNameLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.last_name" var="lastNameLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="local.label.password" var="passwordLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.email" var="emailLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.phoneNumber" var="phoneNumberLocal"/>
+<fmt:message bundle="${thisLocal}" key="local.label.phone_number" var="phoneNumberLocal"/>
 
 <html>
 <head>
@@ -30,27 +30,27 @@
     <table style="with: 50%">
         <tr>
             <td>${firstNameLocal}</td>
-            <td><input type="text" name="first_name" required="required"/></td>
+            <td><input type="text" name="first_name" required/></td>
         </tr>
         <tr>
             <td>${lastNameLocal}</td>
-            <td><input type="text" name="last_name" required="required"/></td>
+            <td><input type="text" name="last_name" required/></td>
         </tr>
         <tr>
             <td>${loginLocal}</td>
-            <td><input type="text" name="login" required="required"/></td>
+            <td><input type="text" name="login" required/></td>
         </tr>
         <tr>
             <td>${passwordLocal}</td>
-            <td><input type="password" name="password" required="required" /></td>
+            <td><input type="password" name="password" minlength="8" required/></td>
         </tr>
         <tr>
             <td>${emailLocal}</td>
-            <td><input type="email" name="email" required="required" /></td>
+            <td><input type="email" name="email" required/></td>
         </tr>
         <tr>
             <td>${phoneNumberLocal}</td>
-            <td><input type="tel" name="phoneNumber" pattern="[+]{1}[0-9]{11,14}" required="required"/></td>
+            <td><input type="tel" name="phoneNumber" pattern="[+]{1}[0-9]{11,14}" required/></td>
         </tr></table>
     <input type="submit" value="Submit" /></form>
 </body>

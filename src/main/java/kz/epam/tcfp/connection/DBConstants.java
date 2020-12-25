@@ -32,6 +32,7 @@ public class DBConstants {
 
     public static final String GET_ADS_BY_USER_ID = "{call get_ads_by_user_id(?)}";
     public static final String GET_AD_BY_ID = "SELECT * FROM advertisement WHERE advertisement_id = ?";
+    public static final String GET_AD_COUNT_BY_ID = "SELECT COUNT(*) FROM advertisement WHERE user_id = ?";
     public static final String GET_CUSTOMER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
     public static final String GET_CUSTOMER_ID_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
     public static final String GET_PHONE_NUMBER_BY_CUSTOMER_ID = "SELECT * FROM user_phone WHERE user_id = ?";
