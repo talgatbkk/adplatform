@@ -11,6 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
+  <jsp:include page="/jsp/Header.jsp"/>
   <h1>HELLO WORLD!</h1>
 
   <form action="/test" method="post">

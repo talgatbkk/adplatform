@@ -1,10 +1,10 @@
 package kz.epam.tcfp.dao.implemenation;
 
 import kz.epam.tcfp.dao.CustomerDAO;
-import kz.epam.tcfp.connection.ClosingUtil;
-import kz.epam.tcfp.connection.ConnectionPool;
-import kz.epam.tcfp.connection.DBConstants;
-import kz.epam.tcfp.connection.ConnectionPoolException;
+import kz.epam.tcfp.dao.connection.ClosingUtil;
+import kz.epam.tcfp.dao.connection.ConnectionPool;
+import kz.epam.tcfp.dao.connection.DBConstants;
+import kz.epam.tcfp.dao.connection.ConnectionPoolException;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Customer;
@@ -48,7 +48,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return false;
@@ -83,7 +83,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, callableStatement);
+            ClosingUtil.closeAll(callableStatement);
             connectionPool.putBackConnectionToPool(connection);
         }
         return false;
@@ -107,7 +107,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return false;
@@ -132,7 +132,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return false;
@@ -156,7 +156,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return false;
@@ -182,7 +182,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return customer;
@@ -221,7 +221,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return phoneNumbers;
@@ -246,7 +246,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (ConnectionPoolException ex){
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(connection, preparedStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return customer;

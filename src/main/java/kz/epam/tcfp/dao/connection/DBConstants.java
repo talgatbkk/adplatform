@@ -1,4 +1,4 @@
-package kz.epam.tcfp.connection;
+package kz.epam.tcfp.dao.connection;
 
 /**
  * @author Talgat Bekkaliyev
@@ -33,6 +33,7 @@ public class DBConstants {
     public static final String GET_ADS_BY_USER_ID = "{call get_ads_by_user_id(?)}";
     public static final String GET_AD_BY_ID = "SELECT * FROM advertisement WHERE advertisement_id = ?";
     public static final String GET_AD_COUNT_BY_ID = "SELECT COUNT(*) FROM advertisement WHERE user_id = ?";
+    public static final String GET_LOCATION_BY_ID = "SELECT location_name, parent_id FROM location p WHERE location_id = ? and language_id = (SELECT language_id FROM language WHERE language_name = ?)";
     public static final String GET_CUSTOMER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
     public static final String GET_CUSTOMER_ID_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
     public static final String GET_PHONE_NUMBER_BY_CUSTOMER_ID = "SELECT * FROM user_phone WHERE user_id = ?";
@@ -41,7 +42,8 @@ public class DBConstants {
     public static final String CHECK_IF_LOGIN_TAKEN = "SELECT login FROM user WHERE login = ?";
     public static final String CHECK_IF_EMAIL_TAKEN = "SELECT email FROM user WHERE email = ?";
     public static final String CHECK_IF_PHONE_NUMBER_TAKEN = "SELECT phone_number FROM user_phone WHERE phone_number = ?";
-
+    public static final String GET_COMMENTS_BY_AD_ID = "SELECT * FROM comment c INNER JOIN user u ON c.user_id = u.user_id WHERE c.advertisement_id = ? ORDER BY c.posted_date";
+    public static final String POST_COMMENT = "INSERT INTO comment VALUES (?, ?, ?, ?, ?)";
 
     public static final String SQL_QUERY_ERROR = "SQL query error";
 }

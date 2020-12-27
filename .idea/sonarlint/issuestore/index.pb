@@ -77,3 +77,9 @@ Q
 !src/main/webapp/css/bootstrap.css,1/3/13ff1c87977647caa2991b40a1e919c79e2b4c31
 O
 src/main/webapp/jsp/Profile.jsp,0/c/0ca89d8278ba7023a2e1eb5ddd398d351fd98825
+N
+src/main/webapp/jsp/Header.jsp,9/0/907913cbbb0a282e5a8f378f23a22a4b2ac7d64d
+U
+%src/main/webapp/jsp/advertisement.jsp,6/6/66e233d9c75111875333428261374781feec0c32
+^
+.src/main/java/kz/epam/tcfp/model/Location.java,5/7/57e4fe9ec4fe99cad6ef3f404d3a8fd53f27aa0c

@@ -48,6 +48,17 @@
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>Header</servlet-name>
+        <jsp-file>/jsp/Header.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Header</servlet-name>
+        <url-pattern>/header</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>OpenProfile</servlet-name>
         <jsp-file>/jsp/Profile.jsp</jsp-file>

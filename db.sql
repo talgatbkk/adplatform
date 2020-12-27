@@ -179,7 +179,7 @@ INSERT INTO role VALUES (2, 'customer');
 INSERT INTO user VALUES (1, 2,'takha', 'passwordtest123', 'Талгат', 'Бекк', 'talgat@email.com', '2020-11-21 20:46:38', 0);
 INSERT INTO user_phone VALUES (NULL, 1, '+77011820844');
 INSERT INTO user_phone VALUES (NULL, 1, '+77471820844');
-INSERT INTO language VALUES (1, 'rus');
+INSERT INTO language VALUES (1, 'ru');
 INSERT INTO language VALUES (2, 'en');
 INSERT INTO location VALUES (1, NULL, 1, 'Казахстан');
 INSERT INTO location VALUES (2, 1, 1, 'Астана');

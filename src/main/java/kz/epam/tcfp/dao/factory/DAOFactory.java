@@ -2,7 +2,7 @@ package kz.epam.tcfp.dao.factory;
 
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.CustomerDAO;
-import kz.epam.tcfp.connection.ConnectionPool;
+import kz.epam.tcfp.dao.connection.ConnectionPool;
 import kz.epam.tcfp.dao.implemenation.AdvertisementDAOImpl;
 import kz.epam.tcfp.dao.implemenation.CustomerDAOImpl;
 

@@ -1,9 +1,6 @@
 package kz.epam.tcfp.command;
 
-import kz.epam.tcfp.command.implementation.FindAds;
-import kz.epam.tcfp.command.implementation.OpenProfile;
-import kz.epam.tcfp.command.implementation.SignIn;
-import kz.epam.tcfp.command.implementation.SignUp;
+import kz.epam.tcfp.command.implementation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +21,8 @@ public class CommandSupplier {
         commands.put("sign_in", new SignIn());
         commands.put("sign_up", new SignUp());
         commands.put("customer_profile", new OpenProfile());
+        commands.put("view_ad", new ViewAdvertisement());
+        commands.put("post_comment", new PostComment());
 
     }
 

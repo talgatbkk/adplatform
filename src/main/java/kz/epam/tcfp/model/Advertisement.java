@@ -14,7 +14,7 @@ public class Advertisement implements Serializable {
     private Integer adId;
     private String title;
     private String description;
-    private Integer locationId;
+    private Location location;
     private Integer price;
     private Date postedDate;
     private Integer category;
@@ -27,7 +27,7 @@ public class Advertisement implements Serializable {
         this.adId = adId;
         this.title = title;
         this.description = description;
-        this.locationId = locationId;
+        this.location = new Location(locationId);
         this.category = category;
         this.photos = photos;
     }
@@ -56,12 +56,12 @@ public class Advertisement implements Serializable {
         this.description = description;
     }
 
-    public Integer getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(Integer locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public Integer getCategory() {
@@ -102,7 +102,7 @@ public class Advertisement implements Serializable {
                 "adId=" + adId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", locationId=" + locationId +
+                ", locationId=" + location +
                 ", price=" + price +
                 ", postedDate=" + postedDate +
                 ", category=" + category +

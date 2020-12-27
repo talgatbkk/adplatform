@@ -2,8 +2,11 @@ package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
 import kz.epam.tcfp.command.PagePath;
+import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Customer;
+import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.AdvertisementService;
 import kz.epam.tcfp.service.CustomerService;
 import kz.epam.tcfp.service.factory.ServiceFactory;
@@ -24,10 +27,13 @@ public class FindAds implements Command {
     private static final String SESSION_USER_ID = "userId";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         AdvertisementService service = ServiceFactory.getAdvertisementService();
+        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+
         List<Advertisement> advertisements = service.getAdvertisement(userId);
+
         request.setAttribute("advertisements", advertisements);
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);

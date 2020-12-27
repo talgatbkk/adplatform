@@ -21,6 +21,8 @@
     <title>${signInLocal}</title>
 </head>
 <body>
+<jsp:include page="/jsp/Header.jsp"/>
+
 <form action="/login" method="post">
     <input type="hidden" name="forward_page" value="sign_in">
     <table style="with: 50%">

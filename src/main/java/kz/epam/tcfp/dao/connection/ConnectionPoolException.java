@@ -1,4 +1,4 @@
-package kz.epam.tcfp.connection;
+package kz.epam.tcfp.dao.connection;
 
 /**
  * @author Talgat Bekkaliyev

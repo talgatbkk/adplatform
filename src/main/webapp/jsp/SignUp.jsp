@@ -24,6 +24,8 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="/jsp/Header.jsp"/>
+
 <h1>${titleLocal}</h1>
 <form action="/test" method="post">
     <input type="hidden" name="forward_page" value="sign_up">

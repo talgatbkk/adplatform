@@ -38,14 +38,13 @@ public class SignIn implements Command {
                 request.getRequestDispatcher("/signin").forward(request,response);
                 return;
             } else {
-                customer = customerDAO.getCustomerIdByLogin(signInInput.getLogin());
+                    customer = customerDAO.getCustomerIdByLogin(signInInput.getLogin());
             }
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
         request.setAttribute("incorrect_auth", false);
-        session = request.getSession(true);
         session.setAttribute(SESSION_USER_ID, customer.getUserId());
         response.sendRedirect(REDIRECT_TO_HOME_PAGE);
     }

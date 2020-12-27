@@ -1,4 +1,4 @@
-package kz.epam.tcfp.connection;
+package kz.epam.tcfp.dao.connection;
 
 import kz.epam.tcfp.dao.exception.DAOException;
 
@@ -13,7 +13,7 @@ import java.sql.Statement;
  */
 public class ClosingUtil {
 
-    public static void closeAll(Connection connection, Statement statement, ResultSet resultSet) throws DAOException {
+    public static void closeAll(Statement statement, ResultSet resultSet) throws DAOException {
         try {
             if (resultSet != null) {
                 resultSet.close();
@@ -21,24 +21,17 @@ public class ClosingUtil {
             if (statement != null) {
                 statement.close();
             }
-            if (connection != null) {
-                connection.close();
-            }
 
         } catch (SQLException ex) {
             throw new DAOException("SQL exception while closing");
         }
     }
 
-    public static void closeAll(Connection connection, Statement statement) throws DAOException {
+    public static void closeAll(Statement statement) throws DAOException {
         try {
             if (statement != null) {
                 statement.close();
             }
-            if (connection != null) {
-                connection.close();
-            }
-
         } catch (SQLException ex) {
             throw new DAOException("SQL exception while closing");
         }

@@ -30,7 +30,7 @@ public class OpenProfile implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();

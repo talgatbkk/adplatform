@@ -1,4 +1,4 @@
-package kz.epam.tcfp.connection;
+package kz.epam.tcfp.dao.connection;
 
 import java.sql.*;
 import java.util.ResourceBundle;

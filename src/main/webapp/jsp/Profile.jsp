@@ -28,6 +28,8 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="/jsp/Header.jsp"/>
+
 <div class="container emp-profile">
     <form method="post">
         <div class="row">
@@ -133,6 +135,7 @@
             </div>
         <form action="/test" method="post">
             <input type="hidden" name="forward_page" value="get_ads">
-                <input type="submit" value="Home"  /></form>
+                <input type="submit" value="Home"  />
+        </form>
 </body>
 </html>
