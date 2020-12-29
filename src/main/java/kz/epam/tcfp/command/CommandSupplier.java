@@ -23,6 +23,8 @@ public class CommandSupplier {
         commands.put("customer_profile", new OpenProfile());
         commands.put("view_ad", new ViewAdvertisement());
         commands.put("post_comment", new PostComment());
+        commands.put("post_ad", new PostAdvertisement());
+        commands.put("input_ad", new InputAdvertisement());
 
     }
 

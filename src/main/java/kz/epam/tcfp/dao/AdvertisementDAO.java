@@ -2,6 +2,7 @@ package kz.epam.tcfp.dao;
 
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.model.Advertisement;
+import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Comment;
 import kz.epam.tcfp.model.Location;
 
@@ -20,6 +21,10 @@ public interface AdvertisementDAO {
     Location getLocationNamesById(Integer locationId, String languageId) throws DAOException;
     List<Comment> getCommentsAByAdvertisementId(Integer customerId) throws DAOException;
     boolean postComment(Comment comment) throws DAOException;
+    boolean postAdvertisement(Advertisement advertisement) throws DAOException;
+    List<Category> getCategories(Integer languageId) throws DAOException;
+    List<Location> getLocations(Integer languageId) throws DAOException;
+    Integer getLanguageIdByName(String languageName) throws DAOException;
 
 
 

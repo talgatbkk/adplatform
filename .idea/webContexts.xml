@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/AddAdvertisement.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/Profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp" />
         <entry key="file://$PROJECT_DIR$/web/index.jsp" value="file://$PROJECT_DIR$/web" />
       </map>

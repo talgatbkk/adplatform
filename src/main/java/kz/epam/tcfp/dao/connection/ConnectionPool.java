@@ -20,19 +20,17 @@ public class ConnectionPool {
     private static final String DB_USER = "db.user";
     private static final String DB_PASSWORD = "db.password";
 
-    private BlockingQueue<Connection> connectionsWaitingToBeUsed;
-    private BlockingQueue<Connection> connectionsInUse;
+    private BlockingQueue<Connection> connections;
 
     public ConnectionPool() {
         try{
             ResourceBundle bundle = ResourceBundle.getBundle(DB_PROPERTIES_FILE);
             int poolSize = Integer.parseInt(bundle.getString(DB_POOL_SIZE));
-            connectionsWaitingToBeUsed = new ArrayBlockingQueue<>(poolSize);
-            connectionsInUse = new ArrayBlockingQueue<>(poolSize);
+            connections = new ArrayBlockingQueue<>(poolSize);
             for (int i = 0; i < poolSize; i++){
                 Connection con = getConnection();
                 if (con != null){
-                    connectionsWaitingToBeUsed.offer(con);
+                    connections.offer(con);
                 }
             }
         } catch (ConnectionPoolException ex){
@@ -57,8 +55,8 @@ public class ConnectionPool {
     }
 
     public synchronized void putBackConnectionToPool(Connection connection) {
-        if (connection != null && connectionsInUse.remove(connection)) {
-                connectionsWaitingToBeUsed.offer(connection);
+        if (connection != null) {
+                connections.offer(connection);
             }
         }
 
@@ -66,14 +64,10 @@ public class ConnectionPool {
 
     public synchronized Connection getExistingConnectionFromPool() throws ConnectionPoolException {
         Connection newConn = null;
-        if (connectionsWaitingToBeUsed.size() == 0){
+        if (connections.size() == 0){
             throw new ConnectionPoolException("All connections are used");
         } else {
-            newConn = connectionsWaitingToBeUsed.poll();
-        }
-        connectionsInUse.add(newConn);
-        if (newConn == null){
-            throw new ConnectionPoolException("Error while getting existing connection");
+            newConn = connections.poll();
         }
         return newConn;
     }

@@ -1,11 +1,11 @@
 
 Z
 java:S1128"8Remove this unused import 'kz.epam.tcfp.model.Customer'.(‡ÌÓïøÿÿÿÿ8³ «†è.
-U
-java:S1128	"8Remove this unused import 'kz.epam.tcfp.model.Location'.(Ì¦Éó8îï¾Ñé.
-a
-java:S1854!"DRemove this useless assignment to local variable "advertisementDAO".(Äÿ„¢8îï¾Ñé.
-^
-java:S1128"ARemove this unused import 'kz.epam.tcfp.service.CustomerService'.(Ñéñû8³ «†è.
 R
 java:S1481!"5Remove this unused "advertisementDAO" local variable.(Äÿ„¢8îï¾Ñé.
+^
+java:S1128"ARemove this unused import 'kz.epam.tcfp.service.CustomerService'.(Ñéñû8³ «†è.
+a
+java:S1854!"DRemove this useless assignment to local variable "advertisementDAO".(Äÿ„¢8îï¾Ñé.
+U
+java:S1128	"8Remove this unused import 'kz.epam.tcfp.model.Location'.(Ì¦Éó8îï¾Ñé.

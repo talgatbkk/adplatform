@@ -70,6 +70,17 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AddAdvertisement</servlet-name>
+        <jsp-file>/jsp/AddAdvertisement.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddAdvertisement</servlet-name>
+        <url-pattern>/add_ad</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>

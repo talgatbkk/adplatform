@@ -1,15 +1,15 @@
 
-_
-java:S1128	"=Remove this unused import 'kz.epam.tcfp.model.Advertisement'.(ЙрҐЕщяяяя8мим¬й.
-c
-java:S1128"FRemove this unused import 'kz.epam.tcfp.service.AdvertisementService'.(ћЩны8Цгй¬й.
 a
 java:S2583,"DChange this condition so that it does not always evaluate to "false"(„ЕрЦ8ЊыЄ®й.
-\
-java:S1128":Remove this unused import 'kz.epam.tcfp.command.PagePath'.(ду‡Ръяяяя8мим¬й.
-j
-java:S1128"HRemove this unused import 'kz.epam.tcfp.service.factory.ServiceFactory'.(†уШрюяяяя8Цгй¬й.
+c
+java:S1128"FRemove this unused import 'kz.epam.tcfp.service.AdvertisementService'.(ћЩны8Цгй¬й.
+_
+java:S1128	"=Remove this unused import 'kz.epam.tcfp.model.Advertisement'.(ЙрҐЕщяяяя8мим¬й.
 Y
 java:S1128"<Remove this unused import 'javax.servlet.RequestDispatcher'.(Лцтј8мим¬й.
 ]
 java:S18547";Remove this useless assignment to local variable "session".(·ћѕЗэяяяя8МИЂ­й.
+j
+java:S1128"HRemove this unused import 'kz.epam.tcfp.service.factory.ServiceFactory'.(†уШрюяяяя8Цгй¬й.
+\
+java:S1128":Remove this unused import 'kz.epam.tcfp.command.PagePath'.(ду‡Ръяяяя8мим¬й.

@@ -11,24 +11,25 @@ import java.util.List;
 public class Advertisement implements Serializable {
     private static final long serialVersionUID = 1234L;
 
+    private Integer userId;
     private Integer adId;
     private String title;
     private String description;
     private Location location;
     private Integer price;
     private Date postedDate;
-    private Integer category;
+    private Category category;
     private List<Photo> photos;
 
     public Advertisement() {
     }
 
-    public Advertisement(Integer adId, String title, String description, Integer locationId, Integer category, List<Photo> photos) {
+    public Advertisement(Integer adId, String title, String description, Integer locationId, Integer categoryId, List<Photo> photos) {
         this.adId = adId;
         this.title = title;
         this.description = description;
         this.location = new Location(locationId);
-        this.category = category;
+        this.category = new Category(categoryId);
         this.photos = photos;
     }
 
@@ -64,11 +65,11 @@ public class Advertisement implements Serializable {
         this.location = location;
     }
 
-    public Integer getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -94,6 +95,14 @@ public class Advertisement implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override

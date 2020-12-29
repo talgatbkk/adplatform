@@ -44,6 +44,9 @@ public class DBConstants {
     public static final String CHECK_IF_PHONE_NUMBER_TAKEN = "SELECT phone_number FROM user_phone WHERE phone_number = ?";
     public static final String GET_COMMENTS_BY_AD_ID = "SELECT * FROM comment c INNER JOIN user u ON c.user_id = u.user_id WHERE c.advertisement_id = ? ORDER BY c.posted_date";
     public static final String POST_COMMENT = "INSERT INTO comment VALUES (?, ?, ?, ?, ?)";
-
+    public static final String POST_ADVERTISEMENT = "INSERT INTO advertisement VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String GET_CATEGORIES = "SELECT * FROM category WHERE language_id = ?";
+    public static final String GET_LOCATIONS = "SELECT * FROM location WHERE language_id = ?";
+    public static final String GET_LANGUAGE_ID_BY_NAME = "SELECT * FROM language WHERE language_name = ?";
     public static final String SQL_QUERY_ERROR = "SQL query error";
 }
