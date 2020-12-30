@@ -29,7 +29,8 @@
         </tr>
         <tr>
             <td>
-                <select name="location_item">
+                <select name="location_item" required>
+                    <option value=""></option>
                     <c:forEach items="${requestScope.locations}" var="location">
                         <option value="${location.id}">${location.name}</option>
                     </c:forEach>
@@ -39,7 +40,8 @@
         </tr>
         <tr>
             <td>
-            <select name="category_item">
+            <select name="category_item" required>
+                <option value=""></option>
                 <c:forEach items="${requestScope.categories}" var="category">
                 <option value="${category.categoryId}">${category.categoryName}</option>
                 </c:forEach>

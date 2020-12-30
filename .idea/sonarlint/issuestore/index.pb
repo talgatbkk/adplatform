@@ -103,3 +103,5 @@ X
 (src/main/webapp/jsp/AddAdvertisement.jsp,a/e/aee5a657f7ca791a6bbcbf30d6f4429d4efe69bb
 x
 Hsrc/main/java/kz/epam/tcfp/command/implementation/PostAdvertisement.java,6/b/6b5075a93bbb14657b7fc6127a8f8bc6147ae491
+y
+Isrc/main/java/kz/epam/tcfp/command/implementation/InputAdvertisement.java,9/d/9d8a4153f227565af2fd28a1310c29ed981e7321

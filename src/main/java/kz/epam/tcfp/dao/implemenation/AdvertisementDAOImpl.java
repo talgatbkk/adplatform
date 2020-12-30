@@ -80,6 +80,91 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
+    public List<Advertisement> searchAdvertisementsByCategory(Integer categoryId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advertisement> advertisements = new ArrayList<>();
+
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_AD_BY_CATEGORY);
+            preparedStatement.setInt(1, categoryId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Advertisement advertisement = new Advertisement();
+                advertisement = buildAdvertisement(resultSet);
+                advertisements.add(advertisement);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return advertisements;
+    }
+
+    @Override
+    public List<Advertisement> searchAdvertisementsByCategoryWithLocation(Integer categoryId, Integer locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advertisement> advertisements = new ArrayList<>();
+
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_AD_BY_LOCATION_AND_CATEGORY);
+            preparedStatement.setInt(1, categoryId);
+            preparedStatement.setInt(2, locationId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Advertisement advertisement = new Advertisement();
+                advertisement = buildAdvertisement(resultSet);
+                advertisements.add(advertisement);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return advertisements;
+    }
+
+    @Override
+    public List<Advertisement> searchAdvertisementsByLocation(Integer locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advertisement> advertisements = new ArrayList<>();
+
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_AD_BY_LOCATION);
+            preparedStatement.setInt(1, locationId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Advertisement advertisement = new Advertisement();
+                advertisement = buildAdvertisement(resultSet);
+                advertisements.add(advertisement);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return advertisements;
+    }
+
+    @Override
     public Integer getAdvertisementCountById(Integer customerId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -266,6 +351,33 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connectionPool.putBackConnectionToPool(connection);
         }
         return languageId;
+    }
+
+    @Override
+    public List<Advertisement> getAllAdvertisements() throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advertisement> advertisements = new ArrayList<>();
+
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_ALL_ADS);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Advertisement advertisement;
+                advertisement = buildAdvertisement(resultSet);
+                advertisements.add(advertisement);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return advertisements;
     }
 
 

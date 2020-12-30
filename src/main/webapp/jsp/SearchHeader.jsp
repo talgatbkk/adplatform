@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: tubuntu
-  Date: 25.12.20
-  Time: 16:03
+  Date: 30.12.20
+  Time: 16:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,7 +17,6 @@
     <title>Title</title>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +35,30 @@
                 </li>
             </c:if>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <form action="/advertisement/search" method="post">
+                    <input type="hidden" name="forward_page" value="search">
+                    <tr>
+                        <td>
+                            <select name="location_item">
+                                <option value=""></option>
+                                <c:forEach items="${requestScope.locations}" var="location">
+                                    <option value="${location.id}">${location.name}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="category_item">
+                                <option value="">All</option>
+                                <c:forEach items="${requestScope.categories}" var="category">
+                                    <option value="${category.categoryId}">${category.categoryName}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
+                    <input type="submit" value="Submit" /></form>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

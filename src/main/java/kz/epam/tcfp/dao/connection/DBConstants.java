@@ -45,8 +45,16 @@ public class DBConstants {
     public static final String GET_COMMENTS_BY_AD_ID = "SELECT * FROM comment c INNER JOIN user u ON c.user_id = u.user_id WHERE c.advertisement_id = ? ORDER BY c.posted_date";
     public static final String POST_COMMENT = "INSERT INTO comment VALUES (?, ?, ?, ?, ?)";
     public static final String POST_ADVERTISEMENT = "INSERT INTO advertisement VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    public static final String GET_CATEGORIES = "SELECT * FROM category WHERE language_id = ?";
-    public static final String GET_LOCATIONS = "SELECT * FROM location WHERE language_id = ?";
+    public static final String GET_CATEGORIES = "SELECT * FROM category WHERE language_id = ? ORDER BY category_name";
+    public static final String GET_LOCATIONS = "SELECT * FROM location WHERE language_id = ? ORDER BY location_name";
     public static final String GET_LANGUAGE_ID_BY_NAME = "SELECT * FROM language WHERE language_name = ?";
+    public static final String GET_AD_BY_CATEGORY = "SELECT * FROM advertisement WHERE category_id = ? ORDER BY posted_date";
+    public static final String GET_AD_BY_LOCATION = "SELECT * FROM advertisement WHERE location_id = ? ORDER BY posted_date";
+    public static final String GET_ALL_ADS = "SELECT * FROM advertisement ORDER BY posted_date";
+    public static final String GET_AD_BY_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE category_id = ? AND location_id = ? ORDER BY posted_date";
+    public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION = "SELECT * FROM advertisement WHERE advertisement_title LIKE ? OR description LIKE ? ORDER BY posted_date";
+    public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND category_id = ? ORDER BY posted_date";
+    public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? ORDER BY posted_date";
+    public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ? ORDER BY posted_date";
     public static final String SQL_QUERY_ERROR = "SQL query error";
 }

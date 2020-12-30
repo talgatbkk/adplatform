@@ -2,11 +2,10 @@ package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
 import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.CustomerDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Advertisement;
-import kz.epam.tcfp.model.Comment;
-import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +28,7 @@ public class ViewAdvertisement implements Command {
         String languageCode = (String) session.getAttribute("local");
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
         Integer adId = null;
         if (request.getParameter("ad_id") == null){
             adId = (Integer) session.getAttribute("ad_id");
@@ -37,8 +37,10 @@ public class ViewAdvertisement implements Command {
         }
         Advertisement advertisement = null;
         Location location = null;
+        List<PhoneNumber> phoneNumbers = null;
         List<Comment> comments = null;
         try {
+            phoneNumbers = customerDAO.getPhoneNumberByCustomerId(userId);
             advertisement = advertisementDAO.getAdvertisementById(adId);
             comments = advertisementDAO.getCommentsAByAdvertisementId(adId);
             location = advertisementDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
@@ -50,6 +52,7 @@ public class ViewAdvertisement implements Command {
         request.setAttribute("advertisement", advertisement);
         request.setAttribute("comments", comments);
         request.setAttribute("location", location);
+        request.setAttribute("phone_numbers", phoneNumbers);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/ViewAdvertisement.jsp");
         dispatcher.forward(request, response);
     }

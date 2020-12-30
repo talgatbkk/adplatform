@@ -35,6 +35,9 @@
 <p> ${requestScope.advertisement.description} </p>
 
 <h4>${requestScope.advertisement.location.name}</h4>
+<c:forEach items="${requestScope.phone_numbers}" var="phone">
+    <p>${phone.phoneNumber}</p>
+</c:forEach>
 
 
 <div class="container">
@@ -66,6 +69,7 @@
 
     </c:when>
     </c:choose>
+    <c:if test="${sessionScope.userId != null}">
     <form action="/test" method="post">
         <input type="hidden" name="forward_page" value="post_comment">
         <input type="hidden" name="ad_id" value="${requestScope.advertisement.adId}">
@@ -78,7 +82,7 @@
         </div>
         <input type="submit" value="Post" />
     </form>
-
+    </c:if>
 
 </div>
 

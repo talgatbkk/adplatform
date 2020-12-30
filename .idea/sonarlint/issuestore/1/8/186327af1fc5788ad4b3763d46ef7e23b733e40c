@@ -1,7 +1,7 @@
 
->
-java:S1948"(Make "photos" transient or serializable.(ªå¬Ÿ
-L
-java:S1948"*Make "location" transient or serializable.(¹¿É‚ÿÿÿÿÿ8œ§ê.
-L
-java:S1948"*Make "category" transient or serializable.(şÖİÑüÿÿÿÿ8Á“›§ê.
+J
+java:S1948"*Make "location" transient or serializable.(¹¿É‚ÿÿÿÿÿ8œ§ê.
+<
+java:S1948"(Make "photos" transient or serializable.(ªå¬Ÿ
+J
+java:S1948"*Make "category" transient or serializable.(şÖİÑüÿÿÿÿ8Á“›§ê.

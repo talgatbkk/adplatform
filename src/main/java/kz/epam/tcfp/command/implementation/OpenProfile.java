@@ -53,7 +53,7 @@ public class OpenProfile implements Command {
         request.setAttribute("incorrect_auth", false);
         request.setAttribute("customer", customer);
         session = request.getSession(true);
-        request.getRequestDispatcher("/profile").forward(request, response);
+        request.getRequestDispatcher("/jsp/Profile.jsp").forward(request, response);
 
     }
 }

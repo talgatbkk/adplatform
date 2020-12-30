@@ -14,6 +14,26 @@
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ViewAdvertisement</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ViewAdvertisement</servlet-name>
+        <url-pattern>/advertisement/view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchAdvertisement</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchAdvertisement</servlet-name>
+        <url-pattern>/advertisement/search</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
@@ -66,7 +86,7 @@
 
     <servlet-mapping>
         <servlet-name>OpenProfile</servlet-name>
-        <url-pattern>/profile</url-pattern>
+        <url-pattern>/user/profile</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -76,7 +96,7 @@
 
     <servlet-mapping>
         <servlet-name>AddAdvertisement</servlet-name>
-        <url-pattern>/add_ad</url-pattern>
+        <url-pattern>/advertisement/add</url-pattern>
     </servlet-mapping>
 
 

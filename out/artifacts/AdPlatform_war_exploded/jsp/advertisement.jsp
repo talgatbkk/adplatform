@@ -26,6 +26,38 @@
     <title>Advertisements of the customer</title>
 </head>
 <body>
+<jsp:include page="/jsp/SearchHeader.jsp"/>
+
+<%--<form action="/advertisement/search" method="post">--%>
+<%--    <input type="hidden" name="forward_page" value="search">--%>
+<%--<tr>--%>
+<%--    <td>--%>
+<%--        <select name="location_item">--%>
+<%--            <option value=""></option>--%>
+<%--            <c:forEach items="${requestScope.locations}" var="location">--%>
+<%--                <option value="${location.id}">${location.name}</option>--%>
+<%--            </c:forEach>--%>
+<%--        </select>--%>
+<%--    </td>--%>
+
+<%--</tr>--%>
+<%--<tr>--%>
+<%--<td>--%>
+<%--    <select name="category_item">--%>
+<%--        <option value="">All</option>--%>
+<%--        <c:forEach items="${requestScope.categories}" var="category">--%>
+<%--            <option value="${category.categoryId}">${category.categoryName}</option>--%>
+<%--        </c:forEach>--%>
+<%--    </select>--%>
+<%--</td>--%>
+<%--</tr>--%>
+<%--    <input type="submit" value="Submit" /></form>--%>
+<br>
+    <c:choose>
+    <c:when test="${requestScope.advertisements.size() == 0}">
+        <h3>No advertisements with such parameters</h3>
+    </c:when>
+    <c:otherwise>
     <c:forEach var="advertisement" items="${requestScope.advertisements}">
     <div class="card mb-3" style="max-width: 640px;">
         <div class="row no-gutters">
@@ -40,7 +72,7 @@
                     <p class="card-text">${advertisement.price}</p>
                     <time class="timeago" datetime="2017-11-17T09:24:17Z">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
-                    <form action="/test" method="post">
+                    <form action="/advertisement/view" method="post">
                     <input type="hidden" name="forward_page" value="view_ad">
                     <input type="hidden" name="ad_id" value=${advertisement.adId}>
                         <input class="btn btn--stroke full-width" type="submit" value="${viewButtonLocal}">
@@ -51,6 +83,7 @@
     </div>
         <br>
     </c:forEach>
-
+    </c:otherwise>
+    </c:choose>
 </body>
 </html>

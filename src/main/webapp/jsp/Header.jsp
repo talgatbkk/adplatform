@@ -30,6 +30,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
+            <c:if test="${sessionScope.userId != null}">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
+                </li>
+            </c:if>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
@@ -44,11 +49,7 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
-            <c:if test="${sessionScope.userId != null}">
-            <li class="nav-item active">
-                <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
-            </li>
-            </c:if>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
