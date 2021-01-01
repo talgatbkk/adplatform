@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <html>
 <head>
@@ -19,7 +19,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/home?forward_page=get_ads">MyAds.kz</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,38 +27,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <input type="hidden" name="forward_page" value="sign_up">
         <ul class="navbar-nav mr-auto">
-            <form action="/advertisement/search" method="post">
             <li class="nav-item active">
-<%--                <a class="nav-link">Home <span class="sr-only">(current)</span></a>--%>
-                    <input class="nav-link" type="hidden" name="forward_page" value="get_ads">
-                    <input type="submit" value="Home"  />
-            </li>
-            </form>
-            <c:if test="${sessionScope.userId != null}">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
-                </li>
-            </c:if>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <a class="nav-link" href="/home?forward_page=view_profile">Profile <span class="sr-only">(current)</span></a>
             </li>
 
+            <li class="nav-item active">
+                <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
+            </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav ml-auto">
+            <c:choose>
+            <c:when test="${sessionScope.userId == null}">
+            <li class="nav-item active">
+                <a class="nav-link" href="/signin">Log in</a>
+            </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/signup">Sign Up</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home?forward_page=logout">Log out</a>
+                </li>
+            </c:otherwise>
+            </c:choose>
+        </ul>
     </div>
 </nav>
 

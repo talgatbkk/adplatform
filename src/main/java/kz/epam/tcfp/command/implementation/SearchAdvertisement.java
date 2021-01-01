@@ -8,6 +8,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import org.apache.coyote.Request;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,7 +39,7 @@ public class SearchAdvertisement implements Command {
 
         String locationInput = request.getParameter("location_item");
         Integer locationId = null;
-        if (!locationInput.isEmpty()){
+        if (locationInput != null && !locationInput.isEmpty()){
             locationId = Integer.parseInt(locationInput);
             if (locationId == LOCATION_ID_DEFAULT) {
                 locationId = null;
@@ -47,11 +48,15 @@ public class SearchAdvertisement implements Command {
                 request.setAttribute("location_selection", locationId);
             }
         }
+        Integer searchUserId = null;
+        if (request.getParameter("search_user_id") != null){
+            searchUserId = Integer.parseInt(request.getParameter("search_user_id"));
+        }
 
 
         Integer categoryId = null;
         String categoryInput = request.getParameter("category_item");
-        if (!categoryInput.isEmpty()){
+        if (categoryInput != null && !categoryInput.isEmpty()){
             categoryId = Integer.parseInt(categoryInput);
         }
 
@@ -66,7 +71,9 @@ public class SearchAdvertisement implements Command {
             Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);
-            if (categoryId != null && locationId != null) {
+            if (searchUserId != null) {
+                advertisements = advertisementDAO.getAdvertisementByCustomerId(searchUserId);
+            } else if (categoryId != null && locationId != null) {
                 advertisements = advertisementDAO.searchAdvertisementsByCategoryWithLocation(categoryId, locationId);
             } else if (categoryId != null) {
                 advertisements = advertisementDAO.searchAdvertisementsByCategory(categoryId);
@@ -88,4 +95,5 @@ public class SearchAdvertisement implements Command {
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);
     }
+
 }

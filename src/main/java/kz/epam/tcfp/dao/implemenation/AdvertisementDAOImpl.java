@@ -31,14 +31,14 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     @Override
     public List<Advertisement> getAdvertisementByCustomerId(Integer customerId) throws DAOException {
         Connection connection = null;
-        CallableStatement callableStatement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Advertisement> allAdvertisements = new ArrayList<>();
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            callableStatement = connection.prepareCall(DBConstants.GET_ADS_BY_USER_ID);
-            callableStatement.setInt(DBConstants.USER_ID, customerId);
-            resultSet = callableStatement.executeQuery();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_ADS_BY_USER_ID);
+            preparedStatement.setInt(1, customerId);
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = buildAdvertisement(resultSet);
                 allAdvertisements.add(advertisement);
@@ -48,7 +48,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         } catch (ConnectionPoolException ex) {
             throw new DAOException(ex);
         } finally {
-            ClosingUtil.closeAll(callableStatement, resultSet);
+            ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
         return allAdvertisements;

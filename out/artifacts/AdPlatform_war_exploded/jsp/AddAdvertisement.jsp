@@ -8,13 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="${sessionScope.applicationResources}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
-<html>
+<fmt:setLocale value="${sessionScope.language}" />
+<fmt:setBundle basename="language" var="thisLocal" />
+<div>
 <head>
     <title>Title</title>
 </head>
-<body>
+</div>
+<div>
+    <c:if test="${sessionScope.userId == null}">
+        <c:redirect url="signin"> </c:redirect>
+    </c:if>
 <jsp:include page="/jsp/Header.jsp"/>
 <form action="/test" method="post">
     <div class="row justify-content-center">
@@ -30,8 +34,9 @@
             <td><input type="text" name="ad_description" required/></td>
         </tr>
         <tr>
+            <td>Location</td>
             <td>
-                <select name="location_item" required>
+                <select  class="form-control" name="location_item" required>
                     <option value=""></option>
                     <c:forEach items="${requestScope.locations}" var="location">
                         <option value="${location.id}">${location.name}</option>
@@ -41,22 +46,26 @@
 
         </tr>
         <tr>
+            <td>Category</td>
             <td>
-            <select name="category_item" required>
+            <select  class="form-control" name="category_item" required>
                 <option value=""></option>
                 <c:forEach items="${requestScope.categories}" var="category">
                 <option value="${category.categoryId}">${category.categoryName}</option>
                 </c:forEach>
             </select>
             </td>
-
         </tr>
         <tr>
             <td>Price</td>
             <td><input type="number" name="price" required/></td>
         </tr>
         </table>
-    <input type="submit" value="Submit" /></form>
+    <input type="submit" value="Submit" />
+</form>
+</div>
+</div>
+</div>
 
 </body>
 </html>

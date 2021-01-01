@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="profile.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="profile.label.email" var="emailLocal"/>
@@ -47,9 +47,7 @@
                     <p class="card-text">${advertisement.price}</p>
                     <time class="timeago" datetime="2017-11-17T09:24:17Z">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
-                    <form action="/advertisement/view" method="post">
-                    <input type="hidden" name="forward_page" value="view_ad">
-                    <input type="hidden" name="ad_id" value=${advertisement.adId}>
+                    <form action="/advertisement/view?forward_page=view_ad&ad_id=${advertisement.adId}" method="post">
                         <input class="btn btn--stroke full-width" type="submit" value="${viewButtonLocal}">
                     </form>
                 </div>

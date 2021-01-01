@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="view_ad.label.price_currency" var="priceCurrencyLocal" />
 
@@ -38,12 +38,17 @@
 <c:forEach items="${requestScope.phone_numbers}" var="phone">
     <p>${phone.phoneNumber}</p>
 </c:forEach>
+
+<a href="/home?forward_page=search&search_user_id=${requestScope.advertisement.userId}">
+    <p>All advertisements from this user</p>
+</a>
+
 <div class="ui-button">
 <c:if test="${requestScope.belongsToCurrentUser == true}">
 <form action="/home" method="post">
     <input type="hidden" name="forward_page" value="delete_ad">
     <input type="hidden" name="ad_id" value=${advertisement.adId}>
-    <input class="btn btn--stroke full-width" type="submit" value="Delete">
+    <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="Delete">
 </form>
 </c:if>
 </div>
@@ -56,7 +61,7 @@
         <div class="be-comment">
             <div class="be-comment-content">
 				<span class="be-comment-name">
-					<a href="blog-detail-2.html">${comment.authorFirstName} ${comment.authorLastName}</a>
+					<a href="?forward_page=view_profile&profile_id=${comment.authorId}">${comment.authorFirstName} ${comment.authorLastName}</a>
 					</span>
                 <span class="be-comment-time">
 					<i class="fa fa-clock-o"></i>
@@ -77,7 +82,7 @@
     </c:when>
     </c:choose>
     <c:if test="${sessionScope.userId != null}">
-    <form action="/test" method="post">
+    <form action="/home" method="post">
         <input type="hidden" name="forward_page" value="post_comment">
         <input type="hidden" name="ad_id" value="${requestScope.advertisement.adId}">
         <div class="row">

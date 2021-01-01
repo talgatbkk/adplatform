@@ -8,8 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="${sessionScope.applicationResources}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setLocale value="${sessionScope.language}" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="local.label.title" var="titleLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.first_name" var="firstNameLocal"/>
@@ -25,6 +26,9 @@
 </head>
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
+<c:if test="${sessionScope.userId != null}">
+    <c:redirect url="home?forward_page=get_ads"> </c:redirect>
+</c:if>
 
 <h1>${titleLocal}</h1>
 <form action="/test" method="post">

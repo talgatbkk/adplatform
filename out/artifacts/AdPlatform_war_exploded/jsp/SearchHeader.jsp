@@ -11,7 +11,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <html>
 <head>
@@ -20,7 +20,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/home?forward_page=get_ads">MyAds.kz</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,18 +29,16 @@
         <form action="/advertisement/search" method="post">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/home?forward_page=view_profile">Profile <span class="sr-only">(current)</span></a>
             </li>
-            <c:if test="${sessionScope.userId != null}">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
-                </li>
-            </c:if>
+            <li class="nav-item active">
+                <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
+            </li>
 
-            <li class="nav-item">
+            <li class="nav-item active">
 
                     <input type="hidden" name="forward_page" value="search">
-                            <select name="location_item">
+                            <select class="form-control" name="location_item">
                                 <c:forEach items="${requestScope.locations}" var="location">
                                     <c:choose>
                                         <c:when test="${requestScope.location_selection == location.id}">
@@ -54,8 +52,8 @@
                             </select>
 
             </li>
-            <li class="nav-item">
-                            <select name="category_item">
+            <li class="nav-item active">
+                            <select  class="form-control" name="category_item">
                                 <option value="">All</option>
                                 <c:forEach items="${requestScope.categories}" var="category">
                                     <c:choose>
@@ -70,18 +68,36 @@
                             </select>
 
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                     <tr>
-                    <input class="form-control mr-sm-2" type="search" name="search_input" placeholder="Search" aria-label="Search">
+                    <input class="form-control" type="search" name="search_input" placeholder="Search" aria-label="Search">
 
             </li>
-            <li class="nav-item">
-                <input type="submit" value="Submit" />
+            <li class="nav-item active">
+                <input class="form-control" type="submit" value="Submit" />
             </li>
+        </ul>
+        </form>
+        <ul class="navbar-nav ml-auto">
 
+            <c:choose>
+                <c:when test="${sessionScope.userId == null}">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/signin">Log in</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/signup">Sign Up</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home?forward_page=logout">Log out</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
-    </form>
+
 </nav>
 
 </body>

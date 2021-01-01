@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="local.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="local.label.password" var="passwordLocal"/>
@@ -22,6 +22,9 @@
 </head>
 <div>
 <jsp:include page="/jsp/Header.jsp"/>
+    <c:if test="${sessionScope.userId != null}">
+        <c:redirect url="home?forward_page=get_ads"> </c:redirect>
+    </c:if>
 
 <div class="container ">
 <form class="form-horizontal" action="/login" method="post">

@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="applicationResources" var="thisLocal" />
+<fmt:setBundle basename="language" var="thisLocal" />
 
 <fmt:message bundle="${thisLocal}" key="profile.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="profile.label.email" var="emailLocal"/>
@@ -93,6 +93,7 @@
                                 <p>${requestScope.customer.lastName}</p>
                             </div>
                         </div>
+                        <c:if test="${requestScope.customer.userId == sessionScope.userId}">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>${emailLocal}</label>
@@ -121,12 +122,16 @@
                                 </div>
                             </c:if>
                         </div>
+                        </c:if>
                         <div class="row">
                             <div class="col-md-6">
                                 <label>${activeAdsLocal}</label>
                             </div>
                             <div class="col-md-6">
-                                <p>${requestScope.customer.activeAds}</p>
+
+                                <a class="nav-link active" data-toggle="tab" href="/home?forward_page=search&search_user_id=${requestScope.customer.userId}">
+                                    <p>${requestScope.customer.activeAds}</p>
+                                </a>
                             </div>
                         </div>
                 </div>

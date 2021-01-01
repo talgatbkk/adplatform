@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 public class SignIn implements Command {
 
-    private static final String REDIRECT_TO_HOME_PAGE = "/home?forward_page=customer_profile";
+    private static final String REDIRECT_TO_HOME_PAGE = "/home?forward_page=view_profile";
     private static final String SESSION_USER_ID = "userId";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -24,6 +24,10 @@ public class PostAdvertisement implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+        if (session.getAttribute(SESSION_USER_ID) == null){
+            response.sendRedirect("/home?forward_page=sign_in");
+            return;
+        }
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         Integer categoryId = Integer.parseInt(request.getParameter("category_item"));
         Integer locationId = Integer.parseInt(request.getParameter("location_item"));

@@ -31,14 +31,24 @@ public class OpenProfile implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true);
+        if (session.getAttribute(SESSION_USER_ID) == null){
+            response.sendRedirect("/signin");
+            return;
+        }
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        Integer profileId = null;
+        if (request.getParameter("profile_id") != null) {
+            profileId = Integer.parseInt(request.getParameter("profile_id"));
+        } else {
+            profileId = userId;
+        }
         CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         Customer customer = null;
         try {
-            customer= customerDAO.getCustomerById(userId);
-            List<PhoneNumber> phoneNumbers = customerDAO.getPhoneNumberByCustomerId(userId);
-            Integer advertisementCount = advertisementDAO.getAdvertisementCountById(userId);
+            customer= customerDAO.getCustomerById(profileId);
+            List<PhoneNumber> phoneNumbers = customerDAO.getPhoneNumberByCustomerId(profileId);
+            Integer advertisementCount = advertisementDAO.getAdvertisementCountById(profileId);
             customer.setPhoneNumbers(phoneNumbers);
             customer.setActiveAds(advertisementCount);
             if (customer == null) {
