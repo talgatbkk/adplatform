@@ -26,6 +26,7 @@ public class CommandSupplier {
         commands.put("post_ad", new PostAdvertisement());
         commands.put("input_ad", new InputAdvertisement());
         commands.put("search", new SearchAdvertisement());
+        commands.put("delete_ad", new DeleteAdvertisement());
 
     }
 

@@ -132,7 +132,7 @@
                 </div>
                 </div>
             </div>
-        <form action="/test" method="post">
+        <form action="/advertisement/search" method="post">
             <input type="hidden" name="forward_page" value="get_ads">
                 <input type="submit" value="Home"  />
         </form>

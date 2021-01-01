@@ -1,11 +1,13 @@
 
-^
-java:S1128"ARemove this unused import 'kz.epam.tcfp.service.CustomerService'.(Ñéñû8³ «†è.
-a
-java:S1854!"DRemove this useless assignment to local variable "advertisementDAO".(Äÿ„¢8îï¾Ñé.
-Z
-java:S1128"8Remove this unused import 'kz.epam.tcfp.model.Customer'.(‡ÌÓïøÿÿÿÿ8³ «†è.
-R
-java:S1481!"5Remove this unused "advertisementDAO" local variable.(Äÿ„¢8îï¾Ñé.
-U
-java:S1128	"8Remove this unused import 'kz.epam.tcfp.model.Location'.(Ì¦Éó8îï¾Ñé.
+P
+java:S1068"3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—8™‚ö£ë.
+V
+java:S1854'":Remove this useless assignment to local variable "userId".(Áµğs8çöá¤ë.
+X
+java:S1854(";Remove this useless assignment to local variable "service".(æÆÔ…8çöá¤ë.
+c
+java:S1192#"FDefine a constant instead of duplicating this literal "local" 3 times.(ÖëÚĞ8Ä¾í£ë.
+G
+java:S1481'"+Remove this unused "userId" local variable.(Áµğs8çöá¤ë.
+I
+java:S1481(",Remove this unused "service" local variable.(æÆÔ…8çöá¤ë.

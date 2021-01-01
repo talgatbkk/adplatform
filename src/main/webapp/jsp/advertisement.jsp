@@ -22,7 +22,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <title>Advertisements of the customer</title>
 </head>
 <body>
@@ -34,7 +34,7 @@
     </c:when>
     <c:otherwise>
     <c:forEach var="advertisement" items="${requestScope.advertisements}">
-    <div class="card mb-3" style="max-width: 640px;">
+    <div class="card mb-3 mx-auto" style="max-width: 640px;">
         <div class="row no-gutters">
             <div class="col-md-4">
                 <img src="..." class="card-img" alt="...">

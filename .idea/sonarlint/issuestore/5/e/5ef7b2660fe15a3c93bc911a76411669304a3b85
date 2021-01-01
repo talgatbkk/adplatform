@@ -1,15 +1,15 @@
 
-j
-java:S1128"HRemove this unused import 'kz.epam.tcfp.service.factory.ServiceFactory'.(†óØðþÿÿÿÿ8Öãé¬é.
-Y
-java:S1128"<Remove this unused import 'javax.servlet.RequestDispatcher'.(Ëöò¼8ìèì¬é.
 _
-java:S1128	"=Remove this unused import 'kz.epam.tcfp.model.Advertisement'.(Éð¥Åùÿÿÿÿ8ìèì¬é.
+java:S2583"DChange this condition so that it does not always evaluate to "false"(„ÅðÖ8éßÆœë.
 a
-java:S2583,"DChange this condition so that it does not always evaluate to "false"(„ÅðÖ8Œûª®é.
+java:S1128"FRemove this unused import 'kz.epam.tcfp.service.AdvertisementService'.(žÙíû8éßÆœë.
+W
+java:S1128"<Remove this unused import 'javax.servlet.RequestDispatcher'.(Ëöò¼8éßÆœë.
+Z
+java:S1128":Remove this unused import 'kz.epam.tcfp.command.PagePath'.(äó‡Ðúÿÿÿÿ8éßÆœë.
 ]
-java:S18547";Remove this useless assignment to local variable "session".(·ž¾Çýÿÿÿÿ8ÌÈ€­é.
-c
-java:S1128"FRemove this unused import 'kz.epam.tcfp.service.AdvertisementService'.(žÙíû8Öãé¬é.
-\
-java:S1128":Remove this unused import 'kz.epam.tcfp.command.PagePath'.(äó‡Ðúÿÿÿÿ8ìèì¬é.
+java:S1128"=Remove this unused import 'kz.epam.tcfp.model.Advertisement'.(Éð¥Åùÿÿÿÿ8éßÆœë.
+h
+java:S1128"HRemove this unused import 'kz.epam.tcfp.service.factory.ServiceFactory'.(†óØðþÿÿÿÿ8éßÆœë.
+[
+java:S1854";Remove this useless assignment to local variable "session".(·ž¾Çýÿÿÿÿ8éßÆœë.

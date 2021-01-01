@@ -7,10 +7,8 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.AdvertisementService;
-import kz.epam.tcfp.service.CustomerService;
 import kz.epam.tcfp.service.factory.ServiceFactory;
 
 import javax.servlet.RequestDispatcher;
@@ -28,6 +26,9 @@ import java.util.List;
  */
 public class FindAds implements Command {
     private static final String SESSION_USER_ID = "userId";
+    private static final Integer LOCATION_ID_DEFAULT = 1;
+    private static final Integer CATEGORY_ID_ALL = 1;
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
@@ -40,10 +41,11 @@ public class FindAds implements Command {
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
+        List<Advertisement> advertisements = new ArrayList<>();
 
-        List<Advertisement> advertisements = service.getAdvertisement(userId);
         try {
             Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
+            advertisements = advertisementDAO.getAllAdvertisements();
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);
         } catch (DAOException e) {
@@ -54,6 +56,7 @@ public class FindAds implements Command {
         request.setAttribute("advertisements", advertisements);
         request.setAttribute("categories", categories);
         request.setAttribute("locations", locations);
+        request.setAttribute("location_selection", LOCATION_ID_DEFAULT);
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);
 

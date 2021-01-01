@@ -29,6 +29,7 @@
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
         <servlet-name>SearchAdvertisement</servlet-name>
         <url-pattern>/advertisement/search</url-pattern>

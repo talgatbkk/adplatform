@@ -22,36 +22,11 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <title>Advertisements of the customer</title>
 </head>
 <body>
 <jsp:include page="/jsp/SearchHeader.jsp"/>
-
-<%--<form action="/advertisement/search" method="post">--%>
-<%--    <input type="hidden" name="forward_page" value="search">--%>
-<%--<tr>--%>
-<%--    <td>--%>
-<%--        <select name="location_item">--%>
-<%--            <option value=""></option>--%>
-<%--            <c:forEach items="${requestScope.locations}" var="location">--%>
-<%--                <option value="${location.id}">${location.name}</option>--%>
-<%--            </c:forEach>--%>
-<%--        </select>--%>
-<%--    </td>--%>
-
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<td>--%>
-<%--    <select name="category_item">--%>
-<%--        <option value="">All</option>--%>
-<%--        <c:forEach items="${requestScope.categories}" var="category">--%>
-<%--            <option value="${category.categoryId}">${category.categoryName}</option>--%>
-<%--        </c:forEach>--%>
-<%--    </select>--%>
-<%--</td>--%>
-<%--</tr>--%>
-<%--    <input type="submit" value="Submit" /></form>--%>
 <br>
     <c:choose>
     <c:when test="${requestScope.advertisements.size() == 0}">
@@ -59,7 +34,7 @@
     </c:when>
     <c:otherwise>
     <c:forEach var="advertisement" items="${requestScope.advertisements}">
-    <div class="card mb-3" style="max-width: 640px;">
+    <div class="card mb-3 mx-auto" style="max-width: 640px;">
         <div class="row no-gutters">
             <div class="col-md-4">
                 <img src="..." class="card-img" alt="...">

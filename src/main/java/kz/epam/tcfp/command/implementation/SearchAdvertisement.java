@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class SearchAdvertisement implements Command {
     private static final String SESSION_USER_ID = "userId";
-    private static final Integer LOCATION_ID_EVERYWHERE_IN_KZ = 1;
+    private static final Integer LOCATION_ID_DEFAULT = 1;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,13 +40,22 @@ public class SearchAdvertisement implements Command {
         Integer locationId = null;
         if (!locationInput.isEmpty()){
             locationId = Integer.parseInt(locationInput);
+            if (locationId == LOCATION_ID_DEFAULT) {
+                locationId = null;
+                request.setAttribute("location_selection", LOCATION_ID_DEFAULT);
+            } else {
+                request.setAttribute("location_selection", locationId);
+            }
         }
+
 
         Integer categoryId = null;
         String categoryInput = request.getParameter("category_item");
         if (!categoryInput.isEmpty()){
             categoryId = Integer.parseInt(categoryInput);
         }
+
+        String searchInput = request.getParameter("search_input");
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
@@ -61,7 +70,7 @@ public class SearchAdvertisement implements Command {
                 advertisements = advertisementDAO.searchAdvertisementsByCategoryWithLocation(categoryId, locationId);
             } else if (categoryId != null) {
                 advertisements = advertisementDAO.searchAdvertisementsByCategory(categoryId);
-            } else if (locationId != null && locationId != LOCATION_ID_EVERYWHERE_IN_KZ) {
+            } else if (locationId != null) {
                 advertisements = advertisementDAO.searchAdvertisementsByLocation(locationId);
             } else {
                 advertisements = advertisementDAO.getAllAdvertisements();
@@ -74,6 +83,8 @@ public class SearchAdvertisement implements Command {
         request.setAttribute("advertisements", advertisements);
         request.setAttribute("categories", categories);
         request.setAttribute("locations", locations);
+        request.setAttribute("category_selection", categoryId);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);
     }

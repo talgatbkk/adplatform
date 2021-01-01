@@ -29,5 +29,6 @@ public interface AdvertisementDAO {
     List<Advertisement> searchAdvertisementsByCategory(Integer categoryId) throws DAOException;
     List<Advertisement> searchAdvertisementsByCategoryWithLocation(Integer categoryId, Integer locationId) throws DAOException;
     List<Advertisement> searchAdvertisementsByLocation(Integer locationId) throws DAOException;
+    boolean deleteAdvertisementByUserIdAndAdId(Integer userId, Integer adId) throws DAOException;
 
 }

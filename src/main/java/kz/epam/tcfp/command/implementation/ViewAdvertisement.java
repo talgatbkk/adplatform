@@ -40,15 +40,18 @@ public class ViewAdvertisement implements Command {
         List<PhoneNumber> phoneNumbers = null;
         List<Comment> comments = null;
         try {
-            phoneNumbers = customerDAO.getPhoneNumberByCustomerId(userId);
             advertisement = advertisementDAO.getAdvertisementById(adId);
             comments = advertisementDAO.getCommentsAByAdvertisementId(adId);
             location = advertisementDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
+            phoneNumbers = customerDAO.getPhoneNumberByCustomerId(advertisement.getUserId());
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
-
+        request.setAttribute("belongsToCurrentUser", false);
+        if (advertisement.getUserId() == userId) {
+            request.setAttribute("belongsToCurrentUser", true);
+        }
         request.setAttribute("advertisement", advertisement);
         request.setAttribute("comments", comments);
         request.setAttribute("location", location);

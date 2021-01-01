@@ -8,12 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="applicationResources" var="thisLocal" />
 
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
@@ -24,7 +26,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <input type="hidden" name="forward_page" value="sign_up">
+        <form action="/advertisement/search" method="post">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -34,50 +36,52 @@
                     <a class="nav-link" href="/home?forward_page=input_ad">Post an advertisement</a>
                 </li>
             </c:if>
+
             <li class="nav-item">
-                <form action="/advertisement/search" method="post">
+
                     <input type="hidden" name="forward_page" value="search">
-                    <tr>
-                        <td>
                             <select name="location_item">
-                                <option value=""></option>
                                 <c:forEach items="${requestScope.locations}" var="location">
-                                    <option value="${location.id}">${location.name}</option>
+                                    <c:choose>
+                                        <c:when test="${requestScope.location_selection == location.id}">
+                                            <option selected value="${location.id}">${location.name}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${location.id}">${location.name}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
                             </select>
-                        </td>
 
-                    </tr>
-                    <tr>
-                        <td>
+            </li>
+            <li class="nav-item">
                             <select name="category_item">
                                 <option value="">All</option>
                                 <c:forEach items="${requestScope.categories}" var="category">
-                                    <option value="${category.categoryId}">${category.categoryName}</option>
+                                    <c:choose>
+                                        <c:when test="${requestScope.category_selection == category.categoryId}">
+                                            <option selected value="${category.categoryId}">${category.categoryName}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <option value="${category.categoryId}">${category.categoryName}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
                             </select>
-                        </td>
-                    </tr>
-                    <input type="submit" value="Submit" /></form>
+
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+            <li class="nav-item">
+                    <tr>
+                    <input class="form-control mr-sm-2" type="search" name="search_input" placeholder="Search" aria-label="Search">
+
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Submit" />
             </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </div>
+    </form>
 </nav>
 
 </body>

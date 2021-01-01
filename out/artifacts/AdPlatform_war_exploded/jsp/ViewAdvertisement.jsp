@@ -38,8 +38,15 @@
 <c:forEach items="${requestScope.phone_numbers}" var="phone">
     <p>${phone.phoneNumber}</p>
 </c:forEach>
-
-
+<div class="ui-button">
+<c:if test="${requestScope.belongsToCurrentUser == true}">
+<form action="/home" method="post">
+    <input type="hidden" name="forward_page" value="delete_ad">
+    <input type="hidden" name="ad_id" value=${advertisement.adId}>
+    <input class="btn btn--stroke full-width" type="submit" value="Delete">
+</form>
+</c:if>
+</div>
 <div class="container">
     <div class="be-comment-block">
         <c:choose>

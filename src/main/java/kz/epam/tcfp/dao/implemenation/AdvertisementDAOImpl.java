@@ -270,6 +270,31 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
+    public boolean deleteAdvertisementByUserIdAndAdId(Integer userId, Integer adId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer rows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.DELETE_AD_BY_USER_ID_AND_AD_ID);
+            preparedStatement.setInt(1, adId);
+            preparedStatement.setInt(2, userId);
+            rows = preparedStatement.executeUpdate();
+            if (rows == 1){
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
     public boolean postAdvertisement(Advertisement advertisement) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -429,6 +454,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     private Advertisement buildAdvertisement(ResultSet resultSet) throws SQLException {
         Advertisement advertisement = new Advertisement();
         advertisement.setAdId(resultSet.getInt(DBConstants.AD_ID));
+        advertisement.setUserId(resultSet.getInt(DBConstants.USER_ID));
         advertisement.setTitle(resultSet.getString(DBConstants.AD_TITLE));
         advertisement.setDescription(resultSet.getString(DBConstants.AD_DESCRIPTION));
         advertisement.setLocation(new Location(resultSet.getInt(DBConstants.AD_CITY_ID)));

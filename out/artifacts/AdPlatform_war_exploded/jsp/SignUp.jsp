@@ -28,6 +28,8 @@
 
 <h1>${titleLocal}</h1>
 <form action="/test" method="post">
+    <div class="row justify-content-center">
+        <div class="col-auto">
     <input type="hidden" name="forward_page" value="sign_up">
     <table style="with: 50%">
         <tr>
@@ -54,6 +56,9 @@
             <td>${phoneNumberLocal}</td>
             <td><input type="tel" name="phoneNumber" pattern="[+]{1}[0-9]{11,14}" required/></td>
         </tr></table>
-    <input type="submit" value="Submit" /></form>
+    <input type="submit" value="Submit" />
+        </div>
+    </div>
+</form>
 </body>
 </html>

@@ -16,25 +16,31 @@
 <fmt:message bundle="${thisLocal}" key="local.label.password" var="passwordLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.sign_in" var="signInLocal"/>
 <fmt:message bundle="${thisLocal}" key="local.label.incorrect_auth" var="incorrectAuthLocal"/>
-<html>
+<div>
 <head>
     <title>${signInLocal}</title>
 </head>
-<body>
+<div>
 <jsp:include page="/jsp/Header.jsp"/>
 
-<form action="/login" method="post">
+<div class="container ">
+<form class="form-horizontal" action="/login" method="post">
+    <div class="row justify-content-center">
+        <div class="col-auto">
     <input type="hidden" name="forward_page" value="sign_in">
-    <table style="with: 50%">
-
+    <table class="table-responsive" style="with: 50%">
+        <div class="form-group">
         <tr>
             <td>${loginLocal}</td>
             <td><input type="text" name="login" required="required" /></td>
         </tr>
+        </div>
+        <div class="form-group">
         <tr>
             <td>${passwordLocal}</td>
             <td><input type="password" name="password" required="required" /></td>
         </tr>
+        </div>
     </table>
     <div>
         <p class="error-input" id="loginError">
@@ -43,6 +49,12 @@
             </c:if>
         </p>
     </div>
-    <input type="submit" value="${signInLocal}" /></form>
+    <input type="submit" value="${signInLocal}" />
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>
