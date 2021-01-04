@@ -3,6 +3,7 @@ package kz.epam.tcfp.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Talgat Bekkaliyev
@@ -18,6 +19,10 @@ public class User implements Serializable {
     private String email;
     private Date createdTime;
     private String password;
+    private boolean isBanned;
+    private Integer roleId;
+    private List<PhoneNumber> phoneNumbers;
+    private Integer activeAds;
 
     public User() {
     }
@@ -76,6 +81,38 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public List<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public Integer getActiveAds() {
+        return activeAds;
+    }
+
+    public void setActiveAds(Integer activeAds) {
+        this.activeAds = activeAds;
     }
 
     @Override

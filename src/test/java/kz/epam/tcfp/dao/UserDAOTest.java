@@ -2,9 +2,8 @@ package kz.epam.tcfp.dao;
 
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Advertisement;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.PhoneNumber;
+import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 import org.junit.Test;
@@ -18,15 +17,15 @@ import static org.junit.Assert.assertTrue;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class CustomerDAOTest {
+public class UserDAOTest {
 
-    private static final CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
+    private static final UserDAO USER_DAO = DAOFactory.getUserDAO();
 
     @Test
     public void getCustomerByIdTest() throws DAOException {
         Integer customerId = 1;
-        Customer customer = customerDAO.getCustomerById(customerId);
-        System.out.println(customer.toString());
+        User user = USER_DAO.getUserById(customerId);
+        System.out.println(user.toString());
 
     }
 
@@ -35,7 +34,7 @@ public class CustomerDAOTest {
     @Test
     public void getPhoneNumberByCustomerIdTest() throws DAOException {
         Integer customerId = 1;
-        List<PhoneNumber> phoneNumbers = customerDAO.getPhoneNumberByCustomerId(customerId);
+        List<PhoneNumber> phoneNumbers = USER_DAO.getPhoneNumberByUserId(customerId);
         System.out.println(phoneNumbers.toString());
 
     }
@@ -45,7 +44,7 @@ public class CustomerDAOTest {
         SignInInput input = new SignInInput();
         input.setLogin("takha");
         input.setPassword("passwordtest123");
-        assertTrue(customerDAO.authenticateCustomer(input));
+        assertTrue(USER_DAO.authenticateUser(input));
 
     }
 
@@ -54,7 +53,7 @@ public class CustomerDAOTest {
         SignInInput input = new SignInInput();
         input.setLogin("invalidlogin");
         input.setPassword("passwordtest123");
-        assertFalse(customerDAO.authenticateCustomer(input));
+        assertFalse(USER_DAO.authenticateUser(input));
 
     }
 
@@ -63,7 +62,7 @@ public class CustomerDAOTest {
         SignInInput input = new SignInInput();
         input.setLogin("takha");
         input.setPassword("someWrongPassword");
-        assertFalse(customerDAO.authenticateCustomer(input));
+        assertFalse(USER_DAO.authenticateUser(input));
 
     }
 
@@ -72,7 +71,7 @@ public class CustomerDAOTest {
         SignInInput input = new SignInInput();
         input.setLogin("wrongLogin");
         input.setPassword("someWrongPassword");
-        assertFalse(customerDAO.authenticateCustomer(input));
+        assertFalse(USER_DAO.authenticateUser(input));
 
     }
 
@@ -85,7 +84,7 @@ public class CustomerDAOTest {
         signInInput.setLastName("Halpert");
         signInInput.setEmail("jim@office.com");
         signInInput.setPhoneInfo(new PhoneNumber("+77016667799"));
-        assertTrue(customerDAO.registerCustomer(signInInput));
+        assertTrue(USER_DAO.registerUser(signInInput));
 
     }
 
@@ -93,7 +92,7 @@ public class CustomerDAOTest {
     public void isLoginTakenTestAlreadyExists() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
         signInInput.setLogin("takha");
-        assertTrue(customerDAO.isLoginTaken(signInInput));
+        assertTrue(USER_DAO.isLoginTaken(signInInput));
 
     }
 
@@ -101,7 +100,7 @@ public class CustomerDAOTest {
     public void isLoginTakenTestNotPresent() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
         signInInput.setLogin("nonexistinglogin");
-        assertFalse(customerDAO.isLoginTaken(signInInput));
+        assertFalse(USER_DAO.isLoginTaken(signInInput));
 
     }
 
@@ -109,7 +108,7 @@ public class CustomerDAOTest {
     public void isEmailTakenTestAlreadyExists() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
         signInInput.setEmail("talgat@email.com");
-        assertTrue(customerDAO.isEmailTaken(signInInput));
+        assertTrue(USER_DAO.isEmailTaken(signInInput));
 
     }
 
@@ -117,7 +116,7 @@ public class CustomerDAOTest {
     public void isEmailTakenTestNotPresent() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
         signInInput.setEmail("nonexistingEmail");
-        assertFalse(customerDAO.isLoginTaken(signInInput));
+        assertFalse(USER_DAO.isLoginTaken(signInInput));
 
     }
 
@@ -125,7 +124,7 @@ public class CustomerDAOTest {
     public void isPhoneNumberTakenTestAlreadyExists() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
         signInInput.setPhoneInfo(new PhoneNumber("+77011820844"));
-        assertTrue(customerDAO.isPhoneNumberTaken(signInInput));
+        assertTrue(USER_DAO.isPhoneNumberTaken(signInInput));
 
     }
 
@@ -133,7 +132,7 @@ public class CustomerDAOTest {
     public void isPhoneNumberTakenTestNotPresent() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
         signInInput.setPhoneInfo(new PhoneNumber("+77777777777"));
-        assertFalse(customerDAO.isPhoneNumberTaken(signInInput));
+        assertFalse(USER_DAO.isPhoneNumberTaken(signInInput));
 
     }
 

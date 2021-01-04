@@ -28,6 +28,8 @@ public class CommandSupplier {
         commands.put("search", new SearchAdvertisement());
         commands.put("delete_ad", new DeleteAdvertisement());
         commands.put("logout", new LogOut());
+        commands.put("delete_user", new DeleteUserAccount());
+        commands.put("ban_user", new BanUserAccount());
 
     }
 

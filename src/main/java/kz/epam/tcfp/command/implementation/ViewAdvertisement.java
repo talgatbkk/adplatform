@@ -2,7 +2,7 @@ package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
 import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.*;
@@ -28,7 +28,7 @@ public class ViewAdvertisement implements Command {
         String languageCode = (String) session.getAttribute("local");
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
+        UserDAO userDAO = DAOFactory.getUserDAO();
         Integer adId = null;
         if (request.getParameter("ad_id") == null){
             adId = (Integer) session.getAttribute("ad_id");
@@ -43,7 +43,7 @@ public class ViewAdvertisement implements Command {
             advertisement = advertisementDAO.getAdvertisementById(adId);
             comments = advertisementDAO.getCommentsAByAdvertisementId(adId);
             location = advertisementDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
-            phoneNumbers = customerDAO.getPhoneNumberByCustomerId(advertisement.getUserId());
+            phoneNumbers = userDAO.getPhoneNumberByUserId(advertisement.getUserId());
         } catch (DAOException e) {
             e.printStackTrace();
         }

@@ -1,10 +1,10 @@
 package kz.epam.tcfp.dao.factory;
 
 import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
 import kz.epam.tcfp.dao.implemenation.AdvertisementDAOImpl;
-import kz.epam.tcfp.dao.implemenation.CustomerDAOImpl;
+import kz.epam.tcfp.dao.implemenation.UserDAOImpl;
 
 /**
  * @author Talgat Bekkaliyev
@@ -19,7 +19,7 @@ public class DAOFactory {
 
     private static AdvertisementDAO advertisementDAO = new AdvertisementDAOImpl();
 
-    private static CustomerDAO customerDAO = new CustomerDAOImpl();
+    private static UserDAO userDAO = new UserDAOImpl();
 
 
     private static synchronized DAOFactory getInstance() {
@@ -37,8 +37,8 @@ public class DAOFactory {
         return getInstance().advertisementDAO;
     }
 
-    public static CustomerDAO getCustomerDAO() {
-        return getInstance().customerDAO;
+    public static UserDAO getUserDAO() {
+        return getInstance().userDAO;
     }
 
 

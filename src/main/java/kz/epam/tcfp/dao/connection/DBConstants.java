@@ -34,11 +34,11 @@ public class DBConstants {
     public static final String GET_AD_BY_ID = "SELECT * FROM advertisement WHERE advertisement_id = ?";
     public static final String GET_AD_COUNT_BY_ID = "SELECT COUNT(*) FROM advertisement WHERE user_id = ?";
     public static final String GET_LOCATION_BY_ID = "SELECT location_name, parent_id FROM location p WHERE location_id = ? and language_id = (SELECT language_id FROM language WHERE language_name = ?)";
-    public static final String GET_CUSTOMER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
-    public static final String GET_CUSTOMER_ID_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
-    public static final String GET_PHONE_NUMBER_BY_CUSTOMER_ID = "SELECT * FROM user_phone WHERE user_id = ?";
-    public static final String AUTHENTICATE_CUSTOMER = "SELECT * FROM user WHERE login = ? AND password = ?";
-    public static final String INSERT_NEW_CUSTOMER = "{call add_new_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    public static final String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
+    public static final String GET_USER_ID_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
+    public static final String GET_PHONE_NUMBER_BY_USER_ID = "SELECT * FROM user_phone WHERE user_id = ?";
+    public static final String AUTHENTICATE_USER = "SELECT * FROM user WHERE login = ? AND password = ?";
+    public static final String INSERT_NEW_USER = "{call add_new_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     public static final String CHECK_IF_LOGIN_TAKEN = "SELECT login FROM user WHERE login = ?";
     public static final String CHECK_IF_EMAIL_TAKEN = "SELECT email FROM user WHERE email = ?";
     public static final String CHECK_IF_PHONE_NUMBER_TAKEN = "SELECT phone_number FROM user_phone WHERE phone_number = ?";
@@ -57,5 +57,7 @@ public class DBConstants {
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? ORDER BY posted_date";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ? ORDER BY posted_date";
     public static final String DELETE_AD_BY_USER_ID_AND_AD_ID = "DELETE FROM advertisement WHERE advertisement_id = ? AND user_id = ?";
+    public static final String DELETE_USER_ACCOUNT = "DELETE FROM user WHERE user_id = ?";
+    public static final String BAN_USER_ACCOUNT = "UPDATE user SET ban = TRUE WHERE user_id = ?";
     public static final String SQL_QUERY_ERROR = "SQL query error";
 }

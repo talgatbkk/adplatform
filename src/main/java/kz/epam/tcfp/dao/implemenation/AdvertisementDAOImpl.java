@@ -29,7 +29,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> getAdvertisementByCustomerId(Integer customerId) throws DAOException {
+    public List<Advertisement> getAdvertisementByUserId(Integer userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -37,7 +37,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_ADS_BY_USER_ID);
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = buildAdvertisement(resultSet);
@@ -165,7 +165,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public Integer getAdvertisementCountById(Integer customerId) throws DAOException {
+    public Integer getAdvertisementCountById(Integer userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -173,7 +173,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_AD_COUNT_BY_ID);
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 advertisementCount = resultSet.getInt(1);

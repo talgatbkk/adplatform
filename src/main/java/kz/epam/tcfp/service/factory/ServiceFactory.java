@@ -1,10 +1,9 @@
 package kz.epam.tcfp.service.factory;
 
 import kz.epam.tcfp.service.AdvertisementService;
-import kz.epam.tcfp.service.CustomerService;
+import kz.epam.tcfp.service.UserService;
 import kz.epam.tcfp.service.implementation.AdvertisementServiceImpl;
-import kz.epam.tcfp.service.implementation.CustomerServiceImpl;
-import org.apache.log4j.Logger;
+import kz.epam.tcfp.service.implementation.UserServiceImpl;
 
 /**
  * @author Talgat Bekkaliyev
@@ -17,7 +16,7 @@ public class ServiceFactory {
 
     private AdvertisementService advertisementService = new AdvertisementServiceImpl();
 
-    private CustomerService customerService = new CustomerServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
 
     private ServiceFactory() {
@@ -27,8 +26,8 @@ public class ServiceFactory {
         return getInstance().advertisementService;
     }
 
-    public static CustomerService getCustomerService() {
-        return getInstance().customerService;
+    public static UserService getUserService() {
+        return getInstance().userService;
     }
 
 

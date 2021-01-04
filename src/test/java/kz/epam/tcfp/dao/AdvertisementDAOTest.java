@@ -19,7 +19,7 @@ public class AdvertisementDAOTest {
     @Test
     public void getAdByCustomerIdTest() throws DAOException {
         Integer customerId = 1;
-        List<Advertisement> allAdvertisements = advertisementDAO.getAdvertisementByCustomerId(customerId);
+        List<Advertisement> allAdvertisements = advertisementDAO.getAdvertisementByUserId(customerId);
         System.out.println(allAdvertisements.toString());
 
     }

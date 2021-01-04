@@ -2,11 +2,10 @@ package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
 import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.Location;
 
 import javax.servlet.ServletException;
@@ -36,14 +35,19 @@ public class InputAdvertisement implements Command {
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        UserDAO userDAO = DAOFactory.getUserDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
 
 
         try {
-            Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
-            categories = advertisementDAO.getCategories(languageId);
-            locations = advertisementDAO.getLocations(languageId);
+            if (userDAO.isUserBanned(userId)) {
+                Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
+                categories = advertisementDAO.getCategories(languageId);
+                locations = advertisementDAO.getLocations(languageId);
+            } else {
+                request.getRequestDispatcher("/jsp/InformBanned.jsp").forward(request, response);
+            }
         } catch (DAOException e) {
             e.printStackTrace();
         }

@@ -20,9 +20,8 @@
 <fmt:message bundle="${thisLocal}" key="profile.label.active_ads" var="activeAdsLocal"/>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../css/bootstrap-grid.min.css"></script>
+    <script src="../js/jquery-3.5.1.min.js"></script>
 
     <title>Title</title>
 </head>
@@ -137,9 +136,23 @@
                 </div>
                 </div>
             </div>
-        <form action="/advertisement/search" method="post">
-            <input type="hidden" name="forward_page" value="get_ads">
-                <input type="submit" value="Home"  />
+        <c:choose>
+        <c:when test="${requestScope.customer.userId == sessionScope.userId}">
+        <form action="/user">
+            <input type="hidden" name="forward_page" value="delete_user">
+            <input type="hidden" name="del_user_id" value="${requestScope.customer.userId}">
+            <input class="btn-outline-danger" type="submit" value="Delete account" onclick="return confirm('Are you sure you want to delete?')" />
         </form>
+        </c:when>
+        <c:when test="${sessionScope.role_id == 1}">
+        <form action="/user">
+            <input type="hidden" name="forward_page" value="ban_user">
+            <input type="hidden" name="ban_user_id" value="${requestScope.customer.userId}">
+            <input class="btn-outline-danger" type="submit" value="Ban this user" onclick="return confirm('Are you sure you want to ban this user?')" />
+        </form>
+        </c:when>
+        </c:choose>
+
+
 </body>
 </html>

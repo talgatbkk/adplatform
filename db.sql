@@ -177,6 +177,7 @@ DELIMITER ;
 INSERT INTO role VALUES (1, 'administrator');
 INSERT INTO role VALUES (2, 'customer');
 INSERT INTO user VALUES (1, 2,'takha', 'passwordtest123', 'Талгат', 'Бекк', 'talgat@email.com', '2020-11-21 20:46:38', 0);
+INSERT INTO user VALUES (NULL, 1,'admin', 'admin', 'Admin', 'adminov', 'adminov@email.com', '2020-11-21 20:46:38', 0);
 INSERT INTO user_phone VALUES (NULL, 1, '+77011820844');
 INSERT INTO user_phone VALUES (NULL, 1, '+77471820844');
 INSERT INTO language VALUES (1, 'ru');

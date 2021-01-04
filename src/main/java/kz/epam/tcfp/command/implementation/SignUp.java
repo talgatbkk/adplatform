@@ -1,11 +1,11 @@
 package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.PhoneNumber;
+import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 
 import javax.servlet.ServletException;
@@ -40,15 +40,15 @@ public class SignUp implements Command {
         signUpInput.setLastName(request.getParameter(NEW_USER_LAST_NAME));
         signUpInput.setEmail(request.getParameter(NEW_USER_EMAIL));
         signUpInput.setPhoneInfo(new PhoneNumber(request.getParameter(NEW_USER_PHONE_NUMBER)));
-        CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
-        Customer customer = null;
+        UserDAO userDAO = DAOFactory.getUserDAO();
+        User user = null;
         try {
-            if (signUpInput.getFirstName() == null || !customerDAO.registerCustomer(signUpInput)){
+            if (signUpInput.getFirstName() == null || !userDAO.registerUser(signUpInput)){
                 request.setAttribute("incorrect_registration", true);
                 request.getRequestDispatcher("/signup").forward(request,response);
                 return;
             } else {
-                customer = customerDAO.getCustomerIdByLogin(signUpInput.getLogin());
+                user = userDAO.getUserIdByLogin(signUpInput.getLogin());
             }
         } catch (DAOException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class SignUp implements Command {
 
         request.setAttribute("incorrect_registration", false);
         session = request.getSession(true);
-        session.setAttribute(SESSION_USER_ID, customer.getUserId());
+        session.setAttribute(SESSION_USER_ID, user.getUserId());
         response.sendRedirect(REDIRECT_TO_HOME_PAGE);
     }
 }

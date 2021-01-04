@@ -1,10 +1,10 @@
 package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Customer;
+import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 
 import javax.servlet.ServletException;
@@ -28,24 +28,27 @@ public class SignIn implements Command {
         SignInInput signInInput = new SignInInput();
         signInInput.setLogin(request.getParameter("login"));
         signInInput.setPassword(request.getParameter("password"));
-        CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
-        Customer customer = null;
+        UserDAO userDAO = DAOFactory.getUserDAO();
+        User user = null;
         try {
-            if (!customerDAO.authenticateCustomer(signInInput)){
+            if (!userDAO.authenticateUser(signInInput)){
                 if (signInInput.getLogin() != null) {
                     request.setAttribute("incorrect_auth", true);
                 }
                 request.getRequestDispatcher("/signin").forward(request,response);
                 return;
             } else {
-                    customer = customerDAO.getCustomerIdByLogin(signInInput.getLogin());
+                    user = userDAO.getUserIdByLogin(signInInput.getLogin());
+
             }
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
         request.setAttribute("incorrect_auth", false);
-        session.setAttribute(SESSION_USER_ID, customer.getUserId());
+        session.setAttribute("role_id", user.getRoleId());
+        session.setAttribute("is_banned", user.isBanned());
+        session.setAttribute(SESSION_USER_ID, user.getUserId());
         response.sendRedirect(REDIRECT_TO_HOME_PAGE);
     }
 }

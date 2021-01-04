@@ -1,14 +1,14 @@
 package kz.epam.tcfp.dao.implemenation;
 
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.connection.ClosingUtil;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
 import kz.epam.tcfp.dao.connection.DBConstants;
 import kz.epam.tcfp.dao.connection.ConnectionPoolException;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.PhoneNumber;
+import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class CustomerDAOImpl implements CustomerDAO {
+public class UserDAOImpl implements UserDAO {
 
     public static final Integer COLUMN_INDEX_ONE = 1;
     public static final Integer COLUMN_INDEX_TWO = 2;
@@ -30,13 +30,13 @@ public class CustomerDAOImpl implements CustomerDAO {
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     @Override
-    public Boolean authenticateCustomer(SignInInput signInInput) throws DAOException {
+    public Boolean authenticateUser(SignInInput signInInput) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.AUTHENTICATE_CUSTOMER);
+            preparedStatement = connection.prepareStatement(DBConstants.AUTHENTICATE_USER);
             preparedStatement.setString(COLUMN_INDEX_ONE, signInInput.getLogin());
             preparedStatement.setString(COLUMN_INDEX_TWO, signInInput.getPassword());
             resultSet = preparedStatement.executeQuery();
@@ -55,13 +55,37 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Boolean registerCustomer(SignUpInput signUpInput) throws DAOException {
+    public Boolean isUserBanned(Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next() && !resultSet.getBoolean("ban")) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean registerUser(SignUpInput signUpInput) throws DAOException {
         Connection connection = null;
         CallableStatement callableStatement = null;
         Integer result = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            callableStatement = connection.prepareCall(DBConstants.INSERT_NEW_CUSTOMER);
+            callableStatement = connection.prepareCall(DBConstants.INSERT_NEW_USER);
             callableStatement.setInt(DBConstants.USER_ROLE_ID, ROLE_ID);
             callableStatement.setString(DBConstants.USER_LOGIN, signUpInput.getLogin());
             callableStatement.setString(DBConstants.USER_PASSWORD, signUpInput.getPassword());
@@ -164,18 +188,18 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 
     @Override
-    public Customer getCustomerById(Integer customerId) throws DAOException {
+    public User getUserById(Integer userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Customer customer = null;
+        User user = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_CUSTOMER_BY_ID);
-            preparedStatement.setInt(COLUMN_INDEX_ONE, customerId);
+            preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
+            preparedStatement.setInt(COLUMN_INDEX_ONE, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                customer = buildCustomer(resultSet);
+                user = buildUser(resultSet);
             }
         } catch (SQLException ex) {
             throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
@@ -185,36 +209,37 @@ public class CustomerDAOImpl implements CustomerDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return customer;
+        return user;
     }
 
-    private Customer buildCustomer(ResultSet resultSet) throws SQLException {
-        Customer customer = new Customer();
-        customer.setUserId(resultSet.getInt(DBConstants.USER_ID));
-        customer.setLogin(resultSet.getString(DBConstants.USER_LOGIN));
-        customer.setFirstName(resultSet.getString(DBConstants.USER_FIRST_NAME));
-        customer.setLastName(resultSet.getString(DBConstants.USER_LAST_NAME));
-        customer.setCreatedTime(resultSet.getDate(DBConstants.USER_REGISTRATION_DATE));
-        customer.setEmail(resultSet.getString(DBConstants.USER_EMAIL));
-        customer.setBanned(resultSet.getBoolean(DBConstants.USER_IS_BANNED));
-        return customer;
+    private User buildUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setUserId(resultSet.getInt(DBConstants.USER_ID));
+        user.setLogin(resultSet.getString(DBConstants.USER_LOGIN));
+        user.setFirstName(resultSet.getString(DBConstants.USER_FIRST_NAME));
+        user.setLastName(resultSet.getString(DBConstants.USER_LAST_NAME));
+        user.setCreatedTime(resultSet.getDate(DBConstants.USER_REGISTRATION_DATE));
+        user.setEmail(resultSet.getString(DBConstants.USER_EMAIL));
+        user.setBanned(resultSet.getBoolean(DBConstants.USER_IS_BANNED));
+        user.setRoleId(resultSet.getInt(DBConstants.USER_ROLE_ID));
+        return user;
     }
 
     @Override
-    public List<PhoneNumber> getPhoneNumberByCustomerId(Integer customerId) throws DAOException {
+    public List<PhoneNumber> getPhoneNumberByUserId(Integer userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<PhoneNumber> phoneNumbers = new ArrayList<>();
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_PHONE_NUMBER_BY_CUSTOMER_ID);
-            preparedStatement.setInt(COLUMN_INDEX_ONE, customerId);
+            preparedStatement = connection.prepareStatement(DBConstants.GET_PHONE_NUMBER_BY_USER_ID);
+            preparedStatement.setInt(COLUMN_INDEX_ONE, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String customerPhoneNumber = resultSet.getString(DBConstants.USER_PHONE_NUMBER);
-                Integer customerPhoneNumberId = resultSet.getInt(DBConstants.USER_PHONE_NUMBER_ID);
-                phoneNumbers.add(new PhoneNumber(customerPhoneNumberId, customerPhoneNumber));
+                String userPhoneNumber = resultSet.getString(DBConstants.USER_PHONE_NUMBER);
+                Integer userPhoneNumberId = resultSet.getInt(DBConstants.USER_PHONE_NUMBER_ID);
+                phoneNumbers.add(new PhoneNumber(userPhoneNumberId, userPhoneNumber));
             }
         } catch (SQLException ex) {
             throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
@@ -228,18 +253,18 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer getCustomerIdByLogin(String login) throws DAOException {
+    public User getUserIdByLogin(String login) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Customer customer = null;
+        User user = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_CUSTOMER_ID_BY_LOGIN);
+            preparedStatement = connection.prepareStatement(DBConstants.GET_USER_ID_BY_LOGIN);
             preparedStatement.setString(1, login);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                customer = buildCustomer(resultSet);
+                user = buildUser(resultSet);
             }
         } catch (SQLException ex) {
             throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
@@ -249,8 +274,55 @@ public class CustomerDAOImpl implements CustomerDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return customer;
+        return user;
     }
 
+    @Override
+    public Boolean deleteUserAccount(Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.DELETE_USER_ACCOUNT);
+            preparedStatement.setInt(1, userId);
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean banUserAccount(Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.BAN_USER_ACCOUNT);
+            preparedStatement.setInt(1, userId);
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
 
 }

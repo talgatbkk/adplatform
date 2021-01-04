@@ -1,12 +1,13 @@
 package kz.epam.tcfp.service;
 
 import kz.epam.tcfp.model.Customer;
+import kz.epam.tcfp.model.User;
 
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public interface CustomerService {
+public interface UserService {
 
-    Customer getCustomer(Integer customerId);
+    User getUser(Integer userId);
 }

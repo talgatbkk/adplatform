@@ -5,7 +5,6 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.service.AdvertisementService;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -20,9 +19,9 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
     @Override
-    public List<Advertisement> getAdvertisement(Integer customerId) {
+    public List<Advertisement> getAdvertisement(Integer userId) {
         try {
-            return advertisementDAO.getAdvertisementByCustomerId(customerId);
+            return advertisementDAO.getAdvertisementByUserId(userId);
         } catch (DAOException e) {
             e.printStackTrace();
         }

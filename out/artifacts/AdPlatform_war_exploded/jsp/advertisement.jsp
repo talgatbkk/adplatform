@@ -23,6 +23,8 @@
 <html>
 <head>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
+
     <title>Advertisements of the customer</title>
 </head>
 <body>
@@ -45,7 +47,7 @@
                     <h5 class="card-title">${advertisement.title}</h5>
                     <p class="card-text">${advertisement.description}</p>
                     <p class="card-text">${advertisement.price}</p>
-                    <time class="timeago" datetime="2017-11-17T09:24:17Z">${advertisement.postedDate}</time>
+                    <time datetime="${advertisement.postedDate}">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
                     <form action="/advertisement/view?forward_page=view_ad&ad_id=${advertisement.adId}" method="post">
                         <input class="btn btn--stroke full-width" type="submit" value="${viewButtonLocal}">

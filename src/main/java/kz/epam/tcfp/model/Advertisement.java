@@ -1,8 +1,11 @@
 package kz.epam.tcfp.model;
 
+
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * @author Talgat Bekkaliyev
@@ -10,6 +13,7 @@ import java.util.List;
  */
 public class Advertisement implements Serializable {
     private static final long serialVersionUID = 1234L;
+
 
     private Integer userId;
     private Integer adId;
@@ -104,6 +108,8 @@ public class Advertisement implements Serializable {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+
 
     @Override
     public String toString() {

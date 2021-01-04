@@ -1,6 +1,11 @@
 package kz.epam.tcfp.model;
 
+
+
+
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * @author Talgat Bekkaliyev
@@ -68,6 +73,7 @@ public class Comment {
         this.postedDate = postedDate;
     }
 
+
     public Integer getAdId() {
         return adId;
     }
@@ -75,4 +81,5 @@ public class Comment {
     public void setAdId(Integer adId) {
         this.adId = adId;
     }
+
 }

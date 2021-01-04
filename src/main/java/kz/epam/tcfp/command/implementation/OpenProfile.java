@@ -1,18 +1,13 @@
 package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
-import kz.epam.tcfp.command.PagePath;
 import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.CustomerDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Advertisement;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.PhoneNumber;
-import kz.epam.tcfp.service.AdvertisementService;
-import kz.epam.tcfp.service.factory.ServiceFactory;
+import kz.epam.tcfp.model.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,16 +37,16 @@ public class OpenProfile implements Command {
         } else {
             profileId = userId;
         }
-        CustomerDAO customerDAO = DAOFactory.getCustomerDAO();
+        UserDAO userDAO = DAOFactory.getUserDAO();
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        Customer customer = null;
+        User user = null;
         try {
-            customer= customerDAO.getCustomerById(profileId);
-            List<PhoneNumber> phoneNumbers = customerDAO.getPhoneNumberByCustomerId(profileId);
+            user= userDAO.getUserById(profileId);
+            List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(profileId);
             Integer advertisementCount = advertisementDAO.getAdvertisementCountById(profileId);
-            customer.setPhoneNumbers(phoneNumbers);
-            customer.setActiveAds(advertisementCount);
-            if (customer == null) {
+            user.setPhoneNumbers(phoneNumbers);
+            user.setActiveAds(advertisementCount);
+            if (user == null) {
                 request.setAttribute("incorrect_auth", true);
                 request.getRequestDispatcher("/signin").forward(request, response);
                 return;
@@ -61,7 +56,7 @@ public class OpenProfile implements Command {
         }
 
         request.setAttribute("incorrect_auth", false);
-        request.setAttribute("customer", customer);
+        request.setAttribute("customer", user);
         session = request.getSession(true);
         request.getRequestDispatcher("/jsp/Profile.jsp").forward(request, response);
 

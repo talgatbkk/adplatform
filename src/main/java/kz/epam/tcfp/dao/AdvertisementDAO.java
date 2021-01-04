@@ -15,11 +15,11 @@ import java.util.List;
 public interface AdvertisementDAO {
 
 
-    List<Advertisement> getAdvertisementByCustomerId(Integer customerId) throws DAOException;
+    List<Advertisement> getAdvertisementByUserId(Integer userId) throws DAOException;
     Advertisement getAdvertisementById(Integer adId) throws DAOException;
-    Integer getAdvertisementCountById(Integer customerId) throws DAOException;
+    Integer getAdvertisementCountById(Integer userId) throws DAOException;
     Location getLocationNamesById(Integer locationId, String languageId) throws DAOException;
-    List<Comment> getCommentsAByAdvertisementId(Integer customerId) throws DAOException;
+    List<Comment> getCommentsAByAdvertisementId(Integer userId) throws DAOException;
     boolean postComment(Comment comment) throws DAOException;
     boolean postAdvertisement(Advertisement advertisement) throws DAOException;
     List<Category> getCategories(Integer languageId) throws DAOException;

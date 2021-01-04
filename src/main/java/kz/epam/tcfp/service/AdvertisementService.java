@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface AdvertisementService {
 
-    List<Advertisement> getAdvertisement(Integer customerId);
+    List<Advertisement> getAdvertisement(Integer userId);
 }

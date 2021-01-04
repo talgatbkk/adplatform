@@ -8,7 +8,6 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
-import org.apache.coyote.Request;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -72,7 +71,7 @@ public class SearchAdvertisement implements Command {
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);
             if (searchUserId != null) {
-                advertisements = advertisementDAO.getAdvertisementByCustomerId(searchUserId);
+                advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId);
             } else if (categoryId != null && locationId != null) {
                 advertisements = advertisementDAO.searchAdvertisementsByCategoryWithLocation(categoryId, locationId);
             } else if (categoryId != null) {

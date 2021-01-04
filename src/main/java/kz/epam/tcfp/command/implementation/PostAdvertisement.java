@@ -2,6 +2,7 @@ package kz.epam.tcfp.command.implementation;
 
 import kz.epam.tcfp.command.Command;
 import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
@@ -35,6 +36,7 @@ public class PostAdvertisement implements Command {
         String advertisementDescription = request.getParameter("ad_description");
         Integer advertisementPrice = Integer.parseInt(request.getParameter("price"));
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        UserDAO userDAO = DAOFactory.getUserDAO();
 
         Advertisement advertisement = new Advertisement();
         advertisement.setUserId(userId);
@@ -47,6 +49,7 @@ public class PostAdvertisement implements Command {
 
         try {
             advertisementDAO.postAdvertisement(advertisement);
+
         } catch (DAOException e) {
             e.printStackTrace();
         }
