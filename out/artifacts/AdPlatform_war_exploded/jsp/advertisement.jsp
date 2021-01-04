@@ -49,7 +49,7 @@
                     <p class="card-text">${advertisement.price}</p>
                     <time datetime="${advertisement.postedDate}">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
-                    <form action="/advertisement/view?forward_page=view_ad&ad_id=${advertisement.adId}" method="post">
+                    <form action="/advertisement/view?page=view_ad&ad_id=${advertisement.adId}" method="post">
                         <input class="btn btn--stroke full-width" type="submit" value="${viewButtonLocal}">
                     </form>
                 </div>

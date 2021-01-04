@@ -33,11 +33,11 @@
         <div class="col-3 order-2" id="sticky-sidebar">
             <div class="sticky-top">
                 <div class="nav flex-column">
-                    <a href="/home?forward_page=search&search_user_id=${requestScope.advertisement.userId}">
+                    <a href="/home?page=search&search_user_id=${requestScope.advertisement.userId}">
                         <p>All advertisements from this user</p>
                     </a>
 
-                    <a href="?forward_page=view_profile&profile_id=${requestScope.advertisement.userId}">
+                    <a href="?page=view_profile&profile_id=${requestScope.advertisement.userId}">
                         <p>Go to user's profile</p>
                     </a>
                 </div>
@@ -61,7 +61,7 @@
         <div class="ui-button">
         <c:if test="${requestScope.belongsToCurrentUser == true}">
         <form action="/home" method="post">
-            <input type="hidden" name="forward_page" value="delete_ad">
+            <input type="hidden" name="page" value="delete_ad">
             <input type="hidden" name="ad_id" value=${advertisement.adId}>
             <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="Delete">
         </form>
@@ -77,7 +77,7 @@
         <div class="be-comment">
             <div class="be-comment-content">
 				<span class="be-comment-name">
-					<a href="?forward_page=view_profile&profile_id=${comment.authorId}">${comment.authorFirstName} ${comment.authorLastName}</a>
+					<a href="?page=view_profile&profile_id=${comment.authorId}">${comment.authorFirstName} ${comment.authorLastName}</a>
 					</span>
                 <span>
                     <time class="" datetime="${advertisement.postedDate}">
@@ -100,7 +100,7 @@
     </c:choose>
     <c:if test="${sessionScope.userId != null}">
     <form action="/home" class="form-control-plaintext" method="post">
-        <input type="hidden" name="forward_page" value="post_comment">
+        <input type="hidden" name="page" value="post_comment">
         <input type="hidden" name="ad_id" value="${requestScope.advertisement.adId}">
         <div class="row">
             <div>

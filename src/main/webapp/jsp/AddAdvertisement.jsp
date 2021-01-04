@@ -23,7 +23,7 @@
 <form action="/test" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-    <input type="hidden" name="forward_page" value="post_ad">
+    <input type="hidden" name="page" value="post_ad">
     <table style="with: 50%">
         <tr>
             <td>Title</td>

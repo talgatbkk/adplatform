@@ -33,30 +33,11 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        Kshiti Ghelani
-                    </h5>
-                    <h6>
-                        Web Developer and Designer
-                    </h6>
-                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                        </li>
-                    </ul>
+                    <img src="" alt=""/>
+<%--                    <div class="file btn btn-lg btn-primary">--%>
+<%--                        Change Photo--%>
+<%--                        <input type="file" name="file"/>--%>
+<%--                    </div>--%>
                 </div>
             </div>
             <div class="col-md-2">
@@ -128,7 +109,7 @@
                             </div>
                             <div class="col-md-6">
 
-                                <a class="nav-link active" data-toggle="tab" href="/home?forward_page=search&search_user_id=${requestScope.customer.userId}">
+                                <a class="nav-link active" data-toggle="tab" href="/home?page=search&search_user_id=${requestScope.customer.userId}">
                                     <p>${requestScope.customer.activeAds}</p>
                                 </a>
                             </div>
@@ -139,14 +120,14 @@
         <c:choose>
         <c:when test="${requestScope.customer.userId == sessionScope.userId}">
         <form action="/user">
-            <input type="hidden" name="forward_page" value="delete_user">
+            <input type="hidden" name="page" value="delete_user">
             <input type="hidden" name="del_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Delete account" onclick="return confirm('Are you sure you want to delete?')" />
         </form>
         </c:when>
         <c:when test="${sessionScope.role_id == 1}">
         <form action="/user">
-            <input type="hidden" name="forward_page" value="ban_user">
+            <input type="hidden" name="page" value="ban_user">
             <input type="hidden" name="ban_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Ban this user" onclick="return confirm('Are you sure you want to ban this user?')" />
         </form>

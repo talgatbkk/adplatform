@@ -23,14 +23,14 @@
 <div>
 <jsp:include page="/jsp/Header.jsp"/>
     <c:if test="${sessionScope.userId != null}">
-        <c:redirect url="home?forward_page=get_ads"> </c:redirect>
+        <c:redirect url="home?page=home"> </c:redirect>
     </c:if>
 
 <div class="container ">
 <form class="form-horizontal" action="/login" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-    <input type="hidden" name="forward_page" value="sign_in">
+<%--    <input type="hidden" name="page" value="sign_in">--%>
     <table class="table-responsive" style="with: 50%">
         <div class="form-group">
         <tr>

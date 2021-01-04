@@ -1,8 +1,6 @@
 package kz.epam.tcfp.dao;
 
-import kz.epam.tcfp.command.implementation.SignIn;
 import kz.epam.tcfp.dao.exception.DAOException;
-import kz.epam.tcfp.model.Customer;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;

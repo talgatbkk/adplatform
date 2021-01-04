@@ -1,10 +1,7 @@
 package kz.epam.tcfp.controller;
 
-import kz.epam.tcfp.command.Command;
-import kz.epam.tcfp.command.CommandFactory;
-import kz.epam.tcfp.command.implementation.FindAds;
+import kz.epam.tcfp.service.ServiceFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +16,9 @@ public class AdvertisementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String command = req.getParameter("forward_page");
-        CommandFactory.getCommand(command).execute(req, resp);
+//        String service = req.getParameter("page");
+        String requestUri = req.getRequestURI();
+        ServiceFactory.getService(requestUri).execute(req, resp);
 
     }
 

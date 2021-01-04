@@ -27,14 +27,14 @@
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
 <c:if test="${sessionScope.userId != null}">
-    <c:redirect url="home?forward_page=get_ads"> </c:redirect>
+    <c:redirect url="home?page=home"> </c:redirect>
 </c:if>
 
 <h1>${titleLocal}</h1>
 <form action="/test" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-    <input type="hidden" name="forward_page" value="sign_up">
+    <input type="hidden" name="page" value="sign_up">
     <table style="with: 50%">
         <tr>
             <td>${firstNameLocal}</td>
