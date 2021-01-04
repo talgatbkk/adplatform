@@ -19,7 +19,7 @@ public class LogOut implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         session.removeAttribute(SESSION_USER_ID);
-        response.sendRedirect("home?page=home");
+        request.getRequestDispatcher("/home").forward(request, response);
 
     }
 }

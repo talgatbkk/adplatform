@@ -35,7 +35,7 @@ public class PostComment implements Service {
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("/home?page=view_ad");
+        response.sendRedirect("/advertisement/view");
 
     }
 }

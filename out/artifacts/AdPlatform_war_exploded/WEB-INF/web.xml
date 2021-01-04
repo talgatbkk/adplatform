@@ -5,15 +5,10 @@
 
 
     <display-name>Advertisement web app</display-name>
-    <servlet>
-        <servlet-name>AdvertisementController</servlet-name>
-        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdvertisementController</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
     <servlet>
         <servlet-name>ViewAdvertisement</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
@@ -35,9 +30,46 @@
         <url-pattern>/advertisement/search</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>PostComment</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+    <servlet>
+
+        <servlet-name>PostAdvertisement</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PostAdvertisement</servlet-name>
+        <url-pattern>/advertisement/post</url-pattern>
+    </servlet-mapping>
+    <servlet>
+
+        <servlet-name>DeleteAdvertisement</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AddAdvertisement</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddAdvertisement</servlet-name>
+        <url-pattern>/advertisement/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DeleteAdvertisement</servlet-name>
+        <url-pattern>/advertisement/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PostComment</servlet-name>
+        <url-pattern>/advertisement/view/comment/post</url-pattern>
+    </servlet-mapping>
     
     <servlet>
         <servlet-name>SignIn</servlet-name>
@@ -50,22 +82,22 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>FreeSignUp</servlet-name>
+        <servlet-name>SignUpPage</servlet-name>
         <jsp-file>/jsp/SignUp.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>FreeSignUp</servlet-name>
+        <servlet-name>SignUpPage</servlet-name>
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>FreeSignIn</servlet-name>
+        <servlet-name>SignInPage</servlet-name>
         <jsp-file>/jsp/SignIn.jsp</jsp-file>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>FreeSignIn</servlet-name>
+        <servlet-name>SignInPage</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
 
@@ -81,29 +113,68 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/user/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserPost</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserPost</servlet-name>
+        <url-pattern>/user/post</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
         <servlet-name>DeleteAccount</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>DeleteAccount</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <url-pattern>/user/delete</url-pattern>
     </servlet-mapping>
 
+
+
+
     <servlet>
-        <servlet-name>AddAdvertisement</servlet-name>
-        <jsp-file>/jsp/AddAdvertisement.jsp</jsp-file>
+        <servlet-name>ViewProfile</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AddAdvertisement</servlet-name>
-        <url-pattern>/advertisement/add</url-pattern>
+        <servlet-name>UserBan</servlet-name>
+        <url-pattern>/user/ban</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserBan</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/user/view</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>InformBanned</servlet-name>
         <jsp-file>/jsp/InformBanned.jsp</jsp-file>
     </servlet>
+
+
 
     <servlet-mapping>
         <servlet-name>InformBanned</servlet-name>
@@ -115,20 +186,21 @@
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
-<!--    <error-page>-->
-<!--        <exception-type>java.lang.Exception</exception-type>-->
-<!--        <location>/jsp/Error.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/jsp/Error.jsp</location>
+    </error-page>
 
-<!--    <error-page>-->
-<!--        <error-code>404</error-code>-->
-<!--        <location>/jsp/Error.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/Error.jsp</location>
+    </error-page>
 
 </web-app>
 

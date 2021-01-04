@@ -6,6 +6,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
+import kz.epam.tcfp.service.util.PreviousPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +19,12 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class EditProfile implements Service {
+public class EditProfile extends PreviousPage implements Service {
     private static final String SESSION_USER_ID = "userId";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         UserDAO userDAO = DAOFactory.getUserDAO();

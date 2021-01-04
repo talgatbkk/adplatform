@@ -1,0 +1,9 @@
+
+\
+java:S1192""FDefine a constant instead of duplicating this literal "local" 3 times.(ÖëÚÐ
+O
+java:S1854&":Remove this useless assignment to local variable "userId".(Áµðs
+@
+java:S1481&"+Remove this unused "userId" local variable.(Áµðs
+I
+java:S1068"3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—

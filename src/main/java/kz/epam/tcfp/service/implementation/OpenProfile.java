@@ -58,7 +58,7 @@ public class OpenProfile implements Service {
         request.setAttribute("incorrect_auth", false);
         request.setAttribute("customer", user);
         session = request.getSession(true);
-        request.getRequestDispatcher("/jsp/Profile.jsp").forward(request, response);
+        request.getRequestDispatcher("/user/profile").forward(request, response);
 
     }
 }

@@ -53,7 +53,7 @@ public class PostAdvertisement implements Service {
             e.printStackTrace();
         }
 
-        response.sendRedirect("/home?page=home");
+        response.sendRedirect("/home");
         }
 
 }

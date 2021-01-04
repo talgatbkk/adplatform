@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 public class SignIn implements Service {
 
-    private static final String REDIRECT_TO_HOME_PAGE = "/home?page=view_profile";
+    private static final String REDIRECT_TO_HOME_PAGE = "/home";
     private static final String SESSION_USER_ID = "userId";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,6 +49,6 @@ public class SignIn implements Service {
         session.setAttribute("role_id", user.getRoleId());
         session.setAttribute("is_banned", user.isBanned());
         session.setAttribute(SESSION_USER_ID, user.getUserId());
-        response.sendRedirect(REDIRECT_TO_HOME_PAGE);
+        request.getRequestDispatcher(REDIRECT_TO_HOME_PAGE).forward(request,response);
     }
 }

@@ -19,20 +19,20 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/home?page=home">MyAds.kz</a>
+    <a class="navbar-brand" href="/home">MyAds.kz</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <input type="hidden" name="page" value="sign_up">
+<%--        <input type="hidden" name="page" value="sign_up">--%>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/home?page=view_profile">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/user/view">Profile <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="/home?page=input_ad">Post an advertisement</a>
+                <a class="nav-link" href="/advertisement/add">Post an advertisement</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -47,7 +47,7 @@
             </c:when>
             <c:otherwise>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/home?page=logout">Log out</a>
+                    <a class="nav-link" href="/user/logout">Log out</a>
                 </li>
             </c:otherwise>
             </c:choose>

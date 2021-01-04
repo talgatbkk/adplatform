@@ -4,6 +4,7 @@ import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
+import kz.epam.tcfp.service.util.PreviousPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,12 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class BanUserAccount implements Service {
+public class BanUserAccount extends PreviousPage implements Service {
     private static final String SESSION_USER_ID = "userId";
     private static final Integer ADMIN_ROLE_ID = 1;
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
         Integer userRoleId = (Integer) session.getAttribute("role_id");
@@ -34,7 +36,7 @@ public class BanUserAccount implements Service {
         if (userRoleId == ADMIN_ROLE_ID) {
             try {
                 if (userDAO.banUserAccount(userIdToBan)) {
-                    response.sendRedirect("home?page=home");
+                    request.getRequestDispatcher("/home").forward(request, response);
                     return;
                 } else {
                     System.out.println("Error");
@@ -45,11 +47,8 @@ public class BanUserAccount implements Service {
 
         } else {
 
-            System.out.println("Error");
+            request.getRequestDispatcher("/error").forward(request, response);
+
         }
-
-
-
-        response.sendRedirect("home?page=home");
     }
 }

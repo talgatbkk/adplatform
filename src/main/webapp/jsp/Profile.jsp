@@ -109,25 +109,28 @@
                             </div>
                             <div class="col-md-6">
 
-                                <a class="nav-link active" data-toggle="tab" href="/home?page=search&search_user_id=${requestScope.customer.userId}">
+                                <a class="nav-link active" data-toggle="tab" href="/advertisement/search?search_user_id=${requestScope.customer.userId}">
                                     <p>${requestScope.customer.activeAds}</p>
                                 </a>
                             </div>
+                        </div>
+                        <div>
+                            <c:if test="${requestScope.customer.banned == true}">
+                                        <p class="text-danger" >You are banned from posting any ads!</p>
+                            </c:if>
                         </div>
                 </div>
                 </div>
             </div>
         <c:choose>
         <c:when test="${requestScope.customer.userId == sessionScope.userId}">
-        <form action="/user">
-            <input type="hidden" name="page" value="delete_user">
+        <form action="/user/delete">
             <input type="hidden" name="del_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Delete account" onclick="return confirm('Are you sure you want to delete?')" />
         </form>
         </c:when>
         <c:when test="${sessionScope.role_id == 1}">
-        <form action="/user">
-            <input type="hidden" name="page" value="ban_user">
+        <form action="/user/ban">
             <input type="hidden" name="ban_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Ban this user" onclick="return confirm('Are you sure you want to ban this user?')" />
         </form>

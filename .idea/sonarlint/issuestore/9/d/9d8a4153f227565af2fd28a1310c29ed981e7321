@@ -1,11 +1,0 @@
-
-V
-java:S1128"9Remove this unused import 'kz.epam.tcfp.dao.CustomerDAO'.(®¯ØÃ8¸Ÿ–¥ë.
-c
-java:S1192"FDefine a constant instead of duplicating this literal "local" 3 times.(ÖëÚÐ8¸Ÿ–¥ë.
-G
-java:S1481$"+Remove this unused "userId" local variable.(Áµðs8¸Ÿ–¥ë.
-Z
-java:S1128	"8Remove this unused import 'kz.epam.tcfp.model.Customer'.(‡ÌÓïøÿÿÿÿ8¸Ÿ–¥ë.
-V
-java:S1854$":Remove this useless assignment to local variable "userId".(Áµðs8¸Ÿ–¥ë.

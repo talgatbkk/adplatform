@@ -1,13 +1,0 @@
-
-V
-java:S1854'":Remove this useless assignment to local variable "userId".(Áµğs8çöá¤ë.
-G
-java:S1481'"+Remove this unused "userId" local variable.(Áµğs8çöá¤ë.
-P
-java:S1068"3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—8™‚ö£ë.
-I
-java:S1481(",Remove this unused "service" local variable.(æÆÔ…8çöá¤ë.
-c
-java:S1192#"FDefine a constant instead of duplicating this literal "local" 3 times.(ÖëÚĞ8Ä¾í£ë.
-X
-java:S1854(";Remove this useless assignment to local variable "service".(æÆÔ…8çöá¤ë.

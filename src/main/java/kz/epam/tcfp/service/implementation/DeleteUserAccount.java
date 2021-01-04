@@ -4,6 +4,7 @@ import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
+import kz.epam.tcfp.service.util.PreviousPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,11 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class DeleteUserAccount implements Service {
+public class DeleteUserAccount extends PreviousPage implements Service {
     private static final String SESSION_USER_ID = "userId";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
         Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
 
@@ -33,7 +35,7 @@ public class DeleteUserAccount implements Service {
             try {
                 if (userDAO.deleteUserAccount(userId)) {
                     session.removeAttribute(SESSION_USER_ID);
-                    response.sendRedirect("home?page=home");
+                    response.sendRedirect("/home");
                     return;
                 } else {
                     System.out.println("Error");
@@ -49,7 +51,7 @@ public class DeleteUserAccount implements Service {
 
 
 
-        response.sendRedirect("home?page=home");
+        response.sendRedirect("/home");
 
     }
 }

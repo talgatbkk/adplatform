@@ -270,7 +270,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public boolean deleteAdvertisementByUserIdAndAdId(Integer userId, Integer adId) throws DAOException {
+    public boolean deleteAdvertisementByUserIdAndAdId(Integer adId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         Integer rows = null;
@@ -278,7 +278,6 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.DELETE_AD_BY_USER_ID_AND_AD_ID);
             preparedStatement.setInt(1, adId);
-            preparedStatement.setInt(2, userId);
             rows = preparedStatement.executeUpdate();
             if (rows == 1){
                 return true;

@@ -36,6 +36,7 @@ public class InputAdvertisement implements Service {
             userId = (Integer) session.getAttribute(SESSION_USER_ID);
         } else {
             request.getRequestDispatcher("/signin").forward(request, response);
+            return;
         }
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();

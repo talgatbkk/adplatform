@@ -20,10 +20,10 @@
         <c:redirect url="signin"> </c:redirect>
     </c:if>
 <jsp:include page="/jsp/Header.jsp"/>
-<form action="/test" method="post">
+<form action="/advertisement/post" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-    <input type="hidden" name="page" value="post_ad">
+<%--    <input type="hidden" name="page" value="post_ad">--%>
     <table style="with: 50%">
         <tr>
             <td>Title</td>

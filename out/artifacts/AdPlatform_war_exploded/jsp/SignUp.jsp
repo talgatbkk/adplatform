@@ -27,14 +27,14 @@
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
 <c:if test="${sessionScope.userId != null}">
-    <c:redirect url="home?page=home"> </c:redirect>
+    <c:redirect url="home"> </c:redirect>
 </c:if>
 
 <h1>${titleLocal}</h1>
-<form action="/test" method="post">
+<form action="/user/post" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-    <input type="hidden" name="page" value="sign_up">
+<%--    <input type="hidden" name="page" value="sign_up">--%>
     <table style="with: 50%">
         <tr>
             <td>${firstNameLocal}</td>
@@ -47,6 +47,11 @@
         <tr>
             <td>${loginLocal}</td>
             <td><input type="text" name="login" required/></td>
+            <td>
+            <c:if test="${requestScope.login_taken == true}">
+                <small class="text-danger">Login is already registred</small>
+            </c:if>
+            </td>
         </tr>
         <tr>
             <td>${passwordLocal}</td>
@@ -55,10 +60,20 @@
         <tr>
             <td>${emailLocal}</td>
             <td><input type="email" name="email" required/></td>
+            <td>
+            <c:if test="${requestScope.email_taken == true}">
+                <small class="text-danger">Email is already registred</small>
+            </c:if>
+            </td>
         </tr>
         <tr>
             <td>${phoneNumberLocal}</td>
             <td><input type="tel" name="phoneNumber" pattern="[+]{1}[0-9]{11,14}" required/></td>
+            <td>
+            <c:if test="${requestScope.phone_number_taken == true}">
+                <small class="text-danger">Phone number is already registred</small>
+            </c:if>
+            </td>
         </tr></table>
     <input type="submit" value="Submit" />
         </div>

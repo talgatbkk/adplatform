@@ -23,7 +23,7 @@
 <div>
 <jsp:include page="/jsp/Header.jsp"/>
     <c:if test="${sessionScope.userId != null}">
-        <c:redirect url="home?page=home"> </c:redirect>
+        <c:redirect url="home"> </c:redirect>
     </c:if>
 
 <div class="container ">
