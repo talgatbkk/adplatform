@@ -3,7 +3,7 @@ package kz.epam.tcfp.dao.implemenation;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.connection.ClosingUtil;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
-import kz.epam.tcfp.dao.connection.DBConstants;
+import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.dao.connection.ConnectionPoolException;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
@@ -22,9 +22,8 @@ import java.util.List;
  */
 public class UserDAOImpl implements UserDAO {
 
-    public static final Integer COLUMN_INDEX_ONE = 1;
-    public static final Integer COLUMN_INDEX_TWO = 2;
-    public static final Integer ROLE_ID = 2;
+
+    public static final Integer CUSTOMER_ROLE_ID = 2;
     public static final Integer IS_USER_BANNED = 0;
     public static final String CALLABLE_RESULT_NAME = "result";
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
@@ -37,8 +36,8 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.AUTHENTICATE_USER);
-            preparedStatement.setString(COLUMN_INDEX_ONE, signInInput.getLogin());
-            preparedStatement.setString(COLUMN_INDEX_TWO, signInInput.getPassword());
+            preparedStatement.setString(1, signInInput.getLogin());
+            preparedStatement.setString(2, signInInput.getPassword());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -64,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next() && !resultSet.getBoolean("ban")) {
+            if (resultSet.next() && !resultSet.getBoolean(DBConstants.USER_IS_BANNED)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -86,7 +85,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             callableStatement = connection.prepareCall(DBConstants.INSERT_NEW_USER);
-            callableStatement.setInt(DBConstants.USER_ROLE_ID, ROLE_ID);
+            callableStatement.setInt(DBConstants.USER_ROLE_ID, CUSTOMER_ROLE_ID);
             callableStatement.setString(DBConstants.USER_LOGIN, signUpInput.getLogin());
             callableStatement.setString(DBConstants.USER_PASSWORD, signUpInput.getPassword());
             callableStatement.setString(DBConstants.USER_FIRST_NAME, signUpInput.getFirstName());
@@ -196,7 +195,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
-            preparedStatement.setInt(COLUMN_INDEX_ONE, userId);
+            preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = buildUser(resultSet);
@@ -234,7 +233,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_PHONE_NUMBER_BY_USER_ID);
-            preparedStatement.setInt(COLUMN_INDEX_ONE, userId);
+            preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String userPhoneNumber = resultSet.getString(DBConstants.USER_PHONE_NUMBER);

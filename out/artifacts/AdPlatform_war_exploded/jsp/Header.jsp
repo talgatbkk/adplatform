@@ -25,7 +25,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<%--        <input type="hidden" name="page" value="sign_up">--%>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/user/view">Profile <span class="sr-only">(current)</span></a>
@@ -36,22 +35,36 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <div>
             <c:choose>
-            <c:when test="${sessionScope.userId == null}">
-            <li class="nav-item active">
-                <a class="nav-link" href="/signin">Log in</a>
-            </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/signup">Sign Up</a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/user/logout">Log out</a>
-                </li>
-            </c:otherwise>
+                <c:when test="${sessionScope.local == 'ru'}">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/language?pick=en">En</a>
+                    </li>
+                </c:when>
+                <c:when test="${sessionScope.local == 'en'}">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/language?pick=ru">Ru</a>
+                    </li>
+                </c:when>
             </c:choose>
-        </ul>
+            </div>
+                <c:choose>
+                <c:when test="${sessionScope.userId == null}">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/signin">Log in</a>
+                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/signup">Sign Up</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user/logout">Log out</a>
+                    </li>
+                </c:otherwise>
+                </c:choose>
+            </ul>
     </div>
 </nav>
 

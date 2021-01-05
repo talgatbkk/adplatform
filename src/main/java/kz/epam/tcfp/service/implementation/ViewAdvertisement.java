@@ -6,6 +6,8 @@ import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.*;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,25 +17,28 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+
+
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class ViewAdvertisement implements Service {
-    private static final String SESSION_USER_ID = "userId";
+public class ViewAdvertisement extends PreviousPage implements Service {
+
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        String languageCode = (String) session.getAttribute("local");
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         UserDAO userDAO = DAOFactory.getUserDAO();
         Integer adId = null;
-        if (request.getParameter("ad_id") == null){
-            adId = (Integer) session.getAttribute("ad_id");
+        if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
+            adId = (Integer) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
         } else {
-            adId = Integer.parseInt(request.getParameter("ad_id"));
+            adId = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         }
         Advertisement advertisement = null;
         Location location = null;
@@ -48,14 +53,14 @@ public class ViewAdvertisement implements Service {
             e.printStackTrace();
         }
 
-        request.setAttribute("belongsToCurrentUser", false);
+        request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, false);
         if (advertisement.getUserId() == userId) {
-            request.setAttribute("belongsToCurrentUser", true);
+            request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, true);
         }
-        request.setAttribute("advertisement", advertisement);
-        request.setAttribute("comments", comments);
-        request.setAttribute("location", location);
-        request.setAttribute("phone_numbers", phoneNumbers);
+        request.setAttribute(ServiceConstants.ADVERTISEMENT, advertisement);
+        request.setAttribute(ServiceConstants.COMMENT_LIST, comments);
+        request.setAttribute(ServiceConstants.LOCATION, location);
+        request.setAttribute(ServiceConstants.PHONE_NUMBER_LIST, phoneNumbers);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/ViewAdvertisement.jsp");
         dispatcher.forward(request, response);
     }

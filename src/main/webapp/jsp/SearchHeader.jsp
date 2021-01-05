@@ -26,6 +26,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div>
         <form action="/advertisement/search" method="post">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -37,7 +38,6 @@
 
             <li class="nav-item active">
 
-<%--                    <input type="hidden" name="page" value="search">--%>
                             <select class="form-control" name="location_item">
                                 <c:forEach items="${requestScope.locations}" var="location">
                                     <c:choose>
@@ -78,8 +78,23 @@
             </li>
         </ul>
         </form>
+        </div>
         <ul class="navbar-nav ml-auto">
-
+            <div>
+                <c:choose>
+                    <c:when test="${sessionScope.local == 'ru'}">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/language?pick=en">En</a>
+                        </li>
+                    </c:when>
+                    <c:when test="${sessionScope.local == 'en'}">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/language?pick=ru">Ru</a>
+                        </li>
+                    </c:when>
+                </c:choose>
+            </div>
+            <div>
             <c:choose>
                 <c:when test="${sessionScope.userId == null}">
                     <li class="nav-item active">
@@ -95,6 +110,7 @@
                     </li>
                 </c:otherwise>
             </c:choose>
+            </div>
         </ul>
     </div>
 

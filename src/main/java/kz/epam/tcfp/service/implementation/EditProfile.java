@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,13 +21,13 @@ import java.util.List;
  * @project AdPlatform
  */
 public class EditProfile extends PreviousPage implements Service {
-    private static final String SESSION_USER_ID = "userId";
+
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
@@ -34,7 +35,7 @@ public class EditProfile extends PreviousPage implements Service {
             List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(userId);
             user.setPhoneNumbers(phoneNumbers);
             if (user == null) {
-                request.setAttribute("incorrect_auth", true);
+                request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 request.getRequestDispatcher("/signin").forward(request, response);
                 return;
             }
@@ -42,8 +43,8 @@ public class EditProfile extends PreviousPage implements Service {
             e.printStackTrace();
         }
 
-        request.setAttribute("incorrect_auth", false);
-        request.setAttribute("customer", user);
+        request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
+        request.setAttribute(ServiceConstants.USER, user);
         session = request.getSession(true);
         request.getRequestDispatcher("/profile").forward(request, response);
     }

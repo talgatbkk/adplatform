@@ -8,6 +8,8 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,44 +24,44 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class SearchAdvertisement implements Service {
-    private static final String SESSION_USER_ID = "userId";
+public class SearchAdvertisement extends PreviousPage implements Service {
+
     private static final Integer LOCATION_ID_DEFAULT = 1;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute("local") == null) {
-            session.setAttribute("local", "ru");
+        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
-        String localLanguage = (String) session.getAttribute("local");
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
 
-        String locationInput = request.getParameter("location_item");
+        String locationInput = request.getParameter(ServiceConstants.LOCATION_PICK);
         Integer locationId = null;
         if (locationInput != null && !locationInput.isEmpty()){
             locationId = Integer.parseInt(locationInput);
             if (locationId == LOCATION_ID_DEFAULT) {
                 locationId = null;
-                request.setAttribute("location_selection", LOCATION_ID_DEFAULT);
+                request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);
             } else {
-                request.setAttribute("location_selection", locationId);
+                request.setAttribute(ServiceConstants.LOCATION_SELECTED, locationId);
             }
         }
         Integer searchUserId = null;
-        if (request.getParameter("search_user_id") != null){
-            searchUserId = Integer.parseInt(request.getParameter("search_user_id"));
+        if (request.getParameter(ServiceConstants.USER_ID_TO_SEARCH) != null){
+            searchUserId = Integer.parseInt(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
         }
 
 
         Integer categoryId = null;
-        String categoryInput = request.getParameter("category_item");
+        String categoryInput = request.getParameter(ServiceConstants.CATEGORY_PICK);
         if (categoryInput != null && !categoryInput.isEmpty()){
             categoryId = Integer.parseInt(categoryInput);
         }
 
-        String searchInput = request.getParameter("search_input");
+        String searchInput = request.getParameter(ServiceConstants.SEARCH_INPUT);
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
@@ -86,10 +88,10 @@ public class SearchAdvertisement implements Service {
             e.printStackTrace();
         }
 
-        request.setAttribute("advertisements", advertisements);
-        request.setAttribute("categories", categories);
-        request.setAttribute("locations", locations);
-        request.setAttribute("category_selection", categoryId);
+        request.setAttribute(ServiceConstants.ADVERTISEMENT_LIST, advertisements);
+        request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
+        request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
+        request.setAttribute(ServiceConstants.CATEGORY_SELECTED, categoryId);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);

@@ -6,6 +6,7 @@ import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,26 +19,27 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class DeleteAdvertisement extends PreviousPage implements Service {
-    private static final String SESSION_USER_ID = "userId";
+
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         Integer userId = null;
-        if (session.getAttribute(SESSION_USER_ID) != null){
-            userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null){
+            userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         } else {
             response.sendRedirect("/signin");
             return;
         }
 
         Integer roleId = null;
-        if (session.getAttribute("role_id") != null){
-            roleId = (Integer) session.getAttribute("role_id");
+        if (session.getAttribute(ServiceConstants.USER_ROLE_ID) != null){
+            roleId = (Integer) session.getAttribute(ServiceConstants.USER_ROLE_ID);
         }
 
 
-        Integer adId = Integer.parseInt(request.getParameter("ad_id"));
+        Integer adId = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         Advertisement advertisement = null;
 

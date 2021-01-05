@@ -25,7 +25,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<%--        <input type="hidden" name="page" value="sign_up">--%>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/user/view">Profile <span class="sr-only">(current)</span></a>
@@ -40,12 +39,12 @@
             <c:choose>
                 <c:when test="${sessionScope.local == 'ru'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/language?local=en">EN</a>
+                        <a class="nav-link" href="/language?pick=en">En</a>
                     </li>
                 </c:when>
                 <c:when test="${sessionScope.local == 'en'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/language?local=ru">RU</a>
+                        <a class="nav-link" href="/language?pick=ru">Ru</a>
                     </li>
                 </c:when>
             </c:choose>

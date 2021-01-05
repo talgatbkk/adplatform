@@ -188,6 +188,17 @@
 
 
     <servlet-mapping>
+        <servlet-name>ChangeLanguage</servlet-name>
+        <url-pattern>/language</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeLanguage</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>

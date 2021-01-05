@@ -1,7 +1,7 @@
 
-S	java:S106/"9Replace this use of System.out or System.err by a logger.(ךÓזרשÿÿÿÿ
-S	java:S106'"9Replace this use of System.out or System.err by a logger.(ךÓזרשÿÿÿÿ
-T
-java:S4973 "9Use the "equals" method if value comparison was intended.(ÊÓנורÿÿÿÿ
+S	java:S106)"9Replace this use of System.out or System.err by a logger.(ךÓזרשÿÿÿÿ
 @
-java:S5411""*Use the primitive boolean expression here.(ÐכÈÄ
+java:S5411$"*Use the primitive boolean expression here.(ÐכÈÄ
+S	java:S1061"9Replace this use of System.out or System.err by a logger.(ךÓזרשÿÿÿÿ
+T
+java:S4973""9Use the "equals" method if value comparison was intended.(ÊÓנורÿÿÿÿ

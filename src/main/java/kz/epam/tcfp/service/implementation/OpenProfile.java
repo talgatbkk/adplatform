@@ -7,6 +7,8 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,21 +21,21 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class OpenProfile implements Service {
+public class OpenProfile extends PreviousPage implements Service {
 
-    private static final String SESSION_USER_ID = "userId";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(SESSION_USER_ID) == null){
+        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) == null){
             response.sendRedirect("/signin");
             return;
         }
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         Integer profileId = null;
-        if (request.getParameter("profile_id") != null) {
-            profileId = Integer.parseInt(request.getParameter("profile_id"));
+        if (request.getParameter(ServiceConstants.USER_PROFILE_ID) != null) {
+            profileId = Integer.parseInt(request.getParameter(ServiceConstants.USER_PROFILE_ID));
         } else {
             profileId = userId;
         }
@@ -47,7 +49,7 @@ public class OpenProfile implements Service {
             user.setPhoneNumbers(phoneNumbers);
             user.setActiveAds(advertisementCount);
             if (user == null) {
-                request.setAttribute("incorrect_auth", true);
+                request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 request.getRequestDispatcher("/signin").forward(request, response);
                 return;
             }
@@ -55,8 +57,8 @@ public class OpenProfile implements Service {
             e.printStackTrace();
         }
 
-        request.setAttribute("incorrect_auth", false);
-        request.setAttribute("customer", user);
+        request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
+        request.setAttribute(ServiceConstants.USER, user);
         session = request.getSession(true);
         request.getRequestDispatcher("/user/profile").forward(request, response);
 

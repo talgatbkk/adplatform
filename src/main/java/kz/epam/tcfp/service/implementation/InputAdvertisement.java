@@ -7,6 +7,8 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,20 +22,20 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class InputAdvertisement implements Service {
-    private static final String SESSION_USER_ID = "userId";
+public class InputAdvertisement extends PreviousPage implements Service {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute("local") == null) {
-            session.setAttribute("local", "ru");
+        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
-        String localLanguage = (String) session.getAttribute("local");
+        String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
 
         Integer userId = null;
-        if (session.getAttribute(SESSION_USER_ID) != null) {
-            userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
+            userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         } else {
             request.getRequestDispatcher("/signin").forward(request, response);
             return;
@@ -57,8 +59,8 @@ public class InputAdvertisement implements Service {
             e.printStackTrace();
         }
 
-        request.setAttribute("categories", categories);
-        request.setAttribute("locations", locations);
+        request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
+        request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
         request.getRequestDispatcher("/jsp/AddAdvertisement.jsp").forward(request, response);
 
     }

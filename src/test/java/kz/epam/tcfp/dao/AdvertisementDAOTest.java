@@ -4,6 +4,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.ServiceConstants;
 import org.junit.Test;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class AdvertisementDAOTest {
     @Test
     public void getLocationNamesByIdTest() throws DAOException {
         Integer locationId = 2;
-        Location location = advertisementDAO.getLocationNamesById(locationId, "ru");
+        Location location = advertisementDAO.getLocationNamesById(locationId, ServiceConstants.RUSSIAN_LANGUAGE);
         System.out.println(location.toString());
 
     }

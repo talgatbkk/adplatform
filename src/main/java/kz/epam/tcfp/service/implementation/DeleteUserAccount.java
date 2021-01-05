@@ -5,6 +5,7 @@ import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,15 +18,15 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class DeleteUserAccount extends PreviousPage implements Service {
-    private static final String SESSION_USER_ID = "userId";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
 
         Integer userIdToDeleted = null;
-        String userIdInputToDeleted = request.getParameter("del_user_id");
+        String userIdInputToDeleted = request.getParameter(ServiceConstants.USER_ID_TO_BE_DELETED);
         if (userIdInputToDeleted != null && !userIdInputToDeleted.isEmpty()){
             userIdToDeleted = Integer.parseInt(userIdInputToDeleted);
         }
@@ -34,7 +35,7 @@ public class DeleteUserAccount extends PreviousPage implements Service {
         if (userIdToDeleted == userId) {
             try {
                 if (userDAO.deleteUserAccount(userId)) {
-                    session.removeAttribute(SESSION_USER_ID);
+                    session.removeAttribute(ServiceConstants.SESSION_USER_ID);
                     response.sendRedirect("/home");
                     return;
                 } else {
@@ -43,16 +44,10 @@ public class DeleteUserAccount extends PreviousPage implements Service {
             } catch (DAOException e) {
                 e.printStackTrace();
             }
-
         } else {
-
             System.out.println("Error");
         }
-
-
-
         response.sendRedirect("/home");
-
     }
 }
 

@@ -1,0 +1,15 @@
+
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÈÉİ†
+c
+java:S1192""FDefine a constant instead of duplicating this literal "local" 3 times.(ÖëÚĞ8‚Ìıõì.
+[
+java:S4973,"9Use the "equals" method if value comparison was intended.(‰”Õÿùÿÿÿÿ8‚Ìıõì.
+V
+java:S1854&":Remove this useless assignment to local variable "userId".(Áµğs8‚Ìıõì.
+a
+java:S1854?"?Remove this useless assignment to local variable "searchInput".(¶‘ĞĞşÿÿÿÿ8‚Ìıõì.
+G
+java:S1481&"+Remove this unused "userId" local variable.(Áµğs8‚Ìıõì.
+R
+java:S1481?"0Remove this unused "searchInput" local variable.(¶‘ĞĞşÿÿÿÿ8‚Ìıõì.

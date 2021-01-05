@@ -8,6 +8,8 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 
 import javax.servlet.RequestDispatcher;
@@ -23,19 +25,19 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class FindAds implements Service {
-    private static final String SESSION_USER_ID = "userId";
+public class FindAds extends PreviousPage implements Service {
     private static final Integer LOCATION_ID_DEFAULT = 1;
     private static final Integer CATEGORY_ID_ALL = 1;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute("local") == null) {
-            session.setAttribute("local", "ru");
+        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
-        String localLanguage = (String) session.getAttribute("local");
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
+        String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
@@ -51,10 +53,10 @@ public class FindAds implements Service {
         }
 
 
-        request.setAttribute("advertisements", advertisements);
-        request.setAttribute("categories", categories);
-        request.setAttribute("locations", locations);
-        request.setAttribute("location_selection", LOCATION_ID_DEFAULT);
+        request.setAttribute(ServiceConstants.ADVERTISEMENT_LIST, advertisements);
+        request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
+        request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
+        request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
         dispatcher.forward(request, response);
 

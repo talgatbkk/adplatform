@@ -8,6 +8,8 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,21 +21,22 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class PostAdvertisement implements Service {
-    private static final String SESSION_USER_ID = "userId";
+public class PostAdvertisement extends PreviousPage implements Service {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(SESSION_USER_ID) == null){
+        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) == null){
             response.sendRedirect("/login");
             return;
         }
-        Integer userId = (Integer) session.getAttribute(SESSION_USER_ID);
-        Integer categoryId = Integer.parseInt(request.getParameter("category_item"));
-        Integer locationId = Integer.parseInt(request.getParameter("location_item"));
-        String advertisementTitle = request.getParameter("ad_title");
-        String advertisementDescription = request.getParameter("ad_description");
-        Integer advertisementPrice = Integer.parseInt(request.getParameter("price"));
+        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Integer categoryId = Integer.parseInt(request.getParameter(ServiceConstants.CATEGORY_PICK));
+        Integer locationId = Integer.parseInt(request.getParameter(ServiceConstants.LOCATION_PICK));
+        String advertisementTitle = request.getParameter(ServiceConstants.ADVERTISEMENT_TITLE);
+        String advertisementDescription = request.getParameter(ServiceConstants.ADVERTISEMENT_DESCRIPTION);
+        Integer advertisementPrice = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_PRICE));
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         UserDAO userDAO = DAOFactory.getUserDAO();
 

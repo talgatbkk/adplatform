@@ -31,6 +31,7 @@ public class ServiceSupplier {
         services.put("/user/logout", new LogOut());
         services.put("/user/delete", new DeleteUserAccount());
         services.put("/user/ban", new BanUserAccount());
+        services.put("/language", new ChangeLanguage());
 
     }
 

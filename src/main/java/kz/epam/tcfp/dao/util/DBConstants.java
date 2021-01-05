@@ -1,4 +1,4 @@
-package kz.epam.tcfp.dao.connection;
+package kz.epam.tcfp.dao.util;
 
 /**
  * @author Talgat Bekkaliyev
@@ -10,7 +10,9 @@ public class DBConstants {
     public static final String AD_ID = "advertisement_id";
     public static final String AD_TITLE = "advertisement_title";
     public static final String AD_DESCRIPTION = "description";
-    public static final String AD_CITY_ID = "location_id";
+    public static final String AD_LOCATION_ID = "location_id";
+    public static final String PARENT_LOCATION_ID = "parent_id";
+    public static final String AD_LOCATION_NAME = "location_name";
     public static final String AD_POSTED_DATE = "posted_date";
     public static final String AD_CATEGORY_ID = "category_id";
     public static final String AD_PRICE = "price";
@@ -25,8 +27,14 @@ public class DBConstants {
     public static final String USER_REGISTRATION_DATE = "created_date";
     public static final String USER_IS_BANNED = "ban";
     public static final String USER_PHONE_NUMBER = "phone_number";
-    public static final String USER_PHONE_NUMBER_ID = "ID";
+    public static final String USER_PHONE_NUMBER_ID = "id";
 
+    public static final String COMMENT_POSTED_DATE = "posted_date";
+    public static final String COMMENT_USER_ID = "c.user_id";
+    public static final String COMMENT_CONTENT = "description";
+    public static final String LANGUAGE_ID = "language_id";
+    public static final String CATEGORY_ID = "category_id";
+    public static final String CATEGORY_NAME = "category_name";
 
 
 

@@ -6,6 +6,8 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
+import kz.epam.tcfp.service.util.PreviousPage;
+import kz.epam.tcfp.service.util.ServiceConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,23 +19,25 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class SignIn implements Service {
+public class SignIn extends PreviousPage implements Service {
 
     private static final String REDIRECT_TO_HOME_PAGE = "/home";
-    private static final String SESSION_USER_ID = "userId";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        savePreviousPage(request);
         HttpSession session = request.getSession();
-        session.setAttribute("local", "ru");
+        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
+        }
         SignInInput signInInput = new SignInInput();
-        signInInput.setLogin(request.getParameter("login"));
-        signInInput.setPassword(request.getParameter("password"));
+        signInInput.setLogin(request.getParameter(ServiceConstants.USER_LOGIN));
+        signInInput.setPassword(request.getParameter(ServiceConstants.USER_PASSWORD));
         UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
             if (!userDAO.authenticateUser(signInInput)){
                 if (signInInput.getLogin() != null) {
-                    request.setAttribute("incorrect_auth", true);
+                    request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 }
                 request.getRequestDispatcher("/signin").forward(request,response);
                 return;
@@ -45,10 +49,9 @@ public class SignIn implements Service {
             e.printStackTrace();
         }
 
-        request.setAttribute("incorrect_auth", false);
-        session.setAttribute("role_id", user.getRoleId());
-        session.setAttribute("is_banned", user.isBanned());
-        session.setAttribute(SESSION_USER_ID, user.getUserId());
+        request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
+        session.setAttribute(ServiceConstants.USER_ROLE_ID, user.getRoleId());
+        session.setAttribute(ServiceConstants.SESSION_USER_ID, user.getUserId());
         request.getRequestDispatcher(REDIRECT_TO_HOME_PAGE).forward(request,response);
     }
 }
