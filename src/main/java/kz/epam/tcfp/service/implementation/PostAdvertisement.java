@@ -23,12 +23,14 @@ import java.io.IOException;
  */
 public class PostAdvertisement extends PreviousPage implements Service {
 
+    public static final String LOGIN_SERVICE = "/login";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) == null){
-            response.sendRedirect("/login");
+            response.sendRedirect(LOGIN_SERVICE);
             return;
         }
         Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
@@ -56,7 +58,7 @@ public class PostAdvertisement extends PreviousPage implements Service {
             e.printStackTrace();
         }
 
-        response.sendRedirect("/home");
+        response.sendRedirect(HOME_SERVICE);
         }
 
 }

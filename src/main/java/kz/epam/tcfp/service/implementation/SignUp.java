@@ -9,7 +9,6 @@ import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
-import org.apache.coyote.Request;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +24,8 @@ import java.io.IOException;
  */
 public class SignUp extends PreviousPage implements Service {
 
-    private static final String REDIRECT_TO_HOME_PAGE = "/home";
 
+    public static final String SIGN_UP_SERVICE = "/signup";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +46,7 @@ public class SignUp extends PreviousPage implements Service {
                 request.setAttribute(ServiceConstants.PHONE_NUMBER_TAKEN, isPhoneNumberTaken);
                 request.setAttribute(ServiceConstants.LOGIN_TAKEN, isLoginTaken);
                 request.setAttribute(ServiceConstants.EMAIL_TAKEN, isEmailTaken);
-                request.getRequestDispatcher("/signup").forward(request,response);
+                request.getRequestDispatcher(SIGN_UP_SERVICE).forward(request,response);
                 return;
             } else {
                 userDAO.registerUser(signUpInput);
@@ -59,7 +58,7 @@ public class SignUp extends PreviousPage implements Service {
 
         session = request.getSession(true);
         session.setAttribute(ServiceConstants.SESSION_USER_ID, user.getUserId());
-        response.sendRedirect(REDIRECT_TO_HOME_PAGE);
+        response.sendRedirect(HOME_SERVICE);
     }
 
     private SignUpInput buildSignUpInput (HttpServletRequest request) {

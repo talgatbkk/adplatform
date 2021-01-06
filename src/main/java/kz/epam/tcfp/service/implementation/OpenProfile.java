@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.UserDAO;
@@ -23,13 +24,15 @@ import java.util.List;
  */
 public class OpenProfile extends PreviousPage implements Service {
 
+    public static final String SIGN_IN_SERVICE = "/signin";
+    public static final String USER_PROFILE_SERVICE = "/user/profile";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) == null){
-            response.sendRedirect("/signin");
+            response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
         Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
@@ -50,7 +53,7 @@ public class OpenProfile extends PreviousPage implements Service {
             user.setActiveAds(advertisementCount);
             if (user == null) {
                 request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
-                request.getRequestDispatcher("/signin").forward(request, response);
+                request.getRequestDispatcher(PagePath.SIGN_IN).forward(request, response);
                 return;
             }
         } catch (DAOException e) {
@@ -60,7 +63,7 @@ public class OpenProfile extends PreviousPage implements Service {
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
         session = request.getSession(true);
-        request.getRequestDispatcher("/user/profile").forward(request, response);
+        request.getRequestDispatcher(USER_PROFILE_SERVICE).forward(request, response);
 
     }
 }

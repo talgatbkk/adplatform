@@ -58,7 +58,7 @@ public class DBConstants {
     public static final String GET_LANGUAGE_ID_BY_NAME = "SELECT * FROM language WHERE language_name = ?";
     public static final String GET_AD_BY_CATEGORY = "SELECT * FROM advertisement WHERE category_id = ? ORDER BY posted_date";
     public static final String GET_AD_BY_LOCATION = "SELECT * FROM advertisement WHERE location_id = ? ORDER BY posted_date";
-    public static final String GET_ALL_ADS = "SELECT * FROM advertisement ORDER BY posted_date";
+    public static final String GET_ALL_ADS = "SELECT * FROM advertisement ORDER BY posted_date DESC";
     public static final String GET_AD_BY_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE category_id = ? AND location_id = ? ORDER BY posted_date";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION = "SELECT * FROM advertisement WHERE advertisement_title LIKE ? OR description LIKE ? ORDER BY posted_date";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND category_id = ? ORDER BY posted_date";

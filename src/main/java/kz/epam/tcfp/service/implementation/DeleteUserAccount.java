@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -36,7 +37,7 @@ public class DeleteUserAccount extends PreviousPage implements Service {
             try {
                 if (userDAO.deleteUserAccount(userId)) {
                     session.removeAttribute(ServiceConstants.SESSION_USER_ID);
-                    response.sendRedirect("/home");
+                    response.sendRedirect(HOME_SERVICE);
                     return;
                 } else {
                     System.out.println("Error");
@@ -47,7 +48,7 @@ public class DeleteUserAccount extends PreviousPage implements Service {
         } else {
             System.out.println("Error");
         }
-        response.sendRedirect("/home");
+        response.sendRedirect(PagePath.ERROR_JSP);
     }
 }
 

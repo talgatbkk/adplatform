@@ -6,5 +6,10 @@ package kz.epam.tcfp.service;
  */
 public class PagePath {
 
-    public static final String ADVERTISEMENT = "/jsp/advertisement.jsp";
+    public static final String HOME_JSP = "/jsp/Home.jsp";
+    public static final String ERROR_JSP = "jsp/Error.jsp";
+
+    public static final String INFORM_BANNED_JSP = "/jsp/InformBanned.jsp";
+    public static final String ADD_ADVERTISEMENT_JSP = "/jsp/AddAdvertisement.jsp";
+    public static final String SIGN_IN = "/signin";
 }

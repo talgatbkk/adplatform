@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -23,6 +24,8 @@ import java.util.List;
 public class EditProfile extends PreviousPage implements Service {
 
 
+    public static final String PROFILE = "/profile";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -36,7 +39,7 @@ public class EditProfile extends PreviousPage implements Service {
             user.setPhoneNumbers(phoneNumbers);
             if (user == null) {
                 request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
-                request.getRequestDispatcher("/signin").forward(request, response);
+                request.getRequestDispatcher(PagePath.SIGN_IN).forward(request, response);
                 return;
             }
         } catch (DAOException e) {
@@ -46,6 +49,6 @@ public class EditProfile extends PreviousPage implements Service {
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
         session = request.getSession(true);
-        request.getRequestDispatcher("/profile").forward(request, response);
+        request.getRequestDispatcher(PROFILE).forward(request, response);
     }
 }

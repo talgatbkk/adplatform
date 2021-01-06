@@ -7,14 +7,14 @@ package kz.epam.tcfp.service;
 public class ServiceFactory {
 
     private static ServiceFactory instance = new ServiceFactory();
-    private ServiceSupplier serviceSupplier = new ServiceSupplier();
+    private ServiceProvider serviceProvider = new ServiceProvider();
 
     public ServiceFactory() {
     }
 
 
     public static Service getService(String serviceName) {
-        return getInstance().serviceSupplier.getService(serviceName);
+        return getInstance().serviceProvider.getService(serviceName);
     }
 
 

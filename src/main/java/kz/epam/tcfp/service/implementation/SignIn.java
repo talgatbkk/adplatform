@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class SignIn extends PreviousPage implements Service {
 
-    private static final String REDIRECT_TO_HOME_PAGE = "/home";
+    public static final String SIGN_IN_SERVICE = "/signin";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -39,7 +39,7 @@ public class SignIn extends PreviousPage implements Service {
                 if (signInInput.getLogin() != null) {
                     request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 }
-                request.getRequestDispatcher("/signin").forward(request,response);
+                request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request,response);
                 return;
             } else {
                     user = userDAO.getUserIdByLogin(signInInput.getLogin());
@@ -52,6 +52,6 @@ public class SignIn extends PreviousPage implements Service {
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         session.setAttribute(ServiceConstants.USER_ROLE_ID, user.getRoleId());
         session.setAttribute(ServiceConstants.SESSION_USER_ID, user.getUserId());
-        request.getRequestDispatcher(REDIRECT_TO_HOME_PAGE).forward(request,response);
+        request.getRequestDispatcher(HOME_SERVICE).forward(request,response);
     }
 }

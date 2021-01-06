@@ -16,7 +16,6 @@ public class AdvertisementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String service = req.getParameter("page");
         String requestUri = req.getRequestURI();
         ServiceFactory.getService(requestUri).execute(req, resp);
 

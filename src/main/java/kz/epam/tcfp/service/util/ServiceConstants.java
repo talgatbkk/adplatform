@@ -53,6 +53,7 @@ public class ServiceConstants {
     public static final String CATEGORY_PICK = "category_item";
     public static final String USER_ID_TO_SEARCH = "search_user_id";
     public static final String SEARCH_INPUT = "search_input";
+    public static final String PREVIOUS_PAGE = "prev_page";
 
     public static final Integer ADMIN_ROLE_ID = 1;
 }

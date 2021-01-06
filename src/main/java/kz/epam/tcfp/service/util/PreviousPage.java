@@ -11,6 +11,8 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class PreviousPage {
+    public static final String HOME_SERVICE = "/home";
+    public static final Character QUESTION_MARK = '?';
 
     protected void savePreviousPage(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
@@ -18,18 +20,20 @@ public class PreviousPage {
         String queryString = request.getQueryString();
 
         if (queryString == null) {
-            session.setAttribute("prev_page", requestURL.toString());
+            session.setAttribute(ServiceConstants.PREVIOUS_PAGE, requestURL.toString());
         } else {
-            session.setAttribute("prev_page", requestURL.append('?').append(queryString).toString());
+            session.setAttribute(ServiceConstants.PREVIOUS_PAGE, requestURL.append('?')
+                                                                .append(queryString)
+                                                                .toString());
         }
 
     }
 
     protected void reloadPreviousPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String previousPageUrl = (String) session.getAttribute("prev_page");
+        String previousPageUrl = (String) session.getAttribute(ServiceConstants.PREVIOUS_PAGE);
         if (previousPageUrl == null || previousPageUrl.isEmpty()){
-            response.sendRedirect("/home");
+            response.sendRedirect(HOME_SERVICE);
         } else {
             response.sendRedirect(previousPageUrl);
         }

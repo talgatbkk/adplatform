@@ -15,13 +15,12 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class LogOut extends PreviousPage implements Service {
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         session.removeAttribute(ServiceConstants.SESSION_USER_ID);
-        request.getRequestDispatcher("/home").forward(request, response);
+        request.getRequestDispatcher(HOME_SERVICE).forward(request, response);
 
     }
 }

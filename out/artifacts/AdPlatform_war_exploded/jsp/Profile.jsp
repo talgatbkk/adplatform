@@ -115,8 +115,13 @@
                             </div>
                         </div>
                         <div>
-                            <c:if test="${requestScope.customer.banned == true}">
+                            <c:if test="${requestScope.customer.banned == true && requestScope.customer.userId == sessionScope.userId}">
                                         <p class="text-danger" >You are banned from posting any ads!</p>
+                            </c:if>
+                        </div>
+                        <div>
+                            <c:if test="${requestScope.customer.banned == true && sessionScope.userId == 2}">
+                                <p class="text-danger" >This user is banned from posting any ads!</p>
                             </c:if>
                         </div>
                 </div>

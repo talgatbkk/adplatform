@@ -1,6 +1,7 @@
 package kz.epam.tcfp.service.implementation;
 
 import kz.epam.tcfp.model.Advertisement;
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -19,7 +20,7 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class DeleteAdvertisement extends PreviousPage implements Service {
-
+    public static final String SIGN_IN_SERVICE = "/signin";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +30,7 @@ public class DeleteAdvertisement extends PreviousPage implements Service {
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null){
             userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         } else {
-            response.sendRedirect("/signin");
+            response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
 
@@ -48,13 +49,12 @@ public class DeleteAdvertisement extends PreviousPage implements Service {
             if (advertisement.getUserId() == userId || roleId == 1) {
                 advertisementDAO.deleteAdvertisementByUserIdAndAdId(adId);
             } else {
-                response.sendRedirect("/error");
+                response.sendRedirect(PagePath.ERROR_JSP);
             }
         } catch (DAOException e) {
             e.printStackTrace();
         }
-
-        request.getRequestDispatcher("/home").forward(request, response);
+        request.getRequestDispatcher(HOME_SERVICE).forward(request, response);
 
 
     }

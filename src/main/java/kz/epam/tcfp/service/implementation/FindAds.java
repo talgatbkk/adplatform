@@ -57,7 +57,7 @@ public class FindAds extends PreviousPage implements Service {
         request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
         request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
         request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ADVERTISEMENT);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.HOME_JSP);
         dispatcher.forward(request, response);
 
     }

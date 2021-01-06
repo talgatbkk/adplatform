@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.UserDAO;
@@ -24,6 +25,9 @@ import java.util.List;
  */
 public class InputAdvertisement extends PreviousPage implements Service {
 
+    public static final String SIGN_IN_SERVICE = "/signin";
+
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -37,7 +41,7 @@ public class InputAdvertisement extends PreviousPage implements Service {
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
             userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         } else {
-            request.getRequestDispatcher("/signin").forward(request, response);
+            request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
 
@@ -53,7 +57,8 @@ public class InputAdvertisement extends PreviousPage implements Service {
                 categories = advertisementDAO.getCategories(languageId);
                 locations = advertisementDAO.getLocations(languageId);
             } else {
-                request.getRequestDispatcher("/jsp/InformBanned.jsp").forward(request, response);
+                request.getRequestDispatcher(PagePath.INFORM_BANNED_JSP).forward(request, response);
+                return;
             }
         } catch (DAOException e) {
             e.printStackTrace();
@@ -61,7 +66,7 @@ public class InputAdvertisement extends PreviousPage implements Service {
 
         request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
         request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
-        request.getRequestDispatcher("/jsp/AddAdvertisement.jsp").forward(request, response);
+        request.getRequestDispatcher(PagePath.ADD_ADVERTISEMENT_JSP).forward(request, response);
 
     }
 }

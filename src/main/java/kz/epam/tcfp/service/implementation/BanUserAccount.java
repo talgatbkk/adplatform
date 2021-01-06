@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -45,8 +46,7 @@ public class BanUserAccount extends PreviousPage implements Service {
             }
 
         } else {
-
-            request.getRequestDispatcher("/error").forward(request, response);
+            response.sendRedirect(PagePath.ERROR_JSP);
 
         }
     }

@@ -20,6 +20,8 @@ import java.io.IOException;
  */
 public class PostComment extends PreviousPage implements Service {
 
+    public static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -38,7 +40,7 @@ public class PostComment extends PreviousPage implements Service {
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("/advertisement/view");
+        response.sendRedirect(ADVERTISEMENT_VIEW_SERVICE);
 
     }
 }
