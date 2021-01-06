@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 public class DAOFactory {
     private static final Logger LOGGER = Logger.getLogger(DAOFactory.class);
 
-    private static DAOFactory instance = new DAOFactory();
+    private static DAOFactory instance;
 
     private static ConnectionPool connectionPool = new ConnectionPool();
 
@@ -23,12 +23,19 @@ public class DAOFactory {
     private static UserDAO userDAO = new UserDAOImpl();
 
 
-    private static synchronized DAOFactory getInstance() {
-        if (instance == null){
-            instance = new DAOFactory();
+    public static DAOFactory getInstance() {
+        if (instance == null) {
+            synchronized (DAOFactory.class) {
+                if (instance == null) {
+                    instance = new DAOFactory();
+                }
+            }
         }
         return instance;
     }
+
+
+
 
     public static ConnectionPool getConnectionPool() {
         return getInstance().connectionPool;

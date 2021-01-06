@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -87,7 +88,7 @@ public class SearchAdvertisement extends PreviousPage implements Service {
         request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
         request.setAttribute(ServiceConstants.CATEGORY_SELECTED, categoryId);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher(HOME_SERVICE);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.HOME_JSP);
         dispatcher.forward(request, response);
     }
 
