@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.UserDAO;
@@ -8,6 +9,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.*;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +26,8 @@ import java.util.List;
  * @project AdPlatform
  */
 public class ViewAdvertisement extends PreviousPage implements Service {
+
+    private static final Logger LOGGER = Logger.getLogger(ViewAdvertisement.class);
 
 
     @Override
@@ -50,7 +54,7 @@ public class ViewAdvertisement extends PreviousPage implements Service {
             location = advertisementDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
             phoneNumbers = userDAO.getPhoneNumberByUserId(advertisement.getUserId());
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while getting advertisement data", e);
         }
 
         request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, false);
@@ -61,7 +65,7 @@ public class ViewAdvertisement extends PreviousPage implements Service {
         request.setAttribute(ServiceConstants.COMMENT_LIST, comments);
         request.setAttribute(ServiceConstants.LOCATION, location);
         request.setAttribute(ServiceConstants.PHONE_NUMBER_LIST, phoneNumbers);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/ViewAdvertisement.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.VIEW_ADVERTISEMENT_JSP);
         dispatcher.forward(request, response);
     }
 }

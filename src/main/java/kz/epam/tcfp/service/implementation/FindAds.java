@@ -10,6 +10,7 @@ import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 
 import javax.servlet.RequestDispatcher;
@@ -26,6 +27,7 @@ import java.util.List;
  * @project AdPlatform
  */
 public class FindAds extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(FindAds.class);
     private static final Integer LOCATION_ID_DEFAULT = 1;
     private static final Integer CATEGORY_ID_ALL = 1;
 
@@ -49,7 +51,7 @@ public class FindAds extends PreviousPage implements Service {
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while getting recent advertisement info", e);
         }
 
 

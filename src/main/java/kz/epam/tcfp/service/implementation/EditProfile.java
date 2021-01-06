@@ -9,6 +9,7 @@ import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,8 @@ import java.util.List;
  * @project AdPlatform
  */
 public class EditProfile extends PreviousPage implements Service {
-
-
-    public static final String PROFILE = "/profile";
+    private static final Logger LOGGER = Logger.getLogger(EditProfile.class);
+    private static final String PROFILE = "/profile";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +43,7 @@ public class EditProfile extends PreviousPage implements Service {
                 return;
             }
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while editing user account info", e);
         }
 
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);

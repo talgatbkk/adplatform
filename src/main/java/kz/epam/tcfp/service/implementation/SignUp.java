@@ -9,6 +9,7 @@ import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +25,8 @@ import java.io.IOException;
  */
 public class SignUp extends PreviousPage implements Service {
 
-
-    public static final String SIGN_UP_SERVICE = "/signup";
+    private static final Logger LOGGER = Logger.getLogger(SignUp.class);
+    private static final String SIGN_UP_SERVICE = "/signup";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +42,6 @@ public class SignUp extends PreviousPage implements Service {
             boolean isEmailTaken =  userDAO.isEmailTaken(signUpInput);
             boolean isLoginTaken = userDAO.isLoginTaken(signUpInput);
             boolean isPhoneNumberTaken = userDAO.isPhoneNumberTaken(signUpInput);
-
             if (isEmailTaken || isLoginTaken || isPhoneNumberTaken){
                 request.setAttribute(ServiceConstants.PHONE_NUMBER_TAKEN, isPhoneNumberTaken);
                 request.setAttribute(ServiceConstants.LOGIN_TAKEN, isLoginTaken);
@@ -53,9 +53,8 @@ public class SignUp extends PreviousPage implements Service {
                 user = userDAO.getUserIdByLogin(signUpInput.getLogin());
             }
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while signing up a user", e);
         }
-
         session = request.getSession(true);
         session.setAttribute(ServiceConstants.SESSION_USER_ID, user.getUserId());
         response.sendRedirect(HOME_SERVICE);

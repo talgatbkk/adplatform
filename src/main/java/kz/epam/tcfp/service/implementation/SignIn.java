@@ -8,6 +8,7 @@ import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,9 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class SignIn extends PreviousPage implements Service {
+    private static final Logger logger = Logger.getLogger(SignIn.class);
+    private static final String SIGN_IN_SERVICE = "/signin";
 
-    public static final String SIGN_IN_SERVICE = "/signin";
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -43,10 +45,9 @@ public class SignIn extends PreviousPage implements Service {
                 return;
             } else {
                     user = userDAO.getUserIdByLogin(signInInput.getLogin());
-
             }
         } catch (DAOException e) {
-            e.printStackTrace();
+            logger.warn("Error in DAO while authenticating a user", e);
         }
 
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);

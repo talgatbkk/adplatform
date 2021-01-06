@@ -8,6 +8,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,8 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class DeleteAdvertisement extends PreviousPage implements Service {
-    public static final String SIGN_IN_SERVICE = "/signin";
+    private static final Logger LOGGER = Logger.getLogger(DeleteAdvertisement.class);
+    private static final String SIGN_IN_SERVICE = "/signin";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,10 +51,11 @@ public class DeleteAdvertisement extends PreviousPage implements Service {
             if (advertisement.getUserId() == userId || roleId == 1) {
                 advertisementDAO.deleteAdvertisementByUserIdAndAdId(adId);
             } else {
+                LOGGER.warn("Failed to delete advertisement");
                 response.sendRedirect(PagePath.ERROR_JSP);
             }
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while deleting user advertisement", e);
         }
         request.getRequestDispatcher(HOME_SERVICE).forward(request, response);
 

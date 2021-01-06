@@ -2,7 +2,6 @@ package kz.epam.tcfp.service.implementation;
 
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
@@ -10,6 +9,7 @@ import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +22,8 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class PostAdvertisement extends PreviousPage implements Service {
-
-    public static final String LOGIN_SERVICE = "/login";
+    private static final Logger LOGGER = Logger.getLogger(PostAdvertisement.class);
+    private static final String LOGIN_SERVICE = "/login";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +40,6 @@ public class PostAdvertisement extends PreviousPage implements Service {
         String advertisementDescription = request.getParameter(ServiceConstants.ADVERTISEMENT_DESCRIPTION);
         Integer advertisementPrice = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_PRICE));
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        UserDAO userDAO = DAOFactory.getUserDAO();
 
         Advertisement advertisement = new Advertisement();
         advertisement.setUserId(userId);
@@ -50,12 +49,10 @@ public class PostAdvertisement extends PreviousPage implements Service {
         advertisement.setDescription(advertisementDescription);
         advertisement.setPrice(advertisementPrice);
 
-
         try {
             advertisementDAO.postAdvertisement(advertisement);
-
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while posting an advertisement", e);
         }
 
         response.sendRedirect(HOME_SERVICE);

@@ -11,6 +11,7 @@ import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Comment;
 import kz.epam.tcfp.model.Location;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
  * @project AdPlatform
  */
 public class AdvertisementDAOImpl implements AdvertisementDAO {
-
+    private static final Logger LOGGER = Logger.getLogger(AdvertisementDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     public AdvertisementDAOImpl() {

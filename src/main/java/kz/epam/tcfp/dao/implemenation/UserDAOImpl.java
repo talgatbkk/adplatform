@@ -11,6 +11,7 @@ import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.model.inputform.SignUpInput;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ import java.util.List;
  */
 public class UserDAOImpl implements UserDAO {
 
-
-    public static final Integer CUSTOMER_ROLE_ID = 2;
-    public static final Integer IS_USER_BANNED = 0;
-    public static final String CALLABLE_RESULT_NAME = "result";
+    private static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
+    private static final Integer CUSTOMER_ROLE_ID = 2;
+    private static final Integer IS_USER_BANNED = 0;
+    private static final String CALLABLE_RESULT_NAME = "result";
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     @Override

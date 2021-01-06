@@ -10,6 +10,7 @@ import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +25,8 @@ import java.util.List;
  * @project AdPlatform
  */
 public class InputAdvertisement extends PreviousPage implements Service {
-
-    public static final String SIGN_IN_SERVICE = "/signin";
-
+    private static final Logger LOGGER = Logger.getLogger(InputAdvertisement.class);
+    private static final String SIGN_IN_SERVICE = "/signin";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,13 +44,10 @@ public class InputAdvertisement extends PreviousPage implements Service {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
-
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         UserDAO userDAO = DAOFactory.getUserDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
-
-
         try {
             if (userDAO.isUserBanned(userId)) {
                 Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
@@ -61,9 +58,8 @@ public class InputAdvertisement extends PreviousPage implements Service {
                 return;
             }
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while getting data for page InputAdvertisement", e);
         }
-
         request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
         request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
         request.getRequestDispatcher(PagePath.ADD_ADVERTISEMENT_JSP).forward(request, response);

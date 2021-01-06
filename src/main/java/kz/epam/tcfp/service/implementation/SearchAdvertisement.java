@@ -9,6 +9,7 @@ import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +25,7 @@ import java.util.List;
  * @project AdPlatform
  */
 public class SearchAdvertisement extends PreviousPage implements Service {
-
+    private static final Logger LOGGER = Logger.getLogger(SearchAdvertisement.class);
     private static final Integer LOCATION_ID_DEFAULT = 1;
 
     @Override
@@ -35,8 +36,6 @@ public class SearchAdvertisement extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-
         String locationInput = request.getParameter(ServiceConstants.LOCATION_PICK);
         Integer locationId = null;
         if (locationInput != null && !locationInput.isEmpty()){
@@ -52,16 +51,12 @@ public class SearchAdvertisement extends PreviousPage implements Service {
         if (request.getParameter(ServiceConstants.USER_ID_TO_SEARCH) != null){
             searchUserId = Integer.parseInt(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
         }
-
-
         Integer categoryId = null;
         String categoryInput = request.getParameter(ServiceConstants.CATEGORY_PICK);
         if (categoryInput != null && !categoryInput.isEmpty()){
             categoryId = Integer.parseInt(categoryInput);
         }
-
         String searchInput = request.getParameter(ServiceConstants.SEARCH_INPUT);
-
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
@@ -84,7 +79,7 @@ public class SearchAdvertisement extends PreviousPage implements Service {
             }
 
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while getting advertisement search results", e);
         }
 
         request.setAttribute(ServiceConstants.ADVERTISEMENT_LIST, advertisements);

@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class DeleteUserAccount extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(DeleteUserAccount.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,13 +42,11 @@ public class DeleteUserAccount extends PreviousPage implements Service {
                     response.sendRedirect(HOME_SERVICE);
                     return;
                 } else {
-                    System.out.println("Error");
+                    LOGGER.warn("Failed to delete user account");
                 }
             } catch (DAOException e) {
-                e.printStackTrace();
+                LOGGER.warn("Error in DAO while deleting user account", e);
             }
-        } else {
-            System.out.println("Error");
         }
         response.sendRedirect(PagePath.ERROR_JSP);
     }

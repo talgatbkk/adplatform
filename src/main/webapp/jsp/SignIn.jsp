@@ -46,7 +46,7 @@
         </div>
     </table>
     <div>
-        <p class="error-input" id="loginError">
+        <p class="error-input text-danger" id="loginError">
             <c:if test="${incorrect_auth == true}">
                 ${incorrectAuthLocal}
             </c:if>

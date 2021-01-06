@@ -5,13 +5,14 @@ import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
 import kz.epam.tcfp.dao.implemenation.AdvertisementDAOImpl;
 import kz.epam.tcfp.dao.implemenation.UserDAOImpl;
+import org.apache.log4j.Logger;
 
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
 public class DAOFactory {
-//    private static final Logger logger = Logger.getLogger(DAOFactory.class);
+    private static final Logger LOGGER = Logger.getLogger(DAOFactory.class);
 
     private static DAOFactory instance = new DAOFactory();
 

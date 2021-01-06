@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Comment;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,8 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class PostComment extends PreviousPage implements Service {
-
-    public static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
+    private static final Logger LOGGER = Logger.getLogger(PostComment.class);
+    private static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +39,7 @@ public class PostComment extends PreviousPage implements Service {
         try {
             advertisementDAO.postComment(comment);
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in DAO while posting a comment", e);
         }
         response.sendRedirect(ADVERTISEMENT_VIEW_SERVICE);
 

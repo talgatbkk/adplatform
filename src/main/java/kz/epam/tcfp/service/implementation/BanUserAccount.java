@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,9 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class BanUserAccount extends PreviousPage implements Service {
-
+    private static final Logger LOGGER = Logger.getLogger(BanUserAccount.class);
     private static final Integer ADMIN_ROLE_ID = 1;
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -42,7 +44,7 @@ public class BanUserAccount extends PreviousPage implements Service {
                     return;
                 }
             } catch (DAOException e) {
-                e.printStackTrace();
+                LOGGER.warn("Error in DAO while banning user", e);
             }
 
         } else {

@@ -11,5 +11,6 @@ public class PagePath {
 
     public static final String INFORM_BANNED_JSP = "/jsp/InformBanned.jsp";
     public static final String ADD_ADVERTISEMENT_JSP = "/jsp/AddAdvertisement.jsp";
+    public static final String VIEW_ADVERTISEMENT_JSP = "/jsp/ViewAdvertisement.jsp";
     public static final String SIGN_IN = "/signin";
 }
