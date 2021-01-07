@@ -1,9 +1,7 @@
 
+M
+java:S1481*"+Remove this unused "userId" local variable.(Üô€Ëùÿÿÿÿ8º€ÖÅí.
+P
+java:S1068 "3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—8º€ÖÅí.
 \
-java:S1192$"FDefine a constant instead of duplicating this literal "local" 3 times.(ÖëÚĞ
-I
-java:S1068"3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—
-@
-java:S1481("+Remove this unused "userId" local variable.(Áµğs
-O
-java:S1854(":Remove this useless assignment to local variable "userId".(Áµğs
+java:S1854*":Remove this useless assignment to local variable "userId".(Üô€Ëùÿÿÿÿ8º€ÖÅí.

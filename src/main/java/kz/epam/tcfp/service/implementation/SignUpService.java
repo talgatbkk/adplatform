@@ -23,9 +23,9 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class SignUp extends PreviousPage implements Service {
+public class SignUpService extends PreviousPage implements Service {
 
-    private static final Logger LOGGER = Logger.getLogger(SignUp.class);
+    private static final Logger LOGGER = Logger.getLogger(SignUpService.class);
     private static final String SIGN_UP_SERVICE = "/signup";
 
     @Override

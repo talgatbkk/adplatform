@@ -32,21 +32,21 @@ public class ServiceProvider {
 
     public ServiceProvider() {
         services = new HashMap<>();
-        services.put(HOME, new FindAds());
-        services.put(LOGIN, new SignIn());
-        services.put(ADVERTISEMENT_SIGN_IN, new SignIn());
-        services.put(REGISTER_USER, new SignUp());
-        services.put(USER_VIEW_PROFILE, new OpenProfile());
-        services.put(ADVERTISEMENT_VIEW, new ViewAdvertisement());
-        services.put(COMMENT_POST, new PostComment());
-        services.put(ADVERTISEMENT_POST, new PostAdvertisement());
-        services.put(ADVERTISEMENT_ADD, new InputAdvertisement());
-        services.put(ADVERTISEMENT_SEARCH, new SearchAdvertisement());
-        services.put(ADVERTISEMENT_DELETE, new DeleteAdvertisement());
-        services.put(USER_LOGOUT, new LogOut());
-        services.put(USER_DELETE, new DeleteUserAccount());
-        services.put(USER_BAN, new BanUserAccount());
-        services.put(LANGUAGE, new ChangeLanguage());
+        services.put(HOME, new FindAdsService());
+        services.put(LOGIN, new SignInService());
+        services.put(ADVERTISEMENT_SIGN_IN, new SignInService());
+        services.put(REGISTER_USER, new SignUpService());
+        services.put(USER_VIEW_PROFILE, new OpenProfileService());
+        services.put(ADVERTISEMENT_VIEW, new ViewAdvertisementService());
+        services.put(COMMENT_POST, new PostCommentService());
+        services.put(ADVERTISEMENT_POST, new PostAdvertisementService());
+        services.put(ADVERTISEMENT_ADD, new InputAdvertisementService());
+        services.put(ADVERTISEMENT_SEARCH, new SearchAdvertisementService());
+        services.put(ADVERTISEMENT_DELETE, new DeleteAdvertisementService());
+        services.put(USER_LOGOUT, new LogOutService());
+        services.put(USER_DELETE, new DeleteUserAccountService());
+        services.put(USER_BAN, new BanUserAccountService());
+        services.put(LANGUAGE, new ChangeLanguageService());
 
     }
 

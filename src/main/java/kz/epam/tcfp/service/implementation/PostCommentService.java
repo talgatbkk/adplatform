@@ -19,8 +19,8 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class PostComment extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(PostComment.class);
+public class PostCommentService extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(PostCommentService.class);
     private static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
 
     @Override

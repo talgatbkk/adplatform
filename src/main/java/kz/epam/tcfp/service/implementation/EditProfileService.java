@@ -22,8 +22,8 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class EditProfile extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(EditProfile.class);
+public class EditProfileService extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(EditProfileService.class);
     private static final String PROFILE = "/profile";
 
     @Override

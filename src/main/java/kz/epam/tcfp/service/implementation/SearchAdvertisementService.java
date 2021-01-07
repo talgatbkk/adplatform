@@ -25,8 +25,8 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class SearchAdvertisement extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(SearchAdvertisement.class);
+public class SearchAdvertisementService extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(SearchAdvertisementService.class);
     private static final Integer LOCATION_ID_DEFAULT = 1;
 
     @Override

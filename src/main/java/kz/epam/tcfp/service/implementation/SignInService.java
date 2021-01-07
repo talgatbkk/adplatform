@@ -20,8 +20,8 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class SignIn extends PreviousPage implements Service {
-    private static final Logger logger = Logger.getLogger(SignIn.class);
+public class SignInService extends PreviousPage implements Service {
+    private static final Logger logger = Logger.getLogger(SignInService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
 
     @Override

@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class LogOut extends PreviousPage implements Service {
+public class LogOutService extends PreviousPage implements Service {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

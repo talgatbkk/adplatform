@@ -1,7 +1,5 @@
 
-a
-java:S22596"KA "NullPointerException" could be thrown; "advertisement" is nullable here.(£‡Åπ
 O
-java:S49736"9Use the "equals" method if value comparison was intended.(£‡Åπ
-\
-java:S1192#"FDefine a constant instead of duplicating this literal "ad_id" 3 times.(⁄ˆ◊Ö
+java:S4973="9Use the "equals" method if value comparison was intended.(£‡Åπ
+a
+java:S2259="KA "NullPointerException" could be thrown; "advertisement" is nullable here.(£‡Åπ

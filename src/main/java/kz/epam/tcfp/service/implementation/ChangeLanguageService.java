@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class ChangeLanguage extends PreviousPage implements Service {
+public class ChangeLanguageService extends PreviousPage implements Service {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -45,8 +45,6 @@ O
 src/main/webapp/jsp/Profile.jsp,0/c/0ca89d8278ba7023a2e1eb5ddd398d351fd98825
 N
 src/main/webapp/jsp/Header.jsp,9/0/907913cbbb0a282e5a8f378f23a22a4b2ac7d64d
-U
-%src/main/webapp/jsp/advertisement.jsp,6/6/66e233d9c75111875333428261374781feec0c32
 ^
 .src/main/java/kz/epam/tcfp/model/Location.java,5/7/57e4fe9ec4fe99cad6ef3f404d3a8fd53f27aa0c
 j
@@ -61,8 +59,6 @@ m
 =src/main/java/kz/epam/tcfp/dao/connection/ConnectionPool.java,c/b/cb09489ab13466cbdf043527b106b2c27ff5a5da
 Y
 )src/main/webapp/jsp/ViewAdvertisement.jsp,3/5/357447d3c48ef232604b4576dfb38e058f536e84
-j
-:src/main/java/kz/epam/tcfp/dao/connection/DBConstants.java,c/d/cd08d8d7137f9cd1e9778a044bda330833eda625
 X
 (src/main/webapp/jsp/AddAdvertisement.jsp,a/e/aee5a657f7ca791a6bbcbf30d6f4429d4efe69bb
 T
@@ -87,8 +83,6 @@ y
 Isrc/main/java/kz/epam/tcfp/service/implementation/InputAdvertisement.java,9/9/99ff5da27ee4183b8949eab7508c7da61d234971
 z
 Jsrc/main/java/kz/epam/tcfp/service/implementation/DeleteAdvertisement.java,e/9/e9cf83c815c741b648503496f5690902c66fd1db
-g
-7src/main/java/kz/epam/tcfp/service/ServiceSupplier.java,f/a/fa5890d26f1ab350244c5655fcc1046ccf8b1a45
 u
 Esrc/main/java/kz/epam/tcfp/service/implementation/BanUserAccount.java,b/1/b1282cce18f9d1b2fd0f752a6bf7ff9c927f5407
 x
@@ -117,3 +111,15 @@ _
 /src/main/java/kz/epam/tcfp/service/Service.java,9/6/96a4f1a3897a28c3b19e68bfcd8b7cdfdccd8871
 m
 =src/main/java/kz/epam/tcfp/dao/implemenation/UserDAOImpl.java,6/7/67246d520ed505af889aac1a31071c5d3aecf3cf
+[
++src/main/java/kz/epam/tcfp/model/Photo.java,7/d/7dcfe187abedbc2cb89f9625071ce411c6a9b4a7
+L
+src/main/webapp/jsp/Home.jsp,2/5/25c89e26b5ca06f071126ed1d02e66360a7de3a6
+m
+=src/main/java/kz/epam/tcfp/service/util/ServiceConstants.java,4/c/4cb4a7fdd0248f80868e0eb1a9c55beb1f6fb263
+`
+0src/main/java/kz/epam/tcfp/service/PagePath.java,9/5/9577d65510c57452f2f84c3927e49b7bdb9cf7ad
+d
+4src/main/java/kz/epam/tcfp/dao/util/DBConstants.java,a/1/a1b8f56e1341426d7cbf1925d6595590ddd7fc55
+g
+7src/main/java/kz/epam/tcfp/service/ServiceProvider.java,0/e/0ebfa30114090504c4a84025f6cfd2c33315aabf

@@ -23,8 +23,8 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class OpenProfile extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(OpenProfile.class);
+public class OpenProfileService extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(OpenProfileService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     private static final String USER_PROFILE_JSP = "/user/profile";
 

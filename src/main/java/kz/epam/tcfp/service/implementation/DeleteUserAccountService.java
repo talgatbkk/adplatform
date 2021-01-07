@@ -19,8 +19,8 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class DeleteUserAccount extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(DeleteUserAccount.class);
+public class DeleteUserAccountService extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(DeleteUserAccountService.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

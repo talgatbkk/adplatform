@@ -19,8 +19,8 @@ import java.io.IOException;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class BanUserAccount extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(BanUserAccount.class);
+public class BanUserAccountService extends PreviousPage implements Service {
+    private static final Logger LOGGER = Logger.getLogger(BanUserAccountService.class);
     private static final Integer ADMIN_ROLE_ID = 1;
 
     @Override

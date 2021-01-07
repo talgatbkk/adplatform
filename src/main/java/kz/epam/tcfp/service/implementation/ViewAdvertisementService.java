@@ -25,9 +25,9 @@ import java.util.List;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class ViewAdvertisement extends PreviousPage implements Service {
+public class ViewAdvertisementService extends PreviousPage implements Service {
 
-    private static final Logger LOGGER = Logger.getLogger(ViewAdvertisement.class);
+    private static final Logger LOGGER = Logger.getLogger(ViewAdvertisementService.class);
 
 
     @Override

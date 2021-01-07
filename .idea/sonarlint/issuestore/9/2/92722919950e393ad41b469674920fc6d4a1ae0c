@@ -1,10 +1,13 @@
 
-W
-java:S1118":Add a private constructor to hide the implicit public one.(®àÅº8¬´¹†è.
-K
-java:S2209%"5Change this instance-reference to a static reference.(€®¨¤
-Q	java:S125"<This block of commented-out lines of code should be removed.(€……á
-K
-java:S2209!"5Change this instance-reference to a static reference.(Ìæ·Þ
+P
+java:S2209"5Change this instance-reference to a static reference.(Ý­õË8î½­Çí.
 J
-java:S2209)"5Change this instance-reference to a static reference.(ÊœÈW
+java:S1068"*Remove this unused "LOGGER" private field.(ÄþñŠûÿÿÿÿ8û€“Çí.
+U
+java:S1118":Add a private constructor to hide the implicit public one.(®àÅº8¬´¹†è.
+Y
+java:S2168"9Remove this dangerous instance of double-checked locking.(ÔÎ‹Ïúÿÿÿÿ8àœ±Èí.
+P
+java:S2209"5Change this instance-reference to a static reference.(Ìæ·Þ8î½­Çí.
+P
+java:S2209"5Change this instance-reference to a static reference.(€®¨¤8î½­Çí.
