@@ -67,16 +67,22 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
             Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);
-            if (searchUserId != null) {
-                advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId);
-            } else if (categoryId != null && locationId != null) {
-                advertisements = advertisementDAO.searchAdvertisementsByCategoryWithLocation(categoryId, locationId);
-            } else if (categoryId != null) {
-                advertisements = advertisementDAO.searchAdvertisementsByCategory(categoryId);
-            } else if (locationId != null) {
-                advertisements = advertisementDAO.searchAdvertisementsByLocation(locationId);
+            if (searchInput == null || searchInput.isEmpty()) {
+                if (searchUserId != null) {
+                    advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId);
+                } else if (categoryId != null && locationId != null) {
+                    advertisements = advertisementDAO.searchAdvertisementsByCategoryAndLocation(categoryId, locationId);
+                } else if (categoryId != null) {
+                    advertisements = advertisementDAO.searchAdvertisementsByCategory(categoryId);
+                } else if (locationId != null) {
+                    advertisements = advertisementDAO.searchAdvertisementsByLocation(locationId);
+                } else {
+                    advertisements = advertisementDAO.getAllAdvertisements();
+                }
             } else {
-                advertisements = advertisementDAO.getAllAdvertisements();
+                if (categoryId != null && locationId != null) {
+//                    advertisementDAO.searchAdvertisementsByDescriptionAndCategoryAndLocation();
+                }
             }
 
         } catch (DAOException e) {

@@ -6,7 +6,6 @@ package kz.epam.tcfp.dao.util;
  */
 public class DBConstants {
 
-
     public static final String AD_ID = "advertisement_id";
     public static final String AD_TITLE = "advertisement_title";
     public static final String AD_DESCRIPTION = "description";
@@ -35,7 +34,7 @@ public class DBConstants {
     public static final String LANGUAGE_ID = "language_id";
     public static final String CATEGORY_ID = "category_id";
     public static final String CATEGORY_NAME = "category_name";
-
+    public static final String SQL_QUERY_ERROR = "SQL query error";
 
 
     public static final String GET_ADS_BY_USER_ID = "SELECT * FROM advertisement WHERE user_id = ?";
@@ -67,5 +66,5 @@ public class DBConstants {
     public static final String DELETE_AD_BY_USER_ID_AND_AD_ID = "DELETE FROM advertisement WHERE advertisement_id = ?";
     public static final String DELETE_USER_ACCOUNT = "DELETE FROM user WHERE user_id = ?";
     public static final String BAN_USER_ACCOUNT = "UPDATE user SET ban = TRUE WHERE user_id = ?";
-    public static final String SQL_QUERY_ERROR = "SQL query error";
+
 }

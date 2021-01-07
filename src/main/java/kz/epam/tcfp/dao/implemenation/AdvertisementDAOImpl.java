@@ -7,10 +7,7 @@ import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.dao.connection.ConnectionPoolException;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Advertisement;
-import kz.epam.tcfp.model.Category;
-import kz.epam.tcfp.model.Comment;
-import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.model.*;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -108,7 +105,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByCategoryWithLocation(Integer categoryId, Integer locationId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByCategoryAndLocation(Integer categoryId, Integer locationId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -163,6 +160,35 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         }
         return advertisements;
     }
+
+    @Override
+    public List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Integer categoryId, Integer locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advertisement> advertisements = new ArrayList<>();
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY);
+            preparedStatement.setInt(1, categoryId);
+            preparedStatement.setInt(2, locationId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Advertisement advertisement = new Advertisement();
+                advertisement = buildAdvertisement(resultSet);
+                advertisements.add(advertisement);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return advertisements;
+    }
+
 
     @Override
     public Integer getAdvertisementCountById(Integer userId) throws DAOException {
@@ -445,7 +471,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         comment.setAuthorFirstName(resultSet.getString(DBConstants.USER_FIRST_NAME));
         comment.setAuthorLastName(resultSet.getString(DBConstants.USER_LAST_NAME));
         comment.setAuthorLogin(resultSet.getString(DBConstants.USER_LOGIN));
-        comment.setPostedDate(resultSet.getDate(DBConstants.COMMENT_POSTED_DATE));
+        comment.setPostedDate(new PrettyDateTime(resultSet.getDate(DBConstants.COMMENT_POSTED_DATE)));
         comment.setContent(resultSet.getString(DBConstants.COMMENT_CONTENT));
         return comment;
     }
@@ -457,7 +483,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         advertisement.setTitle(resultSet.getString(DBConstants.AD_TITLE));
         advertisement.setDescription(resultSet.getString(DBConstants.AD_DESCRIPTION));
         advertisement.setLocation(new Location(resultSet.getInt(DBConstants.AD_LOCATION_ID)));
-        advertisement.setPostedDate(resultSet.getDate(DBConstants.AD_POSTED_DATE));
+        advertisement.setPostedDate(new PrettyDateTime(resultSet.getDate(DBConstants.AD_POSTED_DATE)));
         advertisement.setCategory(new Category(resultSet.getInt(DBConstants.AD_CATEGORY_ID)));
         advertisement.setPrice(resultSet.getInt(DBConstants.AD_PRICE));
         return advertisement;

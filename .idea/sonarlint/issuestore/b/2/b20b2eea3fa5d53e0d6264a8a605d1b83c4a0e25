@@ -1,0 +1,8 @@
+
+P
+java:S1068 "3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—8º€ÖÅí.
+Z	java:S106;"9Replace this use of System.out or System.err by a logger.(­Ë¹ûûÿÿÿÿ8º½ïí.
+\
+java:S1854*":Remove this useless assignment to local variable "userId".(Üô€Ëùÿÿÿÿ8º€ÖÅí.
+M
+java:S1481*"+Remove this unused "userId" local variable.(Üô€Ëùÿÿÿÿ8º€ÖÅí.

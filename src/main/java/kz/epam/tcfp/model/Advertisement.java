@@ -21,7 +21,7 @@ public class Advertisement implements Serializable {
     private String description;
     private Location location;
     private Integer price;
-    private Date postedDate;
+    private PrettyDateTime postedDate;
     private Category category;
     private List<Photo> photos;
 
@@ -85,11 +85,11 @@ public class Advertisement implements Serializable {
         this.photos = photos;
     }
 
-    public Date getPostedDate() {
+    public PrettyDateTime getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(Date postedDate) {
+    public void setPostedDate(PrettyDateTime postedDate) {
         this.postedDate = postedDate;
     }
 

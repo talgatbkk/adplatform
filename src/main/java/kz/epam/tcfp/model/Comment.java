@@ -19,7 +19,7 @@ public class Comment {
     private String authorFirstName;
     private String authorLastName;
     private String content;
-    private Date postedDate;
+    private PrettyDateTime postedDate;
 
 
     public Comment() {
@@ -65,11 +65,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getPostedDate() {
+    public PrettyDateTime getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(Date postedDate) {
+    public void setPostedDate(PrettyDateTime postedDate) {
         this.postedDate = postedDate;
     }
 

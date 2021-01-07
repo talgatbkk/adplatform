@@ -7,8 +7,11 @@ import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 import org.junit.Test;
+import org.ocpsoft.prettytime.PrettyTime;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

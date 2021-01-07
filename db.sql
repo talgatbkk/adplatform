@@ -182,9 +182,15 @@ INSERT INTO user_phone VALUES (NULL, 1, '+77011820844');
 INSERT INTO user_phone VALUES (NULL, 1, '+77471820844');
 INSERT INTO language VALUES (1, 'ru');
 INSERT INTO language VALUES (2, 'en');
+
 INSERT INTO location VALUES (1, NULL, 1, 'Казахстан');
 INSERT INTO location VALUES (2, 1, 1, 'Астана');
 INSERT INTO location VALUES (3, 1, 1, 'Алматы');
+
+INSERT INTO location VALUES (1, NULL, 2, 'Kazakhstan');
+INSERT INTO location VALUES (2, 1, 2, 'Astana');
+INSERT INTO location VALUES (3, 1, 2, 'Almaty');
+
 INSERT INTO category VALUES (1, 1, 'Работа');
 INSERT INTO category VALUES (NULL, 1, 'Недвижимость');
 INSERT INTO category VALUES (NULL, 1, 'Электроника');

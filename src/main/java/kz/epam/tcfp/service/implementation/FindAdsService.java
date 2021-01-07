@@ -56,6 +56,7 @@ public class FindAdsService extends PreviousPage implements Service {
 
 
         request.setAttribute(ServiceConstants.ADVERTISEMENT_LIST, advertisements);
+        System.out.println(advertisements.get(0).getPostedDate().getTimeInRussian());
         request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
         request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
         request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);

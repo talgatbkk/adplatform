@@ -79,7 +79,7 @@
 					</span>
                 <span>
                     <time class="" datetime="${advertisement.postedDate}">
-                    ${comment.postedDate}
+                    ${comment.postedDate.timeInRussian}
                     </time>
 				</span>
                 <p class="be-comment-text">
