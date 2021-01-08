@@ -66,5 +66,6 @@ public class DBConstants {
     public static final String DELETE_AD_BY_USER_ID_AND_AD_ID = "DELETE FROM advertisement WHERE advertisement_id = ?";
     public static final String DELETE_USER_ACCOUNT = "DELETE FROM user WHERE user_id = ?";
     public static final String BAN_USER_ACCOUNT = "UPDATE user SET ban = TRUE WHERE user_id = ?";
+    public static final String UNBAN_USER_ACCOUNT = "UPDATE user SET ban = FALSE WHERE user_id = ?";
 
 }

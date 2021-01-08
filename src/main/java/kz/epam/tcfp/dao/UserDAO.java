@@ -26,5 +26,6 @@ public interface UserDAO {
     Boolean deleteUserAccount(Integer userId) throws DAOException;
     Boolean isUserBanned(Integer userId) throws DAOException;
     Boolean banUserAccount(Integer userId) throws DAOException;
+    Boolean unbanUserAccount(Integer userId) throws DAOException;
 
 }

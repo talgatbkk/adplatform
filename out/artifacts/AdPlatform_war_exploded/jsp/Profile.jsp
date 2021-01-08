@@ -135,10 +135,20 @@
         </form>
         </c:when>
         <c:when test="${sessionScope.role_id == 1}">
+        <c:choose>
+        <c:when test="${requestScope.customer.banned == true}">
+        <form action="/user/unban">
+            <input type="hidden" name="unban_user_id" value="${requestScope.customer.userId}">
+            <input class="btn-outline-danger" type="submit" value="Unban this user" onclick="return confirm('Are you sure you want to unban this user?')" />
+        </form>
+        </c:when>
+        <c:otherwise>
         <form action="/user/ban">
             <input type="hidden" name="ban_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Ban this user" onclick="return confirm('Are you sure you want to ban this user?')" />
         </form>
+        </c:otherwise>
+        </c:choose>
         </c:when>
         </c:choose>
 

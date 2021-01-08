@@ -25,6 +25,20 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
 
+    <c:if test="${sessionScope.local == 'en'}">
+    <script src="../js/jquery.timeago.js" type="text/javascript"></script>
+    </c:if>
+    <c:if test="${sessionScope.local == 'ru'}">
+    <script src="../js/jquery.timeago.js" type="text/javascript"></script>
+    <script src="../js/jquery.timeago.ru.js" type="text/javascript"></script>
+    </c:if>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            $("time.timeago").timeago();
+        });
+    </script>
+
     <title>Advertisements of the customer</title>
 </head>
 <body>
@@ -32,7 +46,9 @@
 <br>
     <c:choose>
     <c:when test="${requestScope.advertisements.size() == 0}">
-        <h3>No advertisements with such parameters</h3>
+
+        <h3 class="text-center">No advertisements with such parameters</h3>
+
     </c:when>
     <c:otherwise>
     <c:forEach var="advertisement" items="${requestScope.advertisements}">
@@ -46,8 +62,10 @@
 
                     <h5 class="card-title">${advertisement.title}</h5>
                     <p class="card-text">${advertisement.description}</p>
-                    <p class="card-text">${advertisement.price}</p>
-                    <time datetime="${advertisement.postedDate}">${advertisement.postedDate}</time>
+                    <c:if test="${advertisement.price != 0}">
+                        <p class="card-text">${advertisement.price} tenge</p>
+                    </c:if>
+                    <time class="timeago" datetime="${advertisement.postedDate.time}">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
                     <form action="/advertisement/view?ad_id=${advertisement.adId}" method="post">
                         <input class="btn btn--stroke full-width" type="submit" value="${viewButtonLocal}">

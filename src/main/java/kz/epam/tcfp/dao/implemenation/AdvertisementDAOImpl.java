@@ -471,7 +471,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         comment.setAuthorFirstName(resultSet.getString(DBConstants.USER_FIRST_NAME));
         comment.setAuthorLastName(resultSet.getString(DBConstants.USER_LAST_NAME));
         comment.setAuthorLogin(resultSet.getString(DBConstants.USER_LOGIN));
-        comment.setPostedDate(new PrettyDateTime(resultSet.getDate(DBConstants.COMMENT_POSTED_DATE)));
+        comment.setPostedDate(new DateTimeInUTC(resultSet.getTimestamp(DBConstants.COMMENT_POSTED_DATE)));
         comment.setContent(resultSet.getString(DBConstants.COMMENT_CONTENT));
         return comment;
     }
@@ -483,7 +483,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         advertisement.setTitle(resultSet.getString(DBConstants.AD_TITLE));
         advertisement.setDescription(resultSet.getString(DBConstants.AD_DESCRIPTION));
         advertisement.setLocation(new Location(resultSet.getInt(DBConstants.AD_LOCATION_ID)));
-        advertisement.setPostedDate(new PrettyDateTime(resultSet.getDate(DBConstants.AD_POSTED_DATE)));
+        advertisement.setPostedDate(new DateTimeInUTC(resultSet.getTimestamp(DBConstants.AD_POSTED_DATE)));
         advertisement.setCategory(new Category(resultSet.getInt(DBConstants.AD_CATEGORY_ID)));
         advertisement.setPrice(resultSet.getInt(DBConstants.AD_PRICE));
         return advertisement;

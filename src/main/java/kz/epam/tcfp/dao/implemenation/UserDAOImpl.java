@@ -325,4 +325,28 @@ public class UserDAOImpl implements UserDAO {
         return false;
     }
 
+    @Override
+    public Boolean unbanUserAccount(Integer userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.UNBAN_USER_ACCOUNT);
+            preparedStatement.setInt(1, userId);
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
 }

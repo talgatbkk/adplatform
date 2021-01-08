@@ -13,7 +13,10 @@
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
 
-<h3>You're banned from posting any ads</h3>
+
+    <h3 class="text-center">You're banned from posting any ads</h3>
+
+
 
 </body>
 </html>

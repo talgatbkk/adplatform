@@ -7,10 +7,10 @@ package kz.epam.tcfp.model;
 public class Photo {
     private static final long serialVersionUID = 1234L;
 
-    private Integer photoId;
+    private Long photoId;
     private String path;
 
-    public Photo(Integer photoId, String path) {
+    public Photo(Long photoId, String path) {
         this.photoId = photoId;
         this.path = path;
     }

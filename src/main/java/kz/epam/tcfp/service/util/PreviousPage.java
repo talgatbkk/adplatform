@@ -13,6 +13,7 @@ import java.io.IOException;
 public class PreviousPage {
     public static final String HOME_SERVICE = "/home";
     public static final Character QUESTION_MARK = '?';
+    public static final Character EQUAL_SIGN = '=';
 
     protected void savePreviousPage(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
@@ -22,7 +23,7 @@ public class PreviousPage {
         if (queryString == null) {
             session.setAttribute(ServiceConstants.PREVIOUS_PAGE, requestURL.toString());
         } else {
-            session.setAttribute(ServiceConstants.PREVIOUS_PAGE, requestURL.append('?')
+            session.setAttribute(ServiceConstants.PREVIOUS_PAGE, requestURL.append(QUESTION_MARK)
                                                                 .append(queryString)
                                                                 .toString());
         }

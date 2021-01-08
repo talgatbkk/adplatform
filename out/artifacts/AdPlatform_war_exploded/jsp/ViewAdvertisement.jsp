@@ -16,7 +16,20 @@
 <html>
 <head>
     <script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.timeago.js" type="text/javascript"></script>
+
+    <c:if test="${sessionScope.local == 'en'}">
+        <script src="../js/jquery.timeago.js" type="text/javascript"></script>
+    </c:if>
+    <c:if test="${sessionScope.local == 'ru'}">
+        <script src="../js/jquery.timeago.js" type="text/javascript"></script>
+        <script src="../js/jquery.timeago.ru.js" type="text/javascript"></script>
+    </c:if>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            $("time.timeago").timeago();
+        });
+    </script>
     <title>Title</title>
 </head>
 <body>
@@ -55,6 +68,9 @@
             <c:forEach items="${requestScope.phone_numbers}" var="phone">
                 <p>${phone.phoneNumber}</p>
             </c:forEach>
+            <p>Posted
+            <time class="timeago" datetime="${requestScope.advertisement.postedDate.time}">${requestScope.advertisement.postedDate}</time>
+            </p>
         </div>
     </div>
         <div class="ui-button">
@@ -78,8 +94,8 @@
 					<a href="/user/view?profile_id=${comment.authorId}">${comment.authorFirstName} ${comment.authorLastName}</a>
 					</span>
                 <span>
-                    <time class="" datetime="${advertisement.postedDate}">
-                    ${comment.postedDate.timeInRussian}
+                    <time class="timeago" datetime="${comment.postedDate.time}">
+
                     </time>
 				</span>
                 <p class="be-comment-text">

@@ -25,6 +25,7 @@ public class ServiceProvider {
     public static final String USER_LOGOUT = "/user/logout";
     public static final String USER_DELETE = "/user/delete";
     public static final String USER_BAN = "/user/ban";
+    public static final String USER_UNBAN = "/user/unban";
     public static final String LANGUAGE = "/language";
 
     private final Map<String, Service> services;
@@ -46,6 +47,7 @@ public class ServiceProvider {
         services.put(USER_LOGOUT, new LogOutService());
         services.put(USER_DELETE, new DeleteUserAccountService());
         services.put(USER_BAN, new BanUserAccountService());
+        services.put(USER_UNBAN, new UnbanUserAccountService());
         services.put(LANGUAGE, new ChangeLanguageService());
 
     }

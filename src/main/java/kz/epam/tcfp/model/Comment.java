@@ -1,12 +1,6 @@
 package kz.epam.tcfp.model;
 
 
-
-
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
@@ -19,7 +13,7 @@ public class Comment {
     private String authorFirstName;
     private String authorLastName;
     private String content;
-    private PrettyDateTime postedDate;
+    private DateTimeInUTC postedDate;
 
 
     public Comment() {
@@ -65,11 +59,11 @@ public class Comment {
         this.content = content;
     }
 
-    public PrettyDateTime getPostedDate() {
+    public DateTimeInUTC getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(PrettyDateTime postedDate) {
+    public void setPostedDate(DateTimeInUTC postedDate) {
         this.postedDate = postedDate;
     }
 

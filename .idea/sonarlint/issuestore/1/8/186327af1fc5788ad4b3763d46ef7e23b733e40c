@@ -1,9 +1,9 @@
 
 L
-java:S1948"*Make "location" transient or serializable.(¹¿É‚ÿÿÿÿÿ8œ§ê.
->
-java:S1948"(Make "photos" transient or serializable.(ªå¬Ÿ
+java:S1948"*Make "category" transient or serializable.(şÖİÑüÿÿÿÿ8ìĞÜğí.
 L
-java:S1948"*Make "category" transient or serializable.(şÖİÑüÿÿÿÿ8Á“›§ê.
-H
-java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8…ş¡îí.
+java:S1948"*Make "location" transient or serializable.(¹¿É‚ÿÿÿÿÿ8œ§ê.
+E
+java:S1948"(Make "photos" transient or serializable.(ªå¬Ÿ8ìĞÜğí.
+N
+java:S1948",Make "postedDate" transient or serializable.(Ñ’èÓüÿÿÿÿ8‚‰´òí.

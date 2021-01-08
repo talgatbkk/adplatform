@@ -163,6 +163,16 @@
     </servlet>
 
     <servlet-mapping>
+        <servlet-name>UserUnban</servlet-name>
+        <url-pattern>/user/unban</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserUnban</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
         <servlet-name>ViewProfile</servlet-name>
         <url-pattern>/user/view</url-pattern>
     </servlet-mapping>

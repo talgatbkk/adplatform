@@ -1,5 +1,7 @@
 package kz.epam.tcfp.dao.connection;
 
+import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -11,7 +13,7 @@ import java.util.concurrent.BlockingQueue;
  */
 public class ConnectionPool {
 
-//    private static final Logger logger = Logger.getLogger(ConnectionPool.class);
+    private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
 
     private static final String DB_PROPERTIES_FILE = "db";
     private static final String DB_DRIVER = "db.driver";
@@ -34,9 +36,7 @@ public class ConnectionPool {
                 }
             }
         } catch (ConnectionPoolException ex){
-//            logger.warn("Error while getting connection", ex);
-            System.out.println("Error");
-
+            LOGGER.warn("Error while getting connection", ex);
         }
     }
 

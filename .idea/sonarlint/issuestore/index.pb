@@ -125,5 +125,5 @@ Osrc/main/java/kz/epam/tcfp/service/implementation/PostAdvertisementService.java
 Qsrc/main/java/kz/epam/tcfp/service/implementation/SearchAdvertisementService.java,e/4/e49847b312e45a73a56db44f181a77ce64594ca8
 _
 /src/test/java/kz/epam/tcfp/dao/UserDAOTest.java,c/4/c4434797a16c2503b2f49297a67fb6e7d69aac96
-d
-4src/main/java/kz/epam/tcfp/model/PrettyDateTime.java,c/c/cc49c86f981003c535f08efc5737bc0120015849
+c
+3src/main/java/kz/epam/tcfp/model/DateTimeInUTC.java,6/7/67c14b576a38509c3448a74bd3aa2853eda2661d

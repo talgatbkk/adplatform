@@ -3,7 +3,6 @@ package kz.epam.tcfp.model;
 
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 
@@ -21,7 +20,7 @@ public class Advertisement implements Serializable {
     private String description;
     private Location location;
     private Integer price;
-    private PrettyDateTime postedDate;
+    private DateTimeInUTC postedDate;
     private Category category;
     private List<Photo> photos;
 
@@ -85,11 +84,11 @@ public class Advertisement implements Serializable {
         this.photos = photos;
     }
 
-    public PrettyDateTime getPostedDate() {
+    public DateTimeInUTC getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(PrettyDateTime postedDate) {
+    public void setPostedDate(DateTimeInUTC postedDate) {
         this.postedDate = postedDate;
     }
 
