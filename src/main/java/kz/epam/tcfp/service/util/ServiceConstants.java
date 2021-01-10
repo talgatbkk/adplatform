@@ -57,5 +57,7 @@ public class ServiceConstants {
     public static final String PREVIOUS_SEARCH_INPUT = "prev_search_input";
     public static final String PREVIOUS_PAGE = "prev_page";
 
+    public static final String PARENT_LOCATION_ID = "parent_id";
+    public static final String NEW_LOCATION_NAME = "new_location";
     public static final Long ADMIN_ROLE_ID = 1L;
 }

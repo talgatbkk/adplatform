@@ -6,6 +6,7 @@ package kz.epam.tcfp.model;
  */
 public class Location {
     private Long id;
+    private Long languageId;
     private String name;
     private Long parentId;
     private String parentName;
@@ -47,6 +48,14 @@ public class Location {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public Long getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(Long languageId) {
+        this.languageId = languageId;
     }
 
     @Override

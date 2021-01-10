@@ -34,5 +34,6 @@ public interface AdvertisementDAO {
     List<Advertisement> searchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId) throws DAOException;
     List<Advertisement> searchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId) throws DAOException;
     List<Advertisement> searchAdvertisementsByDescription(String descriptionInput) throws DAOException;
+    boolean postLocation(Location location) throws DAOException;
 
 }

@@ -33,6 +33,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">Post an advertisement</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/location/add">Add location</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <div>

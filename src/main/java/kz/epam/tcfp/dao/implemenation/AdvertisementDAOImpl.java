@@ -467,6 +467,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         return categories;
     }
 
+
     @Override
     public Long getLanguageIdByName(String languageName) throws DAOException {
         Connection connection = null;
@@ -545,6 +546,34 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         }
         return locations;
     }
+
+    @Override
+    public boolean postLocation(Location location) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer rows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.POST_LOCATION);
+            preparedStatement.setString(1, null);
+            preparedStatement.setLong(2, location.getParentId());
+            preparedStatement.setLong(3, location.getLanguageId());
+            preparedStatement.setString(4, location.getName());
+            rows = preparedStatement.executeUpdate();
+            if (rows == 1){
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
 
     private Location buildLocation(ResultSet resultSet) throws SQLException {
         Location location = new Location();

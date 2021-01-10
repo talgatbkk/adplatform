@@ -241,6 +241,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AddLocation</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddLocation</servlet-name>
+        <url-pattern>/location/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostLocation</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostLocation</servlet-name>
+        <url-pattern>/location/post</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
         <servlet-name>ChangeLanguage</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>

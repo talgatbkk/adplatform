@@ -72,6 +72,7 @@ public class DBConstants {
     public static final String UPDATE_USER_LAST_NAME = "UPDATE user SET last_name = ? WHERE user_id = ?";
     public static final String UPDATE_USER_EMAIL = "UPDATE user SET email = ? WHERE user_id = ?";
     public static final String UPDATE_USER_PASSWORD = "UPDATE user SET password = ? WHERE user_id = ?";
+    public static final String POST_LOCATION = "INSERT INTO location VALUES (?, ?, ?, ?)";
 
 
 }

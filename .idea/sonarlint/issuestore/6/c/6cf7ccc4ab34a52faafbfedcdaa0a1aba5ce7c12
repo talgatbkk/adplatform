@@ -1,5 +1,5 @@
 
-O
-java:S4973="9Use the "equals" method if value comparison was intended.(£‡Åπ
 a
 java:S2259="KA "NullPointerException" could be thrown; "advertisement" is nullable here.(£‡Åπ
+O
+java:S4973="9Use the "equals" method if value comparison was intended.(£‡Åπ

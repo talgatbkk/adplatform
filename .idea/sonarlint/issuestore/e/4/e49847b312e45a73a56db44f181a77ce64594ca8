@@ -1,6 +1,5 @@
 
-[
-java:S4973,"9Use the "equals" method if value comparison was intended.(‰”Õÿùÿÿÿÿ8Þ¨ËÆí.
 o
-java:S3776!"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ÈÉÝ†8Þ¨ËÆí.
-X	java:S125T"<This block of commented-out lines of code should be removed.(òÝ8™õÍçí.
+java:S3776""RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(ÈÉÝ†8€ì£”î.
+[
+java:S4973-"9Use the "equals" method if value comparison was intended.(‰”Õÿùÿÿÿÿ8€ì£”î.
