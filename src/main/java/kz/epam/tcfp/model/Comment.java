@@ -7,8 +7,8 @@ package kz.epam.tcfp.model;
  */
 public class Comment {
 
-    private Integer authorId;
-    private Integer adId;
+    private Long authorId;
+    private Long adId;
     private String authorLogin;
     private String authorFirstName;
     private String authorLastName;
@@ -19,11 +19,11 @@ public class Comment {
     public Comment() {
     }
 
-    public Integer getAuthorId() {
+    public Long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Integer authorId) {
+    public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
 
@@ -68,11 +68,11 @@ public class Comment {
     }
 
 
-    public Integer getAdId() {
+    public Long getAdId() {
         return adId;
     }
 
-    public void setAdId(Integer adId) {
+    public void setAdId(Long adId) {
         this.adId = adId;
     }
 

@@ -26,12 +26,12 @@ public class DeleteUserAccountService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
 
-        Integer userIdToDeleted = null;
+        Long userIdToDeleted = null;
         String userIdInputToDeleted = request.getParameter(ServiceConstants.USER_ID_TO_BE_DELETED);
         if (userIdInputToDeleted != null && !userIdInputToDeleted.isEmpty()){
-            userIdToDeleted = Integer.parseInt(userIdInputToDeleted);
+            userIdToDeleted = Long.parseLong(userIdInputToDeleted);
         }
         UserDAO userDAO = DAOFactory.getUserDAO();
 

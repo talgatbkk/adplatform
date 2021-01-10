@@ -8,23 +8,23 @@ public class Category {
     private static final long serialVersionUID = 1234L;
 
 
-    private Integer categoryId;
+    private Long categoryId;
     private String categoryName;
 
     public Category() {
     }
 
-    public Category(Integer categoryId) {
+    public Category(Long categoryId) {
         this.categoryId = categoryId;
 
     }
 
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

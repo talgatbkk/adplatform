@@ -37,9 +37,9 @@ public class InputAdvertisementService extends PreviousPage implements Service {
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
 
-        Integer userId = null;
+        Long userId = null;
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+            userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         } else {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
@@ -50,7 +50,7 @@ public class InputAdvertisementService extends PreviousPage implements Service {
         List<Location> locations = new ArrayList<>();
         try {
             if (userDAO.isUserBanned(userId)) {
-                Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
+                Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
                 categories = advertisementDAO.getCategories(languageId);
                 locations = advertisementDAO.getLocations(languageId);
             } else {

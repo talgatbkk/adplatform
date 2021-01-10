@@ -14,8 +14,8 @@ public class Advertisement implements Serializable {
     private static final long serialVersionUID = 1234L;
 
 
-    private Integer userId;
-    private Integer adId;
+    private Long userId;
+    private Long adId;
     private String title;
     private String description;
     private Location location;
@@ -27,7 +27,7 @@ public class Advertisement implements Serializable {
     public Advertisement() {
     }
 
-    public Advertisement(Integer adId, String title, String description, Integer locationId, Integer categoryId, List<Photo> photos) {
+    public Advertisement(Long adId, String title, String description, Long locationId, Long categoryId, List<Photo> photos) {
         this.adId = adId;
         this.title = title;
         this.description = description;
@@ -36,11 +36,11 @@ public class Advertisement implements Serializable {
         this.photos = photos;
     }
 
-    public Integer getAdId() {
+    public Long getAdId() {
         return adId;
     }
 
-    public void setAdId(Integer adId) {
+    public void setAdId(Long adId) {
         this.adId = adId;
     }
 
@@ -100,11 +100,11 @@ public class Advertisement implements Serializable {
         this.price = price;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

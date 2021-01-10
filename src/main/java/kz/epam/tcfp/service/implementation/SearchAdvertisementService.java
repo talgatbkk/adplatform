@@ -27,7 +27,8 @@ import java.util.List;
  */
 public class SearchAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(SearchAdvertisementService.class);
-    private static final Integer LOCATION_ID_DEFAULT = 1;
+    private static final Long LOCATION_ID_DEFAULT = 1L;
+    private static final String EMPTY_STRING = "";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,9 +39,9 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         String locationInput = request.getParameter(ServiceConstants.LOCATION_PICK);
-        Integer locationId = null;
+        Long locationId = null;
         if (locationInput != null && !locationInput.isEmpty()){
-            locationId = Integer.parseInt(locationInput);
+            locationId = Long.parseLong(locationInput);
             if (locationId == LOCATION_ID_DEFAULT) {
                 locationId = null;
                 request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);
@@ -48,23 +49,29 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
                 request.setAttribute(ServiceConstants.LOCATION_SELECTED, locationId);
             }
         }
-        Integer searchUserId = null;
+        Long searchUserId = null;
         if (request.getParameter(ServiceConstants.USER_ID_TO_SEARCH) != null){
-            searchUserId = Integer.parseInt(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
+            searchUserId = Long.parseLong(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
         }
-        Integer categoryId = null;
+        Long categoryId = null;
         String categoryInput = request.getParameter(ServiceConstants.CATEGORY_PICK);
         if (categoryInput != null && !categoryInput.isEmpty()){
-            categoryId = Integer.parseInt(categoryInput);
+            categoryId = Long.parseLong(categoryInput);
         }
         String searchInput = request.getParameter(ServiceConstants.SEARCH_INPUT);
+        if (searchInput != null && !searchInput.isEmpty()) {
+            request.setAttribute(ServiceConstants.PREVIOUS_SEARCH_INPUT, searchInput);
+        } else {
+            request.setAttribute(ServiceConstants.PREVIOUS_SEARCH_INPUT, EMPTY_STRING);
+        }
+
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         List<Advertisement> advertisements = null;
 
         try {
-            Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
+            Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);
             if (searchInput == null || searchInput.isEmpty()) {
@@ -81,10 +88,15 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
                 }
             } else {
                 if (categoryId != null && locationId != null) {
-//                    advertisementDAO.searchAdvertisementsByDescriptionAndCategoryAndLocation();
+                    advertisements = advertisementDAO.searchAdvertisementsByDescriptionAndCategoryAndLocation(searchInput, categoryId, locationId);
+                } else if (categoryId != null) {
+                    advertisements = advertisementDAO.searchAdvertisementsByDescriptionAndCategory(searchInput, categoryId);
+                } else if (locationId != null) {
+                    advertisements = advertisementDAO.searchAdvertisementsByDescriptionAndLocation(searchInput, locationId);
+                } else {
+                    advertisements = advertisementDAO.searchAdvertisementsByDescription(searchInput);
                 }
             }
-
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting advertisement search results", e);
         }

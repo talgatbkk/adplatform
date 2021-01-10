@@ -19,7 +19,7 @@ public class AdvertisementDAOTest {
 
     @Test
     public void getAdByCustomerIdTest() throws DAOException {
-        Integer customerId = 1;
+        Long customerId = 1L;
         List<Advertisement> allAdvertisements = advertisementDAO.getAdvertisementByUserId(customerId);
         System.out.println(allAdvertisements.toString());
 
@@ -28,7 +28,7 @@ public class AdvertisementDAOTest {
 
     @Test
     public void getAdByIdTest() throws DAOException {
-        Integer adId = 1;
+        Long adId = 1L;
         Advertisement advertisement = advertisementDAO.getAdvertisementById(adId);
         System.out.println(advertisement.toString());
 
@@ -36,7 +36,7 @@ public class AdvertisementDAOTest {
 
     @Test
     public void getLocationNamesByIdTest() throws DAOException {
-        Integer locationId = 2;
+        Long locationId = 2L;
         Location location = advertisementDAO.getLocationNamesById(locationId, ServiceConstants.RUSSIAN_LANGUAGE);
         System.out.println(location.toString());
 

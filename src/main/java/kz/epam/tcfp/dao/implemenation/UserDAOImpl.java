@@ -55,14 +55,39 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Boolean isUserBanned(Integer userId) throws DAOException {
+    public Boolean authenticateUserById(SignUpInput input) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.AUTHENTICATE_USER_BY_ID);
+            preparedStatement.setLong(1, input.getUserId());
+            preparedStatement.setString(2, input.getPassword());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean isUserBanned(Long userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setLong(1, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next() && !resultSet.getBoolean(DBConstants.USER_IS_BANNED)) {
                 return true;
@@ -188,7 +213,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public User getUserById(Integer userId) throws DAOException {
+    public User getUserById(Long userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -196,7 +221,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setLong(1, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = buildUser(resultSet);
@@ -214,19 +239,19 @@ public class UserDAOImpl implements UserDAO {
 
     private User buildUser(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setUserId(resultSet.getInt(DBConstants.USER_ID));
+        user.setUserId(resultSet.getLong(DBConstants.USER_ID));
         user.setLogin(resultSet.getString(DBConstants.USER_LOGIN));
         user.setFirstName(resultSet.getString(DBConstants.USER_FIRST_NAME));
         user.setLastName(resultSet.getString(DBConstants.USER_LAST_NAME));
         user.setCreatedTime(resultSet.getDate(DBConstants.USER_REGISTRATION_DATE));
         user.setEmail(resultSet.getString(DBConstants.USER_EMAIL));
         user.setBanned(resultSet.getBoolean(DBConstants.USER_IS_BANNED));
-        user.setRoleId(resultSet.getInt(DBConstants.USER_ROLE_ID));
+        user.setRoleId(resultSet.getLong(DBConstants.USER_ROLE_ID));
         return user;
     }
 
     @Override
-    public List<PhoneNumber> getPhoneNumberByUserId(Integer userId) throws DAOException {
+    public List<PhoneNumber> getPhoneNumberByUserId(Long userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -234,11 +259,11 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_PHONE_NUMBER_BY_USER_ID);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setLong(1, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String userPhoneNumber = resultSet.getString(DBConstants.USER_PHONE_NUMBER);
-                Integer userPhoneNumberId = resultSet.getInt(DBConstants.USER_PHONE_NUMBER_ID);
+                Long userPhoneNumberId = resultSet.getLong(DBConstants.USER_PHONE_NUMBER_ID);
                 phoneNumbers.add(new PhoneNumber(userPhoneNumberId, userPhoneNumber));
             }
         } catch (SQLException ex) {
@@ -278,14 +303,14 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Boolean deleteUserAccount(Integer userId) throws DAOException {
+    public Boolean deleteUserAccount(Long userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         Integer affectedRows = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.DELETE_USER_ACCOUNT);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setLong(1, userId);
             affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 1) {
                 return true;
@@ -302,14 +327,14 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Boolean banUserAccount(Integer userId) throws DAOException {
+    public Boolean banUserAccount(Long userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         Integer affectedRows = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.BAN_USER_ACCOUNT);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setLong(1, userId);
             affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 1) {
                 return true;
@@ -326,14 +351,114 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Boolean unbanUserAccount(Integer userId) throws DAOException {
+    public Boolean unbanUserAccount(Long userId) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         Integer affectedRows = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.UNBAN_USER_ACCOUNT);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setLong(1, userId);
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean updateUserFirstName(SignUpInput editedUser) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_FIRST_NAME);
+            preparedStatement.setString(1, editedUser.getFirstName());
+            preparedStatement.setLong(2, editedUser.getUserId());
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean updateUserLastName(SignUpInput editedUser) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_LAST_NAME);
+            preparedStatement.setString(1, editedUser.getLastName());
+            preparedStatement.setLong(2, editedUser.getUserId());
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean updateUserEmail(SignUpInput editedUser) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_EMAIL);
+            preparedStatement.setString(1, editedUser.getEmail());
+            preparedStatement.setLong(2, editedUser.getUserId());
+            affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean updateUserPassword(SignUpInput userWithNewPassword) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Integer affectedRows = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_PASSWORD);
+            preparedStatement.setString(1, userWithNewPassword.getPassword());
+            preparedStatement.setLong(2, userWithNewPassword.getUserId());
             affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 1) {
                 return true;

@@ -30,7 +30,7 @@ public class EditProfileService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
@@ -48,7 +48,6 @@ public class EditProfileService extends PreviousPage implements Service {
 
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
-        session = request.getSession(true);
         request.getRequestDispatcher(PROFILE).forward(request, response);
     }
 }

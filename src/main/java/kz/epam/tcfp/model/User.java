@@ -12,7 +12,7 @@ import java.util.List;
 public class User implements Serializable {
     private static final long serialVersionUID = 1234L;
 
-    private Integer userId;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String login;
@@ -20,18 +20,18 @@ public class User implements Serializable {
     private Date createdTime;
     private String password;
     private boolean isBanned;
-    private Integer roleId;
+    private Long roleId;
     private List<PhoneNumber> phoneNumbers;
     private Integer activeAds;
 
     public User() {
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -91,11 +91,11 @@ public class User implements Serializable {
         isBanned = banned;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 

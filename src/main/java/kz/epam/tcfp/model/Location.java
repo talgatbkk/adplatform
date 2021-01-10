@@ -5,23 +5,23 @@ package kz.epam.tcfp.model;
  * @project AdPlatform
  */
 public class Location {
-    private Integer id;
+    private Long id;
     private String name;
-    private Integer parentId;
+    private Long parentId;
     private String parentName;
 
     public Location() {
     }
 
-    public Location(Integer id) {
+    public Location(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,11 +41,11 @@ public class Location {
         this.parentName = parentName;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

@@ -9,6 +9,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}" />
 <fmt:setBundle basename="language" var="thisLocal" />
 
@@ -27,14 +28,13 @@
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
 <c:if test="${sessionScope.userId != null}">
-    <c:redirect url="home"> </c:redirect>
+    <c:redirect url="${pageContext.request.contextPath}/home"> </c:redirect>
 </c:if>
 
 <h1>${titleLocal}</h1>
-<form action="/user/post" method="post">
+<form action="${pageContext.request.contextPath}/user/post" method="post" onsubmit="return passwordMatchCheck()">
     <div class="row justify-content-center">
         <div class="col-auto">
-<%--    <input type="hidden" name="page" value="sign_up">--%>
     <table style="with: 50%">
         <tr>
             <td>${firstNameLocal}</td>
@@ -53,10 +53,7 @@
             </c:if>
             </td>
         </tr>
-        <tr>
-            <td>${passwordLocal}</td>
-            <td><input type="password" name="password" minlength="8" required/></td>
-        </tr>
+
         <tr>
             <td>${emailLocal}</td>
             <td><input type="email" name="email" required/></td>
@@ -74,10 +71,32 @@
                 <small class="text-danger">Phone number is already registred</small>
             </c:if>
             </td>
-        </tr></table>
+        </tr>
+        <tr>
+            <td>${passwordLocal}</td>
+            <td><input type="password" id="pass1" name="password" minlength="8" required/></td>
+        </tr>
+        <tr>
+            <td>Confirm password</td>
+            <td><input type="password" id="pass2" name="confirm_password" minlength="8" required/></td>
+        </tr>
+    </table>
     <input type="submit" value="Submit" />
         </div>
     </div>
 </form>
+
+<script type="text/javascript">
+    function passwordMatchCheck()
+        {
+        let isMatching = (document.getElementById('pass1').value != document.getElementById('pass2').value);
+        if (isMatching) {
+            alert("Please enter matching passwords");
+            return false;
+        } else
+            return true;
+        };
+</script>
+
 </body>
 </html>

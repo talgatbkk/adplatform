@@ -27,10 +27,9 @@
     </c:if>
 
 <div class="container ">
-<form class="form-horizontal" action="/login" method="post">
+<form class="form-horizontal" action="${pageContext.request.contextPath}/login" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-<%--    <input type="hidden" name="page" value="sign_in">--%>
     <table class="table-responsive" style="with: 50%">
         <div class="form-group">
         <tr>
@@ -45,6 +44,7 @@
         </tr>
         </div>
     </table>
+
     <div>
         <p class="error-input text-danger" id="loginError">
             <c:if test="${incorrect_auth == true}">
@@ -53,6 +53,8 @@
         </p>
     </div>
     <input type="submit" value="${signInLocal}" />
+    </div>
+    </div>
 </form>
 </div>
 </div>

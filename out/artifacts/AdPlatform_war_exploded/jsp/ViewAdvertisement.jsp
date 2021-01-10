@@ -15,7 +15,7 @@
 
 <html>
 <head>
-    <script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 
     <c:if test="${sessionScope.local == 'en'}">
         <script src="../js/jquery.timeago.js" type="text/javascript"></script>
@@ -46,11 +46,11 @@
         <div class="col-3 order-2" id="sticky-sidebar">
             <div class="sticky-top">
                 <div class="nav flex-column">
-                    <a href="/advertisement/search?search_user_id=${requestScope.advertisement.userId}">
+                    <a href="${pageContext.request.contextPath}/advertisement/search?search_user_id=${requestScope.advertisement.userId}">
                         <p>All advertisements from this user</p>
                     </a>
 
-                    <a href="/user/view?profile_id=${requestScope.advertisement.userId}">
+                    <a href="${pageContext.request.contextPath}/user/view?profile_id=${requestScope.advertisement.userId}">
                         <p>Go to user's profile</p>
                     </a>
                 </div>
@@ -75,7 +75,7 @@
     </div>
         <div class="ui-button">
         <c:if test="${requestScope.belongsToCurrentUser == true || sessionScope.role_id == 1}">
-        <form action="/advertisement/delete" method="post">
+        <form action="${pageContext.request.contextPath}/advertisement/delete" method="post">
             <input type="hidden" name="ad_id" value=${advertisement.adId}>
             <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="Delete">
         </form>
@@ -91,7 +91,7 @@
         <div class="be-comment">
             <div class="be-comment-content">
 				<span class="be-comment-name">
-					<a href="/user/view?profile_id=${comment.authorId}">${comment.authorFirstName} ${comment.authorLastName}</a>
+					<a href="${pageContext.request.contextPath}/user/view?profile_id=${comment.authorId}">${comment.authorFirstName} ${comment.authorLastName}</a>
 					</span>
                 <span>
                     <time class="timeago" datetime="${comment.postedDate.time}">
@@ -113,7 +113,7 @@
     </c:when>
     </c:choose>
     <c:if test="${sessionScope.userId != null}">
-    <form action="/advertisement/view/comment/post" class="form-control-plaintext" method="post">
+    <form action="${pageContext.request.contextPath}/advertisement/view/comment/post" class="form-control-plaintext" method="post">
         <input type="hidden" name="ad_id" value="${requestScope.advertisement.adId}">
         <div class="row">
             <div>

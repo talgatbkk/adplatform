@@ -39,7 +39,7 @@ public class SignUpService extends PreviousPage implements Service {
         UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
-            boolean isEmailTaken =  userDAO.isEmailTaken(signUpInput);
+            boolean isEmailTaken = userDAO.isEmailTaken(signUpInput);
             boolean isLoginTaken = userDAO.isLoginTaken(signUpInput);
             boolean isPhoneNumberTaken = userDAO.isPhoneNumberTaken(signUpInput);
             if (isEmailTaken || isLoginTaken || isPhoneNumberTaken){

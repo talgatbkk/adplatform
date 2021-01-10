@@ -29,7 +29,7 @@ import java.util.List;
 public class FindAdsService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(FindAdsService.class);
     private static final Integer LOCATION_ID_DEFAULT = 1;
-    private static final Integer CATEGORY_ID_ALL = 1;
+    private static final Long CATEGORY_ID_ALL = 1L;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,14 +39,14 @@ public class FindAdsService extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         List<Advertisement> advertisements = new ArrayList<>();
 
         try {
-            Integer languageId = advertisementDAO.getLanguageIdByName(localLanguage);
+            Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             advertisements = advertisementDAO.getAllAdvertisements();
             categories = advertisementDAO.getCategories(languageId);
             locations = advertisementDAO.getLocations(languageId);

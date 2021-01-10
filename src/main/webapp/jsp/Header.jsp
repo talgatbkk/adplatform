@@ -13,13 +13,13 @@
 
 <html>
 <head>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/home">MyAds.kz</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/home">MyAds.kz</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,11 +27,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/user/view">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/user/view">Profile <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="/advertisement/add">Post an advertisement</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">Post an advertisement</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -39,12 +39,12 @@
             <c:choose>
                 <c:when test="${sessionScope.local == 'ru'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/language?pick=en">En</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">En</a>
                     </li>
                 </c:when>
                 <c:when test="${sessionScope.local == 'en'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/language?pick=ru">Ru</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Ru</a>
                     </li>
                 </c:when>
             </c:choose>
@@ -52,15 +52,15 @@
                 <c:choose>
                 <c:when test="${sessionScope.userId == null}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/signin">Log in</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/signin">Log in</a>
                 </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/signup">Sign Up</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/user/logout">Log out</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/user/logout">Log out</a>
                     </li>
                 </c:otherwise>
                 </c:choose>

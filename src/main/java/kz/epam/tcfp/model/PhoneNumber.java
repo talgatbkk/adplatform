@@ -7,7 +7,7 @@ package kz.epam.tcfp.model;
 public class PhoneNumber {
     private static final long serialVersionUID = 1234L;
 
-    private Integer phoneNumberId;
+    private Long phoneNumberId;
     private String phoneNumber;
 
     public PhoneNumber() {
@@ -17,7 +17,7 @@ public class PhoneNumber {
         this.phoneNumber = phoneNumber;
     }
 
-    public PhoneNumber(Integer phoneNumberId, String phoneNumber) {
+    public PhoneNumber(Long phoneNumberId, String phoneNumber) {
         this.phoneNumberId = phoneNumberId;
         this.phoneNumber = phoneNumber;
     }

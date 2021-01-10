@@ -36,10 +36,10 @@ public class OpenProfileService extends PreviousPage implements Service {
             response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Integer profileId = null;
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long profileId = null;
         if (request.getParameter(ServiceConstants.USER_PROFILE_ID) != null) {
-            profileId = Integer.parseInt(request.getParameter(ServiceConstants.USER_PROFILE_ID));
+            profileId = Long.parseLong(request.getParameter(ServiceConstants.USER_PROFILE_ID));
         } else {
             profileId = userId;
         }

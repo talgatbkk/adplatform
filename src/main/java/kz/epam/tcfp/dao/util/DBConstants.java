@@ -45,6 +45,7 @@ public class DBConstants {
     public static final String GET_USER_ID_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
     public static final String GET_PHONE_NUMBER_BY_USER_ID = "SELECT * FROM user_phone WHERE user_id = ?";
     public static final String AUTHENTICATE_USER = "SELECT * FROM user WHERE login = ? AND password = ?";
+    public static final String AUTHENTICATE_USER_BY_ID = "SELECT * FROM user WHERE user_id = ? AND password = ?";
     public static final String INSERT_NEW_USER = "{call add_new_user(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     public static final String CHECK_IF_LOGIN_TAKEN = "SELECT login FROM user WHERE login = ?";
     public static final String CHECK_IF_EMAIL_TAKEN = "SELECT email FROM user WHERE email = ?";
@@ -67,5 +68,10 @@ public class DBConstants {
     public static final String DELETE_USER_ACCOUNT = "DELETE FROM user WHERE user_id = ?";
     public static final String BAN_USER_ACCOUNT = "UPDATE user SET ban = TRUE WHERE user_id = ?";
     public static final String UNBAN_USER_ACCOUNT = "UPDATE user SET ban = FALSE WHERE user_id = ?";
+    public static final String UPDATE_USER_FIRST_NAME = "UPDATE user SET first_name = ? WHERE user_id = ?";
+    public static final String UPDATE_USER_LAST_NAME = "UPDATE user SET last_name = ? WHERE user_id = ?";
+    public static final String UPDATE_USER_EMAIL = "UPDATE user SET email = ? WHERE user_id = ?";
+    public static final String UPDATE_USER_PASSWORD = "UPDATE user SET password = ? WHERE user_id = ?";
+
 
 }

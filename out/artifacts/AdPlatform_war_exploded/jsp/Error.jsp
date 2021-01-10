@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
 
-<h3>Error occured.</h3>
+<h3 class="text-center">Error occured.</h3>
 
 </body>
 </html>

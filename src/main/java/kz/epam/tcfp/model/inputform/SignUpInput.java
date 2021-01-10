@@ -10,6 +10,7 @@ import java.sql.Timestamp;
  */
 public class SignUpInput {
 
+    private Long userId;
     private String firstName;
     private String lastName;
     private String login;
@@ -72,5 +73,14 @@ public class SignUpInput {
 
     public Timestamp getCreatedTime() {
         return createdTime;
+    }
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

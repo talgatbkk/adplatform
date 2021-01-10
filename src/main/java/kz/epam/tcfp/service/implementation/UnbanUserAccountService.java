@@ -22,19 +22,19 @@ import java.io.IOException;
 public class UnbanUserAccountService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(BanUserAccountService.class);
     public static final String USER_VIEW_PROFILE_SERVICE = "/user/view";
-    private static final Integer ADMIN_ROLE_ID = 1;
+    private static final Long ADMIN_ROLE_ID = 1L;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Integer userRoleId = (Integer) session.getAttribute(ServiceConstants.USER_ROLE_ID);
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long userRoleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
 
-        Integer userIdToBan = null;
+        Long userIdToBan = null;
         String userIdInputToBan = request.getParameter(ServiceConstants.USER_ID_TO_BE_UNBANNED);
         if (userIdInputToBan != null && !userIdInputToBan.isEmpty()) {
-            userIdToBan = Integer.parseInt(userIdInputToBan);
+            userIdToBan = Long.parseLong(userIdInputToBan);
         }
         UserDAO userDAO = DAOFactory.getUserDAO();
 

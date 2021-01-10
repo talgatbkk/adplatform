@@ -17,13 +17,12 @@
 </div>
 <div>
     <c:if test="${sessionScope.userId == null}">
-        <c:redirect url="signin"> </c:redirect>
+        <c:redirect url="${pageContext.request.contextPath}/signin"> </c:redirect>
     </c:if>
 <jsp:include page="/jsp/Header.jsp"/>
-<form action="/advertisement/post" method="post">
+<form action="${pageContext.request.contextPath}/advertisement/post" method="post">
     <div class="row justify-content-center">
         <div class="col-auto">
-<%--    <input type="hidden" name="page" value="post_ad">--%>
     <table style="with: 50%">
         <tr>
             <td>Title</td>
@@ -62,6 +61,8 @@
         </tr>
         </table>
     <input type="submit" value="Submit" />
+        </div>
+    </div>
 </form>
 </div>
 </div>

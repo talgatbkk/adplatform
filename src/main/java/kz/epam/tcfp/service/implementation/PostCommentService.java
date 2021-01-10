@@ -27,8 +27,8 @@ public class PostCommentService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Integer adId = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
         Comment comment = new Comment();

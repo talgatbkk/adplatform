@@ -15,21 +15,24 @@ import java.util.List;
 public interface AdvertisementDAO {
 
 
-    List<Advertisement> getAdvertisementByUserId(Integer userId) throws DAOException;
-    Advertisement getAdvertisementById(Integer adId) throws DAOException;
-    Integer getAdvertisementCountById(Integer userId) throws DAOException;
-    Location getLocationNamesById(Integer locationId, String languageId) throws DAOException;
-    List<Comment> getCommentsAByAdvertisementId(Integer userId) throws DAOException;
+    List<Advertisement> getAdvertisementByUserId(Long userId) throws DAOException;
+    Advertisement getAdvertisementById(Long adId) throws DAOException;
+    Integer getAdvertisementCountById(Long userId) throws DAOException;
+    Location getLocationNamesById(Long locationId, String languageId) throws DAOException;
+    List<Comment> getCommentsAByAdvertisementId(Long userId) throws DAOException;
     boolean postComment(Comment comment) throws DAOException;
     boolean postAdvertisement(Advertisement advertisement) throws DAOException;
-    List<Category> getCategories(Integer languageId) throws DAOException;
-    List<Location> getLocations(Integer languageId) throws DAOException;
-    Integer getLanguageIdByName(String languageName) throws DAOException;
+    List<Category> getCategories(Long languageId) throws DAOException;
+    List<Location> getLocations(Long languageId) throws DAOException;
+    Long getLanguageIdByName(String languageName) throws DAOException;
     List<Advertisement> getAllAdvertisements() throws DAOException;
-    List<Advertisement> searchAdvertisementsByCategory(Integer categoryId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByCategoryAndLocation(Integer categoryId, Integer locationId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByLocation(Integer locationId) throws DAOException;
-    boolean deleteAdvertisementByUserIdAndAdId(Integer adId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Integer categoryId, Integer locationId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByCategory(Long categoryId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByLocation(Long locationId) throws DAOException;
+    boolean deleteAdvertisementByUserIdAndAdId(Long adId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescription(String descriptionInput) throws DAOException;
 
 }

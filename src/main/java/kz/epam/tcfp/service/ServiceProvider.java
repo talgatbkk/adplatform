@@ -16,6 +16,10 @@ public class ServiceProvider {
     public static final String ADVERTISEMENT_SIGN_IN = "/advertisement/signin";
     public static final String REGISTER_USER = "/user/post";
     public static final String USER_VIEW_PROFILE = "/user/view";
+    public static final String USER_VIEW_PROFILE_OPEN_EDITING = "/user/open_editing";
+    public static final String USER_VIEW_PROFILE_POST_EDIT = "/user/post_edit";
+    public static final String USER_INPUT_NEW_PASSWORD = "/user/password";
+    public static final String USER_POST_NEW_PASSWORD = "/user/password/post";
     public static final String ADVERTISEMENT_VIEW = "/advertisement/view";
     public static final String COMMENT_POST = "/advertisement/view/comment/post";
     public static final String ADVERTISEMENT_POST = "/advertisement/post";
@@ -28,6 +32,8 @@ public class ServiceProvider {
     public static final String USER_UNBAN = "/user/unban";
     public static final String LANGUAGE = "/language";
 
+
+
     private final Map<String, Service> services;
 
 
@@ -38,6 +44,8 @@ public class ServiceProvider {
         services.put(ADVERTISEMENT_SIGN_IN, new SignInService());
         services.put(REGISTER_USER, new SignUpService());
         services.put(USER_VIEW_PROFILE, new OpenProfileService());
+        services.put(USER_VIEW_PROFILE_OPEN_EDITING, new OpenEditProfileService());
+        services.put(USER_VIEW_PROFILE_POST_EDIT, new PostEditProfileService());
         services.put(ADVERTISEMENT_VIEW, new ViewAdvertisementService());
         services.put(COMMENT_POST, new PostCommentService());
         services.put(ADVERTISEMENT_POST, new PostAdvertisementService());
@@ -49,6 +57,8 @@ public class ServiceProvider {
         services.put(USER_BAN, new BanUserAccountService());
         services.put(USER_UNBAN, new UnbanUserAccountService());
         services.put(LANGUAGE, new ChangeLanguageService());
+        services.put(USER_INPUT_NEW_PASSWORD, new InputNewPasswordService());
+        services.put(USER_POST_NEW_PASSWORD, new PostChangedPasswordService());
 
     }
 

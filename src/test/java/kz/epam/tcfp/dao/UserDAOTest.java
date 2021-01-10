@@ -26,7 +26,7 @@ public class UserDAOTest {
 
     @Test
     public void getCustomerByIdTest() throws DAOException {
-        Integer customerId = 1;
+        Long customerId = 1L;
         User user = USER_DAO.getUserById(customerId);
         System.out.println(user.toString());
 
@@ -36,7 +36,7 @@ public class UserDAOTest {
 
     @Test
     public void getPhoneNumberByCustomerIdTest() throws DAOException {
-        Integer customerId = 1;
+        Long customerId = 1L;
         List<PhoneNumber> phoneNumbers = USER_DAO.getPhoneNumberByUserId(customerId);
         System.out.println(phoneNumbers.toString());
 

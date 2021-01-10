@@ -23,32 +23,33 @@ import java.io.IOException;
 public class DeleteAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(DeleteAdvertisementService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
+    private static final Long ADMIN_ROLE_ID = 1L;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Integer userId = null;
+        Long userId = null;
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null){
-            userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+            userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         } else {
             response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
 
-        Integer roleId = null;
+        Long roleId = null;
         if (session.getAttribute(ServiceConstants.USER_ROLE_ID) != null){
-            roleId = (Integer) session.getAttribute(ServiceConstants.USER_ROLE_ID);
+            roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
         }
 
 
-        Integer adId = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+        Long adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         Advertisement advertisement = null;
 
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);
-            if (advertisement.getUserId() == userId || roleId == 1) {
+            if (advertisement.getUserId() == userId || roleId == ADMIN_ROLE_ID) {
                 advertisementDAO.deleteAdvertisementByUserIdAndAdId(adId);
             } else {
                 LOGGER.warn("Failed to delete advertisement");

@@ -15,17 +15,22 @@ import java.util.List;
 public interface UserDAO {
 
 
-    User getUserById(Integer userId) throws DAOException;
-    List<PhoneNumber> getPhoneNumberByUserId(Integer customerId) throws DAOException;
+    User getUserById(Long userId) throws DAOException;
+    List<PhoneNumber> getPhoneNumberByUserId(Long customerId) throws DAOException;
     User getUserIdByLogin(String login) throws DAOException;
     Boolean authenticateUser(SignInInput input) throws DAOException;
+    Boolean authenticateUserById(SignUpInput input) throws DAOException;
     Boolean registerUser(SignUpInput input) throws DAOException;
     Boolean isLoginTaken(SignUpInput input) throws DAOException;
     Boolean isEmailTaken(SignUpInput input) throws DAOException;
     Boolean isPhoneNumberTaken(SignUpInput input) throws DAOException;
-    Boolean deleteUserAccount(Integer userId) throws DAOException;
-    Boolean isUserBanned(Integer userId) throws DAOException;
-    Boolean banUserAccount(Integer userId) throws DAOException;
-    Boolean unbanUserAccount(Integer userId) throws DAOException;
+    Boolean deleteUserAccount(Long userId) throws DAOException;
+    Boolean isUserBanned(Long userId) throws DAOException;
+    Boolean banUserAccount(Long userId) throws DAOException;
+    Boolean unbanUserAccount(Long userId) throws DAOException;
+    Boolean updateUserFirstName(SignUpInput editedUser) throws DAOException;
+    Boolean updateUserLastName(SignUpInput editedUser) throws DAOException;
+    Boolean updateUserEmail(SignUpInput editUser) throws DAOException;
+    Boolean updateUserPassword(SignUpInput userWithNewPassword) throws DAOException;
 
 }

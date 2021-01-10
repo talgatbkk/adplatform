@@ -67,7 +67,7 @@
                     </c:if>
                     <time class="timeago" datetime="${advertisement.postedDate.time}">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
-                    <form action="/advertisement/view?ad_id=${advertisement.adId}" method="post">
+                    <form action="${pageContext.request.contextPath}/advertisement/view?ad_id=${advertisement.adId}" method="post">
                         <input class="btn btn--stroke full-width" type="submit" value="${viewButtonLocal}">
                     </form>
                 </div>

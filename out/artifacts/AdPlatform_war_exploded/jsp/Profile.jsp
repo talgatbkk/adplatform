@@ -20,8 +20,6 @@
 <fmt:message bundle="${thisLocal}" key="profile.label.active_ads" var="activeAdsLocal"/>
 <html>
 <head>
-    <script src="../css/bootstrap-grid.min.css"></script>
-    <script src="../js/jquery-3.5.1.min.js"></script>
 
     <title>Title</title>
 </head>
@@ -29,22 +27,27 @@
 <jsp:include page="/jsp/Header.jsp"/>
 
 <div class="container emp-profile">
-    <form method="post">
         <div class="row">
+<%--            <div class="col-md-4">--%>
+<%--                <div class="profile-img">--%>
+<%--                    <img src="" alt=""/>--%>
+<%--&lt;%&ndash;                    <div class="file btn btn-lg btn-primary">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        Change Photo&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <input type="file" name="file"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    </div>&ndash;%&gt;--%>
+<%--                </div>--%>
+            <c:if test="${sessionScope.userId == requestScope.customer.userId}">
             <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="" alt=""/>
-<%--                    <div class="file btn btn-lg btn-primary">--%>
-<%--                        Change Photo--%>
-<%--                        <input type="file" name="file"/>--%>
-<%--                    </div>--%>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <form action="/login" method="post">
+                <form action="${pageContext.request.contextPath}/user/open_editing" method="post">
                 <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                 </form>
             </div>
+            <div class="col-md-4">
+                <form action="${pageContext.request.contextPath}/user/password" method="post">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Change Password"/>
+                </form>
+            </div>
+            </c:if>
         </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
@@ -109,7 +112,7 @@
                             </div>
                             <div class="col-md-6">
 
-                                <a class="nav-link active" data-toggle="tab" href="/advertisement/search?search_user_id=${requestScope.customer.userId}">
+                                <a class="nav-link active" data-toggle="tab" href="${pageContext.request.contextPath}/advertisement/search?search_user_id=${requestScope.customer.userId}">
                                     <p>${requestScope.customer.activeAds}</p>
                                 </a>
                             </div>
@@ -124,12 +127,12 @@
                                 <p class="text-danger" >This user is banned from posting any ads!</p>
                             </c:if>
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
         <c:choose>
         <c:when test="${requestScope.customer.userId == sessionScope.userId}">
-        <form action="/user/delete">
+        <form action="${pageContext.request.contextPath}/user/delete">
             <input type="hidden" name="del_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Delete account" onclick="return confirm('Are you sure you want to delete?')" />
         </form>
@@ -137,13 +140,13 @@
         <c:when test="${sessionScope.role_id == 1}">
         <c:choose>
         <c:when test="${requestScope.customer.banned == true}">
-        <form action="/user/unban">
+        <form action="${pageContext.request.contextPath}/user/unban">
             <input type="hidden" name="unban_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Unban this user" onclick="return confirm('Are you sure you want to unban this user?')" />
         </form>
         </c:when>
         <c:otherwise>
-        <form action="/user/ban">
+        <form action="${pageContext.request.contextPath}/user/ban">
             <input type="hidden" name="ban_user_id" value="${requestScope.customer.userId}">
             <input class="btn-outline-danger" type="submit" value="Ban this user" onclick="return confirm('Are you sure you want to ban this user?')" />
         </form>
@@ -152,6 +155,7 @@
         </c:when>
         </c:choose>
 
+</div>
 
 </body>
 </html>

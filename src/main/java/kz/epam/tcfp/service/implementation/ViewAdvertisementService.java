@@ -35,14 +35,14 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         UserDAO userDAO = DAOFactory.getUserDAO();
-        Integer adId = null;
+        Long adId = null;
         if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
-            adId = (Integer) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
+            adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
         } else {
-            adId = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+            adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         }
         Advertisement advertisement = null;
         Location location = null;

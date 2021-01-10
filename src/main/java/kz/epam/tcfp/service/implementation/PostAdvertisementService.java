@@ -33,9 +33,9 @@ public class PostAdvertisementService extends PreviousPage implements Service {
             response.sendRedirect(LOGIN_SERVICE);
             return;
         }
-        Integer userId = (Integer) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Integer categoryId = Integer.parseInt(request.getParameter(ServiceConstants.CATEGORY_PICK));
-        Integer locationId = Integer.parseInt(request.getParameter(ServiceConstants.LOCATION_PICK));
+        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long categoryId = Long.parseLong(request.getParameter(ServiceConstants.CATEGORY_PICK));
+        Long locationId = Long.parseLong(request.getParameter(ServiceConstants.LOCATION_PICK));
         String advertisementTitle = request.getParameter(ServiceConstants.ADVERTISEMENT_TITLE);
         String advertisementDescription = request.getParameter(ServiceConstants.ADVERTISEMENT_DESCRIPTION);
         Integer advertisementPrice = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_PRICE));
