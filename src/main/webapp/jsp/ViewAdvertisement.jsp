@@ -30,15 +30,13 @@
             $("time.timeago").timeago();
         });
     </script>
+    <c:set var="imagePath"  value="${initParam.imageLocation}"/>
     <title>Title</title>
 </head>
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
 
-<%--<figure>--%>
-<%--    <img src="img.jpg" alt="my img"/>--%>
-<%--    <figcaption> Your text </figcaption>--%>
-<%--</figure>--%>
+
 
 
 <div class="container">
@@ -58,6 +56,12 @@
         </div>
         <div class="col" id="main">
         <h1>${requestScope.advertisement.title}</h1>
+            <c:if test="${requestScope.image_path != null}">
+            <figure class="align-items-center">
+                <img  src="/images/${requestScope.image_path}" class="img-fluid" alt="Ad image"  width="600"
+                      height="300">
+            </figure>
+            </c:if>
             <p>${requestScope.location.name}</p>
             <c:if test="${requestScope.advertisement.price != 0}">
                 <h3>${requestScope.advertisement.price} ${priceCurrencyLocal} </h3>
@@ -73,11 +77,23 @@
             </p>
         </div>
     </div>
+    <div class="ui-button align-items-center">
+        <div>
+            <c:if test="${requestScope.belongsToCurrentUser == true && requestScope.image_path == null}">
+                <form action="${pageContext.request.contextPath}/advertisement/upload/image?ad_id=${requestScope.advertisement.adId}" method="post" enctype="multipart/form-data" onsubmit="return validateInput()">
+                    Select file to upload: <input type="file" name="file" id="uploadFile"/>
+                    <br />
+                    <br />
+                    <input class="btn btn--stroke full-width btn-outline-primary" type="submit" value="Upload image">
+                </form>
+            </c:if>
+        </div>
+    </div>
         <div class="ui-button">
         <c:if test="${requestScope.belongsToCurrentUser == true || sessionScope.role_id == 1}">
         <form action="${pageContext.request.contextPath}/advertisement/delete" method="post">
             <input type="hidden" name="ad_id" value=${advertisement.adId}>
-            <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="Delete">
+            <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="Delete advertisement">
         </form>
         </c:if>
         </div>
@@ -127,6 +143,20 @@
     </c:if>
 
 </div>
-
+<script type="text/javascript">
+    function validateInput()
+    {
+        if (document.getElementById('uploadFile').value != "") {
+            let file = document.getElementById('uploadFile');
+            if ( /\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false ) {
+                alert("Please select an image!");
+                return false;
+            }
+            return true;
+        } else
+            alert("Please select your image");
+            return false;
+    };
+</script>
 </body>
 </html>

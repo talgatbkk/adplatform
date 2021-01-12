@@ -36,7 +36,7 @@ FOREIGN KEY (role_id) REFERENCES role (role_id) ON DELETE CASCADE ON UPDATE REST
 CREATE TABLE user_phone (
 id int(10) unsigned NOT NULL AUTO_INCREMENT,
 user_id int(10) unsigned NOT NULL,
-phone_number varchar(12) NOT NULL,
+phone_number varchar(14) NOT NULL,
 PRIMARY KEY (id),
 UNIQUE KEY (phone_number),
 FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE RESTRICT);
@@ -83,7 +83,7 @@ FOREIGN KEY (category_id) REFERENCES category (category_id) ON DELETE CASCADE ON
 CREATE TABLE advertisement_image (
 image_id int(10) unsigned NOT NULL AUTO_INCREMENT,
 advertisement_id int(10) unsigned NOT NULL,
-image_data blob NOT NULL,
+image_path varchar(80) NOT NULL,
 PRIMARY KEY (image_id));
 
 
@@ -116,7 +116,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE add_new_user (
 														in email varchar(50),
 														in created_date datetime,
 														in ban boolean,
-														in phone_number varchar(12),
+														in phone_number varchar(14),
 														out result int(10))
 BEGIN
 

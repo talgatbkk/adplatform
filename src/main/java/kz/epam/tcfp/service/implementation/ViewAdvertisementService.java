@@ -1,5 +1,7 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.dao.CommentDAO;
+import kz.epam.tcfp.dao.LocationDAO;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
@@ -28,7 +30,8 @@ import java.util.List;
 public class ViewAdvertisementService extends PreviousPage implements Service {
 
     private static final Logger LOGGER = Logger.getLogger(ViewAdvertisementService.class);
-
+    public static final String IMAGE_LOCATION_PARAMETER = "imageLocation";
+    public static final char SLASH = '/';
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +41,8 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         UserDAO userDAO = DAOFactory.getUserDAO();
+        CommentDAO commentDAO = DAOFactory.getCommentDAO();
+        LocationDAO locationDAO = DAOFactory.getLocationDAO();
         Long adId = null;
         if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
             adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
@@ -48,10 +53,12 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         Location location = null;
         List<PhoneNumber> phoneNumbers = null;
         List<Comment> comments = null;
+        Image image = null;
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);
-            comments = advertisementDAO.getCommentsAByAdvertisementId(adId);
-            location = advertisementDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
+            image = advertisementDAO.getImage(adId);
+            comments = commentDAO.getCommentsAByAdvertisementId(adId);
+            location = locationDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
             phoneNumbers = userDAO.getPhoneNumberByUserId(advertisement.getUserId());
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting advertisement data", e);
@@ -61,7 +68,13 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         if (advertisement.getUserId() == userId) {
             request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, true);
         }
+        String ImagePath = null;
+        if (image != null) {
+            String imagePath = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);
+            ImagePath = image.getPath();
+        }
         request.setAttribute(ServiceConstants.ADVERTISEMENT, advertisement);
+        request.setAttribute(ServiceConstants.IMAGE_PATH, ImagePath);
         request.setAttribute(ServiceConstants.COMMENT_LIST, comments);
         request.setAttribute(ServiceConstants.LOCATION, location);
         request.setAttribute(ServiceConstants.PHONE_NUMBER_LIST, phoneNumbers);

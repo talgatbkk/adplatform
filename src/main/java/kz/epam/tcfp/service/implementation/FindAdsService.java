@@ -1,5 +1,7 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.dao.CategoryDAO;
+import kz.epam.tcfp.dao.LocationDAO;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.dao.AdvertisementDAO;
@@ -41,6 +43,8 @@ public class FindAdsService extends PreviousPage implements Service {
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+        LocationDAO locationDAO = DAOFactory.getLocationDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         List<Advertisement> advertisements = new ArrayList<>();
@@ -48,8 +52,8 @@ public class FindAdsService extends PreviousPage implements Service {
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             advertisements = advertisementDAO.getAllAdvertisements();
-            categories = advertisementDAO.getCategories(languageId);
-            locations = advertisementDAO.getLocations(languageId);
+            categories = categoryDAO.getCategories(languageId);
+            locations = locationDAO.getLocations(languageId);
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting recent advertisement info", e);
         }

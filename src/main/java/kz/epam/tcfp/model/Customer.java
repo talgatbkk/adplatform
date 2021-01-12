@@ -9,7 +9,7 @@ import java.util.List;
 public class Customer extends User {
     private static final long serialVersionUID = 1234L;
 
-    private Photo avatarPhoto;
+    private Image avatarImage;
     private Integer activeAds;
     private boolean isBanned;
     private List<PhoneNumber> phoneNumbers;
@@ -18,12 +18,12 @@ public class Customer extends User {
         super();
     }
 
-    public Photo getAvatarPhoto() {
-        return avatarPhoto;
+    public Image getAvatarPhoto() {
+        return avatarImage;
     }
 
-    public void setAvatarPhoto(Photo avatarPhoto) {
-        this.avatarPhoto = avatarPhoto;
+    public void setAvatarPhoto(Image avatarImage) {
+        this.avatarImage = avatarImage;
     }
 
     public Integer getActiveAds() {

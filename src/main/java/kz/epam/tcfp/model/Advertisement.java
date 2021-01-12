@@ -22,18 +22,18 @@ public class Advertisement implements Serializable {
     private Integer price;
     private DateTimeInUTC postedDate;
     private Category category;
-    private List<Photo> photos;
+    private List<Image> images;
 
     public Advertisement() {
     }
 
-    public Advertisement(Long adId, String title, String description, Long locationId, Long categoryId, List<Photo> photos) {
+    public Advertisement(Long adId, String title, String description, Long locationId, Long categoryId, List<Image> images) {
         this.adId = adId;
         this.title = title;
         this.description = description;
         this.location = new Location(locationId);
         this.category = new Category(categoryId);
-        this.photos = photos;
+        this.images = images;
     }
 
     public Long getAdId() {
@@ -76,12 +76,12 @@ public class Advertisement implements Serializable {
         this.category = category;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public List<Image> getPhotos() {
+        return images;
     }
 
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
+    public void setPhotos(List<Image> images) {
+        this.images = images;
     }
 
     public DateTimeInUTC getPostedDate() {
@@ -120,7 +120,7 @@ public class Advertisement implements Serializable {
                 ", price=" + price +
                 ", postedDate=" + postedDate +
                 ", category=" + category +
-                ", photos=" + photos +
+                ", photos=" + images +
                 '}';
     }
 }

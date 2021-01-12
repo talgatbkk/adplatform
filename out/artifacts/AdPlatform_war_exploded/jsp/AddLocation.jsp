@@ -21,6 +21,7 @@
     </c:if>
     <jsp:include page="/jsp/Header.jsp"/>
     <form action="${pageContext.request.contextPath}/location/post" method="post">
+        <h4 class="text-center">Add new locations/cities</h4>
         <div class="row justify-content-center">
             <div class="col-auto">
                 <table style="with: 50%">

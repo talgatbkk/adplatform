@@ -1,6 +1,7 @@
 package kz.epam.tcfp.service.implementation;
 
 import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.LocationDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
@@ -24,6 +25,7 @@ import java.io.IOException;
 public class PostAddLocationService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAddLocationService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
+    public static final String ADMIN_ADD_LOCATION = "/location/add";
 
 
     @Override
@@ -58,15 +60,19 @@ public class PostAddLocationService extends PreviousPage implements Service {
         location.setParentId(parentLocationId);
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             location.setLanguageId(languageId);
-            advertisementDAO.postLocation(location);
+            if (!locationDAO.postLocation(location)) {
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while posting an advertisement", e);
         }
-        response.sendRedirect(HOME_SERVICE);
+        response.sendRedirect(ADMIN_ADD_LOCATION);
     }
 
 }

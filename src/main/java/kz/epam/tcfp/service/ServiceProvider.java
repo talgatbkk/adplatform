@@ -33,6 +33,8 @@ public class ServiceProvider {
     public static final String LANGUAGE = "/language";
     public static final String ADMIN_ADD_LOCATION = "/location/add";
     public static final String ADMIN_POST_LOCATION = "/location/post";
+    public static final String ADMIN_ADD_CATEGORY = "/category/add";
+    public static final String ADMIN_POST_CATEGORY = "/category/post";
 
 
 
@@ -63,7 +65,8 @@ public class ServiceProvider {
         services.put(USER_POST_NEW_PASSWORD, new PostChangedPasswordService());
         services.put(ADMIN_ADD_LOCATION, new OpenAddLocationService());
         services.put(ADMIN_POST_LOCATION, new PostAddLocationService());
-
+        services.put(ADMIN_ADD_CATEGORY, new OpenAddCategoryService());
+        services.put(ADMIN_POST_CATEGORY, new PostAddCategoryService());
     }
 
     public Service getService(String serviceName) {

@@ -30,7 +30,6 @@
 <c:if test="${sessionScope.userId != null}">
     <c:redirect url="${pageContext.request.contextPath}/home"> </c:redirect>
 </c:if>
-
 <h1>${titleLocal}</h1>
 <form action="${pageContext.request.contextPath}/user/post" method="post" onsubmit="return passwordMatchCheck()">
     <div class="row justify-content-center">
@@ -65,7 +64,7 @@
         </tr>
         <tr>
             <td>${phoneNumberLocal}</td>
-            <td><input type="tel" name="phoneNumber" pattern="[+]{1}[0-9]{11,14}" required/></td>
+            <td><input type="tel" name="phoneNumber" id="phone1" pattern="[+]{1}[0-9]{11,14}" required /></td>
             <td>
             <c:if test="${requestScope.phone_number_taken == true}">
                 <small class="text-danger">Phone number is already registred</small>
@@ -97,6 +96,5 @@
             return true;
         };
 </script>
-
 </body>
 </html>

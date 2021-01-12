@@ -1,13 +1,7 @@
 
-M
-java:S1481'"+Remove this unused "userId" local variable.(È¶Ä§ÿÿÿÿÿ8Ï›¼àî.
 T
-java:S1128"8Remove this unused import 'kz.epam.tcfp.model.Category'.(ëÕò8Ï›¼àî.
-]
-java:S18545";Remove this useless assignment to local variable "userDAO".(µ£ºúÿÿÿÿ8Ï›¼àî.
-N
-java:S14815",Remove this unused "userDAO" local variable.(µ£ºúÿÿÿÿ8Ï›¼àî.
-V
-java:S4973,"9Use the "equals" method if value comparison was intended.(§Œ‘Ó8¹¿µàî.
-W
-java:S1854*":Remove this useless assignment to local variable "userId".(¼–²®8¾¶àî.
+java:S4973"9Use the "equals" method if value comparison was intended.(§Œ‘Ó8¹¿µàî.
+U
+java:S1128"5Remove this unused import 'kz.epam.tcfp.dao.UserDAO'.(è§ÛĞüÿÿÿÿ8üóÛéî.
+R
+java:S1128"8Remove this unused import 'kz.epam.tcfp.model.Category'.(ëÕò8Ï›¼àî.

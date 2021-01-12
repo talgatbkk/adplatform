@@ -1,6 +1,7 @@
 package kz.epam.tcfp.service.implementation;
 
 import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.LocationDAO;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
@@ -36,10 +37,8 @@ public class OpenAddLocationService extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Long userId = null;
-        Long roleId = null;
+        Long roleId;
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
             roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
             if (roleId != ServiceConstants.ADMIN_ROLE_ID) {
                 request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
@@ -50,11 +49,11 @@ public class OpenAddLocationService extends PreviousPage implements Service {
             return;
         }
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        UserDAO userDAO = DAOFactory.getUserDAO();
+        LocationDAO locationDAO = DAOFactory.getLocationDAO();
         List<Location> locations = new ArrayList<>();
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
-            locations = advertisementDAO.getLocations(languageId);
+            locations = locationDAO.getLocations(languageId);
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting data for page InputAdvertisement", e);
         }

@@ -1,5 +1,7 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.dao.CategoryDAO;
+import kz.epam.tcfp.dao.LocationDAO;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
@@ -66,14 +68,16 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
         }
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+        LocationDAO locationDAO = DAOFactory.getLocationDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         List<Advertisement> advertisements = null;
 
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
-            categories = advertisementDAO.getCategories(languageId);
-            locations = advertisementDAO.getLocations(languageId);
+            categories = categoryDAO.getCategories(languageId);
+            locations = locationDAO.getLocations(languageId);
             if (searchInput == null || searchInput.isEmpty()) {
                 if (searchUserId != null) {
                     advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId);

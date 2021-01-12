@@ -230,11 +230,12 @@
         <url-pattern>/user/banned</url-pattern>
     </servlet-mapping>
 
+
+
     <servlet>
-        <servlet-name>Home</servlet-name>
+        <servlet-name>ChangeLanguage</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ChangeLanguage</servlet-name>
         <url-pattern>/language</url-pattern>
@@ -258,15 +259,51 @@
         <url-pattern>/location/post</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddCategory</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCategory</servlet-name>
+        <url-pattern>/category/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostCategory</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostCategory</servlet-name>
+        <url-pattern>/category/post</url-pattern>
+    </servlet-mapping>
+
 
 
     <servlet>
-        <servlet-name>ChangeLanguage</servlet-name>
+        <servlet-name>Home</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DisplayAdvertisementImage</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.ImageDisplayController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayAdvertisementImage</servlet-name>
+        <url-pattern>/images/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadAdvertisementImage</servlet-name>
+        <servlet-class>kz.epam.tcfp.controller.ImageUploadController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadAdvertisementImage</servlet-name>
+        <url-pattern>/advertisement/upload/image</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -277,6 +314,12 @@
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
+
+    <context-param>
+        <param-name>imageLocation</param-name>
+        <param-value>/home/tubuntu/Documents/db/images/</param-value>
+    </context-param>
+
 
     <filter-mapping>
         <filter-name>SetEncoding</filter-name>

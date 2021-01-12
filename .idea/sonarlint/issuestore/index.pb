@@ -81,8 +81,6 @@ _
 /src/main/java/kz/epam/tcfp/service/Service.java,9/6/96a4f1a3897a28c3b19e68bfcd8b7cdfdccd8871
 m
 =src/main/java/kz/epam/tcfp/dao/implemenation/UserDAOImpl.java,6/7/67246d520ed505af889aac1a31071c5d3aecf3cf
-[
-+src/main/java/kz/epam/tcfp/model/Photo.java,7/d/7dcfe187abedbc2cb89f9625071ce411c6a9b4a7
 L
 src/main/webapp/jsp/Home.jsp,2/5/25c89e26b5ca06f071126ed1d02e66360a7de3a6
 m
@@ -143,3 +141,17 @@ X
 Msrc/main/java/kz/epam/tcfp/service/implementation/OpenAddLocationService.java,c/b/cb37716d652522511682dc69ff5f1ccabf8c8f00
 S
 #src/main/webapp/jsp/AddLocation.jsp,2/0/208cdfe1a4b91054a753440bcbf3bbf6b458f0de
+}
+Msrc/main/java/kz/epam/tcfp/service/implementation/PostAddCategoryService.java,6/4/64289c8c4b6de3ce7c70851fc7b7c301159d5a90
+}
+Msrc/main/java/kz/epam/tcfp/service/implementation/PostAddLocationService.java,c/5/c548f57a42e735435f898d8571ba72ef69f4ffc9
+}
+Msrc/main/java/kz/epam/tcfp/service/implementation/OpenAddCategoryService.java,e/f/ef4f7ef45270332fe1fcbbd035d67dd7b796691a
+S
+#src/main/webapp/jsp/AddCategory.jsp,f/6/f66c4b4772479b2278a67b2ff0f75e9816df6a49
+[
++src/main/java/kz/epam/tcfp/model/Image.java,c/6/c6f9c1a71027311b1be4462f2a821cfc65d48fd1
+p
+@src/main/java/kz/epam/tcfp/controller/ImageUploadController.java,0/d/0d4c1ac800f96935ddafe3b696720e6f8325eae3
+q
+Asrc/main/java/kz/epam/tcfp/controller/ImageDisplayController.java,6/a/6aa636389ced99fc1f1d8fc6faf96a72fd06191e

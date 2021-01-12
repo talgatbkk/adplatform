@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.dao.CommentDAO;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -29,7 +30,7 @@ public class PostCommentService extends PreviousPage implements Service {
         HttpSession session = request.getSession(true);
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         Long adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        CommentDAO commentDAO = DAOFactory.getCommentDAO();
 
         Comment comment = new Comment();
         comment.setAuthorId(userId);
@@ -37,7 +38,7 @@ public class PostCommentService extends PreviousPage implements Service {
         comment.setContent(request.getParameter(ServiceConstants.COMMENT_CONTENT));
         session.setAttribute(ServiceConstants.ADVERTISEMENT_ID, adId);
         try {
-            advertisementDAO.postComment(comment);
+            commentDAO.postComment(comment);
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while posting a comment", e);
         }

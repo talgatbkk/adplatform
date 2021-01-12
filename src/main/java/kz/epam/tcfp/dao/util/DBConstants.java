@@ -15,6 +15,8 @@ public class DBConstants {
     public static final String AD_POSTED_DATE = "posted_date";
     public static final String AD_CATEGORY_ID = "category_id";
     public static final String AD_PRICE = "price";
+    public static final String IMAGE_ID = "image_id";
+    public static final String IMAGE_PATH = "image_path";
 
     public static final String USER_ID = "user_id";
     public static final String USER_LOGIN = "login";
@@ -73,6 +75,9 @@ public class DBConstants {
     public static final String UPDATE_USER_EMAIL = "UPDATE user SET email = ? WHERE user_id = ?";
     public static final String UPDATE_USER_PASSWORD = "UPDATE user SET password = ? WHERE user_id = ?";
     public static final String POST_LOCATION = "INSERT INTO location VALUES (?, ?, ?, ?)";
+    public static final String POST_CATEGORY = "INSERT INTO category VALUES (?, ?, ?)";
+    public static final String GET_IMAGE = "SELECT * FROM advertisement_image WHERE advertisement_id = ?";
+    public static final String POST_IMAGE_PATH = "INSERT INTO advertisement_image VALUES (?, ?, ?)";
 
 
 }

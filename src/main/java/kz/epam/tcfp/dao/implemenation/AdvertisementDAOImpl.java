@@ -304,85 +304,6 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         return advertisementCount;
     }
 
-    public Location getLocationNamesById(Long locationId, String languageCode) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Location location = new Location(locationId);
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_LOCATION_BY_ID);
-            preparedStatement.setLong(1, locationId);
-            preparedStatement.setString(2, languageCode);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                location.setName(resultSet.getString(1));
-                location.setParentId(resultSet.getLong(2));
-            }
-        } catch (SQLException ex) {
-            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement, resultSet);
-            connectionPool.putBackConnectionToPool(connection);
-        }
-        return location;
-    }
-
-    @Override
-    public List<Comment> getCommentsAByAdvertisementId(Long adId) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        List<Comment> comments = new ArrayList<>();
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_COMMENTS_BY_AD_ID);
-            preparedStatement.setLong(1, adId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Comment comment = buildComment(resultSet);
-                comments.add(comment);
-            }
-        } catch (SQLException ex) {
-            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement, resultSet);
-            connectionPool.putBackConnectionToPool(connection);
-        }
-        return comments;
-    }
-
-    @Override
-    public boolean postComment(Comment comment) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        Integer rows = null;
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.POST_COMMENT);
-            preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, comment.getAdId());
-            preparedStatement.setLong(3, comment.getAuthorId());
-            preparedStatement.setString(4, comment.getContent());
-            preparedStatement.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
-            rows = preparedStatement.executeUpdate();
-            if (rows == 1){
-                return true;
-            }
-        } catch (SQLException ex) {
-        throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement);
-            connectionPool.putBackConnectionToPool(connection);
-    }
-        return false;
-    }
 
     @Override
     public boolean deleteAdvertisementByUserIdAndAdId(Long adId) throws DAOException {
@@ -439,34 +360,6 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         return false;
     }
 
-    @Override
-    public List<Category> getCategories(Long languageId) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        List<Category> categories = new ArrayList<>();
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_CATEGORIES);
-            preparedStatement.setLong(1, languageId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Category category = new Category();
-                category.setCategoryId(resultSet.getLong(DBConstants.CATEGORY_ID));
-                category.setCategoryName(resultSet.getString(DBConstants.CATEGORY_NAME));
-                categories.add(category);
-            }
-        } catch (SQLException ex) {
-            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement, resultSet);
-            connectionPool.putBackConnectionToPool(connection);
-        }
-        return categories;
-    }
-
 
     @Override
     public Long getLanguageIdByName(String languageName) throws DAOException {
@@ -521,44 +414,18 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
 
-    @Override
-    public List<Location> getLocations(Long languageId) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        List<Location> locations = new ArrayList<>();
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_LOCATIONS);
-            preparedStatement.setLong(1, languageId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Location location = buildLocation(resultSet);
-                locations.add(location);
-            }
-        } catch (SQLException ex) {
-            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement, resultSet);
-            connectionPool.putBackConnectionToPool(connection);
-        }
-        return locations;
-    }
 
     @Override
-    public boolean postLocation(Location location) throws DAOException {
+    public boolean postImage(Image image) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         Integer rows = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.POST_LOCATION);
+            preparedStatement = connection.prepareStatement(DBConstants.POST_IMAGE_PATH);
             preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, location.getParentId());
-            preparedStatement.setLong(3, location.getLanguageId());
-            preparedStatement.setString(4, location.getName());
+            preparedStatement.setLong(2, image.getAdvertisementId());
+            preparedStatement.setString(3, image.getPath());
             rows = preparedStatement.executeUpdate();
             if (rows == 1){
                 return true;
@@ -574,6 +441,33 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         return false;
     }
 
+    @Override
+    public Image getImage(Long adId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Image image = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_IMAGE);
+            preparedStatement.setLong(1, adId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                image = new Image();
+                image.setImageId(resultSet.getLong(DBConstants.IMAGE_ID));
+                image.setAdvertisementId(resultSet.getLong(DBConstants.AD_ID));
+                image.setPath(resultSet.getString(DBConstants.IMAGE_PATH));
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return image;
+    }
 
     private Location buildLocation(ResultSet resultSet) throws SQLException {
         Location location = new Location();
@@ -581,17 +475,6 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         location.setParentId(resultSet.getLong(DBConstants.PARENT_LOCATION_ID));
         location.setName(resultSet.getString(DBConstants.AD_LOCATION_NAME));
         return location;
-    }
-
-    private Comment buildComment(ResultSet resultSet) throws SQLException {
-        Comment comment = new Comment();
-        comment.setAuthorId(resultSet.getLong(DBConstants.COMMENT_USER_ID));
-        comment.setAuthorFirstName(resultSet.getString(DBConstants.USER_FIRST_NAME));
-        comment.setAuthorLastName(resultSet.getString(DBConstants.USER_LAST_NAME));
-        comment.setAuthorLogin(resultSet.getString(DBConstants.USER_LOGIN));
-        comment.setPostedDate(new DateTimeInUTC(resultSet.getTimestamp(DBConstants.COMMENT_POSTED_DATE)));
-        comment.setContent(resultSet.getString(DBConstants.COMMENT_CONTENT));
-        return comment;
     }
 
     private Advertisement buildAdvertisement(ResultSet resultSet) throws SQLException {

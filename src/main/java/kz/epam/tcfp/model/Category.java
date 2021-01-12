@@ -9,6 +9,7 @@ public class Category {
 
 
     private Long categoryId;
+    private Long languageId;
     private String categoryName;
 
     public Category() {
@@ -34,5 +35,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public Long getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(Long languageId) {
+        this.languageId = languageId;
     }
 }

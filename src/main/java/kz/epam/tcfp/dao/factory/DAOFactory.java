@@ -1,10 +1,9 @@
 package kz.epam.tcfp.dao.factory;
 
-import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.UserDAO;
+import kz.epam.tcfp.dao.*;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
-import kz.epam.tcfp.dao.implemenation.AdvertisementDAOImpl;
-import kz.epam.tcfp.dao.implemenation.UserDAOImpl;
+import kz.epam.tcfp.dao.implemenation.*;
+import kz.epam.tcfp.model.Category;
 import org.apache.log4j.Logger;
 
 /**
@@ -21,6 +20,12 @@ public class DAOFactory {
     private static AdvertisementDAO advertisementDAO = new AdvertisementDAOImpl();
 
     private static UserDAO userDAO = new UserDAOImpl();
+
+    private static CommentDAO commentDAO = new CommentDAOImpl();
+
+    private static CategoryDAO categoryDAO = new CategoryDAOImpl();
+
+    private static LocationDAO locationDAO = new LocationDAOImpl();
 
 
     public static DAOFactory getInstance() {
@@ -49,5 +54,15 @@ public class DAOFactory {
         return getInstance().userDAO;
     }
 
+    public static CategoryDAO getCategoryDAO() {
+        return  getInstance().categoryDAO;
+    }
 
+    public static CommentDAO getCommentDAO() {
+        return getInstance().commentDAO;
+    }
+
+    public static LocationDAO getLocationDAO() {
+        return getInstance().locationDAO;
+    }
 }

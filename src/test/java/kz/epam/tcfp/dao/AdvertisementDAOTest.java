@@ -34,11 +34,4 @@ public class AdvertisementDAOTest {
 
     }
 
-    @Test
-    public void getLocationNamesByIdTest() throws DAOException {
-        Long locationId = 2L;
-        Location location = advertisementDAO.getLocationNamesById(locationId, ServiceConstants.RUSSIAN_LANGUAGE);
-        System.out.println(location.toString());
-
-    }
 }
