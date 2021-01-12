@@ -27,6 +27,8 @@ public class DAOFactory {
 
     private static LocationDAO locationDAO = new LocationDAOImpl();
 
+    private static ImageDAO imageDAO = new ImageDAOImpl();
+
 
     public static DAOFactory getInstance() {
         if (instance == null) {
@@ -64,5 +66,9 @@ public class DAOFactory {
 
     public static LocationDAO getLocationDAO() {
         return getInstance().locationDAO;
+    }
+
+    public static ImageDAO getImageDAO() {
+        return getInstance().imageDAO;
     }
 }

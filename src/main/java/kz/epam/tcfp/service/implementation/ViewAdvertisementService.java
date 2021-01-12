@@ -1,11 +1,8 @@
 package kz.epam.tcfp.service.implementation;
 
-import kz.epam.tcfp.dao.CommentDAO;
-import kz.epam.tcfp.dao.LocationDAO;
+import kz.epam.tcfp.dao.*;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
-import kz.epam.tcfp.dao.AdvertisementDAO;
-import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.*;
@@ -40,6 +37,7 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        ImageDAO imageDAO = DAOFactory.getImageDAO();
         UserDAO userDAO = DAOFactory.getUserDAO();
         CommentDAO commentDAO = DAOFactory.getCommentDAO();
         LocationDAO locationDAO = DAOFactory.getLocationDAO();
@@ -56,7 +54,7 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         Image image = null;
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);
-            image = advertisementDAO.getImage(adId);
+            image = imageDAO.getImage(adId);
             comments = commentDAO.getCommentsAByAdvertisementId(adId);
             location = locationDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
             phoneNumbers = userDAO.getPhoneNumberByUserId(advertisement.getUserId());

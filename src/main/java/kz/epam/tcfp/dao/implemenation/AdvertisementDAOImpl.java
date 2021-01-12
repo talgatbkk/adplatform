@@ -414,69 +414,6 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
 
-
-    @Override
-    public boolean postImage(Image image) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        Integer rows = null;
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.POST_IMAGE_PATH);
-            preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, image.getAdvertisementId());
-            preparedStatement.setString(3, image.getPath());
-            rows = preparedStatement.executeUpdate();
-            if (rows == 1){
-                return true;
-            }
-        } catch (SQLException ex) {
-            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement);
-            connectionPool.putBackConnectionToPool(connection);
-        }
-        return false;
-    }
-
-    @Override
-    public Image getImage(Long adId) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Image image = null;
-        try {
-            connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_IMAGE);
-            preparedStatement.setLong(1, adId);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                image = new Image();
-                image.setImageId(resultSet.getLong(DBConstants.IMAGE_ID));
-                image.setAdvertisementId(resultSet.getLong(DBConstants.AD_ID));
-                image.setPath(resultSet.getString(DBConstants.IMAGE_PATH));
-            }
-        } catch (SQLException ex) {
-            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
-        } catch (ConnectionPoolException ex){
-            throw new DAOException(ex);
-        } finally {
-            ClosingUtil.closeAll(preparedStatement, resultSet);
-            connectionPool.putBackConnectionToPool(connection);
-        }
-        return image;
-    }
-
-    private Location buildLocation(ResultSet resultSet) throws SQLException {
-        Location location = new Location();
-        location.setId(resultSet.getLong(DBConstants.AD_LOCATION_ID));
-        location.setParentId(resultSet.getLong(DBConstants.PARENT_LOCATION_ID));
-        location.setName(resultSet.getString(DBConstants.AD_LOCATION_NAME));
-        return location;
-    }
-
     private Advertisement buildAdvertisement(ResultSet resultSet) throws SQLException {
         Advertisement advertisement = new Advertisement();
         advertisement.setAdId(resultSet.getLong(DBConstants.AD_ID));

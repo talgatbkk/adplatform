@@ -1,5 +1,6 @@
 package kz.epam.tcfp.controller;
 import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.ImageDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Image;
@@ -67,10 +68,9 @@ public class ImageUploadController extends HttpServlet {
         Image image = new Image();
         image.setAdvertisementId(advertisementId);
         image.setPath(advertisementIdInput + DOT + imageExtension);
-
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+        ImageDAO imageDAO = DAOFactory.getImageDAO();
         try {
-            if (!advertisementDAO.postImage(image)) {
+            if (!imageDAO.postImage(image)) {
                 response.sendRedirect(PagePath.ERROR_JSP);
                 return;
             }

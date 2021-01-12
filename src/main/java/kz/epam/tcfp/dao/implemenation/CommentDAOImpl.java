@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class CommentDAOImpl implements CommentDAO {
     private static final Logger LOGGER = Logger.getLogger(CommentDAOImpl.class);
-    private static final Character PERCENT_SIGN = '%';
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
 
