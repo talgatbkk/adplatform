@@ -6,8 +6,9 @@ import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.model.inputform.SignUpInput;
+import kz.epam.tcfp.service.util.Encryption;
 import org.junit.Test;
-import org.ocpsoft.prettytime.PrettyTime;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,7 +56,8 @@ public class UserDAOTest {
     public void authenticateCustomerInvalidLoginInputTest() throws DAOException {
         SignInInput input = new SignInInput();
         input.setLogin("invalidlogin");
-        input.setPassword("passwordtest123");
+        input.setPassword(Encryption.encrypt("admin"));
+        System.out.println(input.getPassword());
         assertFalse(USER_DAO.authenticateUser(input));
 
     }

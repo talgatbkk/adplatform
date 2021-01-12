@@ -1,13 +1,23 @@
 
-R
-java:S2209-"5Change this instance-reference to a static reference.(€®¨¤8î½­Çí.
-W
-java:S1118":Add a private constructor to hide the implicit public one.(®àÅº8¬´¹†è.
-R
-java:S22091"5Change this instance-reference to a static reference.(İ­õË8î½­Çí.
-L
-java:S1068"*Remove this unused "LOGGER" private field.(ÄşñŠûÿÿÿÿ8û€“Çí.
 [
-java:S2168"9Remove this dangerous instance of double-checked locking.(ÔÎ‹Ïúÿÿÿÿ8àœ±Èí.
+java:S2168#"9Remove this dangerous instance of double-checked locking.(ÔÎ‹Ïúÿÿÿÿ8àœ±Èí.
+T
+java:S1128"8Remove this unused import 'kz.epam.tcfp.model.Category'.(ëÕò8›×Ü¯ï.
+W
+java:S2209H"5Change this instance-reference to a static reference.(ÌÔ¶øÿÿÿÿ8ø¶±ï.
 R
-java:S2209)"5Change this instance-reference to a static reference.(Ìæ·Ş8î½­Çí.
+java:S22098"5Change this instance-reference to a static reference.(İ­õË8î½­Çí.
+W
+java:S1118":Add a private constructor to hide the implicit public one.(®àÅº8¬´¹†è.
+R
+java:S22090"5Change this instance-reference to a static reference.(Ìæ·Ş8î½­Çí.
+R
+java:S22094"5Change this instance-reference to a static reference.(€®¨¤8î½­Çí.
+W
+java:S2209<"5Change this instance-reference to a static reference.(ÿäÉ«úÿÿÿÿ8Ë²ß¯ï.
+L
+java:S1068"*Remove this unused "LOGGER" private field.(ÄşñŠûÿÿÿÿ8û€“Çí.
+W
+java:S2209D"5Change this instance-reference to a static reference.(õà¥âıÿÿÿÿ8´›µ°ï.
+R
+java:S2209@"5Change this instance-reference to a static reference.(×ºÇş8šü¯¯ï.

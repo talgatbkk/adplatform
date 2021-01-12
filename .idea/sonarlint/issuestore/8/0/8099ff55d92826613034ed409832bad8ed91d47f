@@ -1,5 +1,5 @@
 
 _
-java:S22596"BA "NullPointerException" could be thrown; "user" is nullable here.(¢ËŸø8Ó´ÓÆí.
+java:S22597"BA "NullPointerException" could be thrown; "user" is nullable here.(¢ËŸø8Ó´ÓÆí.
 L
-java:S5411("*Use the primitive boolean expression here.(ÇëÐ¦üÿÿÿÿ8Ó´ÓÆí.
+java:S5411)"*Use the primitive boolean expression here.(ÇëÐ¦üÿÿÿÿ8Ó´ÓÆí.

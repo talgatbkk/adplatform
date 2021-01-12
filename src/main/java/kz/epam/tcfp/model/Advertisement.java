@@ -3,7 +3,6 @@ package kz.epam.tcfp.model;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 
 /**
@@ -22,18 +21,18 @@ public class Advertisement implements Serializable {
     private Integer price;
     private DateTimeInUTC postedDate;
     private Category category;
-    private List<Image> images;
+    private Image image;
 
     public Advertisement() {
     }
 
-    public Advertisement(Long adId, String title, String description, Long locationId, Long categoryId, List<Image> images) {
+    public Advertisement(Long adId, String title, String description, Long locationId, Long categoryId, Image image) {
         this.adId = adId;
         this.title = title;
         this.description = description;
         this.location = new Location(locationId);
         this.category = new Category(categoryId);
-        this.images = images;
+        this.image = image;
     }
 
     public Long getAdId() {
@@ -76,12 +75,12 @@ public class Advertisement implements Serializable {
         this.category = category;
     }
 
-    public List<Image> getPhotos() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setPhotos(List<Image> images) {
-        this.images = images;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public DateTimeInUTC getPostedDate() {
@@ -120,7 +119,7 @@ public class Advertisement implements Serializable {
                 ", price=" + price +
                 ", postedDate=" + postedDate +
                 ", category=" + category +
-                ", photos=" + images +
+                ", photos=" + image +
                 '}';
     }
 }

@@ -23,6 +23,9 @@ public class ImageDAOImpl implements ImageDAO {
     private static final Logger LOGGER = Logger.getLogger(ImageDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
+    public ImageDAOImpl() {
+    }
+
     @Override
     public boolean postImage(Image image) throws DAOException {
         Connection connection = null;

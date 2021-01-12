@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
+import kz.epam.tcfp.service.util.Encryption;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -63,7 +64,7 @@ public class SignUpService extends PreviousPage implements Service {
     private SignUpInput buildSignUpInput (HttpServletRequest request) {
         SignUpInput signUpInput = new SignUpInput();
         signUpInput.setLogin(request.getParameter(ServiceConstants.NEW_USER_LOGIN));
-        signUpInput.setPassword(request.getParameter(ServiceConstants.NEW_USER_PASSWORD));
+        signUpInput.setPassword(Encryption.encrypt(request.getParameter(ServiceConstants.NEW_USER_PASSWORD)));
         signUpInput.setFirstName(request.getParameter(ServiceConstants.NEW_USER_FIRST_NAME));
         signUpInput.setLastName(request.getParameter(ServiceConstants.NEW_USER_LAST_NAME));
         signUpInput.setEmail(request.getParameter(ServiceConstants.NEW_USER_EMAIL));

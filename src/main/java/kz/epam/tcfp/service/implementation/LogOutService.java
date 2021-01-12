@@ -21,7 +21,7 @@ public class LogOutService extends PreviousPage implements Service {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            session.removeAttribute(ServiceConstants.SESSION_USER_ID);
+            session.invalidate();
         }
         request.getRequestDispatcher(HOME_SERVICE).forward(request, response);
     }

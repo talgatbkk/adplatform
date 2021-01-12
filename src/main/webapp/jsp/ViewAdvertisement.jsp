@@ -56,9 +56,9 @@
         </div>
         <div class="col" id="main">
         <h1>${requestScope.advertisement.title}</h1>
-            <c:if test="${requestScope.image_path != null}">
+            <c:if test="${requestScope.advertisement.image.path != null}">
             <figure class="align-items-center">
-                <img  src="/images/${requestScope.image_path}" class="img-fluid" alt="Ad image"  width="600"
+                <img  src="/images/${requestScope.advertisement.image.path}" class="img-fluid" alt="Ad image"  width="600"
                       height="300">
             </figure>
             </c:if>
@@ -79,7 +79,7 @@
     </div>
     <div class="ui-button align-items-center">
         <div>
-            <c:if test="${requestScope.belongsToCurrentUser == true && requestScope.image_path == null}">
+            <c:if test="${requestScope.belongsToCurrentUser == true && requestScope.advertisement.image.path == null}">
                 <form action="${pageContext.request.contextPath}/advertisement/upload/image?ad_id=${requestScope.advertisement.adId}" method="post" enctype="multipart/form-data" onsubmit="return validateInput()">
                     Select file to upload: <input type="file" name="file" id="uploadFile"/>
                     <br />

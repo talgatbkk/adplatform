@@ -29,6 +29,9 @@ public class UserDAOImpl implements UserDAO {
     private static final String CALLABLE_RESULT_NAME = "result";
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
+    public UserDAOImpl() {
+    }
+
     @Override
     public Boolean authenticateUser(SignInInput signInInput) throws DAOException {
         Connection connection = null;

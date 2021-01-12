@@ -26,6 +26,8 @@ public class CommentDAOImpl implements CommentDAO {
     private static final Logger LOGGER = Logger.getLogger(CommentDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
+    public CommentDAOImpl() {
+    }
 
     @Override
     public List<Comment> getCommentsAByAdvertisementId(Long adId) throws DAOException {

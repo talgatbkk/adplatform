@@ -32,13 +32,11 @@
     <script src="../js/jquery.timeago.js" type="text/javascript"></script>
     <script src="../js/jquery.timeago.ru.js" type="text/javascript"></script>
     </c:if>
-
     <script type="text/javascript">
         jQuery(document).ready(function() {
             $("time.timeago").timeago();
         });
     </script>
-
     <title>Advertisements of the customer</title>
 </head>
 <body>
@@ -52,10 +50,19 @@
     </c:when>
     <c:otherwise>
     <c:forEach var="advertisement" items="${requestScope.advertisements}">
-    <div class="card mb-3 mx-auto" style="max-width: 640px;">
+    <div class="card mb-4 mx-auto" style="max-width: 640px;">
         <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="..." class="card-img" alt="...">
+            <div class="col-md-4 my-auto" >
+                <c:choose>
+                    <c:when test="${advertisement.image.path != null}">
+                        <div class="card">
+                        <img src="images/${advertisement.image.path}" class="card-img" alt="">
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <img src="../defaultImages/noimg.png" class="card-img" alt="">
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -74,7 +81,7 @@
             </div>
         </div>
     </div>
-        <br>
+
     </c:forEach>
     </c:otherwise>
     </c:choose>

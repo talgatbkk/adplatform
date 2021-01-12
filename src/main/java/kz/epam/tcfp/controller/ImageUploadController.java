@@ -3,9 +3,11 @@ import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.ImageDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
+import kz.epam.tcfp.dao.implemenation.CategoryDAOImpl;
 import kz.epam.tcfp.model.Image;
 import kz.epam.tcfp.service.PagePath;
 import org.apache.catalina.core.ApplicationPart;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,11 +23,11 @@ import javax.servlet.http.Part;
  * @project AdPlatform
  */
 
-@MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
-        maxFileSize=1024*1024*10,      // 10MB
-        maxRequestSize=1024*1024*50)   // 50MB
+@MultipartConfig(fileSizeThreshold=1024*1024*2,
+        maxFileSize=1024*1024*10,
+        maxRequestSize=1024*1024*50)
 public class ImageUploadController extends HttpServlet {
-
+    private static final Logger LOGGER = Logger.getLogger(ImageUploadController.class);
     public static final String ADVERTISEMENT_ID = "ad_id";
     public static final char QUESTION_MARK = '?';
     public static final char EQUAL_SIGN = '=';
@@ -75,7 +77,7 @@ public class ImageUploadController extends HttpServlet {
                 return;
             }
         } catch (DAOException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error while getting image", e);
         }
         response.sendRedirect(ADVERTISEMENT_VIEW_SERVICE + QUESTION_MARK
                             + ADVERTISEMENT_ID + EQUAL_SIGN + advertisementIdInput);

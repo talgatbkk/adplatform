@@ -8,11 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="${sessionScope.language}" />
+<fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
+
+<fmt:message bundle="${thisLocal}" key="add_advertisement.button.submit" var="submitLocal" />
+<fmt:message bundle="${thisLocal}" key="add_advertisement.label.price" var="priceLocal"/>
+<fmt:message bundle="${thisLocal}" key="add_advertisement.label.category" var="categoryLocal"/>
+<fmt:message bundle="${thisLocal}" key="add_advertisement.label.location" var="locationLocal"/>
+<fmt:message bundle="${thisLocal}" key="add_advertisement.label.description" var="descriptionLocal"/>
+<fmt:message bundle="${thisLocal}" key="add_advertisement.label.title" var="titleLocal"/>
+<fmt:message bundle="${thisLocal}" key="add_advertisement.page.title" var="pageTitleLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.label.active_ads" var="activeAdsLocal"/>
+<fmt:message bundle="${thisLocal}" key="label.view_button" var="viewButtonLocal"/>
 <div>
 <head>
-    <title>Title</title>
+    <title>${pageTitleLocal}</title>
 </head>
 </div>
 <div>
@@ -25,15 +35,18 @@
         <div class="col-auto">
     <table style="with: 50%">
         <tr>
-            <td>Title</td>
+            <h3 class="text-center">${pageTitleLocal}</h3>
+        </tr>
+        <tr>
+            <td>${titleLocal}</td>
             <td><input type="text" name="ad_title" required/></td>
         </tr>
         <tr>
-            <td>Description</td>
+            <td>${descriptionLocal}</td>
             <td><input type="text" name="ad_description" required/></td>
         </tr>
         <tr>
-            <td>Location</td>
+            <td>${locationLocal}</td>
             <td>
                 <select  class="form-control" name="location_item" required>
                     <option value=""></option>
@@ -45,7 +58,7 @@
 
         </tr>
         <tr>
-            <td>Category</td>
+            <td>${categoryLocal}</td>
             <td>
             <select  class="form-control" name="category_item" required>
                 <option value=""></option>
@@ -56,11 +69,11 @@
             </td>
         </tr>
         <tr>
-            <td>Price</td>
+            <td>${priceLocal}</td>
             <td><input type="number" name="price" required/></td>
         </tr>
         </table>
-    <input type="submit" value="Submit" />
+    <input type="submit" value="${submitLocal}" />
         </div>
     </div>
 </form>

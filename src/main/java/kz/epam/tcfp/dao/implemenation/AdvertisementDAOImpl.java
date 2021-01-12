@@ -1,6 +1,7 @@
 package kz.epam.tcfp.dao.implemenation;
 
 import kz.epam.tcfp.dao.AdvertisementDAO;
+import kz.epam.tcfp.dao.ImageDAO;
 import kz.epam.tcfp.dao.connection.ClosingUtil;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
 import kz.epam.tcfp.dao.util.DBConstants;
@@ -22,6 +23,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     private static final Logger LOGGER = Logger.getLogger(AdvertisementDAOImpl.class);
     private static final Character PERCENT_SIGN = '%';
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
+
 
     public AdvertisementDAOImpl() {
     }
@@ -424,7 +426,23 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         advertisement.setPostedDate(new DateTimeInUTC(resultSet.getTimestamp(DBConstants.AD_POSTED_DATE)));
         advertisement.setCategory(new Category(resultSet.getLong(DBConstants.AD_CATEGORY_ID)));
         advertisement.setPrice(resultSet.getInt(DBConstants.AD_PRICE));
+        if (buildImage(advertisement) != null) {
+            advertisement.setImage(buildImage(advertisement));
+        }
         return advertisement;
     }
 
+    private Image buildImage(Advertisement advertisement) {
+        ImageDAO imageDAO = DAOFactory.getImageDAO();
+        Image image= null;
+        try {
+            image = imageDAO.getImage(advertisement.getAdId());
+            if (image != null) {
+                image.setAdvertisementId(advertisement.getAdId());
+            }
+        } catch (DAOException e) {
+            LOGGER.warn("Error while getting image", e);
+        }
+        return image;
+    }
 }

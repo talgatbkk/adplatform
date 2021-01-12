@@ -1,12 +1,12 @@
 package kz.epam.tcfp.model;
 
-import org.ocpsoft.prettytime.PrettyTime;
+
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Locale;
+
 
 /**
  * @author Talgat Bekkaliyev

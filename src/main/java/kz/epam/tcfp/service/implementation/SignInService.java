@@ -6,6 +6,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
+import kz.epam.tcfp.service.util.Encryption;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -33,7 +34,7 @@ public class SignInService extends PreviousPage implements Service {
         }
         SignInInput signInInput = new SignInInput();
         signInInput.setLogin(request.getParameter(ServiceConstants.USER_LOGIN));
-        signInInput.setPassword(request.getParameter(ServiceConstants.USER_PASSWORD));
+        signInInput.setPassword(Encryption.encrypt(request.getParameter(ServiceConstants.USER_PASSWORD)));
         UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {

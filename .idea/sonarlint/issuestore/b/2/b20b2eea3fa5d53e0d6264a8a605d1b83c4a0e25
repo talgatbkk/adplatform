@@ -1,7 +1,7 @@
 
-P
-java:S1068 "3Remove this unused "CATEGORY_ID_ALL" private field.(ÖÇ¡—8º€ÖÅí.
-\
-java:S1854*":Remove this useless assignment to local variable "userId".(‚â¹…ıÿÿÿÿ8º€ÖÅí.
 M
-java:S1481*"+Remove this unused "userId" local variable.(‚â¹…ıÿÿÿÿ8º€ÖÅí.
+java:S1481,"+Remove this unused "userId" local variable.(‚â¹…ıÿÿÿÿ8º€ÖÅí.
+U
+java:S1068""3Remove this unused "CATEGORY_ID_ALL" private field.(ëüƒ‚øÿÿÿÿ8º€ÖÅí.
+\
+java:S1854,":Remove this useless assignment to local variable "userId".(‚â¹…ıÿÿÿÿ8º€ÖÅí.

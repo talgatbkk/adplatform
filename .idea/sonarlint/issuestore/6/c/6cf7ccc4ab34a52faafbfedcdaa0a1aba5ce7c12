@@ -1,10 +1,10 @@
 
 O
-java:S4973@"9Use the "equals" method if value comparison was intended.(£à¹
-K
-java:S1481E".Remove this unused "imagePath" local variable.(œ„”8å“ÿˆï.
-Z
-java:S1854E"=Remove this useless assignment to local variable "imagePath".(œ„”8å“ÿˆï.
+java:S4973B"9Use the "equals" method if value comparison was intended.(£à¹
 a
-java:S2259@"KA "NullPointerException" could be thrown; "advertisement" is nullable here.(£à¹
-m	java:S117C"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â”¡ó8Â‰ï.
+java:S2259B"KA "NullPointerException" could be thrown; "advertisement" is nullable here.(£à¹
+K
+java:S1481G".Remove this unused "imagePath" local variable.(œ„”8å“ÿˆï.
+m	java:S117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â”¡ó8Â‰ï.
+Z
+java:S1854G"=Remove this useless assignment to local variable "imagePath".(œ„”8å“ÿˆï.
