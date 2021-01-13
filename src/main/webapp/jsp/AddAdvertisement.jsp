@@ -18,8 +18,7 @@
 <fmt:message bundle="${thisLocal}" key="add_advertisement.label.description" var="descriptionLocal"/>
 <fmt:message bundle="${thisLocal}" key="add_advertisement.label.title" var="titleLocal"/>
 <fmt:message bundle="${thisLocal}" key="add_advertisement.page.title" var="pageTitleLocal"/>
-<fmt:message bundle="${thisLocal}" key="profile.label.active_ads" var="activeAdsLocal"/>
-<fmt:message bundle="${thisLocal}" key="label.view_button" var="viewButtonLocal"/>
+
 <div>
 <head>
     <title>${pageTitleLocal}</title>

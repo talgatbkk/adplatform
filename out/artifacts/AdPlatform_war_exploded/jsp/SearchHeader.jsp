@@ -10,12 +10,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
+<fmt:message bundle="${thisLocal}" key="header.link.profile" var="profileLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.post_ad" var="postAdLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.add_category" var="addCategoryLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.add_location" var="addLocationLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.login" var="logInLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.sign_up" var="signUpLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.log_out" var="logOutLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.placeholder.search" var="placeholderSearchLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.button.find" var="findLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.label.all_categories" var="allCategoriesLocal"/>
 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-    <title>Title</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,19 +38,19 @@
         <form action="${pageContext.request.contextPath}/advertisement/search" method="post">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/user/view">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/user/view">${profileLocal} <span class="sr-only">(current)</span></a>
             </li>
             <c:if test="${sessionScope.role_id != 1}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">Post an advertisement</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">${postAdLocal}</a>
                 </li>
             </c:if>
             <c:if test="${sessionScope.role_id == 1}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/location/add">Add location</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/location/add">${addLocationLocal}</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/category/add">Add category</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/category/add">${addCategoryLocal}</a>
                 </li>
             </c:if>
 
@@ -63,7 +72,7 @@
             </li>
             <li class="nav-item active">
                             <select  class="form-control" name="category_item">
-                                <option value="">All</option>
+                                <option value="">${allCategoriesLocal}</option>
                                 <c:forEach items="${requestScope.categories}" var="category">
                                     <c:choose>
                                         <c:when test="${requestScope.category_selection == category.categoryId}">
@@ -75,20 +84,19 @@
                                     </c:choose>
                                 </c:forEach>
                             </select>
-
             </li>
             <li class="nav-item active">
                 <c:choose>
                     <c:when test="${requestScope.prev_search_input == null}">
-                    <input class="form-control" type="search" name="search_input" placeholder="Search" aria-label="Search">
+                    <input class="form-control" type="search" name="search_input" placeholder="${placeholderSearchLocal}" aria-label="Search">
                     </c:when>
                     <c:otherwise>
-                        <input class="form-control" type="search" value="${requestScope.prev_search_input}" name="search_input" placeholder="Search" aria-label="Search">
+                        <input class="form-control" type="search" value="${requestScope.prev_search_input}" name="search_input" placeholder="${placeholderSearchLocal}" aria-label="Search">
                     </c:otherwise>
                 </c:choose>
             </li>
             <li class="nav-item active">
-                <input class="form-control" type="submit" value="Submit" />
+                <input class="form-control" type="submit" value="${findLocal}" />
             </li>
         </ul>
         </form>
@@ -98,12 +106,12 @@
                 <c:choose>
                     <c:when test="${sessionScope.local == 'ru'}">
                         <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">En</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">English</a>
                         </li>
                     </c:when>
                     <c:when test="${sessionScope.local == 'en'}">
                         <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Ru</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Русский</a>
                         </li>
                     </c:when>
                 </c:choose>
@@ -111,24 +119,23 @@
             <div>
             <c:choose>
                 <c:when test="${sessionScope.userId == null}">
+
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/signin">Log in</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/signin">${logInLocal}</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/signup">${signUpLocal}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/user/logout">Log out</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/user/logout">${logOutLocal}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
             </div>
         </ul>
     </div>
-
 </nav>
-
 </body>
 </html>

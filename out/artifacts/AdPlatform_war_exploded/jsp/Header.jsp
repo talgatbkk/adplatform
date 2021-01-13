@@ -10,11 +10,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
-
+<fmt:message bundle="${thisLocal}" key="header.link.profile" var="profileLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.post_ad" var="postAdLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.add_category" var="addCategoryLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.add_location" var="addLocationLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.login" var="logInLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.sign_up" var="signUpLocal"/>
+<fmt:message bundle="${thisLocal}" key="header.link.log_out" var="logOutLocal"/>
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-    <title>Title</title>
 </head>
 <body>
 
@@ -27,19 +32,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/user/view">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/user/view">${profileLocal} <span class="sr-only">(current)</span></a>
             </li>
             <c:if test="${sessionScope.role_id != 1}">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">Post an advertisement</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">${postAdLocal}</a>
             </li>
             </c:if>
             <c:if test="${sessionScope.role_id == 1}">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/location/add">Add location</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/location/add">${addLocationLocal}</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/category/add">Add category</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/category/add">${addCategoryLocal}</a>
             </li>
             </c:if>
         </ul>
@@ -48,12 +53,12 @@
             <c:choose>
                 <c:when test="${sessionScope.local == 'ru'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">En</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">English</a>
                     </li>
                 </c:when>
                 <c:when test="${sessionScope.local == 'en'}">
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Ru</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Русский</a>
                     </li>
                 </c:when>
             </c:choose>
@@ -61,21 +66,20 @@
                 <c:choose>
                 <c:when test="${sessionScope.userId == null}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/signin">Log in</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/signin">${logInLocal}</a>
                 </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/signup">${signUpLocal}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/user/logout">Log out</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/user/logout">${logOutLocal}</a>
                     </li>
                 </c:otherwise>
                 </c:choose>
             </ul>
     </div>
 </nav>
-
 </body>
 </html>

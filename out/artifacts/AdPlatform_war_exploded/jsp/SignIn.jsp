@@ -12,10 +12,10 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
 
-<fmt:message bundle="${thisLocal}" key="local.label.login" var="loginLocal" />
-<fmt:message bundle="${thisLocal}" key="local.label.password" var="passwordLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.sign_in" var="signInLocal"/>
-<fmt:message bundle="${thisLocal}" key="local.label.incorrect_auth" var="incorrectAuthLocal"/>
+<fmt:message bundle="${thisLocal}" key="user.label.login" var="loginLocal" />
+<fmt:message bundle="${thisLocal}" key="user.label.password" var="passwordLocal"/>
+<fmt:message bundle="${thisLocal}" key="user.label.sign_in" var="signInLocal"/>
+<fmt:message bundle="${thisLocal}" key="user.label.incorrect_auth" var="incorrectAuthLocal"/>
 <div>
 <head>
     <title>${signInLocal}</title>

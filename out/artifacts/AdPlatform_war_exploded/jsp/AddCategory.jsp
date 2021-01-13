@@ -8,11 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="${sessionScope.language}" />
+<fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="language" var="thisLocal" />
+<fmt:message bundle="${thisLocal}" key="add_category.button.submit" var="submitLocal" />
+<fmt:message bundle="${thisLocal}" key="add_category.label.new_category" var="newCategoryLocal"/>
+<fmt:message bundle="${thisLocal}" key="add_category.page.title" var="pageTitleLocal"/>
 <div>
     <head>
-        <title>Title</title>
+        <title>${pageTitleLocal}</title>
     </head>
 </div>
 <div>
@@ -21,7 +24,7 @@
     </c:if>
     <jsp:include page="/jsp/Header.jsp"/>
     <form action="${pageContext.request.contextPath}/category/post" method="post">
-        <h4 class="text-center">Currently available categories</h4>
+        <h4 class="text-center">${pageTitleLocal}</h4>
         <div class="row justify-content-center">
             <ul class="list-group">
                 <c:forEach var="category" items="${requestScope.categories}">
@@ -34,9 +37,9 @@
             <div class="col-auto">
                 <table style="with: 50%">
                     <tr>
-                        <td>New category</td>
+                        <td>${newCategoryLocal}</td>
                         <td><input type="text" name="new_category" required/></td>
-                        <td><input type="submit" value="Submit"/></td>
+                        <td><input type="submit" value="${submitLocal}"/></td>
                     </tr>
                 </table>
 

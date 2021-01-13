@@ -11,7 +11,23 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
 
-<fmt:message bundle="${thisLocal}" key="view_ad.label.price_currency" var="priceCurrencyLocal" />
+<fmt:message bundle="${thisLocal}" key="user.label.login" var="loginLocal" />
+<fmt:message bundle="${thisLocal}" key="user.label.password" var="passwordLocal"/>
+<fmt:message bundle="${thisLocal}" key="user.label.sign_in" var="signInLocal"/>
+<fmt:message bundle="${thisLocal}" key="user.label.incorrect_auth" var="incorrectAuthLocal"/>
+<fmt:message bundle="${thisLocal}" key="view_advertisement.label.price_currency" var="priceCurrencyLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.message.select_image" var="selectImageLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.placeholder.your_comment" var="yourCommentLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.button.delete_ad" var="deleteAdLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.button.upload_image" var="uploadImageLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.label.comments" var="commentsLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.message.only_images" var="onlyImagesLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.label.no_comments" var="noCommentsLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.message.select_image_to_upload" var="selectImageToUploadLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.label.posted" var="postedLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.link.all_ads_user" var="allAdsOfThisUserLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.link.go_to_profile" var="goUserProfileLocal" />
+<fmt:message bundle="${thisLocal}" key="view_advertisement.button.post" var="postButtontLocal"/>
 
 <html>
 <head>
@@ -31,25 +47,21 @@
         });
     </script>
     <c:set var="imagePath"  value="${initParam.imageLocation}"/>
-    <title>Title</title>
+    <title>MyAds.kz ${requestScope.advertisement.title}</title>
 </head>
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
-
-
-
-
 <div class="container">
     <div class="row py-3">
         <div class="col-3 order-2" id="sticky-sidebar">
             <div class="sticky-top">
                 <div class="nav flex-column">
                     <a href="${pageContext.request.contextPath}/advertisement/search?search_user_id=${requestScope.advertisement.userId}">
-                        <p>All advertisements from this user</p>
+                        <p>${allAdsOfThisUserLocal}</p>
                     </a>
 
                     <a href="${pageContext.request.contextPath}/user/view?profile_id=${requestScope.advertisement.userId}">
-                        <p>Go to user's profile</p>
+                        <p>${goUserProfileLocal}</p>
                     </a>
                 </div>
             </div>
@@ -72,7 +84,7 @@
             <c:forEach items="${requestScope.phone_numbers}" var="phone">
                 <p>${phone.phoneNumber}</p>
             </c:forEach>
-            <p>Posted
+            <p>${postedLocal}
             <time class="timeago" datetime="${requestScope.advertisement.postedDate.time}">${requestScope.advertisement.postedDate}</time>
             </p>
         </div>
@@ -81,10 +93,10 @@
         <div>
             <c:if test="${requestScope.belongsToCurrentUser == true && requestScope.advertisement.image.path == null}">
                 <form action="${pageContext.request.contextPath}/advertisement/upload/image?ad_id=${requestScope.advertisement.adId}" method="post" enctype="multipart/form-data" onsubmit="return validateInput()">
-                    Select file to upload: <input type="file" name="file" id="uploadFile"/>
+                    ${selectImageToUploadLocal} <input type="file" name="file" id="uploadFile"/>
                     <br />
                     <br />
-                    <input class="btn btn--stroke full-width btn-outline-primary" type="submit" value="Upload image">
+                    <input class="btn btn--stroke full-width btn-outline-primary" type="submit" value="${uploadImageLocal}">
                 </form>
             </c:if>
         </div>
@@ -93,7 +105,7 @@
         <c:if test="${requestScope.belongsToCurrentUser == true || sessionScope.role_id == 1}">
         <form action="${pageContext.request.contextPath}/advertisement/delete" method="post">
             <input type="hidden" name="ad_id" value=${advertisement.adId}>
-            <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="Delete advertisement">
+            <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="${deleteAdLocal}">
         </form>
         </c:if>
         </div>
@@ -101,8 +113,8 @@
 <div class="container align-content-center">
     <div class="be-comment-block">
         <c:choose>
-        <c:when test="${requestScope.comments != null}">
-        <h4>Comments (${requestScope.comments.size()})</h4>
+        <c:when test="${requestScope.comments.size() != 0}">
+        <p>${commentsLocal} (${requestScope.comments.size()})</p>
         <c:forEach var="comment" items="${requestScope.comments}">
         <div class="be-comment">
             <div class="be-comment-content">
@@ -121,11 +133,9 @@
         </div>
         </c:forEach>
     </div>
-
     </c:when>
-    <c:when test="${requestScope.comments == null}">
-        <h1 class="comments-title">No comments</h1>
-
+    <c:when test="${requestScope.comments == null || requestScope.comments.size() == 0}">
+        <p class="comments-title">${noCommentsLocal}</p>
     </c:when>
     </c:choose>
     <c:if test="${sessionScope.userId != null}">
@@ -134,11 +144,11 @@
         <div class="row">
             <div>
                 <div >
-                    <textarea name="comment_content" required="" placeholder="Your comment"></textarea>
+                    <textarea name="comment_content" required="" placeholder="${yourCommentLocal}"></textarea>
                 </div>
             </div>
         </div>
-        <input class="btn" type="submit" value="Post" />
+        <input class="btn" type="submit" value="${postButtontLocal}" />
     </form>
     </c:if>
 
@@ -149,12 +159,12 @@
         if (document.getElementById('uploadFile').value != "") {
             let file = document.getElementById('uploadFile');
             if ( /\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false ) {
-                alert("Please select an image!");
+                alert("${onlyImagesLocal}");
                 return false;
             }
             return true;
         } else
-            alert("Please select your image");
+            alert("${selectImageLocal}");
             return false;
     };
 </script>

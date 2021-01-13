@@ -10,7 +10,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
-
 <fmt:message bundle="${thisLocal}" key="profile.label.login" var="loginLocal" />
 <fmt:message bundle="${thisLocal}" key="profile.label.email" var="emailLocal"/>
 <fmt:message bundle="${thisLocal}" key="profile.label.first_name" var="fNameLocal"/>
@@ -18,33 +17,34 @@
 <fmt:message bundle="${thisLocal}" key="profile.label.phone_number" var="phoneLocal"/>
 <fmt:message bundle="${thisLocal}" key="profile.label.second_phone_number" var="secondPhoneLocal"/>
 <fmt:message bundle="${thisLocal}" key="profile.label.active_ads" var="activeAdsLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.label.edit_profile" var="editProfileLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.label.change_password" var="changePasswordLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.label.delete_account" var="deleteAccountLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.label.ban_user" var="banAccountLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.label.unban_user" var="unbanAccountLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.message.confirm_ban" var="confirmBanLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.message.confirm_unban" var="confirmUnbanLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.message.confirm_delete" var="confirmDeleteLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.message.user_banned" var="userIsBannedLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.message.you_banned" var="youAreBannedLocal"/>
+<fmt:message bundle="${thisLocal}" key="profile.page.title" var="pageTitleLocal"/>
 <html>
 <head>
-
-    <title>Title</title>
+    <title>${pageTitleLocal}</title>
 </head>
 <body>
 <jsp:include page="/jsp/Header.jsp"/>
-
 <div class="container emp-profile">
         <div class="row">
-<%--            <div class="col-md-4">--%>
-<%--                <div class="profile-img">--%>
-<%--                    <img src="" alt=""/>--%>
-<%--&lt;%&ndash;                    <div class="file btn btn-lg btn-primary">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        Change Photo&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        <input type="file" name="file"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                    </div>&ndash;%&gt;--%>
-<%--                </div>--%>
             <c:if test="${sessionScope.userId == requestScope.customer.userId}">
             <div class="col-md-4">
                 <form action="${pageContext.request.contextPath}/user/open_editing" method="post">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="${editProfileLocal}"/>
                 </form>
             </div>
             <div class="col-md-4">
                 <form action="${pageContext.request.contextPath}/user/password" method="post">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Change Password"/>
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="${changePasswordLocal}"/>
                 </form>
             </div>
             </c:if>
@@ -119,12 +119,12 @@
                         </div>
                         <div>
                             <c:if test="${requestScope.customer.banned == true && requestScope.customer.userId == sessionScope.userId}">
-                                        <p class="text-danger" >You are banned from posting any ads!</p>
+                                        <p class="text-danger" >${youAreBannedLocal}</p>
                             </c:if>
                         </div>
                         <div>
                             <c:if test="${requestScope.customer.banned == true && sessionScope.userId == 2}">
-                                <p class="text-danger" >This user is banned from posting any ads!</p>
+                                <p class="text-danger" >${userIsBannedLocal}</p>
                             </c:if>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
         <c:when test="${requestScope.customer.userId == sessionScope.userId}">
         <form action="${pageContext.request.contextPath}/user/delete">
             <input type="hidden" name="del_user_id" value="${requestScope.customer.userId}">
-            <input class="btn-outline-danger" type="submit" value="Delete account" onclick="return confirm('Are you sure you want to delete?')" />
+            <input class="btn-outline-danger" type="submit" value="${deleteAccountLocal}" onclick="return confirm('${confirmDeleteLocal}')" />
         </form>
         </c:when>
         <c:when test="${sessionScope.role_id == 1}">
@@ -142,20 +142,18 @@
         <c:when test="${requestScope.customer.banned == true}">
         <form action="${pageContext.request.contextPath}/user/unban">
             <input type="hidden" name="unban_user_id" value="${requestScope.customer.userId}">
-            <input class="btn-outline-danger" type="submit" value="Unban this user" onclick="return confirm('Are you sure you want to unban this user?')" />
+            <input class="btn-outline-danger" type="submit" value="${unbanAccountLocal}" onclick="return confirm('${confirmUnbanLocal}')" />
         </form>
         </c:when>
         <c:otherwise>
         <form action="${pageContext.request.contextPath}/user/ban">
             <input type="hidden" name="ban_user_id" value="${requestScope.customer.userId}">
-            <input class="btn-outline-danger" type="submit" value="Ban this user" onclick="return confirm('Are you sure you want to ban this user?')" />
+            <input class="btn-outline-danger" type="submit" value="${banAccountLocal}" onclick="return confirm('${confirmBanLocal}')" />
         </form>
         </c:otherwise>
         </c:choose>
         </c:when>
         </c:choose>
-
 </div>
-
 </body>
 </html>

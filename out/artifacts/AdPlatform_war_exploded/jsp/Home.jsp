@@ -11,20 +11,15 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="language" var="thisLocal" />
 
-<fmt:message bundle="${thisLocal}" key="profile.label.login" var="loginLocal" />
-<fmt:message bundle="${thisLocal}" key="profile.label.email" var="emailLocal"/>
-<fmt:message bundle="${thisLocal}" key="profile.label.first_name" var="fNameLocal"/>
-<fmt:message bundle="${thisLocal}" key="profile.label.last_name" var="lNameLocal"/>
-<fmt:message bundle="${thisLocal}" key="profile.label.phone_number" var="phoneLocal"/>
-<fmt:message bundle="${thisLocal}" key="profile.label.second_phone_number" var="secondPhoneLocal"/>
-<fmt:message bundle="${thisLocal}" key="profile.label.active_ads" var="activeAdsLocal"/>
+<fmt:message bundle="${thisLocal}" key="home.page.title" var="pageTitleLocal"/>
+<fmt:message bundle="${thisLocal}" key="home.message.no_ads" var="noSuchAdsLocal"/>
+<fmt:message bundle="${thisLocal}" key="home.label.currency" var="currencyLocal"/>
 <fmt:message bundle="${thisLocal}" key="label.view_button" var="viewButtonLocal"/>
 
 <html>
 <head>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
-
     <c:if test="${sessionScope.local == 'en'}">
     <script src="../js/jquery.timeago.js" type="text/javascript"></script>
     </c:if>
@@ -37,16 +32,14 @@
             $("time.timeago").timeago();
         });
     </script>
-    <title>Advertisements of the customer</title>
+    <title>${pageTitleLocal}</title>
 </head>
 <body>
 <jsp:include page="/jsp/SearchHeader.jsp"/>
 <br>
     <c:choose>
     <c:when test="${requestScope.advertisements.size() == 0}">
-
-        <h3 class="text-center">No advertisements with such parameters</h3>
-
+        <h3 class="text-center">${noSuchAdsLocal}</h3>
     </c:when>
     <c:otherwise>
     <c:forEach var="advertisement" items="${requestScope.advertisements}">
@@ -66,11 +59,10 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-
                     <h5 class="card-title">${advertisement.title}</h5>
                     <p class="card-text">${advertisement.description}</p>
                     <c:if test="${advertisement.price != 0}">
-                        <p class="card-text">${advertisement.price} tenge</p>
+                        <p class="card-text">${advertisement.price} ${currencyLocal}</p>
                     </c:if>
                     <time class="timeago" datetime="${advertisement.postedDate.time}">${advertisement.postedDate}</time>
                     <p class="card-text">${advertisement.location.name}</p>
@@ -81,7 +73,6 @@
             </div>
         </div>
     </div>
-
     </c:forEach>
     </c:otherwise>
     </c:choose>
