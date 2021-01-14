@@ -15,18 +15,17 @@
                     <artifactId>tomcat9-maven-plugin</artifactId>
                     <version>2.3-SNAPSHOT</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>8</source>
+                        <target>8</target>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>9</source>
-                    <target>9</target>
-                </configuration>
-            </plugin>
-        </plugins>
+
 
 
     </build>
@@ -76,10 +75,18 @@
 
         <!-- https://mvnrepository.com/artifact/jstl/jstl -->
         <dependency>
-            <groupId>jstl</groupId>
+            <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-catalina</artifactId>-->
+<!--            <version>7.0.106</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
 
         <!-- To compile JSP files -->
         <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->

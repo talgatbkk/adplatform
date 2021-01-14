@@ -33,7 +33,7 @@
                     <tr>
                         <td>${parentLocationLocal}</td>
                         <td>
-                            <select  class="form-control" name="parent_id" required>
+                            <select class="form-control" name="parent_id" required>
                                 <option value=""></option>
                                 <c:forEach items="${requestScope.locations}" var="location">
                                     <option value="${location.id}">${location.name}</option>
