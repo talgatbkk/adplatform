@@ -15,7 +15,8 @@
 <fmt:message bundle="${thisLocal}" key="home.message.no_ads" var="noSuchAdsLocal"/>
 <fmt:message bundle="${thisLocal}" key="home.label.currency" var="currencyLocal"/>
 <fmt:message bundle="${thisLocal}" key="label.view_button" var="viewButtonLocal"/>
-
+<fmt:message bundle="${thisLocal}" key="pagination.button.next" var="nextButtonLocal"/>
+<fmt:message bundle="${thisLocal}" key="pagination.button.previous" var="previousButtonLocal"/>
 <html>
 <head>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -76,16 +77,16 @@
     </c:forEach>
     </c:otherwise>
     </c:choose>
-<br>
 <div class="text-center">
         <ul class="pagination justify-content-center">
             <c:if test="${requestScope.cur_page > 1}">
-                <li><a class="btn btn-light" href="/home?page=${requestScope.cur_page - 1}">Previous</a></li>
+                <li><a class="btn btn-light" href="/home?page=${requestScope.cur_page - 1}">${previousButtonLocal}</a></li>
             </c:if>
             <c:if test="${requestScope.total_ad_count / requestScope.page_ad_count > requestScope.cur_page}">
-                <li><a class="btn btn-light" href="home?page=${requestScope.cur_page + 1}">Next</a></li>
+                <li><a class="btn btn-light" href="home?page=${requestScope.cur_page + 1}">${nextButtonLocal}</a></li>
             </c:if>
         </ul>
 </div>
+<jsp:include page="/jsp/Footer.jsp"/>
 </body>
 </html>

@@ -106,6 +106,6 @@
             }
             };
         </script>
-
+<jsp:include page="/jsp/StickyFooter.jsp"/>
 </body>
 </html>

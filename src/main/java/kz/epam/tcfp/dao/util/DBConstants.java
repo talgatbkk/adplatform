@@ -59,14 +59,21 @@ public class DBConstants {
     public static final String GET_LOCATIONS = "SELECT * FROM location WHERE language_id = ? ORDER BY location_name";
     public static final String GET_LANGUAGE_ID_BY_NAME = "SELECT * FROM language WHERE language_name = ?";
     public static final String GET_AD_BY_CATEGORY = "SELECT * FROM advertisement WHERE category_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_GET_AD_BY_CATEGORY = "SELECT COUNT(*) FROM advertisement WHERE category_id = ?";
     public static final String GET_AD_BY_LOCATION = "SELECT * FROM advertisement WHERE location_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_GET_AD_BY_LOCATION = "SELECT COUNT(*) FROM advertisement WHERE location_id = ?";
     public static final String GET_ALL_ADS = "SELECT * FROM advertisement ORDER BY posted_date DESC LIMIT ?, ?";
-    public static final String GET_COUNT_ALL_ADS = "SELECT COUNT(*) FROM advertisement";
+    public static final String COUNT_GET_ALL_ADS = "SELECT COUNT(*) FROM advertisement";
     public static final String GET_AD_BY_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE category_id = ? AND location_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_GET_AD_BY_LOCATION_AND_CATEGORY = "SELECT COUNT(*) FROM advertisement WHERE category_id = ? AND location_id = ?";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION = "SELECT * FROM advertisement WHERE advertisement_title LIKE ? OR description LIKE ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION = "SELECT COUNT(*) FROM advertisement WHERE advertisement_title LIKE ? OR description LIKE ?";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND category_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_CATEGORY = "SELECT COUNT(*) FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND category_id = ?";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION = "SELECT COUNT(*) FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ?";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT COUNT(*) FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
     public static final String DELETE_AD_BY_USER_ID_AND_AD_ID = "DELETE FROM advertisement WHERE advertisement_id = ?";
     public static final String DELETE_USER_ACCOUNT = "DELETE FROM user WHERE user_id = ?";
     public static final String BAN_USER_ACCOUNT = "UPDATE user SET ban = TRUE WHERE user_id = ?";
@@ -83,3 +90,4 @@ public class DBConstants {
 
 
 }
+

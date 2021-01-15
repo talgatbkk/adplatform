@@ -82,7 +82,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByCategory(Long categoryId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByCategory(Long categoryId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -92,6 +92,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_AD_BY_CATEGORY);
             preparedStatement.setLong(1, categoryId);
+            preparedStatement.setInt(2, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(3, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -110,7 +112,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -121,6 +123,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             preparedStatement = connection.prepareStatement(DBConstants.GET_AD_BY_LOCATION_AND_CATEGORY);
             preparedStatement.setLong(1, categoryId);
             preparedStatement.setLong(2, locationId);
+            preparedStatement.setInt(3, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(4, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -139,7 +143,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByLocation(Long locationId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByLocation(Long locationId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -149,6 +153,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_AD_BY_LOCATION);
             preparedStatement.setLong(1, locationId);
+            preparedStatement.setInt(2, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(3, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -167,7 +173,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -179,6 +185,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
             preparedStatement.setLong(3, locationId);
             preparedStatement.setLong(4, categoryId);
+            preparedStatement.setInt(5, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(6, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -197,7 +205,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -208,6 +216,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
             preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
             preparedStatement.setLong(3, categoryId);
+            preparedStatement.setInt(4, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(5, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -226,7 +236,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -237,6 +247,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
             preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
             preparedStatement.setLong(3, locationId);
+            preparedStatement.setInt(4, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(5, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -255,7 +267,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> searchAdvertisementsByDescription(String descriptionInput) throws DAOException {
+    public List<Advertisement> searchAdvertisementsByDescription(String descriptionInput, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -265,6 +277,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             preparedStatement = connection.prepareStatement(DBConstants.SEARCH_AD_BY_TITLE_AND_DESCRIPTION);
             preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
             preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setInt(3, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(4, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
@@ -280,6 +294,183 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connectionPool.putBackConnectionToPool(connection);
         }
         return advertisements;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByCategory(Long categoryId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_GET_AD_BY_CATEGORY);
+            preparedStatement.setLong(1, categoryId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_GET_AD_BY_LOCATION_AND_CATEGORY);
+            preparedStatement.setLong(1, categoryId);
+            preparedStatement.setLong(2, locationId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByLocation(Long locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_GET_AD_BY_LOCATION);
+            preparedStatement.setLong(1, locationId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY);
+            preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setLong(3, locationId);
+            preparedStatement.setLong(4, categoryId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_CATEGORY);
+            preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setLong(3, categoryId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION);
+            preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setLong(3, locationId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer countSearchAdvertisementsByDescription(String descriptionInput) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION);
+            preparedStatement.setString(1, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            preparedStatement.setString(2, PERCENT_SIGN + descriptionInput + PERCENT_SIGN);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
     }
 
 
@@ -425,7 +616,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         ResultSet resultSet = null;
         try {
             connection = connectionPool.getExistingConnectionFromPool();
-            preparedStatement = connection.prepareStatement(DBConstants.GET_COUNT_ALL_ADS);
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_GET_ALL_ADS);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt(COLUMN_INDEX_ONE);

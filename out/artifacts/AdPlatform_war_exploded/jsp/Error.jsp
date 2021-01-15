@@ -20,6 +20,6 @@
 <jsp:include page="/jsp/Header.jsp"/>
 
 <h3 class="text-center">${errorOccuredLocal}</h3>
-
+<jsp:include page="/jsp/StickyFooter.jsp"/>
 </body>
 </html>

@@ -49,6 +49,6 @@
 </div>
 </div>
 </div>
-
+<jsp:include page="/jsp/StickyFooter.jsp"/>
 </body>
 </html>

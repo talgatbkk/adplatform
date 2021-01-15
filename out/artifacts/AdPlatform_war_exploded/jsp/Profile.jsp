@@ -155,5 +155,6 @@
         </c:when>
         </c:choose>
 </div>
+<jsp:include page="/jsp/StickyFooter.jsp"/>
 </body>
 </html>

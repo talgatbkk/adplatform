@@ -43,14 +43,11 @@ public class FindAdsService extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-
         String pageInput = request.getParameter(PAGE_NUMBER);
         Integer page = 1;
         if (pageInput != null && !pageInput.isEmpty()) {
             page = Integer.parseInt(pageInput);
         }
-
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
         LocationDAO locationDAO = DAOFactory.getLocationDAO();

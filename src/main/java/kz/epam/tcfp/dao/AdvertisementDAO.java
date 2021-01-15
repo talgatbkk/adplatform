@@ -19,14 +19,20 @@ public interface AdvertisementDAO {
     Long getLanguageIdByName(String languageName) throws DAOException;
     List<Advertisement> getAllAdvertisements(Integer page) throws DAOException;
     Integer getCountAllAdvertisements() throws DAOException;
-    List<Advertisement> searchAdvertisementsByCategory(Long categoryId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByLocation(Long locationId) throws DAOException;
     boolean deleteAdvertisementByUserIdAndAdId(Long adId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId) throws DAOException;
-    List<Advertisement> searchAdvertisementsByDescription(String descriptionInput) throws DAOException;
-
+    List<Advertisement> searchAdvertisementsByCategory(Long categoryId, Integer page) throws DAOException;
+    List<Advertisement> searchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId, Integer page) throws DAOException;
+    List<Advertisement> searchAdvertisementsByLocation(Long locationId, Integer page) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId, Integer page) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId, Integer page) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId, Integer page) throws DAOException;
+    List<Advertisement> searchAdvertisementsByDescription(String descriptionInput, Integer page) throws DAOException;
+    Integer countSearchAdvertisementsByCategory(Long categoryId) throws DAOException;
+    Integer countSearchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId) throws DAOException;
+    Integer countSearchAdvertisementsByLocation(Long locationId) throws DAOException;
+    Integer countSearchAdvertisementsByDescriptionAndCategoryAndLocation(String descriptionInput, Long categoryId, Long locationId) throws DAOException;
+    Integer countSearchAdvertisementsByDescriptionAndCategory(String descriptionInput, Long categoryId) throws DAOException;
+    Integer countSearchAdvertisementsByDescriptionAndLocation(String descriptionInput, Long locationId) throws DAOException;
+    Integer countSearchAdvertisementsByDescription(String descriptionInput) throws DAOException;
 
 }

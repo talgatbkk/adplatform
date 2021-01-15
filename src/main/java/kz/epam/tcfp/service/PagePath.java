@@ -7,6 +7,7 @@ package kz.epam.tcfp.service;
 public class PagePath {
 
     public static final String HOME_JSP = "/jsp/Home.jsp";
+    public static final String SEARCH_JSP = "/jsp/Search.jsp";
     public static final String ERROR_JSP = "jsp/Error.jsp";
 
     public static final String INFORM_BANNED_JSP = "/jsp/InformBanned.jsp";
