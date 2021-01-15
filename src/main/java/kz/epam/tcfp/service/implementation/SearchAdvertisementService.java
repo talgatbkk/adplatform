@@ -31,6 +31,7 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
     private static final Logger LOGGER = Logger.getLogger(SearchAdvertisementService.class);
     private static final Long LOCATION_ID_DEFAULT = 1L;
     private static final String EMPTY_STRING = "";
+    public static final String PAGE_NUMBER = "page";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,6 +67,11 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
         } else {
             request.setAttribute(ServiceConstants.PREVIOUS_SEARCH_INPUT, EMPTY_STRING);
         }
+        String pageInput = request.getParameter(PAGE_NUMBER);
+        Integer page = 1;
+        if (pageInput != null && !pageInput.isEmpty()) {
+            page = Integer.parseInt(pageInput);
+        }
 
         AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
@@ -88,7 +94,7 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
                 } else if (locationId != null) {
                     advertisements = advertisementDAO.searchAdvertisementsByLocation(locationId);
                 } else {
-                    advertisements = advertisementDAO.getAllAdvertisements();
+                    advertisements = advertisementDAO.getAllAdvertisements(1);
                 }
             } else {
                 if (categoryId != null && locationId != null) {

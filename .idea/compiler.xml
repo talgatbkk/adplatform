@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AdPlatform" target="9" />
+      <module name="AdPlatform" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

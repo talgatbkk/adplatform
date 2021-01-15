@@ -35,10 +35,13 @@ public class ServiceConstants {
     public static final String USER_PASSWORD = "password";
     public static final String USER_PROFILE_ID = "profile_id";
     public static final String ADVERTISEMENT_LIST = "advertisements";
+    public static final String TOTAL_ADVERTISEMENT_COUNT = "total_ad_count";
+    public static final String PER_PAGE_ADVERTISEMENT_COUNT = "page_ad_count";
     public static final String CATEGORY_LIST = "categories";
     public static final String LOCATION_LIST = "locations";
     public static final String COMMENT_LIST = "comments";
     public static final String PHONE_NUMBER_LIST = "phone_numbers";
+    public static final String CURRENT_PAGE_NUMBER = "cur_page";
 
     public static final String ADVERTISEMENT = "advertisement";
     public static final String IMAGE_PATH = "image_path";

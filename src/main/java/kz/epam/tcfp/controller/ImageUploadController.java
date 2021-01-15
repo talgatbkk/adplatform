@@ -39,7 +39,6 @@ public class ImageUploadController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-
         String savePath = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {

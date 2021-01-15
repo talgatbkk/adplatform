@@ -76,5 +76,16 @@
     </c:forEach>
     </c:otherwise>
     </c:choose>
+<br>
+<div class="text-center">
+        <ul class="pagination justify-content-center">
+            <c:if test="${requestScope.cur_page > 1}">
+                <li><a class="btn btn-light" href="/home?page=${requestScope.cur_page - 1}">Previous</a></li>
+            </c:if>
+            <c:if test="${requestScope.total_ad_count / requestScope.page_ad_count > requestScope.cur_page}">
+                <li><a class="btn btn-light" href="home?page=${requestScope.cur_page + 1}">Next</a></li>
+            </c:if>
+        </ul>
+</div>
 </body>
 </html>

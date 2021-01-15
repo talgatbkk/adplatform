@@ -22,6 +22,8 @@ import java.util.List;
 public class AdvertisementDAOImpl implements AdvertisementDAO {
     private static final Logger LOGGER = Logger.getLogger(AdvertisementDAOImpl.class);
     private static final Character PERCENT_SIGN = '%';
+    public static final int COLUMN_INDEX_ONE = 1;
+
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
 
@@ -389,15 +391,16 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> getAllAdvertisements() throws DAOException {
+    public List<Advertisement> getAllAdvertisements(Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Advertisement> advertisements = new ArrayList<>();
-
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_ALL_ADS);
+            preparedStatement.setInt(1, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(2, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement;
@@ -413,6 +416,29 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connectionPool.putBackConnectionToPool(connection);
         }
         return advertisements;
+    }
+
+    @Override
+    public Integer getCountAllAdvertisements() throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.GET_COUNT_ALL_ADS);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(COLUMN_INDEX_ONE);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex){
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
     }
 
 

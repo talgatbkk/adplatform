@@ -17,7 +17,8 @@ public interface AdvertisementDAO {
     Integer getAdvertisementCountById(Long userId) throws DAOException;
     boolean postAdvertisement(Advertisement advertisement) throws DAOException;
     Long getLanguageIdByName(String languageName) throws DAOException;
-    List<Advertisement> getAllAdvertisements() throws DAOException;
+    List<Advertisement> getAllAdvertisements(Integer page) throws DAOException;
+    Integer getCountAllAdvertisements() throws DAOException;
     List<Advertisement> searchAdvertisementsByCategory(Long categoryId) throws DAOException;
     List<Advertisement> searchAdvertisementsByCategoryAndLocation(Long categoryId, Long locationId) throws DAOException;
     List<Advertisement> searchAdvertisementsByLocation(Long locationId) throws DAOException;
