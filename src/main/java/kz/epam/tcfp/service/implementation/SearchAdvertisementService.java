@@ -76,8 +76,6 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
         if (pageInput != null && !pageInput.isEmpty()) {
             page = Integer.parseInt(pageInput);
         }
-
-
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         AdvertisementPage advertisementPage = null;

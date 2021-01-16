@@ -41,7 +41,6 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         HttpSession session = request.getSession(true);
         String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-
         Long adId = null;
         if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
             adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
@@ -63,11 +62,11 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
             LOGGER.warn("Error in DAO while getting advertisement data", e);
         }
         request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, false);
-        if (advertisement.getUserId() == userId) {
+        if (advertisement.getUserId().equals(userId)) {
             request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, true);
         }
         String imagePath = null;
-        if (image.getPath() != null) {
+        if (image != null) {
             imagePath = image.getPath();
         }
         request.setAttribute(ServiceConstants.ADVERTISEMENT, advertisement);

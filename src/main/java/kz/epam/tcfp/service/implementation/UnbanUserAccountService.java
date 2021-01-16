@@ -20,7 +20,7 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class UnbanUserAccountService extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(BanUserAccountService.class);
+    private static final Logger LOGGER = Logger.getLogger(UnbanUserAccountService.class);
     public static final String USER_VIEW_PROFILE_SERVICE = "/user/view";
     private static final Long ADMIN_ROLE_ID = 1L;
     private UserDAO userDAO = DAOFactory.getUserDAO();
@@ -29,7 +29,6 @@ public class UnbanUserAccountService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         Long userRoleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
 
         Long userIdToBan = null;
@@ -37,9 +36,9 @@ public class UnbanUserAccountService extends PreviousPage implements Service {
         if (userIdInputToBan != null && !userIdInputToBan.isEmpty()) {
             userIdToBan = Long.parseLong(userIdInputToBan);
         }
-        if (userRoleId == ADMIN_ROLE_ID) {
+        if (userRoleId.equals(ADMIN_ROLE_ID)) {
             try {
-                if (userDAO.unbanUserAccount(userIdToBan)) {
+                if (Boolean.TRUE.equals(userDAO.unbanUserAccount(userIdToBan))) {
                     response.sendRedirect(USER_VIEW_PROFILE_SERVICE + QUESTION_MARK
                                             + ServiceConstants.USER_PROFILE_ID + EQUAL_SIGN + userIdToBan);
                     return;

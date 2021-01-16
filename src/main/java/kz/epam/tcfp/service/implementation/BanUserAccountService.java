@@ -37,9 +37,9 @@ public class BanUserAccountService extends PreviousPage implements Service {
             userIdToBan = Long.parseLong(userIdInputToBan);
         }
 
-        if (userRoleId == ADMIN_ROLE_ID) {
+        if (userRoleId.equals(ADMIN_ROLE_ID)) {
             try {
-                if (userDAO.banUserAccount(userIdToBan)) {
+                if (Boolean.TRUE.equals(userDAO.banUserAccount(userIdToBan))) {
                     response.sendRedirect(USER_VIEW_PROFILE_SERVICE + QUESTION_MARK
                             + ServiceConstants.USER_PROFILE_ID + EQUAL_SIGN + userIdToBan);
                     return;

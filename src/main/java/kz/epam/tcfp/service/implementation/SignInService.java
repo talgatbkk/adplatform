@@ -39,7 +39,7 @@ public class SignInService extends PreviousPage implements Service {
 
         User user = null;
         try {
-            if (!userDAO.authenticateUser(signInInput)){
+            if (Boolean.FALSE.equals(!userDAO.authenticateUser(signInInput))){
                 if (signInInput.getLogin() != null) {
                     request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 }
