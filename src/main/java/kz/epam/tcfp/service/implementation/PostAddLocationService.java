@@ -26,7 +26,8 @@ public class PostAddLocationService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAddLocationService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     public static final String ADMIN_ADD_LOCATION = "/location/add";
-
+    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,10 +59,6 @@ public class PostAddLocationService extends PreviousPage implements Service {
         Location location = new Location();
         location.setName(locationName);
         location.setParentId(parentLocationId);
-
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        LocationDAO locationDAO = DAOFactory.getLocationDAO();
-
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             location.setLanguageId(languageId);

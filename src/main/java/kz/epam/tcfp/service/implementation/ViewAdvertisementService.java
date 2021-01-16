@@ -29,6 +29,11 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(ViewAdvertisementService.class);
     public static final String IMAGE_LOCATION_PARAMETER = "imageLocation";
     public static final char SLASH = '/';
+    AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private ImageDAO imageDAO = DAOFactory.getImageDAO();
+    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private CommentDAO commentDAO = DAOFactory.getCommentDAO();
+    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,11 +41,7 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         HttpSession session = request.getSession(true);
         String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        ImageDAO imageDAO = DAOFactory.getImageDAO();
-        UserDAO userDAO = DAOFactory.getUserDAO();
-        CommentDAO commentDAO = DAOFactory.getCommentDAO();
-        LocationDAO locationDAO = DAOFactory.getLocationDAO();
+
         Long adId = null;
         if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
             adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
@@ -61,18 +62,16 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting advertisement data", e);
         }
-
         request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, false);
         if (advertisement.getUserId() == userId) {
             request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, true);
         }
-        String ImagePath = null;
-        if (image != null) {
-            String imagePath = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);
-            ImagePath = image.getPath();
+        String imagePath = null;
+        if (image.getPath() != null) {
+            imagePath = image.getPath();
         }
         request.setAttribute(ServiceConstants.ADVERTISEMENT, advertisement);
-        request.setAttribute(ServiceConstants.IMAGE_PATH, ImagePath);
+        request.setAttribute(ServiceConstants.IMAGE_PATH, imagePath);
         request.setAttribute(ServiceConstants.COMMENT_LIST, comments);
         request.setAttribute(ServiceConstants.LOCATION, location);
         request.setAttribute(ServiceConstants.PHONE_NUMBER_LIST, phoneNumbers);

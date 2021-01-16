@@ -1,3 +1,4 @@
 
-_	Web:S5254"@Add "lang" and/or "xml:lang" attributes to this "<html>" element(œ÷Ãûÿÿÿÿ8±íŒõì.
-hWeb:DoctypePresenceCheck":Insert a <!DOCTYPE> declaration to before this <html> tag.(œ÷Ãûÿÿÿÿ8±íŒõì.
+jWeb:DoctypePresenceCheck":Insert a <!DOCTYPE> declaration to before this <html> tag.(œ÷Ãûÿÿÿÿ8±íŒõì.
+JWeb:PageWithoutTitleCheck"Add a <title> tag to this page.(Õ¶¯M8ÕÔ¯µğ.
+a	Web:S5254"@Add "lang" and/or "xml:lang" attributes to this "<html>" element(œ÷Ãûÿÿÿÿ8±íŒõì.

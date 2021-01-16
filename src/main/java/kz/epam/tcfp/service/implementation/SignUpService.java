@@ -28,6 +28,7 @@ public class SignUpService extends PreviousPage implements Service {
 
     private static final Logger LOGGER = Logger.getLogger(SignUpService.class);
     private static final String SIGN_UP_SERVICE = "/signup";
+    private UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +38,6 @@ public class SignUpService extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         SignUpInput signUpInput = buildSignUpInput(request);
-        UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
             boolean isEmailTaken = userDAO.isEmailTaken(signUpInput);

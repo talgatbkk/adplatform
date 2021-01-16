@@ -23,6 +23,7 @@ public class BanUserAccountService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(BanUserAccountService.class);
     public static final String USER_VIEW_PROFILE_SERVICE = "/user/view";
     private static final Long ADMIN_ROLE_ID = 1L;
+    private UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +37,6 @@ public class BanUserAccountService extends PreviousPage implements Service {
         if (userIdInputToBan != null && !userIdInputToBan.isEmpty()){
             userIdToBan = Long.parseLong(userIdInputToBan);
         }
-        UserDAO userDAO = DAOFactory.getUserDAO();
 
         if (userRoleId == ADMIN_ROLE_ID) {
             try {

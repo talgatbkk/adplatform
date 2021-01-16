@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="AdPlatform">
+    <output-path>$PROJECT_DIR$/out/artifacts/AdPlatform</output-path>
+    <root id="archive" name="AdPlatform.war">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/AdPlatform/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

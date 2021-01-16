@@ -1,5 +1,7 @@
 
-H
-java:S2699"-Add at least one assertion to this test case.(‰È¯¹ùÿÿÿÿ
+;
+java:S5785 "Use assertEquals instead.(ì·™ùÿÿÿÿ8ö¶èÒğ.
 H
 java:S2699'"-Add at least one assertion to this test case.( õúêÿÿÿÿÿ
+S
+java:S59768"6Replace these 3 tests with a single Parameterized one.(Ş…¸Ì8¼êşÒğ.

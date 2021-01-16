@@ -30,7 +30,7 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
     public static final String NEW_PASSWORD = "new_pass";
     public static final String OLD_PASSWORD = "old_pass";
     public static final String INCORRECT_OLD_PASSWORD = "wrong_pass";
-
+    private UserDAO userDAO = DAOFactory.getUserDAO();
 
 
     @Override
@@ -47,12 +47,9 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
-
-
         SignUpInput userWithNewPassword = new SignUpInput();
         userWithNewPassword.setUserId(userId);
         userWithNewPassword.setPassword(Encryption.encrypt(request.getParameter(OLD_PASSWORD)));
-        UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
             if (userDAO.authenticateUserById(userWithNewPassword)) {

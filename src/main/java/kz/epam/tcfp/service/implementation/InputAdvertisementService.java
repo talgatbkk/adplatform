@@ -29,6 +29,10 @@ import java.util.List;
 public class InputAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(InputAdvertisementService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
+    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,10 +50,6 @@ public class InputAdvertisementService extends PreviousPage implements Service {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        UserDAO userDAO = DAOFactory.getUserDAO();
-        CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
-        LocationDAO locationDAO = DAOFactory.getLocationDAO();
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         try {

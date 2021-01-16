@@ -25,13 +25,12 @@ import java.util.List;
 public class EditProfileService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(EditProfileService.class);
     private static final String PROFILE = "/profile";
-
+    private UserDAO userDAO = DAOFactory.getUserDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
             user= userDAO.getUserById(userId);
@@ -45,7 +44,6 @@ public class EditProfileService extends PreviousPage implements Service {
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while editing user account info", e);
         }
-
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
         request.getRequestDispatcher(PROFILE).forward(request, response);

@@ -33,6 +33,9 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
     private static final Long LOCATION_ID_DEFAULT = 1L;
     private static final String EMPTY_STRING = "";
     public static final String PAGE_NUMBER = "page";
+    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,9 +77,7 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
             page = Integer.parseInt(pageInput);
         }
 
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
-        LocationDAO locationDAO = DAOFactory.getLocationDAO();
+
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         List<Advertisement> advertisements = null;

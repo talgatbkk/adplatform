@@ -23,14 +23,14 @@ import java.io.IOException;
 public class PostCommentService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostCommentService.class);
     private static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
-
+    private CommentDAO commentDAO = DAOFactory.getCommentDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         Long adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
-        CommentDAO commentDAO = DAOFactory.getCommentDAO();
+
 
         Comment comment = new Comment();
         comment.setAuthorId(userId);

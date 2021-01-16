@@ -171,3 +171,9 @@ q
 Asrc/main/java/kz/epam/tcfp/dao/implemenation/CategoryDAOImpl.java,0/0/00f3eb808aab91e38c059a3c4f149a4defb56bf0
 g
 7src/main/java/kz/epam/tcfp/service/util/Encryption.java,e/5/e55b4a07ed1b38cf1574200e88615b9169a8b950
+N
+src/main/webapp/jsp/Footer.jsp,c/4/c4016c9aca1084533c2cfc134be07457aae071ae
+T
+$src/main/webapp/jsp/StickyFooter.jsp,8/2/8265321a2ec1fe7df6982752e898c02c9759dd00
+N
+src/main/webapp/jsp/Search.jsp,3/6/36deea7d3bd18d91b6ce6544817485b429659506

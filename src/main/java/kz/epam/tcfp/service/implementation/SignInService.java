@@ -24,6 +24,7 @@ import java.io.IOException;
 public class SignInService extends PreviousPage implements Service {
     private static final Logger logger = Logger.getLogger(SignInService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
+    private UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +36,7 @@ public class SignInService extends PreviousPage implements Service {
         SignInInput signInInput = new SignInInput();
         signInInput.setLogin(request.getParameter(ServiceConstants.USER_LOGIN));
         signInInput.setPassword(Encryption.encrypt(request.getParameter(ServiceConstants.USER_PASSWORD)));
-        UserDAO userDAO = DAOFactory.getUserDAO();
+
         User user = null;
         try {
             if (!userDAO.authenticateUser(signInInput)){

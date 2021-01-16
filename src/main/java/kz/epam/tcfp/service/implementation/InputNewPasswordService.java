@@ -24,8 +24,6 @@ public class InputNewPasswordService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
-
-
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         if (userId == null) {
             request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);

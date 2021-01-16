@@ -27,6 +27,8 @@ public class OpenProfileService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(OpenProfileService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     private static final String USER_PROFILE_JSP = "/user/profile";
+    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,8 +45,6 @@ public class OpenProfileService extends PreviousPage implements Service {
         } else {
             profileId = userId;
         }
-        UserDAO userDAO = DAOFactory.getUserDAO();
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         User user = null;
         try {
             user = userDAO.getUserById(profileId);
@@ -61,7 +61,6 @@ public class OpenProfileService extends PreviousPage implements Service {
         }
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
-        session = request.getSession(true);
         request.getRequestDispatcher(USER_PROFILE_JSP).forward(request, response);
 
     }

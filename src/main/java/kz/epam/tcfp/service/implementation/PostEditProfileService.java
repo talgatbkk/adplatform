@@ -28,7 +28,7 @@ public class PostEditProfileService extends PreviousPage implements Service {
     private static final String SIGN_IN_SERVICE = "/signin";
     private static final String USER_PROFILE_EDIT_SERVICE = "/user/open_editing";
     public static final String EMAIL_TAKEN = "email_taken";
-
+    private UserDAO userDAO = DAOFactory.getUserDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -43,10 +43,8 @@ public class PostEditProfileService extends PreviousPage implements Service {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
-
         SignUpInput editedUser = buildEditedUser(request);
         editedUser.setUserId(userId);
-        UserDAO userDAO = DAOFactory.getUserDAO();
         User user = null;
         try {
             if (editedUser.getFirstName() != null && !editedUser.getFirstName().isEmpty()) {

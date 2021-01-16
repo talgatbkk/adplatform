@@ -24,7 +24,7 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
     private static final Logger LOGGER = Logger.getLogger(DeleteAdvertisementService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     private static final Long ADMIN_ROLE_ID = 1L;
-
+    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -36,17 +36,12 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
             response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
-
         Long roleId = null;
         if (session.getAttribute(ServiceConstants.USER_ROLE_ID) != null){
             roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
         }
-
-
         Long adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
         Advertisement advertisement = null;
-
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);
             if (advertisement.getUserId() == userId || roleId == ADMIN_ROLE_ID) {

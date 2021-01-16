@@ -28,6 +28,8 @@ import java.util.List;
 public class OpenAddCategoryService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(OpenAddLocationService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
+    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -47,8 +49,6 @@ public class OpenAddCategoryService extends PreviousPage implements Service {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
-        AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-        CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
         List<Category> categories = new ArrayList<>();
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
