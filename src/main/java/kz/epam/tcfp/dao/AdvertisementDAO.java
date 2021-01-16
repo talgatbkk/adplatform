@@ -12,7 +12,8 @@ import java.util.List;
 public interface AdvertisementDAO {
 
 
-    List<Advertisement> getAdvertisementByUserId(Long userId) throws DAOException;
+    List<Advertisement> getAdvertisementByUserId(Long userId, Integer page) throws DAOException;
+    Integer countGetAdvertisementByUserId(Long userId) throws DAOException;
     Advertisement getAdvertisementById(Long adId) throws DAOException;
     Integer getAdvertisementCountById(Long userId) throws DAOException;
     boolean postAdvertisement(Advertisement advertisement) throws DAOException;

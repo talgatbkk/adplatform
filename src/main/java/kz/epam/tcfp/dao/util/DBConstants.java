@@ -39,7 +39,8 @@ public class DBConstants {
     public static final String SQL_QUERY_ERROR = "SQL query error";
 
 
-    public static final String GET_ADS_BY_USER_ID = "SELECT * FROM advertisement WHERE user_id = ?";
+    public static final String GET_ADS_BY_USER_ID = "SELECT * FROM advertisement WHERE user_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_GET_ADS_BY_USER_ID = "SELECT COUNT(*) FROM advertisement WHERE user_id = ?";
     public static final String GET_AD_BY_ID = "SELECT * FROM advertisement WHERE advertisement_id = ?";
     public static final String GET_AD_COUNT_BY_ID = "SELECT COUNT(*) FROM advertisement WHERE user_id = ?";
     public static final String GET_LOCATION_BY_ID = "SELECT location_name, parent_id FROM location p WHERE location_id = ? and language_id = (SELECT language_id FROM language WHERE language_name = ?)";

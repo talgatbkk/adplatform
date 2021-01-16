@@ -87,7 +87,8 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
             locations = locationDAO.getLocations(languageId);
             if (searchInput == null || searchInput.isEmpty()) {
                 if (searchUserId != null) {
-                    advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId);
+                    advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId, page);
+                    totalNumberOfAds = advertisementDAO.countGetAdvertisementByUserId(searchUserId);
                 } else if (categoryId != null && locationId != null) {
                     advertisements = advertisementDAO.searchAdvertisementsByCategoryAndLocation(categoryId, locationId, page);
                     totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByCategoryAndLocation(categoryId, locationId);

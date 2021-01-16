@@ -1,5 +1,7 @@
 package kz.epam.tcfp.model;
 
+import java.util.Objects;
+
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
@@ -43,5 +45,18 @@ public class Category {
 
     public void setLanguageId(Long languageId) {
         this.languageId = languageId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        return Objects.equals(getCategoryId(), category.getCategoryId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCategoryId());
     }
 }

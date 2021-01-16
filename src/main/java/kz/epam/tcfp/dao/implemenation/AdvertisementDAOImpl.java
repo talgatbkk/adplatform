@@ -31,7 +31,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
     }
 
     @Override
-    public List<Advertisement> getAdvertisementByUserId(Long userId) throws DAOException {
+    public List<Advertisement> getAdvertisementByUserId(Long userId, Integer page) throws DAOException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -40,6 +40,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_ADS_BY_USER_ID);
             preparedStatement.setLong(1, userId);
+            preparedStatement.setInt(2, (page * DBConstants.ADVERTISEMENT_PER_PAGE) - DBConstants.ADVERTISEMENT_PER_PAGE);
+            preparedStatement.setInt(3, DBConstants.ADVERTISEMENT_PER_PAGE);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = buildAdvertisement(resultSet);
@@ -54,6 +56,30 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             connectionPool.putBackConnectionToPool(connection);
         }
         return allAdvertisements;
+    }
+
+    @Override
+    public Integer countGetAdvertisementByUserId(Long userId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.getExistingConnectionFromPool();
+            preparedStatement = connection.prepareStatement(DBConstants.COUNT_GET_ADS_BY_USER_ID);
+            preparedStatement.setLong(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);
+        } catch (ConnectionPoolException ex) {
+            throw new DAOException(ex);
+        } finally {
+            ClosingUtil.closeAll(preparedStatement, resultSet);
+            connectionPool.putBackConnectionToPool(connection);
+        }
+        return 0;
     }
 
     @Override
@@ -643,8 +669,9 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
         advertisement.setPostedDate(new DateTimeInUTC(resultSet.getTimestamp(DBConstants.AD_POSTED_DATE)));
         advertisement.setCategory(new Category(resultSet.getLong(DBConstants.AD_CATEGORY_ID)));
         advertisement.setPrice(resultSet.getInt(DBConstants.AD_PRICE));
-        if (buildImage(advertisement) != null) {
-            advertisement.setImage(buildImage(advertisement));
+        Image image = buildImage(advertisement);
+        if (image != null) {
+            advertisement.setImage(image);
         }
         return advertisement;
     }

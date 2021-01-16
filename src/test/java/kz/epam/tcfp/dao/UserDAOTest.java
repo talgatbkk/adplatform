@@ -29,7 +29,7 @@ public class UserDAOTest {
     public void getCustomerByIdTest() throws DAOException {
         Long customerId = 1L;
         User user = USER_DAO.getUserById(customerId);
-        System.out.println(user.toString());
+        assertTrue(user.getUserId().equals(customerId));
 
     }
 
@@ -39,15 +39,15 @@ public class UserDAOTest {
     public void getPhoneNumberByCustomerIdTest() throws DAOException {
         Long customerId = 1L;
         List<PhoneNumber> phoneNumbers = USER_DAO.getPhoneNumberByUserId(customerId);
-        System.out.println(phoneNumbers.toString());
-
+        phoneNumbers.get(0).getPhoneNumber().equals("+77011820844");
+        phoneNumbers.get(1).getPhoneNumber().equals("+77471820844");
     }
 
     @Test
     public void authenticateCustomerValidInputTest() throws DAOException {
         SignInInput input = new SignInInput();
         input.setLogin("takha");
-        input.setPassword("passwordtest123");
+        input.setPassword(Encryption.encrypt("passwordtest123"));
         assertTrue(USER_DAO.authenticateUser(input));
 
     }
@@ -57,7 +57,6 @@ public class UserDAOTest {
         SignInInput input = new SignInInput();
         input.setLogin("invalidlogin");
         input.setPassword(Encryption.encrypt("admin"));
-        System.out.println(input.getPassword());
         assertFalse(USER_DAO.authenticateUser(input));
 
     }
@@ -66,7 +65,7 @@ public class UserDAOTest {
     public void authenticateCustomerInvalidPasswordInputTest() throws DAOException {
         SignInInput input = new SignInInput();
         input.setLogin("takha");
-        input.setPassword("someWrongPassword");
+        input.setPassword(Encryption.encrypt("someWrongPassword"));
         assertFalse(USER_DAO.authenticateUser(input));
 
     }
@@ -75,7 +74,7 @@ public class UserDAOTest {
     public void authenticateCustomerInvalidLoginAndPasswordInputTest() throws DAOException {
         SignInInput input = new SignInInput();
         input.setLogin("wrongLogin");
-        input.setPassword("someWrongPassword");
+        input.setPassword(Encryption.encrypt("someWrongPassword"));
         assertFalse(USER_DAO.authenticateUser(input));
 
     }

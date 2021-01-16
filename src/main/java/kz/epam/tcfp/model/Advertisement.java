@@ -3,6 +3,7 @@ package kz.epam.tcfp.model;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -107,7 +108,23 @@ public class Advertisement implements Serializable {
         this.userId = userId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Advertisement)) return false;
+        Advertisement that = (Advertisement) o;
+        return Objects.equals(getUserId(), that.getUserId()) &&
+                Objects.equals(getTitle(), that.getTitle()) &&
+                Objects.equals(getDescription(), that.getDescription()) &&
+                Objects.equals(getLocation(), that.getLocation()) &&
+                Objects.equals(getPrice(), that.getPrice()) &&
+                Objects.equals(getCategory(), that.getCategory());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUserId(), getTitle(), getDescription(), getLocation(), getPrice(), getCategory());
+    }
 
     @Override
     public String toString() {
