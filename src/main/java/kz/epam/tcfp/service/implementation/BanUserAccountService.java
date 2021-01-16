@@ -29,7 +29,6 @@ public class BanUserAccountService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         Long userRoleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
 
         Long userIdToBan = null;

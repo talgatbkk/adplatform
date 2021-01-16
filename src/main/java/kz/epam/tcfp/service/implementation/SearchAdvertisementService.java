@@ -1,16 +1,16 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.CategoryDAO;
 import kz.epam.tcfp.dao.LocationDAO;
-import kz.epam.tcfp.dao.util.DBConstants;
-import kz.epam.tcfp.service.PagePath;
-import kz.epam.tcfp.service.Service;
-import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.Advertisement;
+import kz.epam.tcfp.dao.util.DBConstants;
+import kz.epam.tcfp.model.AdvertisementPage;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.PagePath;
+import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -49,7 +49,7 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
         Long locationId = null;
         if (locationInput != null && !locationInput.isEmpty()){
             locationId = Long.parseLong(locationInput);
-            if (locationId == LOCATION_ID_DEFAULT) {
+            if (locationId.equals(LOCATION_ID_DEFAULT)) {
                 locationId = null;
                 request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);
             } else {
@@ -80,57 +80,72 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
 
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
-        List<Advertisement> advertisements = null;
-        Integer totalNumberOfAds = 0;
+        AdvertisementPage advertisementPage = null;
+
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
             categories = categoryDAO.getCategories(languageId);
             locations = locationDAO.getLocations(languageId);
             if (searchInput == null || searchInput.isEmpty()) {
-                if (searchUserId != null) {
-                    advertisements = advertisementDAO.getAdvertisementByUserId(searchUserId, page);
-                    totalNumberOfAds = advertisementDAO.countGetAdvertisementByUserId(searchUserId);
-                } else if (categoryId != null && locationId != null) {
-                    advertisements = advertisementDAO.searchAdvertisementsByCategoryAndLocation(categoryId, locationId, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByCategoryAndLocation(categoryId, locationId);
-                } else if (categoryId != null) {
-                    advertisements = advertisementDAO.searchAdvertisementsByCategory(categoryId, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByCategory(categoryId);
-                } else if (locationId != null) {
-                    advertisements = advertisementDAO.searchAdvertisementsByLocation(locationId, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByLocation(locationId);
-                } else {
-                    advertisements = advertisementDAO.getAllAdvertisements(page);
-                    totalNumberOfAds = advertisementDAO.getCountAllAdvertisements();
-                }
+                advertisementPage = getAdvertisementsWithoutSearchTextInput(searchUserId, categoryId, locationId, page);
             } else {
-                if (categoryId != null && locationId != null) {
-                    advertisements = advertisementDAO.searchAdvertisementsByDescriptionAndCategoryAndLocation(searchInput, categoryId, locationId, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByDescriptionAndCategoryAndLocation(searchInput, categoryId, locationId);
-                } else if (categoryId != null) {
-                    advertisements = advertisementDAO.searchAdvertisementsByDescriptionAndCategory(searchInput, categoryId, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByDescriptionAndCategory(searchInput, categoryId);
-                } else if (locationId != null) {
-                    advertisements = advertisementDAO.searchAdvertisementsByDescriptionAndLocation(searchInput, locationId, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByDescriptionAndLocation(searchInput, locationId);
-                } else {
-                    advertisements = advertisementDAO.searchAdvertisementsByDescription(searchInput, page);
-                    totalNumberOfAds = advertisementDAO.countSearchAdvertisementsByDescription(searchInput);
-                }
+                advertisementPage = getAdvertisementsWithSearchTextInput(searchInput, categoryId, locationId, page);
             }
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting advertisement search results", e);
         }
-        request.setAttribute(ServiceConstants.ADVERTISEMENT_LIST, advertisements);
+        request.setAttribute(ServiceConstants.ADVERTISEMENT_LIST, advertisementPage.getCurrentPageAdvertisements());
         request.setAttribute(ServiceConstants.CATEGORY_LIST, categories);
         request.setAttribute(ServiceConstants.LOCATION_LIST, locations);
         request.setAttribute(ServiceConstants.CATEGORY_SELECTED, categoryId);
-        request.setAttribute(ServiceConstants.TOTAL_ADVERTISEMENT_COUNT, totalNumberOfAds);
+        request.setAttribute(ServiceConstants.TOTAL_ADVERTISEMENT_COUNT, advertisementPage.getTotalNumberOfAdvertisements());
         request.setAttribute(ServiceConstants.CURRENT_PAGE_NUMBER, page);
         request.setAttribute(ServiceConstants.PER_PAGE_ADVERTISEMENT_COUNT, DBConstants.ADVERTISEMENT_PER_PAGE);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.SEARCH_JSP);
         dispatcher.forward(request, response);
+    }
+
+    private AdvertisementPage getAdvertisementsWithoutSearchTextInput(Long searchUserId, Long categoryId,
+                                                                      Long locationId, Integer page)
+                                                                        throws DAOException {
+        AdvertisementPage advertisementPage = new AdvertisementPage();
+        if (searchUserId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.getAdvertisementByUserId(searchUserId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countGetAdvertisementByUserId(searchUserId));
+        } else if (categoryId != null && locationId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByCategoryAndLocation(categoryId, locationId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByCategoryAndLocation(categoryId, locationId));
+        } else if (categoryId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByCategory(categoryId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByCategory(categoryId));
+        } else if (locationId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByLocation(locationId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByLocation(locationId));
+        } else {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.getAllAdvertisements(page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.getCountAllAdvertisements());
+        }
+            return advertisementPage;
+    }
+
+
+    private AdvertisementPage getAdvertisementsWithSearchTextInput(String searchInput, Long categoryId, Long locationId, Integer page) throws DAOException {
+        AdvertisementPage advertisementPage = new AdvertisementPage();
+        if (categoryId != null && locationId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByDescriptionAndCategoryAndLocation(searchInput, categoryId, locationId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByDescriptionAndCategoryAndLocation(searchInput, categoryId, locationId));
+        } else if (categoryId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByDescriptionAndCategory(searchInput, categoryId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByDescriptionAndCategory(searchInput, categoryId));
+        } else if (locationId != null) {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByDescriptionAndLocation(searchInput, locationId, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByDescriptionAndLocation(searchInput, locationId));
+        } else {
+            advertisementPage.setCurrentPageAdvertisements(advertisementDAO.searchAdvertisementsByDescription(searchInput, page));
+            advertisementPage.setTotalNumberOfAdvertisements(advertisementDAO.countSearchAdvertisementsByDescription(searchInput));
+        }
+        return advertisementPage;
     }
 
 }
