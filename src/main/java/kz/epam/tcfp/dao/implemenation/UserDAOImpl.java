@@ -92,8 +92,8 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
             preparedStatement.setLong(1, userId);
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next() && !resultSet.getBoolean(DBConstants.USER_IS_BANNED)) {
-                return true;
+            if (resultSet.next()) {
+                return resultSet.getBoolean(DBConstants.USER_IS_BANNED);
             }
         } catch (SQLException ex) {
             throw new DAOException(DBConstants.SQL_QUERY_ERROR, ex);

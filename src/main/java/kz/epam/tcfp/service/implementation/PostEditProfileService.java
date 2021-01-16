@@ -48,10 +48,10 @@ public class PostEditProfileService extends PreviousPage implements Service {
         User user = null;
         try {
             if (editedUser.getFirstName() != null && !editedUser.getFirstName().isEmpty()) {
-                userDAO.updateUserFirstName(editedUser);
-            } if (editedUser.getLastName() != null && !editedUser.getLastName().isEmpty()) {
-                userDAO.updateUserLastName(editedUser);
-            }  if (editedUser.getEmail() != null && !editedUser.getEmail().isEmpty()) {
+                userDAO.updateUserFirstName(editedUser); }
+            if (editedUser.getLastName() != null && !editedUser.getLastName().isEmpty()) {
+                userDAO.updateUserLastName(editedUser); }
+            if (editedUser.getEmail() != null && !editedUser.getEmail().isEmpty()) {
                 if (Boolean.TRUE.equals(userDAO.isEmailTaken(editedUser))) {
                     user= userDAO.getUserById(userId);
                     List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(userId);

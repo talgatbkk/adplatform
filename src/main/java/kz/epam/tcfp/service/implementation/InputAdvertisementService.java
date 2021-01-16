@@ -53,7 +53,7 @@ public class InputAdvertisementService extends PreviousPage implements Service {
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         try {
-            if (userDAO.isUserBanned(userId)) {
+            if (Boolean.TRUE.equals(!userDAO.isUserBanned(userId))) {
                 Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);
                 categories = categoryDAO.getCategories(languageId);
                 locations = locationDAO.getLocations(languageId);

@@ -27,6 +27,7 @@ public class PostAddCategoryService extends PreviousPage implements Service {
     public static final String ADMIN_ADD_CATEGORY = "/category/add";
     private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
     private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -38,7 +39,7 @@ public class PostAddCategoryService extends PreviousPage implements Service {
         Long roleId = null;
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
             roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
-            if (roleId != ServiceConstants.ADMIN_ROLE_ID) {
+            if (!roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
                 request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
                 return;
             }

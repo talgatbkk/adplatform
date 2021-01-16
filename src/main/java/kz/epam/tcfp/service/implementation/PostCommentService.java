@@ -1,11 +1,10 @@
 package kz.epam.tcfp.service.implementation;
 
 import kz.epam.tcfp.dao.CommentDAO;
-import kz.epam.tcfp.service.Service;
-import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Comment;
+import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;

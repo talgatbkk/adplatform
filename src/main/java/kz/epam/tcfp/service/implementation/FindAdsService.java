@@ -32,7 +32,6 @@ import java.util.List;
 public class FindAdsService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(FindAdsService.class);
     private static final Integer LOCATION_ID_DEFAULT = 1;
-    private static final Long CATEGORY_ID_ALL = 1L;
     public static final String PAGE_NUMBER = "page";
     private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
     private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();

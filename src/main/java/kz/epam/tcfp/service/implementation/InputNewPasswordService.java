@@ -4,7 +4,6 @@ import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
-import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class InputNewPasswordService extends PreviousPage implements Service {
-    private static final Logger LOGGER = Logger.getLogger(InputNewPasswordService.class);
     public static final String INPUT_NEW_PASSWORD_JSP = "/jsp/InputNewPassword.jsp";
 
     @Override

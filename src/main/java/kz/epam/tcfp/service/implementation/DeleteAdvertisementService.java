@@ -44,7 +44,7 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
         Advertisement advertisement = null;
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);
-            if (advertisement.getUserId() == userId || roleId == ADMIN_ROLE_ID) {
+            if (advertisement.getUserId().equals(userId) || roleId.equals(ADMIN_ROLE_ID)) {
                 advertisementDAO.deleteAdvertisementByUserIdAndAdId(adId);
             } else {
                 LOGGER.warn("Failed to delete advertisement");

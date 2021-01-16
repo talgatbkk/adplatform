@@ -35,7 +35,7 @@ public class DeleteUserAccountService extends PreviousPage implements Service {
         }
         if (userIdToDeleted.equals(userId)) {
             try {
-                if (userDAO.deleteUserAccount(userId)) {
+                if (Boolean.TRUE.equals(userDAO.deleteUserAccount(userId))) {
                     session.removeAttribute(ServiceConstants.SESSION_USER_ID);
                     response.sendRedirect(HOME_SERVICE);
                     return;

@@ -25,6 +25,7 @@ public class PostAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAdvertisementService.class);
     private static final String LOGIN_SERVICE = "/login";
     private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -39,7 +40,6 @@ public class PostAdvertisementService extends PreviousPage implements Service {
         String advertisementTitle = request.getParameter(ServiceConstants.ADVERTISEMENT_TITLE);
         String advertisementDescription = request.getParameter(ServiceConstants.ADVERTISEMENT_DESCRIPTION);
         Integer advertisementPrice = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_PRICE));
-
 
         Advertisement advertisement = new Advertisement();
         advertisement.setUserId(userId);

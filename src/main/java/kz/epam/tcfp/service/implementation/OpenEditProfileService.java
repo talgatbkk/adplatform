@@ -61,7 +61,6 @@ public class OpenEditProfileService extends PreviousPage implements Service {
         }
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
-        session = request.getSession(true);
         request.getRequestDispatcher(USER_PROFILE_EDIT_JSP).forward(request, response);
     }
 }

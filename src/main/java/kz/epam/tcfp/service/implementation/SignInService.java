@@ -39,14 +39,14 @@ public class SignInService extends PreviousPage implements Service {
 
         User user = null;
         try {
-            if (Boolean.FALSE.equals(!userDAO.authenticateUser(signInInput))){
+            if (Boolean.TRUE.equals(userDAO.authenticateUser(signInInput))){
+                user = userDAO.getUserIdByLogin(signInInput.getLogin());
+            } else {
                 if (signInInput.getLogin() != null) {
                     request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 }
                 request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request,response);
                 return;
-            } else {
-                    user = userDAO.getUserIdByLogin(signInInput.getLogin());
             }
         } catch (DAOException e) {
             logger.warn("Error in DAO while authenticating a user", e);

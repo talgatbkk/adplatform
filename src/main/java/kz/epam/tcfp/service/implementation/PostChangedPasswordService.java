@@ -3,7 +3,6 @@ package kz.epam.tcfp.service.implementation;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
@@ -50,11 +49,10 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
         SignUpInput userWithNewPassword = new SignUpInput();
         userWithNewPassword.setUserId(userId);
         userWithNewPassword.setPassword(Encryption.encrypt(request.getParameter(OLD_PASSWORD)));
-        User user = null;
         try {
-            if (userDAO.authenticateUserById(userWithNewPassword)) {
+            if (Boolean.TRUE.equals(userDAO.authenticateUserById(userWithNewPassword))) {
                 userWithNewPassword.setPassword(Encryption.encrypt(request.getParameter(NEW_PASSWORD)));
-                if (!userDAO.updateUserPassword(userWithNewPassword)) {
+                if (Boolean.FALSE.equals(!userDAO.updateUserPassword(userWithNewPassword))) {
                     response.sendRedirect(PagePath.ERROR_JSP);
                     return;
                 }
