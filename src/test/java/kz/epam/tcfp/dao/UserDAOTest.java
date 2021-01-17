@@ -46,8 +46,8 @@ public class UserDAOTest {
     @Test
     public void authenticateCustomerValidInputTest() throws DAOException {
         SignInInput input = new SignInInput();
-        input.setLogin("takha");
-        input.setPassword(Encryption.encrypt("passwordtest123"));
+        input.setLogin("user");
+        input.setPassword(Encryption.encrypt("user1234"));
         assertTrue(USER_DAO.authenticateUser(input));
 
     }
@@ -95,7 +95,7 @@ public class UserDAOTest {
     @Test
     public void isLoginTakenTestAlreadyExists() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
-        signInInput.setLogin("takha");
+        signInInput.setLogin("user");
         assertTrue(USER_DAO.isLoginTaken(signInInput));
 
     }
@@ -111,7 +111,7 @@ public class UserDAOTest {
     @Test
     public void isEmailTakenTestAlreadyExists() throws DAOException {
         SignUpInput signInInput = new SignUpInput();
-        signInInput.setEmail("talgat@email.com");
+        signInInput.setEmail("jim@email.com");
         assertTrue(USER_DAO.isEmailTaken(signInInput));
 
     }

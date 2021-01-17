@@ -1,5 +1,5 @@
 
-[
-java:S49731"9Use the "equals" method if value comparison was intended.(‰”Õÿùÿÿÿÿ8µÍğ.
 o
-java:S3776&"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(ÈÉİ†8µÍğ.
+java:S3776)"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ÈÉİ†8õóÚáğ.
+k
+java:S2259_"OA "NullPointerException" could be thrown; "advertisementPage" is nullable here.(ß§‹J8Ñ¿ªâğ.

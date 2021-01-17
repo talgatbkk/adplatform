@@ -177,3 +177,10 @@ T
 $src/main/webapp/jsp/StickyFooter.jsp,8/2/8265321a2ec1fe7df6982752e898c02c9759dd00
 N
 src/main/webapp/jsp/Search.jsp,3/6/36deea7d3bd18d91b6ce6544817485b429659506
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+g
+7src/main/java/kz/epam/tcfp/model/AdvertisementPage.java,1/e/1eff4d60b1c51c21afe1174bdcd6bd6301f87766
+V
+&src/main/webapp/js/jquery-3.5.1.min.js,6/b/6b0c5f802af5073cfab1f6b2b7d2c51665a525e5

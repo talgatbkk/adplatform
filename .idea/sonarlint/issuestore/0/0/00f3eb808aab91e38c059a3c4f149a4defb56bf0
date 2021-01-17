@@ -1,7 +1,7 @@
 
 ž
 java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ê•À›8ç‹¯³ï.
-L
-java:S1068"*Remove this unused "LOGGER" private field.(Æ°¹Ÿþÿÿÿÿ8ÁúÓ¯ï.
 R
 java:S1068"0Remove this unused "PERCENT_SIGN" private field.(ÖÝ³Æÿÿÿÿÿ8ÁúÓ¯ï.
+L
+java:S1068"*Remove this unused "LOGGER" private field.(Æ°¹Ÿþÿÿÿÿ8ÁúÓ¯ï.
