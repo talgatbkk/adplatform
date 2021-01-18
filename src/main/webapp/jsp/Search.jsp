@@ -63,7 +63,14 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">${advertisement.title}</h5>
-                            <p class="card-text">${advertisement.description}</p>
+                            <c:choose>
+                                <c:when test="${advertisement.description.length() > 43}">
+                                    <p class="card-text">${advertisement.description.substring(0,42)}...</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="card-text">${advertisement.description}</p>
+                                </c:otherwise>
+                            </c:choose>
                             <c:if test="${advertisement.price != 0}">
                                 <p class="card-text">${advertisement.price} ${currencyLocal}</p>
                             </c:if>
