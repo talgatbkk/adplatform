@@ -22,6 +22,7 @@ import java.io.IOException;
 public class DeleteUserAccountService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(DeleteUserAccountService.class);
     private UserDAO userDAO = DAOFactory.getUserDAO();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);

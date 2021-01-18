@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
  * @project AdPlatform
  */
 public class DAOFactory {
-    private static final Logger LOGGER = Logger.getLogger(DAOFactory.class);
 
     private static DAOFactory instance;
 
