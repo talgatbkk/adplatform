@@ -38,7 +38,7 @@ public class CommentDAOImpl implements CommentDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_COMMENTS_BY_AD_ID);
-            preparedStatement.setLong(1, adId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, adId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Comment comment = buildComment(resultSet);
@@ -63,13 +63,13 @@ public class CommentDAOImpl implements CommentDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.POST_COMMENT);
-            preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, comment.getAdId());
-            preparedStatement.setLong(3, comment.getAuthorId());
-            preparedStatement.setString(4, comment.getContent());
-            preparedStatement.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, null);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, comment.getAdId());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_THREE, comment.getAuthorId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_FOUR, comment.getContent());
+            preparedStatement.setTimestamp(DBConstants.PARAMETER_INDEX_FIVE, new java.sql.Timestamp(new java.util.Date().getTime()));
             rows = preparedStatement.executeUpdate();
-            if (rows == 1){
+            if (rows.equals(DBConstants.PARAMETER_INDEX_ONE)){
                 return true;
             }
         } catch (SQLException ex) {

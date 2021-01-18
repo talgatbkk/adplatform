@@ -38,11 +38,11 @@ public class LocationDAOImpl implements LocationDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_LOCATION_BY_ID);
-            preparedStatement.setLong(1, locationId);
-            preparedStatement.setString(2, languageCode);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, locationId);
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_TWO, languageCode);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                location.setName(resultSet.getString(1));
+                location.setName(resultSet.getString(DBConstants.PARAMETER_INDEX_ONE));
                 location.setParentId(resultSet.getLong(2));
             }
         } catch (SQLException ex) {
@@ -65,7 +65,7 @@ public class LocationDAOImpl implements LocationDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_LOCATIONS);
-            preparedStatement.setLong(1, languageId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, languageId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Location location = buildLocation(resultSet);
@@ -90,12 +90,12 @@ public class LocationDAOImpl implements LocationDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.POST_LOCATION);
-            preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, location.getParentId());
-            preparedStatement.setLong(3, location.getLanguageId());
-            preparedStatement.setString(4, location.getName());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, null);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, location.getParentId());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_THREE, location.getLanguageId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_FOUR, location.getName());
             rows = preparedStatement.executeUpdate();
-            if (rows == 1){
+            if (rows.equals(DBConstants.INTEGER_ONE)){
                 return true;
             }
         } catch (SQLException ex) {

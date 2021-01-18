@@ -22,7 +22,7 @@ public class ImageDisplayController extends HttpServlet { ;
     public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String URLAfterWebDomain = request.getRequestURI();
         String url = request.getQueryString();
-        if (URLAfterWebDomain.startsWith(IMAGES_FOLDER) == false)
+        if (Boolean.FALSE.equals(URLAfterWebDomain.startsWith(IMAGES_FOLDER)))
             return;
 
         String imagesBase = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);

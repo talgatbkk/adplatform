@@ -87,7 +87,22 @@ public class DBConstants {
     public static final String POST_CATEGORY = "INSERT INTO category VALUES (?, ?, ?)";
     public static final String GET_IMAGE = "SELECT * FROM advertisement_image WHERE advertisement_id = ?";
     public static final String POST_IMAGE_PATH = "INSERT INTO advertisement_image VALUES (?, ?, ?)";
+
+    public static final int PARAMETER_INDEX_ONE = 1;
+    public static final int PARAMETER_INDEX_TWO = 2;
+    public static final int PARAMETER_INDEX_THREE = 3;
+    public static final int PARAMETER_INDEX_FOUR = 4;
+    public static final int PARAMETER_INDEX_FIVE = 5;
+    public static final int PARAMETER_INDEX_SIX = 6;
+    public static final int PARAMETER_INDEX_SEVEN = 7;
+    public static final int PARAMETER_INDEX_EIGHT = 8;
+    public static final int PARAMETER_INDEX_NINE = 9;
+    public static final int PARAMETER_INDEX_TEN = 10;
+    public static final int INTEGER_ONE = 1;
+    public static final int COLUMN_INDEX_ONE = 1;
+
     public static final Integer ADVERTISEMENT_PER_PAGE = 3;
+
 
 
 }

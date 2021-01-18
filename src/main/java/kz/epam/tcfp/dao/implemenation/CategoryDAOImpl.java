@@ -8,7 +8,6 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.model.Category;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,9 +21,8 @@ import java.util.List;
  * @project AdPlatform
  */
 public class CategoryDAOImpl implements CategoryDAO {
-    private static final Logger LOGGER = Logger.getLogger(CategoryDAOImpl.class);
-    private static final Character PERCENT_SIGN = '%';
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
+
 
     public CategoryDAOImpl() {
     }
@@ -37,11 +35,11 @@ public class CategoryDAOImpl implements CategoryDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.POST_CATEGORY);
-            preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, category.getLanguageId());
-            preparedStatement.setString(3, category.getCategoryName());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, null);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, category.getLanguageId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_THREE, category.getCategoryName());
             rows = preparedStatement.executeUpdate();
-            if (rows == 1){
+            if (rows.equals(DBConstants.INTEGER_ONE)){
                 return true;
             }
         } catch (SQLException ex) {
@@ -64,7 +62,7 @@ public class CategoryDAOImpl implements CategoryDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_CATEGORIES);
-            preparedStatement.setLong(1, languageId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, languageId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Category category = new Category();

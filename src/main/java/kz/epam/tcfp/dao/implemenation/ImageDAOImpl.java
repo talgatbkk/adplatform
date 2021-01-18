@@ -34,11 +34,11 @@ public class ImageDAOImpl implements ImageDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.POST_IMAGE_PATH);
-            preparedStatement.setString(1, null);
-            preparedStatement.setLong(2, image.getAdvertisementId());
-            preparedStatement.setString(3, image.getPath());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, null);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, image.getAdvertisementId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_THREE, image.getPath());
             rows = preparedStatement.executeUpdate();
-            if (rows == 1){
+            if (rows.equals(DBConstants.INTEGER_ONE)){
                 return true;
             }
         } catch (SQLException ex) {
@@ -61,7 +61,7 @@ public class ImageDAOImpl implements ImageDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_IMAGE);
-            preparedStatement.setLong(1, adId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, adId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 image = new Image();

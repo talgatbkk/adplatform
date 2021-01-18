@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class UserDAOImpl implements UserDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
     private static final Integer CUSTOMER_ROLE_ID = 2;
     private static final Integer IS_USER_BANNED = 0;
     private static final String CALLABLE_RESULT_NAME = "result";
@@ -40,8 +39,8 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.AUTHENTICATE_USER);
-            preparedStatement.setString(1, signInInput.getLogin());
-            preparedStatement.setString(2, signInInput.getPassword());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, signInInput.getLogin());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_TWO, signInInput.getPassword());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -65,8 +64,8 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.AUTHENTICATE_USER_BY_ID);
-            preparedStatement.setLong(1, input.getUserId());
-            preparedStatement.setString(2, input.getPassword());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, input.getUserId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_TWO, input.getPassword());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -90,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
-            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getBoolean(DBConstants.USER_IS_BANNED);
@@ -114,18 +113,18 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             callableStatement = connection.prepareCall(DBConstants.INSERT_NEW_USER);
-            callableStatement.setInt(DBConstants.USER_ROLE_ID, CUSTOMER_ROLE_ID);
-            callableStatement.setString(DBConstants.USER_LOGIN, signUpInput.getLogin());
-            callableStatement.setString(DBConstants.USER_PASSWORD, signUpInput.getPassword());
-            callableStatement.setString(DBConstants.USER_FIRST_NAME, signUpInput.getFirstName());
-            callableStatement.setString(DBConstants.USER_LAST_NAME, signUpInput.getLastName());
-            callableStatement.setString(DBConstants.USER_EMAIL, signUpInput.getEmail());
-            callableStatement.setTimestamp(DBConstants.USER_REGISTRATION_DATE, signUpInput.getCreatedTime());
-            callableStatement.setInt(DBConstants.USER_IS_BANNED, IS_USER_BANNED);
-            callableStatement.setString(DBConstants.USER_PHONE_NUMBER, signUpInput.getPhoneInfo().getPhoneNumber());
-            callableStatement.registerOutParameter(CALLABLE_RESULT_NAME, Types.INTEGER);
+            callableStatement.setInt(DBConstants.PARAMETER_INDEX_ONE, CUSTOMER_ROLE_ID);
+            callableStatement.setString(DBConstants.PARAMETER_INDEX_TWO, signUpInput.getLogin());
+            callableStatement.setString(DBConstants.PARAMETER_INDEX_THREE, signUpInput.getPassword());
+            callableStatement.setString(DBConstants.PARAMETER_INDEX_FOUR, signUpInput.getFirstName());
+            callableStatement.setString(DBConstants.PARAMETER_INDEX_FIVE, signUpInput.getLastName());
+            callableStatement.setString(DBConstants.PARAMETER_INDEX_SIX, signUpInput.getEmail());
+            callableStatement.setTimestamp(DBConstants.PARAMETER_INDEX_SEVEN, signUpInput.getCreatedTime());
+            callableStatement.setInt(DBConstants.PARAMETER_INDEX_EIGHT, IS_USER_BANNED);
+            callableStatement.setString(DBConstants.PARAMETER_INDEX_NINE, signUpInput.getPhoneInfo().getPhoneNumber());
+            callableStatement.registerOutParameter(DBConstants.PARAMETER_INDEX_TEN, Types.INTEGER);
 
-            callableStatement.executeUpdate();
+            callableStatement.execute();
             result = callableStatement.getInt(CALLABLE_RESULT_NAME);
             if (result == 0) {
                 return true;
@@ -149,7 +148,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.CHECK_IF_LOGIN_TAKEN);
-            preparedStatement.setString(1, input.getLogin());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, input.getLogin());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -174,7 +173,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.CHECK_IF_EMAIL_TAKEN);
-            preparedStatement.setString(1, input.getEmail());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, input.getEmail());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -198,7 +197,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.CHECK_IF_PHONE_NUMBER_TAKEN);
-            preparedStatement.setString(1, input.getPhoneInfo().getPhoneNumber());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, input.getPhoneInfo().getPhoneNumber());
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -224,7 +223,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_BY_ID);
-            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, userId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = buildUser(resultSet);
@@ -262,7 +261,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_PHONE_NUMBER_BY_USER_ID);
-            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, userId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String userPhoneNumber = resultSet.getString(DBConstants.USER_PHONE_NUMBER);
@@ -289,7 +288,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.GET_USER_ID_BY_LOGIN);
-            preparedStatement.setString(1, login);
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, login);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = buildUser(resultSet);
@@ -313,9 +312,9 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.DELETE_USER_ACCOUNT);
-            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, userId);
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -337,9 +336,9 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.BAN_USER_ACCOUNT);
-            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, userId);
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -361,9 +360,9 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.UNBAN_USER_ACCOUNT);
-            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_ONE, userId);
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -385,10 +384,10 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_FIRST_NAME);
-            preparedStatement.setString(1, editedUser.getFirstName());
-            preparedStatement.setLong(2, editedUser.getUserId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, editedUser.getFirstName());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, editedUser.getUserId());
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -410,10 +409,10 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_LAST_NAME);
-            preparedStatement.setString(1, editedUser.getLastName());
-            preparedStatement.setLong(2, editedUser.getUserId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, editedUser.getLastName());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, editedUser.getUserId());
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -435,10 +434,10 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_EMAIL);
-            preparedStatement.setString(1, editedUser.getEmail());
-            preparedStatement.setLong(2, editedUser.getUserId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, editedUser.getEmail());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, editedUser.getUserId());
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -460,10 +459,10 @@ public class UserDAOImpl implements UserDAO {
         try {
             connection = connectionPool.getExistingConnectionFromPool();
             preparedStatement = connection.prepareStatement(DBConstants.UPDATE_USER_PASSWORD);
-            preparedStatement.setString(1, userWithNewPassword.getPassword());
-            preparedStatement.setLong(2, userWithNewPassword.getUserId());
+            preparedStatement.setString(DBConstants.PARAMETER_INDEX_ONE, userWithNewPassword.getPassword());
+            preparedStatement.setLong(DBConstants.PARAMETER_INDEX_TWO, userWithNewPassword.getUserId());
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows.equals(DBConstants.INTEGER_ONE)) {
                 return true;
             }
         } catch (SQLException ex) {
