@@ -39,7 +39,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/advertisement/add">${postAdLocal}</a>
             </li>
             </c:if>
-            <c:if test="${sessionScope.role_id == 1}">
+            <c:if test="${sessionScope.role_id eq 1}">
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/location/add">${addLocationLocal}</a>
             </li>
@@ -51,12 +51,12 @@
         <ul class="navbar-nav ml-auto">
             <div>
             <c:choose>
-                <c:when test="${sessionScope.local == 'ru'}">
+                <c:when test="${sessionScope.local eq 'ru'}">
                     <li class="nav-item active">
                         <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">English</a>
                     </li>
                 </c:when>
-                <c:when test="${sessionScope.local == 'en'}">
+                <c:when test="${sessionScope.local eq 'en'}">
                     <li class="nav-item active">
                         <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Русский</a>
                     </li>

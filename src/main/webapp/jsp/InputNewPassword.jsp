@@ -60,7 +60,7 @@
                             <input type="password" id="old_pass" name="old_pass" minlength="8" required>
                         </div>
                         <div class="col-md-4">
-                        <c:if test="${requestScope.wrong_pass == true}">
+                        <c:if test="${requestScope.wrong_pass eq true}">
                                 <small class="text-danger">${incorrectPasswordLocal}</small>
                         </c:if>
                         </div>

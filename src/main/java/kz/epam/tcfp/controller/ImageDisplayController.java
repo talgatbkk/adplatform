@@ -24,7 +24,6 @@ public class ImageDisplayController extends HttpServlet { ;
         String url = request.getQueryString();
         if (Boolean.FALSE.equals(URLAfterWebDomain.startsWith(IMAGES_FOLDER)))
             return;
-
         String imagesBase = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);
         String relativeImagePath = URLAfterWebDomain.substring(IMAGES_FOLDER.length());
         response.setContentType(IMAGE_JPEG_OR_PNG);

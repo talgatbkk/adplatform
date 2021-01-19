@@ -33,10 +33,10 @@
 <head>
     <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" type="text/javascript"></script>
 
-    <c:if test="${sessionScope.local == 'en'}">
+    <c:if test="${sessionScope.local eq 'en'}">
         <script src="../js/jquery.timeago.js" type="text/javascript"></script>
     </c:if>
-    <c:if test="${sessionScope.local == 'ru'}">
+    <c:if test="${sessionScope.local eq 'ru'}">
         <script src="../js/jquery.timeago.js" type="text/javascript"></script>
         <script src="../js/jquery.timeago.ru.js" type="text/javascript"></script>
     </c:if>
@@ -91,7 +91,7 @@
     </div>
     <div class="ui-button align-items-center">
         <div>
-            <c:if test="${requestScope.belongsToCurrentUser == true && requestScope.advertisement.image.path == null}">
+            <c:if test="${requestScope.belongsToCurrentUser eq true && requestScope.advertisement.image.path == null}">
                 <form action="${pageContext.request.contextPath}/advertisement/upload/image?ad_id=${requestScope.advertisement.adId}" method="post" enctype="multipart/form-data" onsubmit="return validateInput()">
                     ${selectImageToUploadLocal} <input type="file" name="file" id="uploadFile"/>
                     <br />
@@ -102,7 +102,7 @@
         </div>
     </div>
         <div class="ui-button">
-        <c:if test="${requestScope.belongsToCurrentUser == true || sessionScope.role_id == 1}">
+        <c:if test="${requestScope.belongsToCurrentUser eq true || sessionScope.role_id eq 1}">
         <form action="${pageContext.request.contextPath}/advertisement/delete" method="post">
             <input type="hidden" name="ad_id" value=${advertisement.adId}>
             <input class="btn btn--stroke full-width btn-outline-danger" type="submit" value="${deleteAdLocal}">

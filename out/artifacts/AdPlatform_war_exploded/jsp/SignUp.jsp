@@ -53,7 +53,7 @@
             <td>${loginLocal}</td>
             <td><input type="text" name="login" required/></td>
             <td>
-            <c:if test="${requestScope.login_taken == true}">
+            <c:if test="${requestScope.login_taken eq true}">
                 <small class="text-danger">${loginTakenLocal}</small>
             </c:if>
             </td>
@@ -63,7 +63,7 @@
             <td>${emailLocal}</td>
             <td><input type="email" name="email" required/></td>
             <td>
-            <c:if test="${requestScope.email_taken == true}">
+            <c:if test="${requestScope.email_taken eq true}">
                 <small class="text-danger">${emailTakenLocal}</small>
             </c:if>
             </td>
@@ -72,7 +72,7 @@
             <td>${phoneNumberLocal}</td>
             <td><input type="tel" name="phoneNumber" id="phone1" pattern="[+]{1}[0-9]{11,14}" required /></td>
             <td>
-            <c:if test="${requestScope.phone_number_taken == true}">
+            <c:if test="${requestScope.phone_number_taken eq true}">
                 <small class="text-danger">${phoneTakenLocal}</small>
             </c:if>
             </td>
