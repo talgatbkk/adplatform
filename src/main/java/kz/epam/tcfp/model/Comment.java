@@ -1,12 +1,15 @@
 package kz.epam.tcfp.model;
 
 
+import java.io.Serializable;
+
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class Comment {
+public class Comment implements Serializable {
 
+    private static final long serialVersionUID = 1234L;
     private Long authorId;
     private Long adId;
     private String authorLogin;

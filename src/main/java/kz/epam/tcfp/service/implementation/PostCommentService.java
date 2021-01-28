@@ -22,7 +22,7 @@ import java.io.IOException;
 public class PostCommentService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostCommentService.class);
     private static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
-    private CommentDAO commentDAO = DAOFactory.getCommentDAO();
+    private final CommentDAO commentDAO = DAOFactory.getCommentDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);

@@ -33,9 +33,9 @@ public class FindAdsService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(FindAdsService.class);
     private static final Integer LOCATION_ID_DEFAULT = 1;
     public static final String PAGE_NUMBER = "page";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
-    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private final LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

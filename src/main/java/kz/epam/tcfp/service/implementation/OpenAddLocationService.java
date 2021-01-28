@@ -26,8 +26,9 @@ import java.util.List;
 public class OpenAddLocationService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(OpenAddLocationService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final LocationDAO locationDAO = DAOFactory.getLocationDAO();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);

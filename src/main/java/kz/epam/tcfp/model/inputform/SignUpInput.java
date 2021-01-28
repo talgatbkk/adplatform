@@ -10,12 +10,12 @@ import java.sql.Timestamp;
  */
 public class SignUpInput {
 
+    private final Timestamp createdTime;
     private Long userId;
     private String firstName;
     private String lastName;
     private String login;
     private String email;
-    private Timestamp createdTime;
     private String password;
     private PhoneNumber phoneInfo;
 

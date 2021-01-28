@@ -29,10 +29,10 @@ import java.util.List;
 public class InputAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(InputAdvertisementService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private UserDAO userDAO = DAOFactory.getUserDAO();
-    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
-    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
+    private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private final LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

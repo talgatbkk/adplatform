@@ -23,7 +23,7 @@ public class UnbanUserAccountService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(UnbanUserAccountService.class);
     public static final String USER_VIEW_PROFILE_SERVICE = "/user/view";
     private static final Long ADMIN_ROLE_ID = 1L;
-    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,13 @@ public class UnbanUserAccountService extends PreviousPage implements Service {
         Long userIdToBan = null;
         String userIdInputToBan = request.getParameter(ServiceConstants.USER_ID_TO_BE_UNBANNED);
         if (userIdInputToBan != null && !userIdInputToBan.isEmpty()) {
-            userIdToBan = Long.parseLong(userIdInputToBan);
+            try {
+                userIdToBan = Long.parseLong(userIdInputToBan);
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Error while parsing a number", e);
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
         }
         if (userRoleId.equals(ADMIN_ROLE_ID)) {
             try {

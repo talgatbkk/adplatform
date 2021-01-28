@@ -29,7 +29,7 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
     public static final String NEW_PASSWORD = "new_pass";
     public static final String OLD_PASSWORD = "old_pass";
     public static final String INCORRECT_OLD_PASSWORD = "wrong_pass";
-    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
 
 
     @Override

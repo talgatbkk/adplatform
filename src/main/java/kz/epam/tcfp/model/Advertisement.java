@@ -11,9 +11,8 @@ import java.util.Objects;
  * @project AdPlatform
  */
 public class Advertisement implements Serializable {
+
     private static final long serialVersionUID = 1234L;
-
-
     private Long userId;
     private Long adId;
     private String title;
@@ -25,15 +24,6 @@ public class Advertisement implements Serializable {
     private Image image;
 
     public Advertisement() {
-    }
-
-    public Advertisement(Long adId, String title, String description, Long locationId, Long categoryId, Image image) {
-        this.adId = adId;
-        this.title = title;
-        this.description = description;
-        this.location = new Location(locationId);
-        this.category = new Category(categoryId);
-        this.image = image;
     }
 
     public Long getAdId() {
@@ -108,23 +98,6 @@ public class Advertisement implements Serializable {
         this.userId = userId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Advertisement)) return false;
-        Advertisement that = (Advertisement) o;
-        return Objects.equals(getUserId(), that.getUserId()) &&
-                Objects.equals(getTitle(), that.getTitle()) &&
-                Objects.equals(getDescription(), that.getDescription()) &&
-                Objects.equals(getLocation(), that.getLocation()) &&
-                Objects.equals(getPrice(), that.getPrice()) &&
-                Objects.equals(getCategory(), that.getCategory());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUserId(), getTitle(), getDescription(), getLocation(), getPrice(), getCategory());
-    }
 
     @Override
     public String toString() {

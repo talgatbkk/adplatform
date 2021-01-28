@@ -2,6 +2,7 @@ package kz.epam.tcfp.model;
 
 
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -12,8 +13,9 @@ import java.util.Date;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class DateTimeInUTC {
+public class DateTimeInUTC implements Serializable {
 
+    private static final long serialVersionUID = 1234L;
     private Date postedDate;
 
     public DateTimeInUTC() {

@@ -26,8 +26,8 @@ import java.util.List;
 public class OpenAddCategoryService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(OpenAddCategoryService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -38,7 +38,13 @@ public class OpenAddCategoryService extends PreviousPage implements Service {
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         Long roleId;
         if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
+            try {
+                roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Error while parsing a number", e);
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
             if (!roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
                 request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
                 return;

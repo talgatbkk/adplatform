@@ -25,10 +25,6 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
-
-    public AdvertisementDAOImpl() {
-    }
-
     @Override
     public List<Advertisement> getAdvertisementByUserId(Long userId, Integer page) throws DAOException {
         Connection connection = null;

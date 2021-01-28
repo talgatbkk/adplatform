@@ -49,7 +49,6 @@ public class UserDAOTest {
         input.setLogin("user");
         input.setPassword(Encryption.encrypt("user1234"));
         assertTrue(USER_DAO.authenticateUser(input));
-
     }
 
     @Test
@@ -64,7 +63,7 @@ public class UserDAOTest {
     @Test
     public void authenticateCustomerInvalidPasswordInputTest() throws DAOException {
         SignInInput input = new SignInInput();
-        input.setLogin("takha");
+        input.setLogin("user");
         input.setPassword(Encryption.encrypt("someWrongPassword"));
         assertFalse(USER_DAO.authenticateUser(input));
 
@@ -74,7 +73,7 @@ public class UserDAOTest {
     public void authenticateCustomerInvalidLoginAndPasswordInputTest() throws DAOException {
         SignInInput input = new SignInInput();
         input.setLogin("wrongLogin");
-        input.setPassword(Encryption.encrypt("someWrongPassword"));
+        input.setPassword(Encryption.encrypt("user1234"));
         assertFalse(USER_DAO.authenticateUser(input));
 
     }

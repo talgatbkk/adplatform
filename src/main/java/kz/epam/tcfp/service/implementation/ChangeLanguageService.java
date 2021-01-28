@@ -19,7 +19,7 @@ public class ChangeLanguageService extends PreviousPage implements Service {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String pickedLanguage = request.getParameter(ServiceConstants.LANGUAGE_PICK);
+        String pickedLanguage = request.getParameter(ServiceConstants.LANGUAGE_CODE);
         session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, pickedLanguage);
         reloadPreviousPage(request, response);
     }

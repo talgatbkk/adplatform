@@ -1,22 +1,21 @@
 package kz.epam.tcfp.controller;
-import kz.epam.tcfp.dao.AdvertisementDAO;
+
 import kz.epam.tcfp.dao.ImageDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
-import kz.epam.tcfp.dao.implemenation.CategoryDAOImpl;
 import kz.epam.tcfp.model.Image;
 import kz.epam.tcfp.service.PagePath;
 import org.apache.catalina.core.ApplicationPart;
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author Talgat Bekkaliyev

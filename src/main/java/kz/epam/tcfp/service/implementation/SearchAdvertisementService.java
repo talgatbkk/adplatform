@@ -11,6 +11,7 @@ import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -33,9 +34,9 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
     private static final Long LOCATION_ID_DEFAULT = 1L;
     private static final String EMPTY_STRING = "";
     public static final String PAGE_NUMBER = "page";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
-    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private final LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +49,13 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
         String locationInput = request.getParameter(ServiceConstants.LOCATION_PICK);
         Long locationId = null;
         if (locationInput != null && !locationInput.isEmpty()){
-            locationId = Long.parseLong(locationInput);
+            try {
+                locationId = Long.parseLong(locationInput);
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Error while parsing a number", e);
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
             if (locationId.equals(LOCATION_ID_DEFAULT)) {
                 locationId = null;
                 request.setAttribute(ServiceConstants.LOCATION_SELECTED, LOCATION_ID_DEFAULT);
@@ -57,8 +64,10 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
             }
         }
         Long searchUserId = null;
-        if (request.getParameter(ServiceConstants.USER_ID_TO_SEARCH) != null){
-            searchUserId = Long.parseLong(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
+        searchUserId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
+        if (searchUserId == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
         Long categoryId = null;
         String categoryInput = request.getParameter(ServiceConstants.CATEGORY_PICK);

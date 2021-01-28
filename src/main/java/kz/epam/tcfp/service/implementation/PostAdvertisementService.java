@@ -24,7 +24,7 @@ import java.io.IOException;
 public class PostAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAdvertisementService.class);
     private static final String LOGIN_SERVICE = "/login";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

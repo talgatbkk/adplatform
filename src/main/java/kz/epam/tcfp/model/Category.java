@@ -7,8 +7,6 @@ import java.util.Objects;
  * @project AdPlatform
  */
 public class Category {
-    private static final long serialVersionUID = 1234L;
-
 
     private Long categoryId;
     private Long languageId;
@@ -47,16 +45,4 @@ public class Category {
         this.languageId = languageId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category category = (Category) o;
-        return Objects.equals(getCategoryId(), category.getCategoryId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getCategoryId());
-    }
 }

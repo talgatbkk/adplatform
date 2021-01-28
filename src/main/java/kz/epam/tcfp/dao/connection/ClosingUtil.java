@@ -2,7 +2,6 @@ package kz.epam.tcfp.dao.connection;
 
 import kz.epam.tcfp.dao.exception.DAOException;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +11,9 @@ import java.sql.Statement;
  * @project AdPlatform
  */
 public class ClosingUtil {
+
+    private ClosingUtil() {
+    }
 
     public static void closeAll(Statement statement, ResultSet resultSet) throws DAOException {
         try {

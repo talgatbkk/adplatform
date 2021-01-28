@@ -25,7 +25,7 @@ import java.util.List;
 public class EditProfileService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(EditProfileService.class);
     private static final String PROFILE = "/profile";
-    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
@@ -33,7 +33,7 @@ public class EditProfileService extends PreviousPage implements Service {
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         User user = null;
         try {
-            user= userDAO.getUserById(userId);
+            user = userDAO.getUserById(userId);
             List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(userId);
             user.setPhoneNumbers(phoneNumbers);
             if (user == null) {

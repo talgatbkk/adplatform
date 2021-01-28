@@ -25,8 +25,8 @@ public class PostAddCategoryService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAddCategoryService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     public static final String ADMIN_ADD_CATEGORY = "/category/add";
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

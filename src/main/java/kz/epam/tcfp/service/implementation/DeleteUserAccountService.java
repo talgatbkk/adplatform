@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class DeleteUserAccountService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(DeleteUserAccountService.class);
-    private UserDAO userDAO = DAOFactory.getUserDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,13 @@ public class DeleteUserAccountService extends PreviousPage implements Service {
         Long userIdToDeleted = null;
         String userIdInputToDeleted = request.getParameter(ServiceConstants.USER_ID_TO_BE_DELETED);
         if (userIdInputToDeleted != null && !userIdInputToDeleted.isEmpty()){
-            userIdToDeleted = Long.parseLong(userIdInputToDeleted);
+            try {
+                userIdToDeleted = Long.parseLong(userIdInputToDeleted);
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Error while parsing a number", e);
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
         }
         if (userIdToDeleted.equals(userId)) {
             try {

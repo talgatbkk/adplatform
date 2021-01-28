@@ -26,9 +26,6 @@ public class LocationDAOImpl implements LocationDAO {
     private static final Logger LOGGER = Logger.getLogger(LocationDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
-    public LocationDAOImpl() {
-    }
-
     @Override
     public Location getLocationNamesById(Long locationId, String languageCode) throws DAOException {
         Connection connection = null;

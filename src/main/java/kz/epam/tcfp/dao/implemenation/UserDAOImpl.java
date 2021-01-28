@@ -3,15 +3,14 @@ package kz.epam.tcfp.dao.implemenation;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.connection.ClosingUtil;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
-import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.dao.connection.ConnectionPoolException;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
+import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignInInput;
 import kz.epam.tcfp.model.inputform.SignUpInput;
-import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,9 +26,6 @@ public class UserDAOImpl implements UserDAO {
     private static final Integer IS_USER_BANNED = 0;
     private static final String CALLABLE_RESULT_NAME = "result";
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
-
-    public UserDAOImpl() {
-    }
 
     @Override
     public Boolean authenticateUser(SignInInput signInInput) throws DAOException {

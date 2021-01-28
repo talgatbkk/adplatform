@@ -38,17 +38,4 @@ public class SignInInput implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SignInInput)) return false;
-        SignInInput that = (SignInInput) o;
-        return Objects.equals(getLogin(), that.getLogin()) &&
-                Objects.equals(getPassword(), that.getPassword());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getLogin(), getPassword());
-    }
 }

@@ -11,7 +11,7 @@ public class ServiceConstants {
     public static final String USER_ROLE_ID = "role_id";
     public static final String USER_ID_TO_BE_BANNED = "ban_user_id";
     public static final String USER_ID_TO_BE_UNBANNED = "unban_user_id";
-    public static final String LANGUAGE_PICK = "pick";
+    public static final String LANGUAGE_CODE = "code";
     public static final String ADVERTISEMENT_ID = "ad_id";
     public static final String ADVERTISEMENT_TITLE = "ad_title";
     public static final String ADVERTISEMENT_DESCRIPTION = "ad_description";

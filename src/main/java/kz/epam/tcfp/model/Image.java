@@ -1,12 +1,14 @@
 package kz.epam.tcfp.model;
 
+import java.io.Serializable;
+
 /**
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class Image {
-    private static final long serialVersionUID = 1234L;
+public class Image implements Serializable {
 
+    private static final long serialVersionUID = 1234L;
     private Long imageId;
     private Long advertisementId;
     private String path;

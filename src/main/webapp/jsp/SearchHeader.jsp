@@ -106,12 +106,12 @@
                 <c:choose>
                     <c:when test="${sessionScope.local == 'ru'}">
                         <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=en">English</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/language?code=en">English</a>
                         </li>
                     </c:when>
                     <c:when test="${sessionScope.local == 'en'}">
                         <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/language?pick=ru">Русский</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/language?code=ru">Русский</a>
                         </li>
                     </c:when>
                 </c:choose>

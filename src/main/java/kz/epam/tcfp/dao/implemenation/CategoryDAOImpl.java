@@ -23,10 +23,6 @@ import java.util.List;
 public class CategoryDAOImpl implements CategoryDAO {
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
-
-    public CategoryDAOImpl() {
-    }
-
     @Override
     public boolean postCategory(Category category) throws DAOException {
         Connection connection = null;

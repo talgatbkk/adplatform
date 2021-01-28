@@ -64,7 +64,7 @@ public class ConnectionPool {
 
     public synchronized Connection getExistingConnectionFromPool() throws ConnectionPoolException {
         Connection newConn = null;
-        if (connections.size() == 0){
+        if (connections.isEmpty()){
             throw new ConnectionPoolException("All connections are used");
         } else {
             newConn = connections.poll();

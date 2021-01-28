@@ -3,8 +3,6 @@ package kz.epam.tcfp.dao.factory;
 import kz.epam.tcfp.dao.*;
 import kz.epam.tcfp.dao.connection.ConnectionPool;
 import kz.epam.tcfp.dao.implemenation.*;
-import kz.epam.tcfp.model.Category;
-import org.apache.log4j.Logger;
 
 /**
  * @author Talgat Bekkaliyev
@@ -28,6 +26,9 @@ public class DAOFactory {
 
     private static ImageDAO imageDAO = new ImageDAOImpl();
 
+
+    private DAOFactory() {
+    }
 
     public static DAOFactory getInstance() {
         if (instance == null) {

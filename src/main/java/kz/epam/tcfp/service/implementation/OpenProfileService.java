@@ -27,8 +27,8 @@ public class OpenProfileService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(OpenProfileService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     private static final String USER_PROFILE_JSP = "/user/profile";
-    private UserDAO userDAO = DAOFactory.getUserDAO();
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

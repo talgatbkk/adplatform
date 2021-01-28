@@ -24,7 +24,8 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
     private static final Logger LOGGER = Logger.getLogger(DeleteAdvertisementService.class);
     private static final String SIGN_IN_SERVICE = "/signin";
     private static final Long ADMIN_ROLE_ID = 1L;
-    private AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+    private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);

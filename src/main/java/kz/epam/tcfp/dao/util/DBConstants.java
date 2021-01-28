@@ -6,6 +6,9 @@ package kz.epam.tcfp.dao.util;
  */
 public class DBConstants {
 
+    private DBConstants() {
+    }
+
     public static final String AD_ID = "advertisement_id";
     public static final String AD_TITLE = "advertisement_title";
     public static final String AD_DESCRIPTION = "description";

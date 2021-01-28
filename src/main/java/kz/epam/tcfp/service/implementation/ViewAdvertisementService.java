@@ -30,10 +30,10 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
     public static final String IMAGE_LOCATION_PARAMETER = "imageLocation";
     public static final char SLASH = '/';
     AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
-    private ImageDAO imageDAO = DAOFactory.getImageDAO();
-    private UserDAO userDAO = DAOFactory.getUserDAO();
-    private CommentDAO commentDAO = DAOFactory.getCommentDAO();
-    private LocationDAO locationDAO = DAOFactory.getLocationDAO();
+    private final ImageDAO imageDAO = DAOFactory.getImageDAO();
+    private final UserDAO userDAO = DAOFactory.getUserDAO();
+    private final CommentDAO commentDAO = DAOFactory.getCommentDAO();
+    private final LocationDAO locationDAO = DAOFactory.getLocationDAO();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,9 +43,21 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
         Long adId = null;
         if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
-            adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
+            try {
+                adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Error while parsing a number", e);
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
         } else {
-            adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+            try {
+                adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Error while parsing a number", e);
+                response.sendRedirect(PagePath.ERROR_JSP);
+                return;
+            }
         }
         Advertisement advertisement = null;
         Location location = null;

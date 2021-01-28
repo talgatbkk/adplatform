@@ -1,26 +1,2 @@
 
-s
-java:S1989 "VHandle the following exception that could be thrown by "getOutputStream": IOException.(Ü³‘¿8èÔŒˆï.
-i
-java:S1989)"LHandle the following exception that could be thrown by "close": IOException.(ş³Š«8èÔŒˆï.
-J
-java:S1481"(Remove this unused "url" local variable.(åš›€øÿÿÿÿ8¾²›¬ñ.
-i
-java:S1989'"LHandle the following exception that could be thrown by "close": IOException.(³é‘8èÔŒˆï.
-m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸÙ¤¦8èÔŒˆï.
-s
-java:S2095""QUse try-with-resources or close this "BufferedInputStream" in a "finally" clause.(¬Ğ¼øÿÿÿÿ8èÔŒˆï.
-9
-java:S1116"Remove this empty statement.(×²õ…8Ä´ºŠï.
-n
-java:S1989&"LHandle the following exception that could be thrown by "write": IOException.(Ïêåœşÿÿÿÿ8èÔŒˆï.
-n
-java:S1989("LHandle the following exception that could be thrown by "close": IOException.(µö¹šúÿÿÿÿ8èÔŒˆï.
-i
-java:S1989*"LHandle the following exception that could be thrown by "close": IOException.(®ø§ä8ê–ˆï.
-Y
-java:S1854"7Remove this useless assignment to local variable "url".(åš›€øÿÿÿÿ8¾²›¬ñ.
-W
-java:S1161":Add the "@Override" annotation above this method signature(°¥¸û8èÔŒˆï.
-m
-java:S1989%"KHandle the following exception that could be thrown by "read": IOException.(¯ñ¥âıÿÿÿÿ8èÔŒˆï.
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸÙ¤¦8èÔŒˆï.
