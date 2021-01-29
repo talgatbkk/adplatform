@@ -63,31 +63,20 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
                 request.setAttribute(ServiceConstants.LOCATION_SELECTED, locationId);
             }
         }
-        Long searchUserId = null;
-        searchUserId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
-        if (searchUserId == null) {
-            response.sendRedirect(PagePath.ERROR_JSP);
-            return;
-        }
-        Long categoryId = null;
-        String categoryInput = request.getParameter(ServiceConstants.CATEGORY_PICK);
-        if (categoryInput != null && !categoryInput.isEmpty()){
-            categoryId = Long.parseLong(categoryInput);
-        }
+        Long searchUserId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.USER_ID_TO_SEARCH));
+        Long categoryId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.CATEGORY_PICK));
+
         String searchInput = request.getParameter(ServiceConstants.SEARCH_INPUT);
         if (searchInput != null && !searchInput.isEmpty()) {
             request.setAttribute(ServiceConstants.PREVIOUS_SEARCH_INPUT, searchInput);
         } else {
             request.setAttribute(ServiceConstants.PREVIOUS_SEARCH_INPUT, EMPTY_STRING);
         }
-        String pageInput = request.getParameter(PAGE_NUMBER);
-        Integer page = 1;
-        if (pageInput != null && !pageInput.isEmpty()) {
-            page = Integer.parseInt(pageInput);
-        }
+
+        Integer page = NumberUtil.tryParsePageNumber(request.getParameter(PAGE_NUMBER));
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
-        AdvertisementPage advertisementPage = null;
+        AdvertisementPage advertisementPage = new AdvertisementPage();
 
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);

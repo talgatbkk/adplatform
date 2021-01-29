@@ -10,6 +10,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -43,10 +44,8 @@ public class InputAdvertisementService extends PreviousPage implements Service {
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
 
-        Long userId = null;
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        } else {
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        if (userId == null) {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }

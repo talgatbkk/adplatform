@@ -22,6 +22,7 @@ import java.util.List;
 public class AdvertisementDAOImpl implements AdvertisementDAO {
     private static final Logger LOGGER = Logger.getLogger(AdvertisementDAOImpl.class);
     private static final Character PERCENT_SIGN = '%';
+    public static final int ZERO_ADS_WITH_SUCH_PARAMETERS = 0;
 
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
@@ -74,7 +75,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -338,7 +339,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -363,7 +364,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -387,7 +388,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -414,7 +415,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -440,7 +441,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -466,7 +467,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
     @Override
@@ -491,7 +492,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
 
@@ -650,7 +651,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
             ClosingUtil.closeAll(preparedStatement, resultSet);
             connectionPool.putBackConnectionToPool(connection);
         }
-        return 0;
+        return ZERO_ADS_WITH_SUCH_PARAMETERS;
     }
 
 

@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -36,20 +37,14 @@ public class PostAddLocationService extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Long roleId = null;
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
-            if (!roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
-                request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
-                return;
-            }
-        } else {
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        Long roleId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.USER_ROLE_ID));
+        if (userId == null || !roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
-        Long parentLocationId = Long.parseLong(request.getParameter(ServiceConstants.PARENT_LOCATION_ID));
+        Long parentLocationId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.PARENT_LOCATION_ID));
         String locationName = request.getParameter(ServiceConstants.NEW_LOCATION_NAME);
-
         if (parentLocationId == null || locationName == null
                                      || locationName.isEmpty()) {
             response.sendRedirect(PagePath.ERROR_JSP);

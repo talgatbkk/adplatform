@@ -11,6 +11,8 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.LanguageValidator;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -41,15 +43,11 @@ public class FindAdsService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+        if (!LanguageValidator.validate(session.getAttribute(ServiceConstants.LOCAL_LANGUAGE))) {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        String pageInput = request.getParameter(PAGE_NUMBER);
-        Integer page = 1;
-        if (pageInput != null && !pageInput.isEmpty()) {
-            page = Integer.parseInt(pageInput);
-        }
+        Integer page = NumberUtil.tryParsePageNumber(request.getParameter(PAGE_NUMBER));
         List<Category> categories = new ArrayList<>();
         List<Location> locations = new ArrayList<>();
         List<Advertisement> advertisements = new ArrayList<>();

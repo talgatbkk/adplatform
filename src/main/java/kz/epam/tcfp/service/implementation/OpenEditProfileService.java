@@ -8,6 +8,7 @@ import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -35,28 +36,23 @@ public class OpenEditProfileService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) == null){
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        if (userId == null){
             response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Long profileId = null;
-        if (request.getParameter(ServiceConstants.USER_PROFILE_ID) != null) {
-            profileId = Long.parseLong(request.getParameter(ServiceConstants.USER_PROFILE_ID));
-        } else {
-            profileId = userId;
-        }
         User user = null;
         try {
-            user = userDAO.getUserById(profileId);
-            List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(profileId);
-            Integer advertisementCount = advertisementDAO.getAdvertisementCountById(profileId);
-            user.setPhoneNumbers(phoneNumbers);
-            user.setActiveAds(advertisementCount);
+            user = userDAO.getUserById(userId);
+            List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(userId);
+            Integer advertisementCount = advertisementDAO.getAdvertisementCountById(userId);
             if (user == null) {
                 response.sendRedirect(PagePath.ERROR_JSP);
                 return;
             }
+            user.setPhoneNumbers(phoneNumbers);
+            user.setActiveAds(advertisementCount);
+
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting data for user profile", e);
         }

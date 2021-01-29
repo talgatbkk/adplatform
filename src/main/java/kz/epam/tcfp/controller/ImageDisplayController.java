@@ -23,11 +23,11 @@ public class ImageDisplayController extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        String URLAfterWebDomain = request.getRequestURI();
-        if (Boolean.FALSE.equals(URLAfterWebDomain.startsWith(IMAGES_FOLDER)))
+        String requestURI = request.getRequestURI();
+        if (Boolean.FALSE.equals(requestURI.startsWith(IMAGES_FOLDER)))
             return;
         String imagesBase = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);
-        String relativeImagePath = URLAfterWebDomain.substring(IMAGES_FOLDER.length());
+        String relativeImagePath = requestURI.substring(IMAGES_FOLDER.length());
         response.setContentType(IMAGE_JPEG_OR_PNG);
         try (ServletOutputStream outStream = response.getOutputStream();
              FileInputStream fin = new FileInputStream(imagesBase + relativeImagePath);

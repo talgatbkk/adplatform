@@ -9,7 +9,6 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.model.Comment;
 import kz.epam.tcfp.model.DateTimeInUTC;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +22,6 @@ import java.util.List;
  * @project AdPlatform
  */
 public class CommentDAOImpl implements CommentDAO {
-    private static final Logger LOGGER = Logger.getLogger(CommentDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     @Override

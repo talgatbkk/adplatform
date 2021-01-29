@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -52,6 +53,10 @@ public class SignInService extends PreviousPage implements Service {
             logger.warn("Error in DAO while authenticating a user", e);
         }
 
+        if (user == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
+        }
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         session.setAttribute(ServiceConstants.USER_ROLE_ID, user.getRoleId());
         session.setAttribute(ServiceConstants.SESSION_USER_ID, user.getUserId());

@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -36,23 +37,14 @@ public class OpenAddCategoryService extends PreviousPage implements Service {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
         String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Long roleId;
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            try {
-                roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
-            } catch (NumberFormatException e) {
-                LOGGER.warn("Error while parsing a number", e);
-                response.sendRedirect(PagePath.ERROR_JSP);
-                return;
-            }
-            if (!roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
-                request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
-                return;
-            }
-        } else {
+
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        Long roleId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.USER_ROLE_ID));
+        if (userId == null || !roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }
+
         List<Category> categories = new ArrayList<>();
         try {
             Long languageId = advertisementDAO.getLanguageIdByName(localLanguage);

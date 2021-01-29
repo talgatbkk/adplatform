@@ -6,6 +6,9 @@ package kz.epam.tcfp.service.util;
  */
 public class ServiceConstants {
 
+    private ServiceConstants() {
+    }
+
     public static final String SESSION_USER_ID = "userId";
     public static final String LOCAL_LANGUAGE = "local";
     public static final String USER_ROLE_ID = "role_id";

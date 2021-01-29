@@ -5,6 +5,7 @@ import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -27,18 +28,11 @@ public class DeleteUserAccountService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-
-        Long userIdToDeleted = null;
-        String userIdInputToDeleted = request.getParameter(ServiceConstants.USER_ID_TO_BE_DELETED);
-        if (userIdInputToDeleted != null && !userIdInputToDeleted.isEmpty()){
-            try {
-                userIdToDeleted = Long.parseLong(userIdInputToDeleted);
-            } catch (NumberFormatException e) {
-                LOGGER.warn("Error while parsing a number", e);
-                response.sendRedirect(PagePath.ERROR_JSP);
-                return;
-            }
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        Long userIdToDeleted = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.USER_ID_TO_BE_DELETED));
+        if (userIdToDeleted == null || userId == null){
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
         if (userIdToDeleted.equals(userId)) {
             try {

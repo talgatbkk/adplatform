@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.UserDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
@@ -55,6 +56,10 @@ public class SignUpService extends PreviousPage implements Service {
             }
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while signing up a user", e);
+        }
+        if (user == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
         session = request.getSession(true);
         session.setAttribute(ServiceConstants.SESSION_USER_ID, user.getUserId());

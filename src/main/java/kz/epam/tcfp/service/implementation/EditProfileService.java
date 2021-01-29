@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -30,17 +31,21 @@ public class EditProfileService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        if (userId == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
+        }
         User user = null;
         try {
             user = userDAO.getUserById(userId);
-            List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(userId);
-            user.setPhoneNumbers(phoneNumbers);
             if (user == null) {
                 request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 request.getRequestDispatcher(PagePath.SIGN_IN).forward(request, response);
                 return;
             }
+            List<PhoneNumber> phoneNumbers = userDAO.getPhoneNumberByUserId(userId);
+            user.setPhoneNumbers(phoneNumbers);
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while editing user account info", e);
         }

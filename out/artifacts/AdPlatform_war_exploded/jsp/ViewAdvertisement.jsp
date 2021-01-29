@@ -152,22 +152,24 @@
     </form>
     </c:if>
 
-</div>
-<script type="text/javascript">
-    function validateInput()
-    {
-        if (document.getElementById('uploadFile').value != "") {
-            let file = document.getElementById('uploadFile');
-            if ( /\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false ) {
-                alert("${onlyImagesLocal}");
+    </div>
+    <script type="text/javascript">
+        function validateInput()
+        {
+            if (document.getElementById('uploadFile').value != "") {
+                let file = document.getElementById('uploadFile');
+                if ( /\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false ) {
+                    alert("${onlyImagesLocal}");
+                    return false;
+                }
+                return true;
+            } else
+                alert("${selectImageLocal}");
                 return false;
-            }
-            return true;
-        } else
-            alert("${selectImageLocal}");
-            return false;
-    };
-</script>
-<jsp:include page="/jsp/StickyFooter.jsp"/>
+        };
+    </script>
+    <c:if test="${requestScope.advertisement.image.path eq null}">
+        <jsp:include page="/jsp/StickyFooter.jsp"/>
+    </c:if>
 </body>
 </html>

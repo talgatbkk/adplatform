@@ -11,8 +11,10 @@ import org.junit.Test;
 
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -30,7 +32,6 @@ public class UserDAOTest {
         Long customerId = 1L;
         User user = USER_DAO.getUserById(customerId);
         assertTrue(user.getUserId().equals(customerId));
-
     }
 
 

@@ -8,6 +8,9 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Encryption {
 
+    private Encryption() {
+    }
+
     public static String encrypt(String data) {
         return DigestUtils.md5Hex(data);
     }

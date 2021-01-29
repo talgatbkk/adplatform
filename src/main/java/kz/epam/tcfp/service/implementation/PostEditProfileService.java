@@ -7,6 +7,7 @@ import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -36,10 +37,8 @@ public class PostEditProfileService extends PreviousPage implements Service {
         if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
         }
-        Long userId = null;
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null) {
-            userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        } else {
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        if (userId == null) {
             request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
             return;
         }

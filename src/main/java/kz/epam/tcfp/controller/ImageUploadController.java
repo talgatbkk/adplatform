@@ -5,6 +5,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Image;
 import kz.epam.tcfp.service.PagePath;
+import kz.epam.tcfp.service.util.NumberUtil;
 import org.apache.catalina.core.ApplicationPart;
 import org.apache.log4j.Logger;
 
@@ -34,8 +35,9 @@ public class ImageUploadController extends HttpServlet {
     public static final String IMAGE_LOCATION_PARAMETER = "imageLocation";
     public static final String REGEX_DOT = "\\.";
     public static final String DOT = ".";
+    public static final int SIZE_ONE = 1;
 
-
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         String savePath = request.getServletContext().getInitParameter(IMAGE_LOCATION_PARAMETER);
@@ -43,18 +45,10 @@ public class ImageUploadController extends HttpServlet {
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
         }
-        String advertisementIdInput = request.getParameter(ADVERTISEMENT_ID);
-        Long advertisementId = null;
-        if (advertisementIdInput == null || advertisementIdInput.isEmpty()) {
+        Long advertisementId = NumberUtil.tryParseLong(request.getParameter(ADVERTISEMENT_ID));
+        if (advertisementId == null || request.getParts().size() > SIZE_ONE) {
             response.sendRedirect(PagePath.ERROR_JSP);
             return;
-        } else {
-            advertisementId = Long.parseLong(advertisementIdInput);
-        }
-
-        if (request.getParts().size() > 1 || advertisementIdInput == null
-            || advertisementIdInput.isEmpty()) {
-            response.sendRedirect(PagePath.ERROR_JSP);
         }
         String partName = null;
         String[] partNameAndExtension = null;
@@ -63,11 +57,11 @@ public class ImageUploadController extends HttpServlet {
             partName = ((ApplicationPart) part).getSubmittedFileName();
             partNameAndExtension = partName.split(REGEX_DOT);
             imageExtension = partNameAndExtension[partNameAndExtension.length - 1];
-            part.write(savePath + File.separator + advertisementIdInput + DOT + imageExtension);
+            part.write(savePath + File.separator + advertisementId.toString() + DOT + imageExtension);
         }
         Image image = new Image();
         image.setAdvertisementId(advertisementId);
-        image.setPath(advertisementIdInput + DOT + imageExtension);
+        image.setPath(advertisementId.toString() + DOT + imageExtension);
         ImageDAO imageDAO = DAOFactory.getImageDAO();
         try {
             if (!imageDAO.postImage(image)) {
@@ -78,6 +72,6 @@ public class ImageUploadController extends HttpServlet {
             LOGGER.warn("Error while getting image", e);
         }
         response.sendRedirect(ADVERTISEMENT_VIEW_SERVICE + QUESTION_MARK
-                            + ADVERTISEMENT_ID + EQUAL_SIGN + advertisementIdInput);
+                            + ADVERTISEMENT_ID + EQUAL_SIGN + advertisementId);
     }
 }

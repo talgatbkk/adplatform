@@ -8,7 +8,6 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.model.Image;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +19,6 @@ import java.sql.SQLException;
  * @project AdPlatform
  */
 public class ImageDAOImpl implements ImageDAO {
-    private static final Logger LOGGER = Logger.getLogger(ImageDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     @Override

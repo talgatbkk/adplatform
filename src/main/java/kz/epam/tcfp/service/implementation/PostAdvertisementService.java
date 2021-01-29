@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -30,16 +31,16 @@ public class PostAdvertisementService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) == null){
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        if (userId == null) {
             response.sendRedirect(LOGIN_SERVICE);
             return;
         }
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Long categoryId = Long.parseLong(request.getParameter(ServiceConstants.CATEGORY_PICK));
-        Long locationId = Long.parseLong(request.getParameter(ServiceConstants.LOCATION_PICK));
+        Long categoryId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.CATEGORY_PICK));
+        Long locationId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.LOCATION_PICK));
         String advertisementTitle = request.getParameter(ServiceConstants.ADVERTISEMENT_TITLE);
         String advertisementDescription = request.getParameter(ServiceConstants.ADVERTISEMENT_DESCRIPTION);
-        Integer advertisementPrice = Integer.parseInt(request.getParameter(ServiceConstants.ADVERTISEMENT_PRICE));
+        Integer advertisementPrice = NumberUtil.tryParseInteger(request.getParameter(ServiceConstants.ADVERTISEMENT_PRICE));
 
         Advertisement advertisement = new Advertisement();
         advertisement.setUserId(userId);

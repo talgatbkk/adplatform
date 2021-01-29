@@ -6,6 +6,7 @@ import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.*;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -40,24 +41,11 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
         String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
-        Long userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        Long adId = null;
-        if (request.getParameter(ServiceConstants.ADVERTISEMENT_ID) == null){
-            try {
-                adId = (Long) session.getAttribute(ServiceConstants.ADVERTISEMENT_ID);
-            } catch (NumberFormatException e) {
-                LOGGER.warn("Error while parsing a number", e);
-                response.sendRedirect(PagePath.ERROR_JSP);
-                return;
-            }
-        } else {
-            try {
-                adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
-            } catch (NumberFormatException e) {
-                LOGGER.warn("Error while parsing a number", e);
-                response.sendRedirect(PagePath.ERROR_JSP);
-                return;
-            }
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        Long adId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+        if (adId == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
         Advertisement advertisement = null;
         Location location = null;
@@ -72,6 +60,10 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
             phoneNumbers = userDAO.getPhoneNumberByUserId(advertisement.getUserId());
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting advertisement data", e);
+        }
+        if (advertisement == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
         request.setAttribute(ServiceConstants.IS_AD_BELONGS_TO_CURRENT_USER, false);
         if (advertisement.getUserId().equals(userId)) {

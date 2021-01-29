@@ -5,6 +5,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -29,18 +30,11 @@ public class UnbanUserAccountService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Long userRoleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
-
-        Long userIdToBan = null;
-        String userIdInputToBan = request.getParameter(ServiceConstants.USER_ID_TO_BE_UNBANNED);
-        if (userIdInputToBan != null && !userIdInputToBan.isEmpty()) {
-            try {
-                userIdToBan = Long.parseLong(userIdInputToBan);
-            } catch (NumberFormatException e) {
-                LOGGER.warn("Error while parsing a number", e);
-                response.sendRedirect(PagePath.ERROR_JSP);
-                return;
-            }
+        Long userRoleId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.USER_ROLE_ID));
+        Long userIdToBan = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.USER_ID_TO_BE_UNBANNED));
+        if (userIdToBan == null || userRoleId == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
         if (userRoleId.equals(ADMIN_ROLE_ID)) {
             try {
@@ -55,7 +49,6 @@ public class UnbanUserAccountService extends PreviousPage implements Service {
 
         } else {
             response.sendRedirect(PagePath.ERROR_JSP);
-
         }
     }
 }

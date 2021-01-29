@@ -6,6 +6,7 @@ import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
+import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
 import org.apache.log4j.Logger;
@@ -30,18 +31,17 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        Long userId = null;
-        if (session.getAttribute(ServiceConstants.SESSION_USER_ID) != null){
-            userId = (Long) session.getAttribute(ServiceConstants.SESSION_USER_ID);
-        } else {
+        Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
+        Long roleId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.USER_ROLE_ID));
+        Long adId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
+        if (userId == null) {
             response.sendRedirect(SIGN_IN_SERVICE);
             return;
         }
-        Long roleId = null;
-        if (session.getAttribute(ServiceConstants.USER_ROLE_ID) != null){
-            roleId = (Long) session.getAttribute(ServiceConstants.USER_ROLE_ID);
+        if (adId == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
         }
-        Long adId = Long.parseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         Advertisement advertisement = null;
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);

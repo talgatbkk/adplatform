@@ -77,7 +77,7 @@ public class DBConstants {
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
     public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION = "SELECT COUNT(*) FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ?";
     public static final String SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT * FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
-    public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT COUNT(*) FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ? ORDER BY posted_date DESC LIMIT ?, ?";
+    public static final String COUNT_SEARCH_AD_BY_TITLE_AND_DESCRIPTION_AND_LOCATION_AND_CATEGORY = "SELECT COUNT(*) FROM advertisement WHERE (advertisement_title LIKE ? OR description LIKE ?) AND location_id = ? AND category_id = ?";
     public static final String DELETE_AD_BY_USER_ID_AND_AD_ID = "DELETE FROM advertisement WHERE advertisement_id = ?";
     public static final String DELETE_USER_ACCOUNT = "DELETE FROM user WHERE user_id = ?";
     public static final String BAN_USER_ACCOUNT = "UPDATE user SET ban = TRUE WHERE user_id = ?";

@@ -8,7 +8,6 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.dao.util.DBConstants;
 import kz.epam.tcfp.model.Location;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +22,6 @@ import java.util.List;
  */
 public class LocationDAOImpl implements LocationDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(LocationDAOImpl.class);
     ConnectionPool connectionPool = DAOFactory.getConnectionPool();
 
     @Override
