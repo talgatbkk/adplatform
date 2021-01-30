@@ -1,5 +1,6 @@
 package kz.epam.tcfp.service.implementation;
 
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
@@ -20,6 +21,10 @@ public class ChangeLanguageService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String pickedLanguage = request.getParameter(ServiceConstants.LANGUAGE_CODE);
+        if (pickedLanguage == null) {
+            response.sendRedirect(PagePath.ERROR_JSP);
+            return;
+        }
         session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, pickedLanguage);
         reloadPreviousPage(request, response);
     }

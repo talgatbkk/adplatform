@@ -24,7 +24,6 @@ import java.io.IOException;
  */
 public class SignInService extends PreviousPage implements Service {
     private static final Logger logger = Logger.getLogger(SignInService.class);
-    private static final String SIGN_IN_SERVICE = "/signin";
     private final UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
@@ -46,7 +45,7 @@ public class SignInService extends PreviousPage implements Service {
                 if (signInInput.getLogin() != null) {
                     request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, true);
                 }
-                request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request,response);
+                request.getRequestDispatcher(PagePath.SIGN_IN_SERVICE).forward(request,response);
                 return;
             }
         } catch (DAOException e) {

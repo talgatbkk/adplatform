@@ -1,12 +1,13 @@
 package kz.epam.tcfp.service.implementation;
 
-import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.AdvertisementDAO;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Advertisement;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.PagePath;
+import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
@@ -24,7 +25,6 @@ import java.io.IOException;
  */
 public class PostAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAdvertisementService.class);
-    private static final String LOGIN_SERVICE = "/login";
     private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
     @Override
@@ -33,7 +33,7 @@ public class PostAdvertisementService extends PreviousPage implements Service {
         HttpSession session = request.getSession(true);
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         if (userId == null) {
-            response.sendRedirect(LOGIN_SERVICE);
+            response.sendRedirect(PagePath.LOGIN_SERVICE);
             return;
         }
         Long categoryId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.CATEGORY_PICK));

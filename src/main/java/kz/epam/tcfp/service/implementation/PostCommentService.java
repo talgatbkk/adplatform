@@ -23,8 +23,6 @@ import java.io.IOException;
  */
 public class PostCommentService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostCommentService.class);
-    private static final String ADVERTISEMENT_VIEW_SERVICE = "/advertisement/view";
-    private static final String SIGN_IN_SERVICE = "/signin";
     private final CommentDAO commentDAO = DAOFactory.getCommentDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +30,7 @@ public class PostCommentService extends PreviousPage implements Service {
         HttpSession session = request.getSession(true);
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         if (userId == null) {
-            request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
+            request.getRequestDispatcher(PagePath.SIGN_IN_SERVICE).forward(request, response);
             return;
         }
         Long adId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
@@ -49,7 +47,7 @@ public class PostCommentService extends PreviousPage implements Service {
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while posting a comment", e);
         }
-        response.sendRedirect(ADVERTISEMENT_VIEW_SERVICE + QUESTION_MARK
+        response.sendRedirect(PagePath.ADVERTISEMENT_VIEW_SERVICE + QUESTION_MARK
                 + ServiceConstants.ADVERTISEMENT_ID + EQUAL_SIGN + adId);
 
     }

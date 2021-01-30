@@ -6,6 +6,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.PhoneNumber;
 import kz.epam.tcfp.model.User;
 import kz.epam.tcfp.model.inputform.SignUpInput;
+import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
@@ -25,21 +26,15 @@ import java.util.List;
  */
 public class PostEditProfileService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostEditProfileService.class);
-    private static final String USER_PROFILE_EDIT_JSP = "/user/profile/edit";
-    private static final String SIGN_IN_SERVICE = "/signin";
-    private static final String USER_PROFILE_EDIT_SERVICE = "/user/open_editing";
     public static final String EMAIL_TAKEN = "email_taken";
     private final UserDAO userDAO = DAOFactory.getUserDAO();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
-        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
-            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
-        }
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         if (userId == null) {
-            request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
+            request.getRequestDispatcher(PagePath.SIGN_IN_SERVICE).forward(request, response);
             return;
         }
         SignUpInput editedUser = buildEditedUser(request);
@@ -57,7 +52,7 @@ public class PostEditProfileService extends PreviousPage implements Service {
                     user.setPhoneNumbers(phoneNumbers);
                     request.setAttribute(ServiceConstants.USER, user);
                     request.setAttribute(EMAIL_TAKEN, true);
-                    request.getRequestDispatcher(USER_PROFILE_EDIT_JSP).forward(request, response);
+                    request.getRequestDispatcher(PagePath.USER_PROFILE_EDIT_JSP).forward(request, response);
                     return;
                 }
                 userDAO.updateUserEmail(editedUser);
@@ -65,7 +60,7 @@ public class PostEditProfileService extends PreviousPage implements Service {
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while signing up a user", e);
         }
-        response.sendRedirect(USER_PROFILE_EDIT_SERVICE);
+        response.sendRedirect(PagePath.USER_PROFILE_EDIT_SERVICE);
     }
 
     private SignUpInput buildEditedUser(HttpServletRequest request) {

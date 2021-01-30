@@ -10,14 +10,14 @@ import java.util.Locale;
  * @author Talgat Bekkaliyev
  * @project AdPlatform
  */
-public class LanguageValidator {
+public class LanguageUtil {
     private static final List<String> ISO_LANGUAGES_LIST = Arrays.asList(Locale.getISOLanguages());
-    private static final Logger LOGGER = Logger.getLogger(LanguageValidator.class);
+    private static final Logger LOGGER = Logger.getLogger(LanguageUtil.class);
 
-    private LanguageValidator() {
+    private LanguageUtil() {
     }
 
-    public static boolean validate(Object languageCodeInput) {
+    public static boolean validateLanguageCode(Object languageCodeInput) {
         try {
             String languageCode = (String) languageCodeInput;
             if (languageCode == null || languageCode.isEmpty()) {
@@ -30,6 +30,21 @@ public class LanguageValidator {
             LOGGER.warn("Incorrect language code", e);
         }
         return false;
+    }
+
+    public static String getLanguageCode(Object languageCodeInput) {
+        try {
+            String languageCode = (String) languageCodeInput;
+            if (languageCode == null || languageCode.isEmpty()) {
+                return null;
+            }
+            if (ISO_LANGUAGES_LIST.contains(languageCode)) {
+                return languageCode;
+            }
+        } catch (ClassCastException e) {
+            LOGGER.warn("Incorrect language code", e);
+        }
+        return null;
     }
 
 

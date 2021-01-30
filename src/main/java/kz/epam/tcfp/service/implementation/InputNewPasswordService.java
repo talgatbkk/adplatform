@@ -17,7 +17,6 @@ import java.io.IOException;
  * @project AdPlatform
  */
 public class InputNewPasswordService extends PreviousPage implements Service {
-    public static final String INPUT_NEW_PASSWORD_JSP = "/jsp/InputNewPassword.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +29,6 @@ public class InputNewPasswordService extends PreviousPage implements Service {
             return;
         }
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
-        request.getRequestDispatcher(INPUT_NEW_PASSWORD_JSP).forward(request, response);
+        request.getRequestDispatcher(PagePath.INPUT_NEW_PASSWORD_JSP).forward(request, response);
     }
 }

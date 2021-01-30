@@ -22,8 +22,6 @@ import java.io.IOException;
  */
 public class BanUserAccountService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(BanUserAccountService.class);
-    public static final String USER_VIEW_PROFILE_SERVICE = "/user/view";
-    private static final Long ADMIN_ROLE_ID = 1L;
     private final UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
@@ -36,10 +34,10 @@ public class BanUserAccountService extends PreviousPage implements Service {
             response.sendRedirect(PagePath.ERROR_JSP);
             return;
         }
-        if (userRoleId.equals(ADMIN_ROLE_ID)) {
+        if (userRoleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
             try {
                 if (Boolean.TRUE.equals(userDAO.banUserAccount(userIdToBan))) {
-                    response.sendRedirect(USER_VIEW_PROFILE_SERVICE + QUESTION_MARK
+                    response.sendRedirect(PagePath.USER_VIEW_PROFILE_SERVICE + QUESTION_MARK
                             + ServiceConstants.USER_PROFILE_ID + EQUAL_SIGN + userIdToBan);
                     return;
                 }

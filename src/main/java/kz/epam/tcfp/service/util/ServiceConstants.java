@@ -67,5 +67,6 @@ public class ServiceConstants {
     public static final String PARENT_LOCATION_ID = "parent_id";
     public static final String NEW_LOCATION_NAME = "new_location";
     public static final String NEW_CATEGORY_NAME = "new_category";
+
     public static final Long ADMIN_ROLE_ID = 1L;
 }

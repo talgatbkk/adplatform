@@ -28,7 +28,6 @@ import java.io.IOException;
 public class SignUpService extends PreviousPage implements Service {
 
     private static final Logger LOGGER = Logger.getLogger(SignUpService.class);
-    private static final String SIGN_UP_SERVICE = "/signup";
     private final UserDAO userDAO = DAOFactory.getUserDAO();
 
     @Override
@@ -48,7 +47,7 @@ public class SignUpService extends PreviousPage implements Service {
                 request.setAttribute(ServiceConstants.PHONE_NUMBER_TAKEN, isPhoneNumberTaken);
                 request.setAttribute(ServiceConstants.LOGIN_TAKEN, isLoginTaken);
                 request.setAttribute(ServiceConstants.EMAIL_TAKEN, isEmailTaken);
-                request.getRequestDispatcher(SIGN_UP_SERVICE).forward(request,response);
+                request.getRequestDispatcher(PagePath.SIGN_UP_SERVICE).forward(request,response);
                 return;
             } else {
                 userDAO.registerUser(signUpInput);

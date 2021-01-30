@@ -24,9 +24,6 @@ import java.io.IOException;
  */
 public class PostChangedPasswordService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostChangedPasswordService.class);
-    private static final String SIGN_IN_SERVICE = "/signin";
-    public static final String USER_VIEW_PROFILE_SERVICE = "/user/view";
-    public static final String INPUT_NEW_PASSWORD_JSP = "/jsp/InputNewPassword.jsp";
     public static final String NEW_PASSWORD = "new_pass";
     public static final String OLD_PASSWORD = "old_pass";
     public static final String INCORRECT_OLD_PASSWORD = "wrong_pass";
@@ -37,12 +34,9 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession();
-        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
-            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
-        }
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         if (userId == null) {
-            request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
+            request.getRequestDispatcher(PagePath.SIGN_IN_SERVICE).forward(request, response);
             return;
         }
 
@@ -53,7 +47,7 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
             if (Boolean.TRUE.equals(userDAO.authenticateUserById(userWithNewPassword))) {
                 userWithNewPassword.setPassword(Encryption.encrypt(request.getParameter(NEW_PASSWORD)));
                 if (Boolean.TRUE.equals(userDAO.updateUserPassword(userWithNewPassword))) {
-                    response.sendRedirect(USER_VIEW_PROFILE_SERVICE + QUESTION_MARK
+                    response.sendRedirect(PagePath.USER_VIEW_PROFILE_SERVICE + QUESTION_MARK
                             + ServiceConstants.USER_PROFILE_ID + EQUAL_SIGN + userId);
                 } else {
                     response.sendRedirect(PagePath.ERROR_JSP);
@@ -61,7 +55,7 @@ public class PostChangedPasswordService extends PreviousPage implements Service 
                 return;
             } else {
                 request.setAttribute(INCORRECT_OLD_PASSWORD, true);
-                request.getRequestDispatcher(INPUT_NEW_PASSWORD_JSP).forward(request, response);
+                request.getRequestDispatcher(PagePath.INPUT_NEW_PASSWORD_JSP).forward(request, response);
                 return;
             }
         } catch (DAOException e) {

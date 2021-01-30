@@ -11,6 +11,7 @@ import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.LanguageUtil;
 import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
@@ -42,10 +43,13 @@ public class SearchAdvertisementService extends PreviousPage implements Service 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+        String localLanguage = null;
+        if (!LanguageUtil.validateLanguageCode(session.getAttribute(ServiceConstants.LOCAL_LANGUAGE))) {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
+            localLanguage = ServiceConstants.RUSSIAN_LANGUAGE;
+        } else {
+            localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         }
-        String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         String locationInput = request.getParameter(ServiceConstants.LOCATION_PICK);
         Long locationId = null;
         if (locationInput != null && !locationInput.isEmpty()){

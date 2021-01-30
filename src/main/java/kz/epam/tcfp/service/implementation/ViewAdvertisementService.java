@@ -6,6 +6,7 @@ import kz.epam.tcfp.service.Service;
 import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.*;
+import kz.epam.tcfp.service.util.LanguageUtil;
 import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
@@ -40,7 +41,14 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        String languageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
+        String localLanguageCode = null;
+        if (!LanguageUtil.validateLanguageCode(session.getAttribute(ServiceConstants.LOCAL_LANGUAGE))) {
+            session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
+            localLanguageCode = ServiceConstants.RUSSIAN_LANGUAGE;
+        } else {
+            localLanguageCode = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
+        }
+
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         Long adId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         if (adId == null) {
@@ -56,7 +64,7 @@ public class ViewAdvertisementService extends PreviousPage implements Service {
             advertisement = advertisementDAO.getAdvertisementById(adId);
             image = imageDAO.getImage(adId);
             comments = commentDAO.getCommentsAByAdvertisementId(adId);
-            location = locationDAO.getLocationNamesById(advertisement.getLocation().getId(), languageCode);
+            location = locationDAO.getLocationNamesById(advertisement.getLocation().getId(), localLanguageCode);
             phoneNumbers = userDAO.getPhoneNumberByUserId(advertisement.getUserId());
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while getting advertisement data", e);

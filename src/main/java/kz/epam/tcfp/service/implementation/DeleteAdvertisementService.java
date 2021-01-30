@@ -23,8 +23,6 @@ import java.io.IOException;
  */
 public class DeleteAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(DeleteAdvertisementService.class);
-    private static final String SIGN_IN_SERVICE = "/signin";
-    private static final Long ADMIN_ROLE_ID = 1L;
     private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
     @Override
@@ -35,7 +33,7 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
         Long roleId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.USER_ROLE_ID));
         Long adId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.ADVERTISEMENT_ID));
         if (userId == null) {
-            response.sendRedirect(SIGN_IN_SERVICE);
+            response.sendRedirect(PagePath.SIGN_IN_SERVICE);
             return;
         }
         if (adId == null) {
@@ -45,7 +43,7 @@ public class DeleteAdvertisementService extends PreviousPage implements Service 
         Advertisement advertisement = null;
         try {
             advertisement = advertisementDAO.getAdvertisementById(adId);
-            if (advertisement.getUserId().equals(userId) || roleId.equals(ADMIN_ROLE_ID)) {
+            if (advertisement.getUserId().equals(userId) || roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
                 advertisementDAO.deleteAdvertisementByUserIdAndAdId(adId);
             } else {
                 LOGGER.warn("Failed to delete advertisement");

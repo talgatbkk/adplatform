@@ -7,6 +7,7 @@ import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.service.PagePath;
 import kz.epam.tcfp.service.Service;
+import kz.epam.tcfp.service.util.LanguageUtil;
 import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
@@ -24,8 +25,6 @@ import java.io.IOException;
  */
 public class PostAddCategoryService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(PostAddCategoryService.class);
-    private static final String SIGN_IN_SERVICE = "/signin";
-    public static final String ADMIN_ADD_CATEGORY = "/category/add";
     private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
     private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
 
@@ -33,14 +32,18 @@ public class PostAddCategoryService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+        String localLanguage = null;
+        if (!LanguageUtil.validateLanguageCode(session.getAttribute(ServiceConstants.LOCAL_LANGUAGE))) {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
+            localLanguage = ServiceConstants.RUSSIAN_LANGUAGE;
+        } else {
+            localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         }
-        String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
+
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         Long roleId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.USER_ROLE_ID));
         if (userId == null || !roleId.equals(ServiceConstants.ADMIN_ROLE_ID)) {
-            request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
+            request.getRequestDispatcher(PagePath.SIGN_IN_SERVICE).forward(request, response);
             return;
         }
         String categoryName = request.getParameter(ServiceConstants.NEW_CATEGORY_NAME);
@@ -61,7 +64,7 @@ public class PostAddCategoryService extends PreviousPage implements Service {
         } catch (DAOException e) {
             LOGGER.warn("Error in DAO while posting an advertisement", e);
         }
-        response.sendRedirect(ADMIN_ADD_CATEGORY);
+        response.sendRedirect(PagePath.ADMIN_ADD_CATEGORY);
 
     }
 }

@@ -10,6 +10,7 @@ import kz.epam.tcfp.dao.exception.DAOException;
 import kz.epam.tcfp.dao.factory.DAOFactory;
 import kz.epam.tcfp.model.Category;
 import kz.epam.tcfp.model.Location;
+import kz.epam.tcfp.service.util.LanguageUtil;
 import kz.epam.tcfp.service.util.NumberUtil;
 import kz.epam.tcfp.service.util.PreviousPage;
 import kz.epam.tcfp.service.util.ServiceConstants;
@@ -29,7 +30,6 @@ import java.util.List;
  */
 public class InputAdvertisementService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(InputAdvertisementService.class);
-    private static final String SIGN_IN_SERVICE = "/signin";
     private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
     private final UserDAO userDAO = DAOFactory.getUserDAO();
     private final CategoryDAO categoryDAO = DAOFactory.getCategoryDAO();
@@ -39,14 +39,17 @@ public class InputAdvertisementService extends PreviousPage implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         savePreviousPage(request);
         HttpSession session = request.getSession(true);
-        if (session.getAttribute(ServiceConstants.LOCAL_LANGUAGE) == null) {
+        String localLanguage = null;
+        if (!LanguageUtil.validateLanguageCode(session.getAttribute(ServiceConstants.LOCAL_LANGUAGE))) {
             session.setAttribute(ServiceConstants.LOCAL_LANGUAGE, ServiceConstants.RUSSIAN_LANGUAGE);
+            localLanguage = ServiceConstants.RUSSIAN_LANGUAGE;
+        } else {
+            localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
         }
-        String localLanguage = (String) session.getAttribute(ServiceConstants.LOCAL_LANGUAGE);
 
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         if (userId == null) {
-            request.getRequestDispatcher(SIGN_IN_SERVICE).forward(request, response);
+            request.getRequestDispatcher(PagePath.SIGN_IN_SERVICE).forward(request, response);
             return;
         }
         List<Category> categories = new ArrayList<>();

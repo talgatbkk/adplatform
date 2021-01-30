@@ -26,8 +26,6 @@ import java.util.List;
  */
 public class OpenProfileService extends PreviousPage implements Service {
     private static final Logger LOGGER = Logger.getLogger(OpenProfileService.class);
-    private static final String SIGN_IN_SERVICE = "/signin";
-    private static final String USER_PROFILE_JSP = "/user/profile";
     private final UserDAO userDAO = DAOFactory.getUserDAO();
     private final AdvertisementDAO advertisementDAO = DAOFactory.getAdvertisementDAO();
 
@@ -37,7 +35,7 @@ public class OpenProfileService extends PreviousPage implements Service {
         HttpSession session = request.getSession(true);
         Long userId = NumberUtil.tryCastToLong(session.getAttribute(ServiceConstants.SESSION_USER_ID));
         if (userId == null){
-            response.sendRedirect(SIGN_IN_SERVICE);
+            response.sendRedirect(PagePath.SIGN_IN_SERVICE);
             return;
         }
         Long profileId = NumberUtil.tryParseLong(request.getParameter(ServiceConstants.USER_PROFILE_ID));
@@ -60,7 +58,7 @@ public class OpenProfileService extends PreviousPage implements Service {
         }
         request.setAttribute(ServiceConstants.INCORRECT_AUTHORIZATION, false);
         request.setAttribute(ServiceConstants.USER, user);
-        request.getRequestDispatcher(USER_PROFILE_JSP).forward(request, response);
+        request.getRequestDispatcher(PagePath.USER_PROFILE_JSP).forward(request, response);
 
     }
 }
