@@ -25,15 +25,18 @@ public class ConnectionPool {
     private BlockingQueue<Connection> connections;
 
     public ConnectionPool() {
+    }
+
+    private void init() {
         try{
             ResourceBundle bundle = ResourceBundle.getBundle(DB_PROPERTIES_FILE);
             int poolSize = Integer.parseInt(bundle.getString(DB_POOL_SIZE));
             connections = new ArrayBlockingQueue<>(poolSize);
             for (int i = 0; i < poolSize; i++){
                 Connection con = getConnection();
-                if (con != null){
-                    connections.offer(con);
-                }
+                if (con != null && Boolean.FALSE.equals(connections.offer(con))) {
+                        LOGGER.warn("Failed to put the new connection in to connections queue");
+                    }
             }
         } catch (ConnectionPoolException ex){
             LOGGER.warn("Error while getting connection", ex);
@@ -55,16 +58,19 @@ public class ConnectionPool {
     }
 
     public synchronized void putBackConnectionToPool(Connection connection) {
-        if (connection != null) {
-                connections.offer(connection);
-            }
+        if (connection != null && Boolean.FALSE.equals(connections.offer(connection))) {
+                    LOGGER.warn("Failed to put back the connection");
         }
+    }
 
 
 
     public synchronized Connection getExistingConnectionFromPool() throws ConnectionPoolException {
         Connection newConn = null;
-        if (connections.isEmpty()){
+        if (connections == null){
+            init();
+        }
+        if (connections.isEmpty()) {
             throw new ConnectionPoolException("All connections are used");
         } else {
             newConn = connections.poll();
