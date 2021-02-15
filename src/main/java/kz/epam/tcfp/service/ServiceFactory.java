@@ -18,9 +18,13 @@ public class ServiceFactory {
     }
 
 
-    private static synchronized ServiceFactory getInstance() {
+    private static ServiceFactory getInstance() {
         if (instance == null){
-            instance = new ServiceFactory();
+            synchronized (ServiceFactory.class) {
+                if (instance == null) {
+                    instance = new ServiceFactory();
+                }
+            }
         }
         return instance;
     }
