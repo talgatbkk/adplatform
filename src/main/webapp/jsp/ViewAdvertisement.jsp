@@ -94,7 +94,7 @@
             <c:if test="${requestScope.belongsToCurrentUser eq true && requestScope.advertisement.image.path == null}">
                 <form action="${pageContext.request.contextPath}/advertisement/upload/image?ad_id=${requestScope.advertisement.adId}" method="post" enctype="multipart/form-data" onsubmit="return validateInput()">
                     ${selectImageToUploadLocal} <input type="file" name="file" id="uploadFile"/>
-                    <br />
+                    <br/>
                     <br />
                     <input class="btn btn--stroke full-width btn-outline-primary" type="submit" value="${uploadImageLocal}">
                 </form>

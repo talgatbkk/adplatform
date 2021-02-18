@@ -9,7 +9,7 @@ public class ServiceFactory {
     private static ServiceFactory instance = new ServiceFactory();
     private ServiceProvider serviceProvider = new ServiceProvider();
 
-    public ServiceFactory() {
+    private ServiceFactory() {
     }
 
 
