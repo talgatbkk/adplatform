@@ -35,6 +35,7 @@ public class ServiceFactory {
     public static final String ADMIN_POST_LOCATION = "/location/post";
     public static final String ADMIN_ADD_CATEGORY = "/category/add";
     public static final String ADMIN_POST_CATEGORY = "/category/post";
+    public static final String ERROR = "/error";
 
     private static final Map<String, Service> SERVICE_MAP = new HashMap<>();
     private static ServiceFactory instance;
@@ -82,7 +83,7 @@ public class ServiceFactory {
     }
 
     public static Service getService(String request) {
-        Service service = null;
+        Service service = SERVICE_MAP.get(ERROR);
         for (Map.Entry<String, Service> serviceSet : SERVICE_MAP.entrySet()) {
             if (request.equalsIgnoreCase(serviceSet.getKey())) {
                 service = SERVICE_MAP.get(serviceSet.getKey());
