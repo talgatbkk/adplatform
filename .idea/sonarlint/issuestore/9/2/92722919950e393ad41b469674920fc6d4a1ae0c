@@ -1,17 +1,17 @@
 
-W
-java:S2209H"5Change this instance-reference to a static reference.(ÌÔ¶øÿÿÿÿ8ø¶±ï.
 [
 java:S2168#"9Remove this dangerous instance of double-checked locking.(ÔÎ‹Ïúÿÿÿÿ8àœ±Èí.
+W
+java:S2209H"5Change this instance-reference to a static reference.(ÌÔ¶øÿÿÿÿ8ø¶±ï.
+R
+java:S22098"5Change this instance-reference to a static reference.(İ­õË8î½­Çí.
+R
+java:S22090"5Change this instance-reference to a static reference.(Ìæ·Ş8î½­Çí.
 W
 java:S2209<"5Change this instance-reference to a static reference.(ÿäÉ«úÿÿÿÿ8Ë²ß¯ï.
 R
 java:S2209@"5Change this instance-reference to a static reference.(×ºÇş8šü¯¯ï.
-W
-java:S2209D"5Change this instance-reference to a static reference.(õà¥âıÿÿÿÿ8´›µ°ï.
-R
-java:S22090"5Change this instance-reference to a static reference.(Ìæ·Ş8î½­Çí.
 R
 java:S22094"5Change this instance-reference to a static reference.(€®¨¤8î½­Çí.
-R
-java:S22098"5Change this instance-reference to a static reference.(İ­õË8î½­Çí.
+W
+java:S2209D"5Change this instance-reference to a static reference.(õà¥âıÿÿÿÿ8´›µ°ï.

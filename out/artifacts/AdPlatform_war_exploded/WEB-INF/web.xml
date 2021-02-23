@@ -13,7 +13,7 @@
         <servlet-name>ViewAdvertisement</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>ViewAdvertisement</servlet-name>
         <url-pattern>/advertisement/view</url-pattern>
@@ -70,7 +70,7 @@
         <servlet-name>PostComment</servlet-name>
         <url-pattern>/advertisement/view/comment/post</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>SignIn</servlet-name>
         <servlet-class>kz.epam.tcfp.controller.AdvertisementController</servlet-class>
@@ -121,8 +121,6 @@
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/user/profile/edit</url-pattern>
     </servlet-mapping>
-
-
 
     <servlet>
         <servlet-name>Logout</servlet-name>
